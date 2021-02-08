@@ -1,0 +1,11 @@
+"this is a valid string and I hope it parses correctly\n\tthis should be on a new line and also indented\
+
+
+
+\ and this should show up on the same line\n\t\twhile this should be later and indented twice\n\
+
+	\ \\backslashes are fun and dandy\\ \"and so are quotes\" \n\
+
+	\ \97\110\100\32\102\105\110\97\108\108\121\32\73\32\104\111\112\101\32\116\104\105\115\32\105\115\32\114\101\97\10\97\98\108\101\n\
+
+	\ and if all that made sense we win! "
