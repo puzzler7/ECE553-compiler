@@ -53,7 +53,7 @@ nil => (Tokens.NIL(yypos,yypos+3));
 ","	=> (Tokens.COMMA(yypos,yypos+1));
 "123"	=> (Tokens.INT(123,yypos,yypos+3));
 .       => (ErrorMsg.error yypos ("illegal character " ^ yytext); continue());
-<INITIAL>"(*" => (YYBEGIN COMMENT; val in_comment = true; val nesting_depth = 1; continue());<COMMENT>"
+<INITIAL>"(*" => (YYBEGIN COMMENT; val in_comment = true; val nesting_depth = 1; continue());
 <COMMENT>"(*" => (val nesting_depth = nesting_depth + 1; continue());
 <COMMENT>"*)" => (val nesting_depth = nesting_depth - 1; if nesting_depth = 0 then val in_comment = false else (); if nesting_depth = 0 then YYBEGIN INITIAL else (); continue());
 <COMMENT>. => (continue());
