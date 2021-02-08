@@ -2,7 +2,7 @@
 
 
 
-\ and this should show up on the same line\n\t\twhile this should be later and indented twice\n\
+\ and this should show up on the same line\n\t\twhile this should be newline and indented twice\n\
 
 	\ \\backslashes are fun and dandy\\ \"and so are quotes\" \n\
 
