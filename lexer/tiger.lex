@@ -6,18 +6,25 @@ val linePos = ErrorMsg.linePos
 fun err(p1,p2) = ErrorMsg.error p1
 
 val nestingDepth = ref 0
-
-
-
+val string = ref ()
 fun eof() = let val pos = hd(!linePos) in Tokens.EOF(pos,pos) end
-
+fun asciiToString(x) = if x < 128 then SOME Char.toString(Char.chr(x)) else NONE)
 %% 
 %s COMMENT ;
 %%
+<INITIAL>"\"" => (YYBEGIN STRING; string := ""; continue());
 <INITIAL>"/*" => (YYBEGIN COMMENT; nestingDepth := !nestingDepth + 1; continue());
 <COMMENT>"/*" => (nestingDepth := !nestingDepth + 1; continue());
 <COMMENT>"*/" => (nestingDepth := !nestingDepth - 1; if !nestingDepth = 0 then YYBEGIN INITIAL else (); continue());
 <COMMENT>. => (continue());
+<STRING>"\\\\n" => (string := !string ^ "\n");
+<STRING>"\\\\t" => (string := !string ^ "\t");
+<STRING>"\\[0-9]{3}" => ((case asciiToString(Int.fromString(yytext)) of NONE => ErrorMsg.error yypos ("illegal ascii in string")
+			  | SOME  x => string := !string ^ x); continue());
+<STRING>"\\\\\"" => (string := !string ^ "\"");
+<STRING>"\\\\\\\\" => (string := !string ^ "\\");
+<STRING>\\[\\n\\t ]+\\ => (continue());
+<STRING>. => (string := string ^ yytext);
 <INITIAL>while => (Tokens.WHILE(yypos,yypos+5));
 <INITIAL>for  => (Tokens.FOR(yypos,yypos+3));
 <INITIAL>to => (Tokens.TO(yypos,yypos+2));
