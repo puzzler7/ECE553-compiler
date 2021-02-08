@@ -1,0 +1,4 @@
+token before
+"this is a str!\non a new line!\n\tand also \
+	  \indented!\nwith \"quotes\" and \\backslashes\\\nthis is coded: \104\105"
+token after

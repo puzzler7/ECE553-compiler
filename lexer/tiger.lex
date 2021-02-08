@@ -6,25 +6,29 @@ val linePos = ErrorMsg.linePos
 fun err(p1,p2) = ErrorMsg.error p1
 
 val nestingDepth = ref 0
-val string = ref ()
+val str = ref ""
+val inStr = ref 0
+val strStart = ref 0
 fun eof() = let val pos = hd(!linePos) in Tokens.EOF(pos,pos) end
-fun asciiToString(x) = if x < 128 then SOME Char.toString(Char.chr(x)) else NONE)
+fun asciiToString(x) = if x < 128 then SOME (Char.toString(Char.chr(x))) else NONE
 %% 
-%s COMMENT ;
+%s STRING COMMENT ;
 %%
-<INITIAL>"\"" => (YYBEGIN STRING; string := ""; continue());
+<INITIAL>"\"" => (YYBEGIN STRING; str := ""; inStr := 1; strStart := yypos; continue());
 <INITIAL>"/*" => (YYBEGIN COMMENT; nestingDepth := !nestingDepth + 1; continue());
 <COMMENT>"/*" => (nestingDepth := !nestingDepth + 1; continue());
+<COMMENT>\n\013? => (lineNum := !lineNum+1; linePos := yypos :: !linePos; continue());
 <COMMENT>"*/" => (nestingDepth := !nestingDepth - 1; if !nestingDepth = 0 then YYBEGIN INITIAL else (); continue());
 <COMMENT>. => (continue());
-<STRING>"\\\\n" => (string := !string ^ "\n");
-<STRING>"\\\\t" => (string := !string ^ "\t");
-<STRING>"\\[0-9]{3}" => ((case asciiToString(Int.fromString(yytext)) of NONE => ErrorMsg.error yypos ("illegal ascii in string")
-			  | SOME  x => string := !string ^ x); continue());
-<STRING>"\\\\\"" => (string := !string ^ "\"");
-<STRING>"\\\\\\\\" => (string := !string ^ "\\");
-<STRING>\\[\\n\\t ]+\\ => (continue());
-<STRING>. => (string := string ^ yytext);
+<STRING>"\\n" => (str := !str ^ "\n"; lineNum := !lineNum+1; linePos := yypos :: !linePos; continue());
+<STRING>"\\t" => (str := !str ^ "\t"; continue());
+<STRING>"\\[0-9]{3}" => ((case asciiToString(valOf (Int.fromString(yytext))) of NONE => ErrorMsg.error yypos ("illegal ascii in string")
+			  | SOME  x => str := !str ^ x); continue()); (*this does not work, will fix later*)
+<STRING>"\\\"" => (str := !str ^ "\""; continue());
+<STRING>"\\\\" => (str := !str ^ "\\"; continue());
+<STRING>\\[\n\t\013 ]+\\ => (continue());
+<STRING>"\"" => (YYBEGIN INITIAL; inStr := 0; Tokens.STRING(!str, !strStart, yypos+1));
+<STRING>. => (str := !str ^ yytext; continue());
 <INITIAL>while => (Tokens.WHILE(yypos,yypos+5));
 <INITIAL>for  => (Tokens.FOR(yypos,yypos+3));
 <INITIAL>to => (Tokens.TO(yypos,yypos+2));
@@ -66,8 +70,8 @@ fun asciiToString(x) = if x < 128 then SOME Char.toString(Char.chr(x)) else NONE
 <INITIAL>")" => (Tokens.RPAREN(yypos, yypos+1));
 <INITIAL>";" => (Tokens.SEMICOLON(yypos, yypos+1));
 <INITIAL>":" => (Tokens.COLON(yypos, yypos+1));
-<INITIAL>\n	=> (lineNum := !lineNum+1; linePos := yypos :: !linePos; continue());
+<INITIAL>(\n\013?)|(\010\013?) => (lineNum := !lineNum+1; linePos := yypos :: !linePos; continue());
+<INITIAL>[\013\t ]* => (continue());
 <INITIAL>","	=> (Tokens.COMMA(yypos,yypos+1));
-<INITIAL>"123"	=> (Tokens.INT(123,yypos,yypos+3));
 <INITIAL>.       => (ErrorMsg.error yypos ("illegal character " ^ yytext); continue());
 
