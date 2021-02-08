@@ -206,6 +206,6 @@ local
    open l33
    open l177073
 in
-   test/lexerParse.sml
+   lexerParse.sml
 end
 end

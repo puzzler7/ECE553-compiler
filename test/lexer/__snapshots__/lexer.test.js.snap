@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Maverick's cool custom tests parses ../../test/badcomment.tig correctly 1`] = `
+exports[`Maverick's cool custom tests parses test/lexer/badcomment.tig correctly 1`] = `
 "EOF   37
 "
 `;
 
-exports[`Maverick's cool custom tests parses ../../test/goodcomment.tig correctly 1`] = `
+exports[`Maverick's cool custom tests parses test/lexer/goodcomment.tig correctly 1`] = `
 "EOF   135
 "
 `;
 
-exports[`Maverick's cool custom tests parses ../../test/goodstring.tig correctly 1`] = `
+exports[`Maverick's cool custom tests parses test/lexer/goodstring.tig correctly 1`] = `
 "STRING(this is a valid string and I hope it parses correctly
 	this should be on a new line and also indented and this should show up on the same line
 		while this should be newline and indented twice
@@ -27,7 +27,7 @@ EOF   405
 "
 `;
 
-exports[`Maverick's cool custom tests parses ../../test/simplestr.tig correctly 1`] = `
+exports[`Maverick's cool custom tests parses test/lexer/simplestr.tig correctly 1`] = `
 "ID(token)     2
 ID(before)     8
 STRING(this is a str!
@@ -44,7 +44,7 @@ EOF   137
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/merge.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/merge.tig correctly 1`] = `
 "LET   2
 TYPE   9
 ID(any)     14
@@ -460,7 +460,7 @@ EOF   1365
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/queens.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/queens.tig correctly 1`] = `
 "LET   49
 VAR   57
 ID(N)     61
@@ -704,7 +704,7 @@ EOF   800
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test1.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test1.tig correctly 1`] = `
 "LET   44
 TYPE   49
 ID(arrtype)     55
@@ -730,7 +730,7 @@ EOF   129
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test2.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test2.tig correctly 1`] = `
 "LET   56
 TYPE   61
 ID(myint)     66
@@ -760,7 +760,7 @@ EOF   162
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test3.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test3.tig correctly 1`] = `
 "LET   44
 TYPE   49
 ID(rectype)     55
@@ -802,7 +802,7 @@ EOF   181
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test4.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test4.tig correctly 1`] = `
 "LET   36
 FUNCTION   60
 ID(nfactor)     69
@@ -839,7 +839,7 @@ EOF   161
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test5.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test5.tig correctly 1`] = `
 "LET   37
 TYPE   61
 ID(intlist)     66
@@ -899,7 +899,7 @@ EOF   263
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test6.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test6.tig correctly 1`] = `
 "LET   51
 FUNCTION   56
 ID(do_nothing1)     65
@@ -945,7 +945,7 @@ EOF   204
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test7.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test7.tig correctly 1`] = `
 "LET   50
 FUNCTION   55
 ID(do_nothing1)     64
@@ -1003,7 +1003,7 @@ EOF   224
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test8.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test8.tig correctly 1`] = `
 "IF   19
 LPAREN   22
 INT(10)   23
@@ -1018,7 +1018,7 @@ EOF   48
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test9.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test9.tig correctly 1`] = `
 "IF   45
 LPAREN   48
 INT(5)   49
@@ -1033,7 +1033,7 @@ EOF   71
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test10.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test10.tig correctly 1`] = `
 "WHILE   39
 LPAREN   44
 INT(10)   45
@@ -1048,7 +1048,7 @@ EOF   59
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test11.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test11.tig correctly 1`] = `
 "FOR   79
 ID(i)     83
 ASSIGN   84
@@ -1065,7 +1065,7 @@ EOF   111
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test12.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test12.tig correctly 1`] = `
 "LET   27
 VAR   32
 ID(a)     36
@@ -1094,7 +1094,7 @@ EOF   81
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test13.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test13.tig correctly 1`] = `
 "INT(3)   49
 GT   51
 STRING(df)     53
@@ -1102,7 +1102,7 @@ EOF   57
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test14.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test14.tig correctly 1`] = `
 "LET   40
 TYPE   46
 ID(arrtype)     51
@@ -1158,7 +1158,7 @@ EOF   220
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test15.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test15.tig correctly 1`] = `
 "IF   42
 INT(20)   45
 THEN   48
@@ -1167,7 +1167,7 @@ EOF   54
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test16.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test16.tig correctly 1`] = `
 "LET   81
 TYPE   87
 ID(a)     92
@@ -1192,7 +1192,7 @@ EOF   134
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test17.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test17.tig correctly 1`] = `
 "LET   60
 TYPE   84
 ID(tree)     89
@@ -1231,7 +1231,7 @@ EOF   191
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test18.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test18.tig correctly 1`] = `
 "LET   65
 FUNCTION   70
 ID(do_nothing1)     79
@@ -1293,7 +1293,7 @@ EOF   249
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test19.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test19.tig correctly 1`] = `
 "LET   91
 FUNCTION   96
 ID(do_nothing1)     105
@@ -1351,7 +1351,7 @@ EOF   265
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test20.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test20.tig correctly 1`] = `
 "WHILE   38
 INT(10)   44
 GT   47
@@ -1369,7 +1369,7 @@ EOF   62
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test21.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test21.tig correctly 1`] = `
 "LET   73
 FUNCTION   97
 ID(nfactor)     106
@@ -1404,7 +1404,7 @@ EOF   193
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test22.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test22.tig correctly 1`] = `
 "LET   42
 TYPE   48
 ID(rectype)     53
@@ -1442,7 +1442,7 @@ EOF   152
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test23.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test23.tig correctly 1`] = `
 "LET   31
 TYPE   37
 ID(rectype)     42
@@ -1486,7 +1486,7 @@ EOF   156
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test24.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test24.tig correctly 1`] = `
 "LET   35
 VAR   41
 ID(d)     45
@@ -1502,7 +1502,7 @@ EOF   63
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test25.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test25.tig correctly 1`] = `
 "LET   36
 VAR   42
 ID(d)     46
@@ -1517,7 +1517,7 @@ EOF   64
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test26.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test26.tig correctly 1`] = `
 "INT(3)   34
 PLUS   36
 STRING(var)     38
@@ -1525,7 +1525,7 @@ EOF   43
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test27.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test27.tig correctly 1`] = `
 "LET   28
 VAR   33
 ID(a)     37
@@ -1552,7 +1552,7 @@ EOF   83
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test28.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test28.tig correctly 1`] = `
 "LET   40
 TYPE   45
 ID(rectype1)     50
@@ -1600,7 +1600,7 @@ EOF   189
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test29.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test29.tig correctly 1`] = `
 "LET   39
 TYPE   44
 ID(arrtype1)     49
@@ -1632,7 +1632,7 @@ EOF   158
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test30.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test30.tig correctly 1`] = `
 "LET   27
 TYPE   34
 ID(a)     39
@@ -1665,7 +1665,7 @@ EOF   114
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test31.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test31.tig correctly 1`] = `
 "LET   54
 VAR   60
 ID(a)     64
@@ -1680,7 +1680,7 @@ EOF   86
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test32.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test32.tig correctly 1`] = `
 "LET   56
 TYPE   61
 ID(arrayty)     66
@@ -1704,7 +1704,7 @@ EOF   129
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test33.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test33.tig correctly 1`] = `
 "LET   29
 VAR   34
 ID(a)     38
@@ -1719,7 +1719,7 @@ EOF   62
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test34.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test34.tig correctly 1`] = `
 "LET   57
 FUNCTION   62
 ID(g)     71
@@ -1748,7 +1748,7 @@ EOF   123
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test35.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test35.tig correctly 1`] = `
 "LET   46
 FUNCTION   51
 ID(g)     60
@@ -1775,7 +1775,7 @@ EOF   105
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test36.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test36.tig correctly 1`] = `
 "LET   47
 FUNCTION   52
 ID(g)     61
@@ -1806,7 +1806,7 @@ EOF   110
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test37.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test37.tig correctly 1`] = `
 "LET   141
 VAR   146
 ID(a)     150
@@ -1823,7 +1823,7 @@ EOF   180
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test38.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test38.tig correctly 1`] = `
 "LET   157
 TYPE   162
 ID(a)     167
@@ -1840,7 +1840,7 @@ EOF   201
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test39.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test39.tig correctly 1`] = `
 "LET   162
 FUNCTION   167
 ID(g)     176
@@ -1871,7 +1871,7 @@ EOF   229
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test40.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test40.tig correctly 1`] = `
 "LET   40
 FUNCTION   45
 ID(g)     54
@@ -1892,7 +1892,7 @@ EOF   81
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test41.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test41.tig correctly 1`] = `
 "LET   32
 TYPE   37
 ID(a)     42
@@ -1912,7 +1912,7 @@ EOF   92
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test42.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test42.tig correctly 1`] = `
 "LET   29
 TYPE   35
 ID(arrtype1)     40
@@ -2117,7 +2117,7 @@ EOF   712
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test43.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test43.tig correctly 1`] = `
 "LET   68
 VAR   74
 ID(a)     78
@@ -2133,7 +2133,7 @@ EOF   99
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test44.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test44.tig correctly 1`] = `
 "LET   48
 TYPE   55
 ID(rectype)     60
@@ -2162,7 +2162,7 @@ EOF   133
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test45.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test45.tig correctly 1`] = `
 "LET   75
 TYPE   81
 ID(rectype)     86
@@ -2187,7 +2187,7 @@ EOF   141
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test46.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test46.tig correctly 1`] = `
 "LET   30
 TYPE   36
 ID(rectype)     41
@@ -2220,7 +2220,7 @@ EOF   121
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test47.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test47.tig correctly 1`] = `
 "LET   220
 TYPE   225
 ID(a)     230
@@ -2241,7 +2241,7 @@ EOF   276
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test48.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test48.tig correctly 1`] = `
 "LET   233
 FUNCTION   238
 ID(g)     247
@@ -2276,7 +2276,7 @@ EOF   314
 "
 `;
 
-exports[`The textbook tests parses ../../../bookfiles/testcases/test49.tig correctly 1`] = `
+exports[`The textbook tests parses test/testcases/test49.tig correctly 1`] = `
 "LET   69
 TYPE   75
 ID(rectype)     80
