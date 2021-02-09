@@ -15,7 +15,7 @@ describe('When building with Mlton', () => {
     it('checks that Mlton exists and builds lexer without crashing', () => {
         const checkMltonExists = spawnSync('mlton')
         expect(checkMltonExists.error).toBeFalsy();
-        expect(checkMltonExists.stdout.toString()).toBe('MLton 20210117\n');
+        expect(checkMltonExists.stdout.toString().includes('MLton')).toBeTruthy();
 
         const checkBuild = spawnSync('mlton', [
             '-default-ann',
