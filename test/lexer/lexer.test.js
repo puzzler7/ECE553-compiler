@@ -9,19 +9,20 @@ const getRelativePathOfTests = (dir) => {
 
 }
 
-const errorMessagePattern = /:[0-9]+.[0-9]+:/
+const errorMessagePattern = /:[0-9]+.[0-9]+:/;
+const binaryName = `lexerParse-${process.platform}`;
 
 describe('When building with Mlton', () => {
     it('checks that Mlton exists and builds lexer without crashing', () => {
         const checkMltonExists = spawnSync('mlton')
         expect(checkMltonExists.error).toBeFalsy();
-        expect(checkMltonExists.stdout.toString()).toBe('MLton 20210117\n');
+        expect(checkMltonExists.stdout.toString().includes('MLton')).toBeTruthy();
 
         const checkBuild = spawnSync('mlton', [
             '-default-ann',
             'allowVectorExps true',
             '-output',
-            'build/lexerParse',
+            `build/${binaryName}`,
             'src/lexer/sources.mlb'
         ]);
         expect(checkBuild.error).toBeFalsy();
@@ -36,7 +37,7 @@ describe('Maverick\'s cool custom tests', () => {
     test.each(positiveCases)(
         'parses %s correctly',
         (testFile) => {
-            const parseResults = spawnSync('build/lexerParse', [testFile]);
+            const parseResults = spawnSync(`build/${binaryName}`, [testFile]);
             expect(parseResults.error).toBeFalsy();
             expect(parseResults.stderr.toString()).toBe('');
             expect(parseResults.stdout.toString()).toMatchSnapshot();
@@ -47,7 +48,7 @@ describe('Maverick\'s cool custom tests', () => {
     test.each(negativeCases)(
         'correctly throws error messages for %s',
         (testFile) => {
-            const parseResults = spawnSync('build/lexerParse', [testFile]);
+            const parseResults = spawnSync(`build/${binaryName}`, [testFile]);
             expect(parseResults.error).toBeFalsy();
             expect(parseResults.stderr.toString()).toBe('');
             expect(parseResults.stderr.toString()).toMatchSnapshot();
@@ -62,7 +63,7 @@ describe('The textbook tests', () => {
     test.each(cases)(
         'parses %s correctly',
         (testFile) => {
-            const parseResults = spawnSync('build/lexerParse', [testFile])
+            const parseResults = spawnSync(`build/${binaryName}`, [testFile])
             expect(parseResults.error).toBeFalsy();
             expect(parseResults.stderr.toString()).toBe('');
             expect(parseResults.stdout.toString()).toMatchSnapshot();
