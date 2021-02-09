@@ -64,7 +64,7 @@ describe('The textbook tests', () => {
         (testFile) => {
             const parseResults = spawnSync('build/lexerParse', [testFile])
             expect(parseResults.error).toBeFalsy();
-            expect(parseResults.stderr.length).toBe(0);
+            expect(parseResults.stderr.toString()).toBe('');
             expect(parseResults.stdout.toString()).toMatchSnapshot();
         }
     );
