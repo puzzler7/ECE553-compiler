@@ -24,7 +24,7 @@ fun asciiToString(x) = if x < 128 then SOME (Char.toString(Char.chr(x))) else NO
 <INITIAL>\" => (YYBEGIN STRING; str := ""; inStr := 1; strStart := yypos; continue());
 <INITIAL>"/*" => (YYBEGIN COMMENT; nestingDepth := !nestingDepth + 1; continue());
 <COMMENT>"/*" => (nestingDepth := !nestingDepth + 1; continue());
-<COMMENT>\n\013? => (lineNum := !lineNum+1; linePos := yypos :: !linePos; continue());
+<COMMENT>\013?\n => (lineNum := !lineNum+1; linePos := yypos :: !linePos; continue());
 <COMMENT>"*/" => (nestingDepth := !nestingDepth - 1; if !nestingDepth = 0 then YYBEGIN INITIAL else (); continue());
 <COMMENT>. => (continue());
 <STRING>\\n => (str := !str ^ "\n"; continue());
@@ -35,7 +35,7 @@ fun asciiToString(x) = if x < 128 then SOME (Char.toString(Char.chr(x))) else NO
 <STRING>\\\\ => (str := !str ^ "\\"; continue());
 <STRING>\\[\n\t\013 ]+\\ => (continue());
 <STRING>\" => (YYBEGIN INITIAL; inStr := 0; Tokens.STRING(!str, !strStart, yypos+1));
-<STRING>\n\013? => ((ErrorMsg.error yypos ("unescaped newline in string")); continue());
+<STRING>\013?\n => ((ErrorMsg.error yypos ("unescaped newline in string")); continue());
 <STRING>\t => ((ErrorMsg.error yypos ("unescaped tab character in string")); continue());
 <STRING>\b => ((ErrorMsg.error yypos ("unescaped backspace character in string")); continue());
 <STRING>\\ => ((ErrorMsg.error yypos ("illegal escape in string")); continue());
@@ -81,7 +81,7 @@ fun asciiToString(x) = if x < 128 then SOME (Char.toString(Char.chr(x))) else NO
 <INITIAL>")" => (Tokens.RPAREN(yypos, yypos+1));
 <INITIAL>";" => (Tokens.SEMICOLON(yypos, yypos+1));
 <INITIAL>":" => (Tokens.COLON(yypos, yypos+1));
-<INITIAL>(\n\013?)|(\010\013?) => (lineNum := !lineNum+1; linePos := yypos :: !linePos; continue());
+<INITIAL>(\013?\n)|(\013?\010) => (lineNum := !lineNum+1; linePos := yypos :: !linePos; continue());
 <INITIAL>[\013\t ]* => (continue());
 <INITIAL>","	=> (Tokens.COMMA(yypos,yypos+1));
 <INITIAL>.       => (ErrorMsg.error yypos ("illegal character " ^ yytext); continue());
