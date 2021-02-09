@@ -12,9 +12,9 @@ val strStart = ref 0
 
 fun eof() = let val pos = hd(!linePos) 
 	val _ = (if !inStr = 1 then 
-		(ErrorMsg.error pos "unclosed string") 
+		(inStr:=0; (ErrorMsg.error pos "unclosed string") )
 	else 
-		if !nestingDepth > 0 then (ErrorMsg.error pos "unclosed comment") else ())
+		if !nestingDepth > 0 then (nestingDepth:=0;(ErrorMsg.error pos "unclosed comment")) else ())
 in Tokens.EOF(pos,pos) end
 
 fun asciiToString(x) = if x < 128 then SOME (Char.toString(Char.chr(x))) else NONE
@@ -29,7 +29,7 @@ fun asciiToString(x) = if x < 128 then SOME (Char.toString(Char.chr(x))) else NO
 <COMMENT>. => (continue());
 <STRING>\\n => (str := !str ^ "\n"; continue());
 <STRING>\\t => (str := !str ^ "\t"; continue());
-<STRING>\\[0-9]{3} => (print("num: " ^ yytext); (case asciiToString(valOf (Int.fromString(String.substring(yytext, 1, 3)))) of NONE => (ErrorMsg.error yypos ("illegal ascii in string"))
+<STRING>\\[0-9]{3} => ((case asciiToString(valOf (Int.fromString(String.substring(yytext, 1, 3)))) of NONE => (ErrorMsg.error yypos ("illegal ascii in string"))
 			  | SOME  x => str := !str ^ x); continue());
 <STRING>\\\" => (str := !str ^ "\""; continue());
 <STRING>\\\\ => (str := !str ^ "\\"; continue());
