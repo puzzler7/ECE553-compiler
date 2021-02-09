@@ -9,7 +9,14 @@ val nestingDepth = ref 0
 val str = ref ""
 val inStr = ref 0
 val strStart = ref 0
-  fun eof() = if :inStr = 1 then (ErrorMsg.error yypos "unclosed string") else if :nestingDepth > 0 then (ErrorMsg.error yypos "unclosed comment") else let val pos = hd(!linePos) in Tokens.EOF(pos,pos) end
+
+fun eof() = let val pos = hd(!linePos) 
+	val _ = (if !inStr = 1 then 
+		(ErrorMsg.error pos "unclosed string") 
+	else 
+		if !nestingDepth > 0 then (ErrorMsg.error pos "unclosed comment") else ())
+in Tokens.EOF(pos,pos) end
+
 fun asciiToString(x) = if x < 128 then SOME (Char.toString(Char.chr(x))) else NONE
 %% 
 %s STRING COMMENT ;
@@ -27,7 +34,11 @@ fun asciiToString(x) = if x < 128 then SOME (Char.toString(Char.chr(x))) else NO
 <STRING>\\\" => (str := !str ^ "\""; continue());
 <STRING>\\\\ => (str := !str ^ "\\"; continue());
 <STRING>\\[\n\t\013 ]+\\ => (continue());
-<STRING>\" => (YYBEGIN INITIAL; print("leaving quote"); inStr := 0; Tokens.STRING(!str, !strStart, yypos+1));
+<STRING>\" => (YYBEGIN INITIAL; inStr := 0; Tokens.STRING(!str, !strStart, yypos+1));
+<STRING>\n\013? => ((ErrorMsg.error yypos ("unescaped newline in string")); continue());
+<STRING>\t => ((ErrorMsg.error yypos ("unescaped tab character in string")); continue());
+<STRING>\b => ((ErrorMsg.error yypos ("unescaped backspace character in string")); continue());
+<STRING>\\ => ((ErrorMsg.error yypos ("illegal escape in string")); continue());
 <STRING>. => (str := !str ^ yytext; continue());
 <INITIAL>while => (Tokens.WHILE(yypos,yypos+5));
 <INITIAL>for  => (Tokens.FOR(yypos,yypos+3));
