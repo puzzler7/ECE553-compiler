@@ -9,6 +9,8 @@ const getRelativePathOfTests = (dir) => {
 
 }
 
+const errorMessagePattern = /:[0-9]+.[0-9]+:/
+
 describe('When building with Mlton', () => {
     it('checks that Mlton exists and builds lexer without crashing', () => {
         const checkMltonExists = spawnSync('mlton')
@@ -28,16 +30,28 @@ describe('When building with Mlton', () => {
 })
 
 describe('Maverick\'s cool custom tests', () => {
-    const cases = getRelativePathOfTests('test/lexer/');
+    const positiveCases = getRelativePathOfTests('test/lexer/positiveTests/');
+    const negativeCases = getRelativePathOfTests('test/lexer/negativeTests/');
     
-    test.each(cases)(
+    test.each(positiveCases)(
         'parses %s correctly',
         (testFile) => {
             const parseResults = spawnSync('build/lexerParse', [testFile]);
             expect(parseResults.error).toBeFalsy();
-            console.log(parseResults.stderr.toString());
             expect(parseResults.stderr.toString().length).toBe(0);
             expect(parseResults.stdout.toString()).toMatchSnapshot();
+            expect(errorMessagePattern.test(parseResults.stdout.toString())).toBeFalsy();
+        }
+    );
+
+    test.each(negativeCases)(
+        'correctly throws error messages for %s',
+        (testFile) => {
+            const parseResults = spawnSync('build/lexerParse', [testFile]);
+            expect(parseResults.error).toBeFalsy();
+            expect(parseResults.stderr.toString().length).toBe(0);
+            expect(parseResults.stderr.toString()).toMatchSnapshot();
+            expect(errorMessagePattern.test(parseResults.stdout.toString())).toBeTruthy();
         }
     );
 })

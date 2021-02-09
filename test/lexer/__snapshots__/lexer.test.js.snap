@@ -1,16 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Maverick's cool custom tests parses test/lexer/badcomment.tig correctly 1`] = `
-"EOF   37
-"
-`;
+exports[`Maverick's cool custom tests correctly throws error messages for test/lexer/negativeTests/badcomment.tig 1`] = `""`;
 
-exports[`Maverick's cool custom tests parses test/lexer/goodcomment.tig correctly 1`] = `
+exports[`Maverick's cool custom tests correctly throws error messages for test/lexer/negativeTests/badstring.tig 1`] = `""`;
+
+exports[`Maverick's cool custom tests parses test/lexer/positiveTests/goodcomment.tig correctly 1`] = `
 "EOF   135
 "
 `;
 
-exports[`Maverick's cool custom tests parses test/lexer/goodstring.tig correctly 1`] = `
+exports[`Maverick's cool custom tests parses test/lexer/positiveTests/goodstring.tig correctly 1`] = `
 "STRING(this is a valid string and I hope it parses correctly
 	this should be on a new line and also indented and this should show up on the same line
 		while this should be newline and indented twice
@@ -21,13 +20,13 @@ ID(are)     257
 ID(quotes)     261
 :4.61:illegal character \\\\
 STRING( 
- \\\\97\\\\110\\\\100\\\\32\\\\102\\\\105\\\\110\\\\97\\\\108\\\\108\\\\121\\\\32\\\\73\\\\32\\\\104\\\\111\\\\112\\\\101\\\\32\\\\116\\\\104\\\\105\\\\115\\\\32\\\\105\\\\115\\\\32\\\\114\\\\101\\\\97\\\\10\\\\97\\\\98\\\\108\\\\101
+ \\\\065\\\\078\\\\073\\\\077\\\\069 
  and if all that made sense we win! )     268
-EOF   405
+EOF   299
 "
 `;
 
-exports[`Maverick's cool custom tests parses test/lexer/simplestr.tig correctly 1`] = `
+exports[`Maverick's cool custom tests parses test/lexer/positiveTests/simplestr.tig correctly 1`] = `
 "ID(token)     2
 ID(before)     8
 STRING(this is a str!
