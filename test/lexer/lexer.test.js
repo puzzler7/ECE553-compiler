@@ -38,7 +38,7 @@ describe('Maverick\'s cool custom tests', () => {
         (testFile) => {
             const parseResults = spawnSync('build/lexerParse', [testFile]);
             expect(parseResults.error).toBeFalsy();
-            expect(parseResults.stderr.toString().length).toBe(0);
+            expect(parseResults.stderr.toString()).toBe('');
             expect(parseResults.stdout.toString()).toMatchSnapshot();
             expect(errorMessagePattern.test(parseResults.stdout.toString())).toBeFalsy();
         }
@@ -49,7 +49,7 @@ describe('Maverick\'s cool custom tests', () => {
         (testFile) => {
             const parseResults = spawnSync('build/lexerParse', [testFile]);
             expect(parseResults.error).toBeFalsy();
-            expect(parseResults.stderr.toString().length).toBe(0);
+            expect(parseResults.stderr.toString()).toBe('');
             expect(parseResults.stderr.toString()).toMatchSnapshot();
             expect(errorMessagePattern.test(parseResults.stdout.toString())).toBeTruthy();
         }
