@@ -9,7 +9,7 @@ val nestingDepth = ref 0
 val str = ref ""
 val inStr = ref 0
 val strStart = ref 0
-  fun eof() = if inStr = 1 then (ErrorMsg.error yypos "unclosed string") else if nestingDepth > 0 then (ErrorMsg.error yypos "unclosed comment") else let val pos = hd(!linePos) in Tokens.EOF(pos,pos) end
+  fun eof() = if :inStr = 1 then (ErrorMsg.error yypos "unclosed string") else if :nestingDepth > 0 then (ErrorMsg.error yypos "unclosed comment") else let val pos = hd(!linePos) in Tokens.EOF(pos,pos) end
 fun asciiToString(x) = if x < 128 then SOME (Char.toString(Char.chr(x))) else NONE
 %% 
 %s STRING COMMENT ;
