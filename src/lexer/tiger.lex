@@ -14,20 +14,20 @@ fun asciiToString(x) = if x < 128 then SOME (Char.toString(Char.chr(x))) else NO
 %% 
 %s STRING COMMENT ;
 %%
-<INITIAL>"\"" => (YYBEGIN STRING; str := ""; inStr := 1; strStart := yypos; continue());
+<INITIAL>\" => (YYBEGIN STRING; str := ""; inStr := 1; strStart := yypos; continue());
 <INITIAL>"/*" => (YYBEGIN COMMENT; nestingDepth := !nestingDepth + 1; continue());
 <COMMENT>"/*" => (nestingDepth := !nestingDepth + 1; continue());
 <COMMENT>\n\013? => (lineNum := !lineNum+1; linePos := yypos :: !linePos; continue());
 <COMMENT>"*/" => (nestingDepth := !nestingDepth - 1; if !nestingDepth = 0 then YYBEGIN INITIAL else (); continue());
 <COMMENT>. => (continue());
-<STRING>"\\n" => (str := !str ^ "\n"; lineNum := !lineNum+1; linePos := yypos :: !linePos; continue());
-<STRING>"\\t" => (str := !str ^ "\t"; continue());
-<STRING>"\\[0-9]{3}" => ((case asciiToString(valOf (Int.fromString(yytext))) of NONE => ErrorMsg.error yypos ("illegal ascii in string")
-			  | SOME  x => str := !str ^ x); continue()); (*this does not work, will fix later*)
-<STRING>"\\\"" => (str := !str ^ "\""; continue());
-<STRING>"\\\\" => (str := !str ^ "\\"; continue());
+<STRING>\\n => (str := !str ^ "\n"; continue());
+<STRING>\\t => (str := !str ^ "\t"; continue());
+<STRING>\\[0-9]{3} => (print("num: " ^ yytext); (case asciiToString(valOf (Int.fromString(String.substring(yytext, 1, 3)))) of NONE => (ErrorMsg.error yypos ("illegal ascii in string"))
+			  | SOME  x => str := !str ^ x); continue());
+<STRING>\\\" => (str := !str ^ "\""; continue());
+<STRING>\\\\ => (str := !str ^ "\\"; continue());
 <STRING>\\[\n\t\013 ]+\\ => (continue());
-<STRING>"\"" => (YYBEGIN INITIAL; inStr := 0; Tokens.STRING(!str, !strStart, yypos+1));
+<STRING>\" => (YYBEGIN INITIAL; print("leaving quote"); inStr := 0; Tokens.STRING(!str, !strStart, yypos+1));
 <STRING>. => (str := !str ^ yytext; continue());
 <INITIAL>while => (Tokens.WHILE(yypos,yypos+5));
 <INITIAL>for  => (Tokens.FOR(yypos,yypos+3));
