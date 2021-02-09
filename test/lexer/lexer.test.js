@@ -67,6 +67,7 @@ describe('The textbook tests', () => {
             expect(parseResults.error).toBeFalsy();
             expect(parseResults.stderr.toString()).toBe('');
             expect(parseResults.stdout.toString()).toMatchSnapshot();
+            expect(errorMessagePattern.test(parseResults.stdout.toString())).toBeFalsy();
         }
     );
 })

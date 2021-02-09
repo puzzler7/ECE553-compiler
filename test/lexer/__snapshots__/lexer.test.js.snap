@@ -7,14 +7,14 @@ EOF   37
 `;
 
 exports[`Maverick's cool custom tests correctly throws error messages for test/lexer/negativeTests/illegalescapes.tig 1`] = `
-"caught bad backslash:1.2:illegal escape in string
-caught bad backslash:1.5:illegal escape in string
-caught bad backslash:1.8:illegal escape in string
-caught bad backslash:1.11:illegal escape in string
-caught bad backslash:1.14:illegal escape in string
-caught bad backslash:1.17:illegal escape in string
-caught bad backslash:1.20:illegal escape in string
-caught bad backslash:1.23:illegal escape in string
+":1.2:illegal escape in string
+:1.5:illegal escape in string
+:1.8:illegal escape in string
+:1.11:illegal escape in string
+:1.14:illegal escape in string
+:1.17:illegal escape in string
+:1.20:illegal escape in string
+:1.23:illegal escape in string
 STRING(p i k a c h u 23 ??? gotta catch em all but unfortunately I have low financial literacy)     2
 EOF   1
 "
@@ -30,18 +30,19 @@ EOF   1
 `;
 
 exports[`Maverick's cool custom tests correctly throws error messages for test/lexer/negativeTests/unendingstring.tig 1`] = `
-"0.0:unclosed string
+":1.15:unescaped newline in string
+0.0:unclosed string
 EOF   1
 "
 `;
 
 exports[`Maverick's cool custom tests parses test/lexer/positiveTests/goodcomment.tig correctly 1`] = `
-"EOF   135
+"EOF   138
 "
 `;
 
 exports[`Maverick's cool custom tests parses test/lexer/positiveTests/goodstring.tig correctly 1`] = `
-"num: \\\\065num: \\\\078num: \\\\073num: \\\\077num: \\\\069STRING(this is a valid string and I hope it parses correctly
+"STRING(this is a valid string and I hope it parses correctly
 	this should be on a new line and also indented and this should show up on the same line
 		while this should be newline and indented twice
  \\\\backslashes are fun and dandy\\\\ \\"and so are quotes\\" 
@@ -54,7 +55,7 @@ EOF   1
 exports[`Maverick's cool custom tests parses test/lexer/positiveTests/simplestr.tig correctly 1`] = `
 "ID(token)     2
 ID(before)     8
-num: \\\\104num: \\\\105STRING(this is a str!
+STRING(this is a str!
 on a new line!
 	and also indented!
 with \\"quotes\\" and \\\\backslashes\\\\
