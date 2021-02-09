@@ -51,7 +51,7 @@ describe('Maverick\'s cool custom tests', () => {
             const parseResults = spawnSync(`build/${binaryName}`, [testFile]);
             expect(parseResults.error).toBeFalsy();
             expect(parseResults.stderr.toString()).toBe('');
-            expect(parseResults.stderr.toString()).toMatchSnapshot();
+            expect(parseResults.stdout.toString()).toMatchSnapshot();
             expect(errorMessagePattern.test(parseResults.stdout.toString())).toBeTruthy();
         }
     );

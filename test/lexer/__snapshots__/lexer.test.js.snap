@@ -1,10 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Maverick's cool custom tests correctly throws error messages for test/lexer/negativeTests/badcomment.tig 1`] = `""`;
+exports[`Maverick's cool custom tests correctly throws error messages for test/lexer/negativeTests/badcomment.tig 1`] = `
+":2.24:unclosed comment
+EOF   37
+"
+`;
 
-exports[`Maverick's cool custom tests correctly throws error messages for test/lexer/negativeTests/illegalescapes.tig 1`] = `""`;
+exports[`Maverick's cool custom tests correctly throws error messages for test/lexer/negativeTests/illegalescapes.tig 1`] = `
+"caught bad backslash:1.2:illegal escape in string
+caught bad backslash:1.5:illegal escape in string
+caught bad backslash:1.8:illegal escape in string
+caught bad backslash:1.11:illegal escape in string
+caught bad backslash:1.14:illegal escape in string
+caught bad backslash:1.17:illegal escape in string
+caught bad backslash:1.20:illegal escape in string
+caught bad backslash:1.23:illegal escape in string
+STRING(p i k a c h u 23 ??? gotta catch em all but unfortunately I have low financial literacy)     2
+EOF   1
+"
+`;
 
-exports[`Maverick's cool custom tests correctly throws error messages for test/lexer/negativeTests/unendingstring.tig 1`] = `""`;
+exports[`Maverick's cool custom tests correctly throws error messages for test/lexer/negativeTests/stringwithnewline.tig 1`] = `
+":1.32:unescaped newline in string
+:1.33:unescaped newline in string
+:1.60:unescaped newline in string
+STRING( holy mussolini its a new linethe sad state of socialism)     2
+EOF   1
+"
+`;
+
+exports[`Maverick's cool custom tests correctly throws error messages for test/lexer/negativeTests/unendingstring.tig 1`] = `
+"0.0:unclosed string
+EOF   1
+"
+`;
 
 exports[`Maverick's cool custom tests parses test/lexer/positiveTests/goodcomment.tig correctly 1`] = `
 "EOF   135
@@ -12,7 +41,7 @@ exports[`Maverick's cool custom tests parses test/lexer/positiveTests/goodcommen
 `;
 
 exports[`Maverick's cool custom tests parses test/lexer/positiveTests/goodstring.tig correctly 1`] = `
-"num: \\\\065num: \\\\078num: \\\\073num: \\\\077num: \\\\069leaving quoteSTRING(this is a valid string and I hope it parses correctly
+"num: \\\\065num: \\\\078num: \\\\073num: \\\\077num: \\\\069STRING(this is a valid string and I hope it parses correctly
 	this should be on a new line and also indented and this should show up on the same line
 		while this should be newline and indented twice
  \\\\backslashes are fun and dandy\\\\ \\"and so are quotes\\" 
@@ -25,7 +54,7 @@ EOF   1
 exports[`Maverick's cool custom tests parses test/lexer/positiveTests/simplestr.tig correctly 1`] = `
 "ID(token)     2
 ID(before)     8
-num: \\\\104num: \\\\105leaving quoteSTRING(this is a str!
+num: \\\\104num: \\\\105STRING(this is a str!
 on a new line!
 	and also indented!
 with \\"quotes\\" and \\\\backslashes\\\\
@@ -84,7 +113,7 @@ RPAREN   166
 GE   167
 ID(ord)     169
 LPAREN   172
-leaving quoteSTRING(0)     173
+STRING(0)     173
 RPAREN   176
 AND   178
 ID(ord)     180
@@ -94,7 +123,7 @@ RPAREN   190
 LE   191
 ID(ord)     193
 LPAREN   196
-leaving quoteSTRING(9)     197
+STRING(9)     197
 RPAREN   200
 FUNCTION   207
 ID(skipto)     216
@@ -104,11 +133,11 @@ EQ   225
 WHILE   234
 ID(buffer)     240
 EQ   246
-leaving quoteSTRING( )     247
+STRING( )     247
 OR   251
 ID(buffer)     253
 EQ   259
-leaving quoteSTRING(
+STRING(
 )     260
 DO   274
 ID(buffer)     277
@@ -150,7 +179,7 @@ RPAREN   403
 MINUS   404
 ID(ord)     405
 LPAREN   408
-leaving quoteSTRING(0)     409
+STRING(0)     409
 RPAREN   412
 SEMICOLON   413
 ID(buffer)     415
@@ -339,7 +368,7 @@ INT(10)   991
 PLUS   993
 ID(ord)     994
 LPAREN   997
-leaving quoteSTRING(0)     998
+STRING(0)     998
 RPAREN   1001
 RPAREN   1002
 RPAREN   1003
@@ -353,7 +382,7 @@ THEN   1019
 LPAREN   1024
 ID(print)     1025
 LPAREN   1030
-leaving quoteSTRING(-)     1031
+STRING(-)     1031
 RPAREN   1034
 SEMICOLON   1035
 ID(f)     1037
@@ -375,7 +404,7 @@ RPAREN   1070
 ELSE   1078
 ID(print)     1083
 LPAREN   1088
-leaving quoteSTRING(0)     1089
+STRING(0)     1089
 RPAREN   1092
 END   1096
 FUNCTION   1102
@@ -393,7 +422,7 @@ NIL   1140
 THEN   1144
 ID(print)     1149
 LPAREN   1154
-leaving quoteSTRING(
+STRING(
 )     1155
 RPAREN   1159
 ELSE   1164
@@ -407,7 +436,7 @@ RPAREN   1186
 SEMICOLON   1187
 ID(print)     1189
 LPAREN   1194
-leaving quoteSTRING( )     1195
+STRING( )     1195
 RPAREN   1198
 SEMICOLON   1199
 ID(printlist)     1201
@@ -543,21 +572,21 @@ RBRACK   355
 EQ   356
 ID(j)     357
 THEN   359
-leaving quoteSTRING( O)     364
+STRING( O)     364
 ELSE   369
-leaving quoteSTRING( .)     374
+STRING( .)     374
 RPAREN   378
 SEMICOLON   379
 ID(print)     387
 LPAREN   392
-leaving quoteSTRING(
+STRING(
 )     393
 RPAREN   397
 RPAREN   398
 SEMICOLON   399
 ID(print)     410
 LPAREN   415
-leaving quoteSTRING(
+STRING(
 )     416
 RPAREN   420
 RPAREN   421
@@ -775,7 +804,7 @@ ID(rectype)     109
 LBRACE   117
 ID(name)     118
 EQ   122
-leaving quoteSTRING(Nobody)     123
+STRING(Nobody)     123
 COMMA   131
 ID(age)     133
 EQ   136
@@ -786,7 +815,7 @@ ID(rec1)     147
 DOT   151
 ID(name)     152
 ASSIGN   157
-leaving quoteSTRING(Somebody)     160
+STRING(Somebody)     160
 SEMICOLON   170
 ID(rec1)     173
 END   178
@@ -923,14 +952,14 @@ ID(do_nothing1)     150
 LPAREN   161
 ID(d)     162
 COMMA   163
-leaving quoteSTRING(str)     165
+STRING(str)     165
 RPAREN   170
 IN   173
 ID(do_nothing1)     177
 LPAREN   188
 INT(0)   189
 COMMA   190
-leaving quoteSTRING(str2)     192
+STRING(str2)     192
 RPAREN   198
 END   200
 EOF   204
@@ -978,17 +1007,17 @@ ID(do_nothing1)     165
 LPAREN   176
 ID(d)     177
 COMMA   178
-leaving quoteSTRING(str)     180
+STRING(str)     180
 RPAREN   185
 SEMICOLON   186
-leaving quoteSTRING( )     187
+STRING( )     187
 RPAREN   190
 IN   193
 ID(do_nothing1)     197
 LPAREN   208
 INT(0)   209
 COMMA   210
-leaving quoteSTRING(str2)     212
+STRING(str2)     212
 RPAREN   218
 END   220
 EOF   224
@@ -1020,7 +1049,7 @@ RPAREN   52
 THEN   54
 INT(13)   59
 ELSE   62
-leaving quoteSTRING( )     68
+STRING( )     68
 EOF   71
 "
 `;
@@ -1046,7 +1075,7 @@ ID(i)     83
 ASSIGN   84
 INT(10)   86
 TO   89
-leaving quoteSTRING( )     92
+STRING( )     92
 DO   96
 ID(i)     101
 ASSIGN   103
@@ -1089,7 +1118,7 @@ EOF   81
 exports[`The textbook tests parses test/testcases/test13.tig correctly 1`] = `
 "INT(3)   49
 GT   51
-leaving quoteSTRING(df)     53
+STRING(df)     53
 EOF   57
 "
 `;
@@ -1121,7 +1150,7 @@ ID(rectype)     126
 LBRACE   134
 ID(name)     135
 EQ   139
-leaving quoteSTRING(aname)     140
+STRING(aname)     140
 COMMA   147
 ID(id)     149
 EQ   151
@@ -1178,7 +1207,7 @@ ID(d)     119
 EQ   120
 ID(a)     121
 IN   124
-leaving quoteSTRING()     128
+STRING()     128
 END   131
 EOF   134
 "
@@ -1268,17 +1297,17 @@ ID(do_nothing1)     190
 LPAREN   201
 ID(d)     202
 COMMA   203
-leaving quoteSTRING(str)     205
+STRING(str)     205
 RPAREN   210
 SEMICOLON   211
-leaving quoteSTRING( )     212
+STRING( )     212
 RPAREN   215
 IN   218
 ID(do_nothing1)     222
 LPAREN   233
 INT(0)   234
 COMMA   235
-leaving quoteSTRING(str2)     237
+STRING(str2)     237
 RPAREN   243
 END   245
 EOF   249
@@ -1326,17 +1355,17 @@ ID(do_nothing1)     206
 LPAREN   217
 ID(a)     218
 COMMA   219
-leaving quoteSTRING(str)     221
+STRING(str)     221
 RPAREN   226
 SEMICOLON   227
-leaving quoteSTRING( )     228
+STRING( )     228
 RPAREN   231
 IN   234
 ID(do_nothing1)     238
 LPAREN   249
 INT(0)   250
 COMMA   251
-leaving quoteSTRING(str2)     253
+STRING(str2)     253
 RPAREN   259
 END   261
 EOF   265
@@ -1417,7 +1446,7 @@ ID(rectype)     99
 LBRACE   107
 ID(name)     108
 EQ   112
-leaving quoteSTRING(Name)     113
+STRING(Name)     113
 COMMA   119
 ID(id)     121
 EQ   123
@@ -1428,7 +1457,7 @@ ID(rec1)     131
 DOT   135
 ID(nam)     136
 ASSIGN   140
-leaving quoteSTRING(asd)     143
+STRING(asd)     143
 END   149
 EOF   152
 "
@@ -1455,7 +1484,7 @@ ID(rectype)     88
 LBRACE   96
 ID(name)     97
 EQ   101
-leaving quoteSTRING(aname)     102
+STRING(aname)     102
 COMMA   109
 ID(id)     111
 EQ   113
@@ -1472,7 +1501,7 @@ ID(rec1)     138
 DOT   142
 ID(id)     143
 ASSIGN   146
-leaving quoteSTRING()     149
+STRING()     149
 END   153
 EOF   156
 "
@@ -1512,7 +1541,7 @@ EOF   64
 exports[`The textbook tests parses test/testcases/test26.tig correctly 1`] = `
 "INT(3)   34
 PLUS   36
-leaving quoteSTRING(var)     38
+STRING(var)     38
 EOF   43
 "
 `;
@@ -1579,7 +1608,7 @@ ID(rectype2)     148
 LBRACE   157
 ID(name)     158
 EQ   162
-leaving quoteSTRING(Name)     163
+STRING(Name)     163
 COMMA   169
 ID(id)     171
 EQ   173
@@ -1664,7 +1693,7 @@ ID(a)     64
 COLON   65
 ID(int)     66
 ASSIGN   70
-leaving quoteSTRING( )     73
+STRING( )     73
 IN   77
 ID(a)     81
 END   83
@@ -1688,7 +1717,7 @@ LBRACK   108
 INT(10)   109
 RBRACK   111
 OF   113
-leaving quoteSTRING( )     116
+STRING( )     116
 IN   120
 INT(0)   124
 END   126
@@ -1731,9 +1760,9 @@ ID(a)     98
 IN   100
 ID(g)     104
 LPAREN   105
-leaving quoteSTRING(one)     106
+STRING(one)     106
 COMMA   111
-leaving quoteSTRING(two)     113
+STRING(two)     113
 RPAREN   118
 END   120
 EOF   123
@@ -1760,7 +1789,7 @@ ID(a)     87
 IN   89
 ID(g)     93
 LPAREN   94
-leaving quoteSTRING(one)     95
+STRING(one)     95
 RPAREN   100
 END   102
 EOF   105
@@ -1789,7 +1818,7 @@ ID(g)     94
 LPAREN   95
 INT(3)   96
 COMMA   97
-leaving quoteSTRING(one)     98
+STRING(one)     98
 COMMA   103
 INT(5)   104
 RPAREN   105
@@ -1807,7 +1836,7 @@ INT(0)   155
 VAR   158
 ID(a)     162
 ASSIGN   164
-leaving quoteSTRING( )     167
+STRING( )     167
 IN   171
 INT(0)   175
 END   177
@@ -1977,11 +2006,11 @@ ID(rectype1)     307
 LBRACE   316
 ID(name)     317
 EQ   321
-leaving quoteSTRING(aname)     322
+STRING(aname)     322
 COMMA   329
 ID(address)     331
 EQ   338
-leaving quoteSTRING(somewhere)     339
+STRING(somewhere)     339
 COMMA   350
 ID(id)     352
 EQ   354
@@ -2001,7 +2030,7 @@ LBRACK   395
 INT(100)   396
 RBRACK   399
 OF   401
-leaving quoteSTRING()     404
+STRING()     404
 VAR   408
 ID(rec1)     412
 ASSIGN   417
@@ -2009,11 +2038,11 @@ ID(rectype1)     420
 LBRACE   429
 ID(name)     430
 EQ   434
-leaving quoteSTRING(Kapoios)     435
+STRING(Kapoios)     435
 COMMA   444
 ID(address)     446
 EQ   453
-leaving quoteSTRING(Kapou)     454
+STRING(Kapou)     454
 COMMA   461
 ID(id)     463
 EQ   465
@@ -2030,7 +2059,7 @@ ID(rectype2)     493
 LBRACE   502
 ID(name)     503
 EQ   507
-leaving quoteSTRING(Allos)     508
+STRING(Allos)     508
 COMMA   515
 ID(dates)     517
 EQ   522
@@ -2063,7 +2092,7 @@ RBRACK   586
 DOT   587
 ID(name)     588
 ASSIGN   593
-leaving quoteSTRING(kati)     596
+STRING(kati)     596
 SEMICOLON   602
 ID(arr2)     604
 LBRACK   608
@@ -2079,13 +2108,13 @@ LBRACK   627
 INT(34)   628
 RBRACK   630
 ASSIGN   632
-leaving quoteSTRING(sfd)     635
+STRING(sfd)     635
 SEMICOLON   640
 ID(rec1)     643
 DOT   647
 ID(name)     648
 ASSIGN   653
-leaving quoteSTRING(sdf)     656
+STRING(sdf)     656
 SEMICOLON   661
 ID(rec2)     663
 DOT   667
