@@ -102,6 +102,8 @@ STRING | COMMENT | INITIAL
     structure UserDeclarations = 
       struct
 
+
+
 type pos = int
 type lexresult = Tokens.token
 

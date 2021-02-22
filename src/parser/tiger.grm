@@ -32,7 +32,26 @@
 
 %%
 
-program	: exp				()
+program	: exp		()
 
 	
-exp: 			()
+exp : NIL                               ()
+    | MINUS INT                         ()
+    | exp PLUS exp                      ()
+    | exp MINUS exp                     ()
+    | exp TIMES exp                     ()
+    | exp DIVIDE exp                    ()
+    | exp LT exp                        ()
+    | exp NEQ exp                       ()
+    | exp LE exp                        ()
+    | exp GT exp                        ()
+    | exp GE exp                        ()
+    | exp EQ exp                        ()
+    | exp AND exp                       ()
+    | exp OR exp                        ()
+    | IF exp THEN exp ELSE exp          ()
+    | IF exp THEN exp                   ()
+    | WHILE exp DO exp                  ()
+    | FOR ID ASSIGN exp TO exp DO exp   ()
+    | BREAK                             ()
+
