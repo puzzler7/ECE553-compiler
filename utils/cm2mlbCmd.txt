@@ -1,5 +1,5 @@
 CM2MLB.cm2mlb {defines = ["MLton"],
-maps = ["../utils/cm2mlb-map"],
+maps = ["cm2mlb-map"],
 binds = [],
-sources = "sources.cm",
+sources = "../src/parser/sources.cm",
 out = TextIO.stdOut};
