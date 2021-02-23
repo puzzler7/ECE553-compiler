@@ -10,6 +10,7 @@ const getRelativePathOfTests = (dir) => {
 }
 
 const negativeTestPattern = /\/\*.*error.*\*\//;
+const errorMessagePattern = /:syntax error:/;
 const binaryName = `parserParse-${process.platform}`;
 
 describe('When building with Mlton', () => {
