@@ -65,7 +65,12 @@ exp : NIL                               ()
     | lvalue ASSIGN exp                 ()
     | LPAREN RPAREN                     ()
     | LPAREN exps RPAREN                ()
+    | typeid LBRACK exp RBRACK OF exp   ()
     | BREAK                             ()
+
+lvalue : ID ()
+       | lvalue DOT ID  ()
+       | lvalue LBRACK exp RBRACK ()
 
 exps : exp ()
      | exp SEMICOLON exps ()
@@ -81,8 +86,10 @@ dec : tydec ()
 tydec : TYPE typeid EQ ty ()
 
 ty : typeid ()
-    | LBRACK typeid RBRACK ()
+    | LBRACE tyfields RBRACE ()
     | ARRAY OF typeid ()
+
+typeid : ID ()
 
 tyfields : ID COLON typeid ()
          | ID COLON typeid COMMA tyfields ()
@@ -93,10 +100,6 @@ vardec : VAR ID ASSIGN exp  ()
 
 fundec : FUNCTION ID LPAREN tyfields RPAREN EQ exp ()
        | FUNCTION ID LPAREN tyfields RPAREN COLON typeid EQ exp ()
-
-lvalue : ID ()
-       | lvalue DOT ID  ()
-       | lvalue LBRACK exp RBRACK ()
 
 
 
