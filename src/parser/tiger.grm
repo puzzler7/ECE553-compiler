@@ -12,7 +12,7 @@
   | FUNCTION | VAR | TYPE | UMINUS
 
 %nonterm  exp | program | exps | decs | dec | tydec | ty | typeid | tyfields
-        | vardec | fundec | lvalue
+        | vardec | fundec | lvalue | hackybrackthing | typeorlid | recfields
 
 %pos int
 %verbose
@@ -44,7 +44,6 @@ exp : NIL                               ()
     | INT                               ()
     | STRING                            ()
     | ID                                ()
-    | MINUS exp %prec UMINUS            ()
     | exp PLUS exp                      ()
     | exp MINUS exp                     ()
     | exp TIMES exp                     ()
@@ -59,24 +58,34 @@ exp : NIL                               ()
     | exp OR exp                        ()
     | IF exp THEN exp ELSE exp          ()
     | IF exp THEN exp                   ()
-    | WHILE exp DO exp                  ()
-    | FOR ID ASSIGN exp TO exp DO exp   () (*20*)
-    | LET decs IN exp END               ()
+    | WHILE exp DO exp                  () (*20*)
+    | FOR ID ASSIGN exp TO exp DO exp   () 
+    | LET decs IN exps END               () 
     | lvalue ASSIGN exp                 ()
     | LPAREN RPAREN                     ()
     | LPAREN exps RPAREN                ()
-    | typeid LBRACK exp RBRACK OF exp   ()
+    | hackybrackthing OF exp               ()
+    | typeid LBRACE recfields RBRACE    ()
     | BREAK                             ()
+    | MINUS exp %prec UMINUS            () 
 
-lvalue : ID ()
+recfields : ID EQ exp                 ()
+          | ID EQ exp COMMA recfields ()
+          |                           ()
+
+typeorlid: ID ()
+
+hackybrackthing: typeorlid LBRACK exp RBRACK ()
+
+lvalue : typeorlid ()
        | lvalue DOT ID  ()
-       | lvalue LBRACK exp RBRACK ()
+       | hackybrackthing ()
+       | lvalue DOT hackybrackthing ()
 
 exps : exp ()
      | exp SEMICOLON exps ()
 
-decs : dec      ()
-     | dec decs ()
+decs : dec decs ()
      |          ()
 
 dec : tydec ()
@@ -89,7 +98,7 @@ ty : typeid ()
     | LBRACE tyfields RBRACE ()
     | ARRAY OF typeid ()
 
-typeid : ID ()
+typeid : typeorlid ()
 
 tyfields : ID COLON typeid ()
          | ID COLON typeid COMMA tyfields ()
