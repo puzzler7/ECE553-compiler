@@ -1,20 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`The textbook tests parses test/testcases/test1.tig correctly 1`] = `
-"test/testcases/test1.tig:4.35:syntax error: replacing  OF with  ASSIGN
+exports[`The textbook tests parses test/testcases/queens.tig correctly 1`] = `
+"test/testcases/queens.tig:16.16:syntax error: inserting  SEMICOLON
+test/testcases/queens.tig:16.26:syntax error: replacing  EQ with  ASSIGN
+test/testcases/queens.tig:17.12:syntax error: inserting  SEMICOLON
+test/testcases/queens.tig:18.15:syntax error: inserting  SEMICOLON
+test/testcases/queens.tig:23.21:syntax error: inserting  PLUS
+test/testcases/queens.tig:25.17:syntax error: replacing  EQ with  ASSIGN
+test/testcases/queens.tig:25.32:syntax error: replacing  EQ with  ASSIGN
+test/testcases/queens.tig:25.49:syntax error: replacing  EQ with  ASSIGN
+test/testcases/queens.tig:28.22:syntax error: inserting  SEMICOLON
+test/testcases/queens.tig:32.8:syntax error: inserting  SEMICOLON
 "
 `;
 
-exports[`The textbook tests parses test/testcases/test2.tig correctly 1`] = `
-"test/testcases/test2.tig:6.35:syntax error: replacing  OF with  ASSIGN
-"
-`;
+exports[`The textbook tests parses test/testcases/test1.tig correctly 1`] = `""`;
+
+exports[`The textbook tests parses test/testcases/test2.tig correctly 1`] = `""`;
+
+exports[`The textbook tests parses test/testcases/test3.tig correctly 1`] = `""`;
 
 exports[`The textbook tests parses test/testcases/test4.tig correctly 1`] = `
 "test/testcases/test4.tig:8.20:syntax error: inserting  PLUS
-test/testcases/test4.tig:11.9:syntax error: inserting  PLUS
+test/testcases/test4.tig:11.9:syntax error: inserting  SEMICOLON
 "
 `;
+
+exports[`The textbook tests parses test/testcases/test5.tig correctly 1`] = `""`;
 
 exports[`The textbook tests parses test/testcases/test6.tig correctly 1`] = `
 "test/testcases/test6.tig:5.14:syntax error: inserting  PLUS
@@ -46,6 +58,8 @@ exports[`The textbook tests parses test/testcases/test12.tig correctly 1`] = `""
 
 exports[`The textbook tests parses test/testcases/test13.tig correctly 1`] = `""`;
 
+exports[`The textbook tests parses test/testcases/test14.tig correctly 1`] = `""`;
+
 exports[`The textbook tests parses test/testcases/test15.tig correctly 1`] = `""`;
 
 exports[`The textbook tests parses test/testcases/test16.tig correctly 1`] = `""`;
@@ -74,33 +88,30 @@ exports[`The textbook tests parses test/testcases/test20.tig correctly 1`] = `""
 
 exports[`The textbook tests parses test/testcases/test21.tig correctly 1`] = `
 "test/testcases/test21.tig:8.20:syntax error: inserting  PLUS
-test/testcases/test21.tig:11.9:syntax error: inserting  PLUS
+test/testcases/test21.tig:11.9:syntax error: inserting  SEMICOLON
 "
 `;
+
+exports[`The textbook tests parses test/testcases/test22.tig correctly 1`] = `""`;
+
+exports[`The textbook tests parses test/testcases/test23.tig correctly 1`] = `""`;
 
 exports[`The textbook tests parses test/testcases/test26.tig correctly 1`] = `""`;
 
 exports[`The textbook tests parses test/testcases/test27.tig correctly 1`] = `
-"test/testcases/test27.tig:7.3:syntax error: inserting  PLUS
+"test/testcases/test27.tig:7.3:syntax error: inserting  SEMICOLON
 "
 `;
 
-exports[`The textbook tests parses test/testcases/test29.tig correctly 1`] = `
-"test/testcases/test29.tig:7.38:syntax error: replacing  OF with  ASSIGN
-"
-`;
+exports[`The textbook tests parses test/testcases/test28.tig correctly 1`] = `""`;
+
+exports[`The textbook tests parses test/testcases/test29.tig correctly 1`] = `""`;
 
 exports[`The textbook tests parses test/testcases/test31.tig correctly 1`] = `""`;
 
-exports[`The textbook tests parses test/testcases/test32.tig correctly 1`] = `
-"test/testcases/test32.tig:6.24:syntax error: replacing  OF with  ASSIGN
-"
-`;
+exports[`The textbook tests parses test/testcases/test32.tig correctly 1`] = `""`;
 
-exports[`The textbook tests parses test/testcases/test33.tig correctly 1`] = `
-"test/testcases/test33.tig:3.18:syntax error: deleting  LBRACE RBRACE
-"
-`;
+exports[`The textbook tests parses test/testcases/test33.tig correctly 1`] = `""`;
 
 exports[`The textbook tests parses test/testcases/test34.tig correctly 1`] = `
 "test/testcases/test34.tig:5.3:syntax error: deleting  LPAREN STRING COMMA
@@ -109,7 +120,7 @@ test/testcases/test34.tig:5.11:syntax error: deleting  STRING RPAREN
 `;
 
 exports[`The textbook tests parses test/testcases/test35.tig correctly 1`] = `
-"test/testcases/test35.tig:5.3:syntax error: inserting  PLUS
+"test/testcases/test35.tig:5.3:syntax error: inserting  SEMICOLON
 "
 `;
 
@@ -127,11 +138,13 @@ exports[`The textbook tests parses test/testcases/test38.tig correctly 1`] = `""
 exports[`The textbook tests parses test/testcases/test39.tig correctly 1`] = `""`;
 
 exports[`The textbook tests parses test/testcases/test40.tig correctly 1`] = `
-"test/testcases/test40.tig:5.3:syntax error: inserting  PLUS
+"test/testcases/test40.tig:5.3:syntax error: inserting  SEMICOLON
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test41.tig correctly 1`] = `""`;
+
+exports[`The textbook tests parses test/testcases/test42.tig correctly 1`] = `""`;
 
 exports[`The textbook tests parses test/testcases/test43.tig correctly 1`] = `""`;
 
@@ -139,10 +152,7 @@ exports[`The textbook tests parses test/testcases/test44.tig correctly 1`] = `""
 
 exports[`The textbook tests parses test/testcases/test45.tig correctly 1`] = `""`;
 
-exports[`The textbook tests parses test/testcases/test46.tig correctly 1`] = `
-"test/testcases/test46.tig:6.9:syntax error: replacing  SEMICOLON with  AND
-"
-`;
+exports[`The textbook tests parses test/testcases/test46.tig correctly 1`] = `""`;
 
 exports[`The textbook tests parses test/testcases/test47.tig correctly 1`] = `""`;
 
