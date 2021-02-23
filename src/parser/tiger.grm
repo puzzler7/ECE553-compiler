@@ -12,7 +12,7 @@
   | FUNCTION | VAR | TYPE | UMINUS
 
 %nonterm  exp | program | exps | decs | dec | tydec | ty | typeid | tyfields
-        | vardec | fundec | lvalue | hackybrackthing | typeorlid | recfields
+        | vardec | fundec | lvalue | hackybrackthing | typeorlid | recfields | args
 
 %pos int
 %verbose
@@ -43,7 +43,7 @@ program	: exp		()
 exp : NIL                               ()
     | INT                               ()
     | STRING                            ()
-    | ID                                ()
+    | lvalue                            ()
     | exp PLUS exp                      ()
     | exp MINUS exp                     ()
     | exp TIMES exp                     ()
@@ -64,6 +64,7 @@ exp : NIL                               ()
     | lvalue ASSIGN exp                 ()
     | LPAREN RPAREN                     ()
     | LPAREN exps RPAREN                ()
+    | ID LPAREN args RPAREN             ()
     | hackybrackthing OF exp               ()
     | typeid LBRACE recfields RBRACE    ()
     | BREAK                             ()
@@ -72,6 +73,10 @@ exp : NIL                               ()
 recfields : ID EQ exp                 ()
           | ID EQ exp COMMA recfields ()
           |                           ()
+
+args : exp ()
+     | exp COMMA args ()
+     | ()
 
 typeorlid: ID ()
 
