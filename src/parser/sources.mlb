@@ -1,0 +1,269 @@
+local
+  basis l4 =
+    bas
+      (* $/basis.cm ====> *) $(SML_LIB)/basis/basis.mlb
+    end
+  basis l51 =
+    bas
+      (* $/ml-yacc-lib.cm ====> *) $(SML_LIB)/mlyacc-lib/mlyacc-lib.mlb
+    end
+in
+local
+   $(SML_LIB)/basis/pervasive.mlb
+   local
+      open l4
+   in
+      structure gs_0 = Array
+   end
+   local
+      open l4
+   in
+      structure gs_1 = List
+   end
+   local
+      open l4
+   in
+      structure gs_2 = Char
+      structure gs_3 = CharArray
+      structure gs_4 = CharVector
+      structure gs_5 = FixedInt
+      structure gs_6 = General
+      structure gs_7 = Int
+      structure gs_8 = Int32
+      structure gs_9 = Int64
+      structure gs_10 = IntInf
+      structure gs_11 = LargeInt
+      structure gs_12 = LargeReal
+      structure gs_13 = LargeWord
+      structure gs_14 = OS
+      structure gs_15 = Position
+      structure gs_16 = Real
+      structure gs_17 = Real64
+      structure gs_18 = RealArray
+      structure gs_19 = RealArraySlice
+      structure gs_20 = RealVector
+      structure gs_21 = RealVectorSlice
+      structure gs_23 = Socket
+      structure gs_24 = String
+      structure gs_25 = Substring
+      structure gs_26 = SysWord
+      structure gs_27 = Time
+      structure gs_28 = Word
+      structure gs_29 = Word32
+      structure gs_30 = Word64
+      structure gs_31 = Word8
+   end
+   local
+      open l51
+   in
+      signature gs_32 = ARG_LEXER
+      signature gs_33 = ARG_PARSER
+      signature gs_34 = LEXER
+      signature gs_35 = LR_PARSER
+      signature gs_36 = LR_TABLE
+      signature gs_37 = PARSER
+      signature gs_38 = PARSER_DATA
+      signature gs_39 = STREAM
+      signature gs_40 = TOKEN
+   end
+   local
+      signature ARG_LEXER = gs_32
+      signature ARG_PARSER = gs_33
+      signature LEXER = gs_34
+      signature LR_PARSER = gs_35
+      signature LR_TABLE = gs_36
+      signature PARSER = gs_37
+      signature PARSER_DATA = gs_38
+      signature STREAM = gs_39
+      signature TOKEN = gs_40
+      tiger.grm.sig
+   in
+      signature gs_41 = Tiger_LRVALS
+      signature gs_42 = Tiger_TOKENS
+   end
+   local
+      signature ARG_LEXER = gs_32
+      signature ARG_PARSER = gs_33
+      structure Array = gs_0
+      structure Char = gs_2
+      structure CharArray = gs_3
+      structure CharVector = gs_4
+      structure FixedInt = gs_5
+      structure General = gs_6
+      structure Int = gs_7
+      structure Int32 = gs_8
+      structure Int64 = gs_9
+      structure IntInf = gs_10
+      signature LEXER = gs_34
+      signature LR_PARSER = gs_35
+      signature LR_TABLE = gs_36
+      structure LargeInt = gs_11
+      structure LargeReal = gs_12
+      structure LargeWord = gs_13
+      structure List = gs_1
+      structure OS = gs_14
+      signature PARSER = gs_37
+      signature PARSER_DATA = gs_38
+      structure Position = gs_15
+      structure Real = gs_16
+      structure Real64 = gs_17
+      structure RealArray = gs_18
+      structure RealArraySlice = gs_19
+      structure RealVector = gs_20
+      structure RealVectorSlice = gs_21
+      signature STREAM = gs_39
+      structure Socket = gs_23
+      structure String = gs_24
+      structure Substring = gs_25
+      structure SysWord = gs_26
+      signature TOKEN = gs_40
+      signature Tiger_LRVALS = gs_41
+      signature Tiger_TOKENS = gs_42
+      structure Time = gs_27
+      structure Word = gs_28
+      structure Word32 = gs_29
+      structure Word64 = gs_30
+      structure Word8 = gs_31
+      tiger.grm.sml
+   in
+      functor gs_43 = TigerLrValsFun
+   end
+   local
+      open l4
+   in
+      structure gs_44 = IO
+   end
+   local
+      open l4
+   in
+      structure gs_45 = TextPrimIO
+   end
+   local
+      open l4
+   in
+      structure gs_46 = Vector
+   end
+   local
+      open l4
+   in
+      structure gs_47 = TextIO
+   end
+   local
+      structure Char = gs_2
+      structure CharArray = gs_3
+      structure CharVector = gs_4
+      structure FixedInt = gs_5
+      structure General = gs_6
+      structure Int = gs_7
+      structure Int32 = gs_8
+      structure Int64 = gs_9
+      structure IntInf = gs_10
+      structure LargeInt = gs_11
+      structure LargeReal = gs_12
+      structure LargeWord = gs_13
+      structure OS = gs_14
+      structure Position = gs_15
+      structure Real = gs_16
+      structure Real64 = gs_17
+      structure RealArray = gs_18
+      structure RealArraySlice = gs_19
+      structure RealVector = gs_20
+      structure RealVectorSlice = gs_21
+      structure Socket = gs_23
+      structure String = gs_24
+      structure Substring = gs_25
+      structure SysWord = gs_26
+      structure TextIO = gs_47
+      structure Time = gs_27
+      structure Word = gs_28
+      structure Word32 = gs_29
+      structure Word64 = gs_30
+      structure Word8 = gs_31
+      errormsg.sml
+   in
+      signature gs_48 = ERRORMSG
+      structure gs_49 = ErrorMsg
+   end
+   local
+      structure Char = gs_2
+      structure CharArray = gs_3
+      structure CharVector = gs_4
+      signature ERRORMSG = gs_48
+      structure ErrorMsg = gs_49
+      structure FixedInt = gs_5
+      structure General = gs_6
+      structure IO = gs_44
+      structure Int = gs_7
+      structure Int32 = gs_8
+      structure Int64 = gs_9
+      structure IntInf = gs_10
+      structure LargeInt = gs_11
+      structure LargeReal = gs_12
+      structure LargeWord = gs_13
+      structure List = gs_1
+      structure OS = gs_14
+      structure Position = gs_15
+      structure Real = gs_16
+      structure Real64 = gs_17
+      structure RealArray = gs_18
+      structure RealArraySlice = gs_19
+      structure RealVector = gs_20
+      structure RealVectorSlice = gs_21
+      structure Socket = gs_23
+      structure String = gs_24
+      structure Substring = gs_25
+      structure SysWord = gs_26
+      structure TextIO = gs_47
+      structure TextPrimIO = gs_45
+      signature Tiger_LRVALS = gs_41
+      signature Tiger_TOKENS = gs_42
+      structure Time = gs_27
+      structure Vector = gs_46
+      structure Word = gs_28
+      structure Word32 = gs_29
+      structure Word64 = gs_30
+      structure Word8 = gs_31
+      tiger.lex.sml
+   in
+      functor gs_50 = TigerLexFun
+   end
+   local
+      open l51
+   in
+      functor gs_51 = Join
+      functor gs_52 = JoinWithArg
+   end
+   local
+      open l51
+   in
+      structure gs_53 = LrParser
+   end
+   local
+      signature ERRORMSG = gs_48
+      structure ErrorMsg = gs_49
+      functor Join = gs_51
+      functor JoinWithArg = gs_52
+      structure LrParser = gs_53
+      structure TextIO = gs_47
+      functor TigerLexFun = gs_50
+      functor TigerLrValsFun = gs_43
+      parsetest.sml
+   in
+      structure gs_54 = Parse
+   end
+in
+   signature ERRORMSG = gs_48
+   structure ErrorMsg = gs_49
+   structure Parse = gs_54
+   functor TigerLexFun = gs_50
+   functor TigerLrValsFun = gs_43
+   signature Tiger_LRVALS = gs_41
+   signature Tiger_TOKENS = gs_42
+end
+local
+   open l4
+   open l51
+in
+   parserParse.sml
+end
+end

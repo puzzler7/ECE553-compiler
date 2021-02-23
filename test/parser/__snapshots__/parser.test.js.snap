@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The textbook tests parses test/testcases/test44.tig correctly 1`] = `
+"test/testcases/test44.tig:2.1:syntax error: deleting  LET TYPE ID
+test/testcases/test44.tig:4.15:syntax error: deleting  EQ LBRACE ID
+test/testcases/test44.tig:4.22:syntax error: deleting  COLON ID COMMA
+test/testcases/test44.tig:4.31:syntax error: deleting  ID COLON ID
+test/testcases/test44.tig:4.37:syntax error: deleting  RBRACE VAR ID
+test/testcases/test44.tig:5.7:syntax error: deleting  COLON ID ASSIGN
+test/testcases/test44.tig:7.1:syntax error: deleting  IN ID ASSIGN
+test/testcases/test44.tig:9.7:syntax error: deleting  NIL END
+"
+`;
+
+exports[`The textbook tests parses test/testcases/test49.tig correctly 1`] = `
+"test/testcases/test49.tig:2.1:syntax error: deleting  LET TYPE ID
+test/testcases/test49.tig:3.15:syntax error: deleting  EQ LBRACE ID
+test/testcases/test49.tig:3.22:syntax error: deleting  COLON ID COMMA
+test/testcases/test49.tig:3.31:syntax error: deleting  ID COLON ID
+test/testcases/test49.tig:3.37:syntax error: deleting  RBRACE VAR ID
+test/testcases/test49.tig:5.7:syntax error: deleting  ASSIGN ID
+test/testcases/test49.tig:6.1:syntax error: deleting  IN ID END
+"
+`;
