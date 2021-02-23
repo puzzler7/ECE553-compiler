@@ -1,50 +1,154 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`The textbook tests parses test/testcases/test1.tig correctly 1`] = `
+"test/testcases/test1.tig:4.35:syntax error: replacing  OF with  ASSIGN
+"
+`;
+
+exports[`The textbook tests parses test/testcases/test2.tig correctly 1`] = `
+"test/testcases/test2.tig:6.35:syntax error: replacing  OF with  ASSIGN
+"
+`;
+
+exports[`The textbook tests parses test/testcases/test4.tig correctly 1`] = `
+"test/testcases/test4.tig:8.20:syntax error: inserting  PLUS
+test/testcases/test4.tig:11.9:syntax error: inserting  PLUS
+"
+`;
+
+exports[`The textbook tests parses test/testcases/test6.tig correctly 1`] = `
+"test/testcases/test6.tig:5.14:syntax error: inserting  PLUS
+test/testcases/test6.tig:8.14:syntax error: deleting  LPAREN ID COMMA
+test/testcases/test6.tig:8.18:syntax error: deleting  STRING RPAREN
+test/testcases/test6.tig:11.13:syntax error: deleting  LPAREN INT COMMA
+test/testcases/test6.tig:11.17:syntax error: deleting  STRING RPAREN
+"
+`;
+
+exports[`The textbook tests parses test/testcases/test7.tig correctly 1`] = `
+"test/testcases/test7.tig:5.15:syntax error: inserting  SEMICOLON
+test/testcases/test7.tig:8.15:syntax error: deleting  LPAREN ID COMMA
+test/testcases/test7.tig:8.19:syntax error: deleting  STRING RPAREN
+test/testcases/test7.tig:11.13:syntax error: deleting  LPAREN INT COMMA
+test/testcases/test7.tig:11.17:syntax error: deleting  STRING RPAREN
+"
+`;
+
 exports[`The textbook tests parses test/testcases/test8.tig correctly 1`] = `""`;
 
 exports[`The textbook tests parses test/testcases/test9.tig correctly 1`] = `""`;
 
 exports[`The textbook tests parses test/testcases/test10.tig correctly 1`] = `""`;
 
-exports[`The textbook tests parses test/testcases/test11.tig correctly 1`] = `
-"test/testcases/test11.tig:3.9:syntax error: inserting  ASSIGN
-"
-`;
+exports[`The textbook tests parses test/testcases/test11.tig correctly 1`] = `""`;
 
-exports[`The textbook tests parses test/testcases/test12.tig correctly 1`] = `
-"test/testcases/test12.tig:4.2:syntax error: inserting  LBRACK
-test/testcases/test12.tig:5.1:syntax error: inserting  RBRACK
-test/testcases/test12.tig:6.26:syntax error: replacing  PLUS with  ASSIGN
-test/testcases/test12.tig:6.30:syntax error: inserting  BREAK
-"
-`;
+exports[`The textbook tests parses test/testcases/test12.tig correctly 1`] = `""`;
 
 exports[`The textbook tests parses test/testcases/test13.tig correctly 1`] = `""`;
 
 exports[`The textbook tests parses test/testcases/test15.tig correctly 1`] = `""`;
 
-exports[`The textbook tests parses test/testcases/test20.tig correctly 1`] = `
-"test/testcases/test20.tig:3.19:syntax error: replacing  PLUS with  ASSIGN
-test/testcases/test20.tig:3.23:syntax error: inserting  BREAK
+exports[`The textbook tests parses test/testcases/test16.tig correctly 1`] = `""`;
+
+exports[`The textbook tests parses test/testcases/test17.tig correctly 1`] = `""`;
+
+exports[`The textbook tests parses test/testcases/test18.tig correctly 1`] = `
+"test/testcases/test18.tig:5.15:syntax error: inserting  SEMICOLON
+test/testcases/test18.tig:10.15:syntax error: deleting  LPAREN ID COMMA
+test/testcases/test18.tig:10.19:syntax error: deleting  STRING RPAREN
+test/testcases/test18.tig:13.13:syntax error: deleting  LPAREN INT COMMA
+test/testcases/test18.tig:13.17:syntax error: deleting  STRING RPAREN
+"
+`;
+
+exports[`The textbook tests parses test/testcases/test19.tig correctly 1`] = `
+"test/testcases/test19.tig:5.15:syntax error: inserting  SEMICOLON
+test/testcases/test19.tig:8.15:syntax error: deleting  LPAREN ID COMMA
+test/testcases/test19.tig:8.19:syntax error: deleting  STRING RPAREN
+test/testcases/test19.tig:11.13:syntax error: deleting  LPAREN INT COMMA
+test/testcases/test19.tig:11.17:syntax error: deleting  STRING RPAREN
+"
+`;
+
+exports[`The textbook tests parses test/testcases/test20.tig correctly 1`] = `""`;
+
+exports[`The textbook tests parses test/testcases/test21.tig correctly 1`] = `
+"test/testcases/test21.tig:8.20:syntax error: inserting  PLUS
+test/testcases/test21.tig:11.9:syntax error: inserting  PLUS
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test26.tig correctly 1`] = `""`;
 
-exports[`The textbook tests parses test/testcases/test37.tig correctly 1`] = `
-"test/testcases/test37.tig:4.2:syntax error: inserting  LBRACK
-test/testcases/test37.tig:5.2:syntax error: replacing  VAR with  PLUS
-test/testcases/test37.tig:6.1:syntax error: inserting  RBRACK
+exports[`The textbook tests parses test/testcases/test27.tig correctly 1`] = `
+"test/testcases/test27.tig:7.3:syntax error: inserting  PLUS
 "
 `;
 
-exports[`The textbook tests parses test/testcases/test44.tig correctly 1`] = `
-"test/testcases/test44.tig:4.2:syntax error: deleting  TYPE ID EQ
-test/testcases/test44.tig:4.17:syntax error: deleting  LBRACE ID COLON
-test/testcases/test44.tig:4.23:syntax error: deleting  ID COMMA ID
-test/testcases/test44.tig:4.33:syntax error: deleting  COLON ID RBRACE
-test/testcases/test44.tig:5.2:syntax error: inserting  LBRACK
-test/testcases/test44.tig:5.7:syntax error: replacing  COLON with  ASSIGN
-test/testcases/test44.tig:7.1:syntax error: inserting  RBRACK
+exports[`The textbook tests parses test/testcases/test29.tig correctly 1`] = `
+"test/testcases/test29.tig:7.38:syntax error: replacing  OF with  ASSIGN
+"
+`;
+
+exports[`The textbook tests parses test/testcases/test31.tig correctly 1`] = `""`;
+
+exports[`The textbook tests parses test/testcases/test32.tig correctly 1`] = `
+"test/testcases/test32.tig:6.24:syntax error: replacing  OF with  ASSIGN
+"
+`;
+
+exports[`The textbook tests parses test/testcases/test33.tig correctly 1`] = `
+"test/testcases/test33.tig:3.18:syntax error: deleting  LBRACE RBRACE
+"
+`;
+
+exports[`The textbook tests parses test/testcases/test34.tig correctly 1`] = `
+"test/testcases/test34.tig:5.3:syntax error: deleting  LPAREN STRING COMMA
+test/testcases/test34.tig:5.11:syntax error: deleting  STRING RPAREN
+"
+`;
+
+exports[`The textbook tests parses test/testcases/test35.tig correctly 1`] = `
+"test/testcases/test35.tig:5.3:syntax error: inserting  PLUS
+"
+`;
+
+exports[`The textbook tests parses test/testcases/test36.tig correctly 1`] = `
+"test/testcases/test36.tig:5.3:syntax error: deleting  LPAREN INT COMMA
+test/testcases/test36.tig:5.6:syntax error: deleting  STRING COMMA INT
+test/testcases/test36.tig:5.13:syntax error: deleting  RPAREN
+"
+`;
+
+exports[`The textbook tests parses test/testcases/test37.tig correctly 1`] = `""`;
+
+exports[`The textbook tests parses test/testcases/test38.tig correctly 1`] = `""`;
+
+exports[`The textbook tests parses test/testcases/test39.tig correctly 1`] = `""`;
+
+exports[`The textbook tests parses test/testcases/test40.tig correctly 1`] = `
+"test/testcases/test40.tig:5.3:syntax error: inserting  PLUS
+"
+`;
+
+exports[`The textbook tests parses test/testcases/test41.tig correctly 1`] = `""`;
+
+exports[`The textbook tests parses test/testcases/test43.tig correctly 1`] = `""`;
+
+exports[`The textbook tests parses test/testcases/test44.tig correctly 1`] = `""`;
+
+exports[`The textbook tests parses test/testcases/test45.tig correctly 1`] = `""`;
+
+exports[`The textbook tests parses test/testcases/test46.tig correctly 1`] = `
+"test/testcases/test46.tig:6.9:syntax error: replacing  SEMICOLON with  AND
+"
+`;
+
+exports[`The textbook tests parses test/testcases/test47.tig correctly 1`] = `""`;
+
+exports[`The textbook tests parses test/testcases/test48.tig correctly 1`] = `""`;
+
+exports[`The textbook tests parses test/testcases/test49.tig correctly 1`] = `
+"test/testcases/test49.tig:5.18:syntax error: inserting  PLUS
 "
 `;
