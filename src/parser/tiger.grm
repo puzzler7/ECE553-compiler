@@ -19,6 +19,12 @@
 %eop EOF
 %noshift EOF
 
+%left OR
+%left AND
+%left LT LE GE GT EQ NEQ
+%left PLUS MINUS
+%left TIMES DIVIDE
+
 %name Tiger
 
 %keyword WHILE FOR TO BREAK LET IN END FUNCTION VAR TYPE ARRAY IF THEN ELSE 
