@@ -3,6 +3,10 @@ Group is
 $/basis.cm
 $/smlnj-lib.cm
 $/ml-yacc-lib.cm
+absyn.sml
+table.sig
+table.sml
+symbol.sml
 tiger.lex
 errormsg.sml
 parsetest.sml
