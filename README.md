@@ -7,6 +7,7 @@
 
 ### Links to Compiler Parts
 * [Lexer](https://gitlab.oit.duke.edu/bj92/ece553project/-/tree/master/src/lexer)
+* [Parser](https://gitlab.oit.duke.edu/bj92/ece553project/-/tree/master/src/parser)
 * 
 
 ### Testing Instructions

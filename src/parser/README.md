@@ -1,15 +1,19 @@
-#Parser
+# Parser
 
-###Running
-In the SML command line, run ```CM.make "sources.cm";
+### Running
+In the SML command line, run 
+
+```
+CM.make "sources.cm";
 use "prabsyn.sml";
-PrintAbsyn.print(TextIO.stdOut, Parse.parse "filename.tig");```
+PrintAbsyn.print(TextIO.stdOut, Parse.parse "filename.tig");
+```
 
 This will compile the parser, parse the input file into an AST, and pretty-print the AST to stdout.
 
-###Justification of Shift/Reduce Conflicts
+### Justification of Shift/Reduce Conflicts
 
-We have 12 exps that start with exp, namely PLUS, MINUS, TIMES, DIVIDE, LT, NEQ, LE, GT, GE, EQ, AND, OR. We give these
+We have 12 exps that start with exp, namely `PLUS`, `MINUS`, `TIMES`, `DIVIDE`, `LT`, `NEQ`, `LE`, `GT`, `GE`, `EQ`, `AND`, `OR`. We give these
 precedence, so there are no shift/reduce conflicts between these 12 actions. However, there are shift/reduce conflicts with `IF/THEN(/ELSE)`, `WHILE/DO`, `FOR`,
 and `hackybrackthing`, as each of these expressions ends with an `exp`. The parser has to decide between reducing to the stated expression, or shifting to the next operator. In all cases, we want to shift, as we to capture everything in the later expression before reducing. As this is default behavior in a shift/reduce conflict, this is acceptable.
 
