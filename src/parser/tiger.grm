@@ -96,7 +96,17 @@ lvalue : typeorlid                  (A.SimpleVar(typeorlid, typeorlidleft))
 exps : exp                  ([(exp, exp1left)])
      | exp SEMICOLON exps   ([(exp, exp1left)] @ exps)
 
-decs : dec decs (dec :: decs) (*FIXME this needs to be a big function for mut rec stuff*)
+(*dec :: decs*)
+
+decs : dec decs (let
+                  fun concat (newdec, []) = [newdec]
+                    | concat (newdec, dechead::declist) = case (newdec, dechead, declist) of
+                      (A.FunctionDec(ndecflist), A.FunctionDec(hdecflist), declist) => A.FunctionDec(ndecflist @ hdecflist) :: declist
+                    | (A.TypeDec(ndectlist), A.TypeDec(hdectlist), declist) => A.TypeDec(ndectlist @ hdectlist) :: declist
+                    | (newdec, dechead, declist) => newdec :: (dechead::declist)
+                in
+                  concat (dec, decs)
+                end) 
      |          ([])
 
 dec : tydec     (A.TypeDec([{name=(#id tydec), ty=(#ty tydec), pos=tydecleft}]))

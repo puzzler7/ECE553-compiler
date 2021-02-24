@@ -961,7 +961,17 @@ end
 MlyValue.dec dec1, dec1left, _)) :: rest671)) => let val  result = 
 MlyValue.decs (fn _ => let val  (dec as dec1) = dec1 ()
  val  (decs as decs1) = decs1 ()
- in (dec :: decs)
+ in (
+let
+                  fun concat (newdec, []) = [newdec]
+                    | concat (newdec, dechead::declist) = case (newdec, dechead, declist) of
+                      (A.FunctionDec(ndecflist), A.FunctionDec(hdecflist), declist) => A.FunctionDec(ndecflist @ hdecflist) :: declist
+                    | (A.TypeDec(ndectlist), A.TypeDec(hdectlist), declist) => A.TypeDec(ndectlist @ hdectlist) :: declist
+                    | (newdec, dechead, declist) => newdec :: (dechead::declist)
+                in
+                  concat (dec, decs)
+                end
+)
 end)
  in ( LrTable.NT 3, ( result, dec1left, decs1right), rest671)
 end
