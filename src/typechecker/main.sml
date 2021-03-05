@@ -1,4 +1,7 @@
-structure Main : sig (val parse : string -> Absyn.exp; )  end =
+structure Main : sig 
+	val parse : string -> Absyn.exp
+	val main : string -> unit 
+end =
 struct 
 	structure TigerLrVals = TigerLrValsFun(structure Token = LrParser.Token)
 	structure Lex = TigerLexFun(structure Tokens = TigerLrVals.Tokens)
@@ -17,10 +20,10 @@ struct
 		end handle LrParser.ParseError => raise ErrorMsg.Error
 
 	fun main filename = 
-		let val tree = Main.parse(filename)
+		let val tree = parse(filename)
 		in
-			PrintAbsyn.print(TextIO.stdOut, tree)
-			Semant.transProg(tree)
+			(PrintAbsyn.print(TextIO.stdOut, tree);
+			Semant.transProg(tree))
 		end
 end
 
