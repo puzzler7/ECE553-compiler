@@ -22,8 +22,8 @@ struct
 			    end)
 	val stack = ref [TypeTable.empty]
 	fun checkInt ({exp,T.INT}, pos) = ()
-		| checkInt ({exp, ty}, pos) = ErrorMsg.Error pos "Not int type"
-	fun transProg (A.VarDec({name: S.symbol,
+	  | checkInt ({exp, ty}, pos) = ErrorMsg.Error pos "Not int type"
+	fun checkThenElse ({exp1, ty1}, {exp2, ty2}, pos) = if ty1 = ty2 then () else ErrorMsg.Error pos "Then Else disagree" (* not sure if this works *) 					    fun transProg (A.VarDec({name: S.symbol,
 		     escape: bool ref,
 		     typ: (S.symbol * pos) option,
 		     init: exp,
@@ -33,13 +33,23 @@ struct
 		let fun trexp (A.NilExp) = {exp=(), ty=T.NIL}
 			  | trexp (A.IntExp(ival)) = {exp=(), ty=T.INT}
 			  | trexp (A.StringExp(sval)) = {exp=(), ty=T.STRING}
+			  | trexp (A.IfExp(test, then', else', pos))  =
+			    case else' of NONE => (checkInt(trexp test, pos); trexp then'; {exp=(), ty=(trexp then').ty})
+					| SOME exp => (checkInt(trexp test, pos); checkThenElse(trexp then', trexp else', pos); {exp = (), ty=(trexp then').ty})
+			  | trexp (A.WhileExp(test, body, pos)) = (checkInt(trexp test, pos); trexp body; {exp = (), ty = (trexp body).ty})
 			  | trexp (A.OpExp(left, oper, right, pos)) =
-			  		case oper of 
-			  			A.PlusOp = (checkInt(trexp left, pos); checkInt(trexp right, pos) {exp=(), ty=T.INT})
-			  		  | A.MinusOp = (checkInt(trexp left, pos); checkInt(trexp right, pos) {exp=(), ty=T.INT})
-			  		  | A.TimesOp = (checkInt(trexp left, pos); checkInt(trexp right, pos) {exp=(), ty=T.INT})
-			  		  | A.DivideOp = (checkInt(trexp left, pos); checkInt(trexp right, pos) {exp=(), ty=T.INT})
-		in 
+			  		case oper of A.PlusOp => (checkInt(trexp left, pos); checkInt(trexp right, pos) {exp=(), ty=T.INT})
+			  		  | A.MinusOp => (checkInt(trexp left, pos); checkInt(trexp right, pos) {exp=(), ty=T.INT})
+			  		  | A.TimesOp => (checkInt(trexp left, pos); checkInt(trexp right, pos) {exp=(), ty=T.INT})
+			  		  | A.DivideOp => (checkInt(trexp left, pos); checkInt(trexp right, pos) {exp=(), ty=T.INT})
+				          | A.LtOp => (checkInt(trexp left, pos); checkInt(trexp right, pos) {exp=(), ty=T.INT})
+					  | A.GtOp  => (checkInt(trexp left, pos); checkInt(trexp right, pos) {exp=(), ty=T.INT})
+					  | A.NeqOp => (checkInt(trexp left, pos); checkInt(trexp right, pos) {exp=(), ty=T.INT})
+					  | A.LeOp => (checkInt(trexp left, pos); checkInt(trexp right, pos) {exp=(), ty=T.INT})
+					  | A.GeOp => (checkInt(trexp left, pos); checkInt(trexp right, pos) {exp=(), ty=T.INT})
+					  | A.EqOp => (checkInt(trexp left, pos); checkInt(trexp right, pos) {exp=(), ty=T.INT})
+					    
+  		in 
 			trexp exp
 		end
 end
