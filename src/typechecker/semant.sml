@@ -33,10 +33,11 @@ struct
 		let fun trexp (A.NilExp) = {exp=(), ty=T.NIL}
 			  | trexp (A.IntExp(ival)) = {exp=(), ty=T.INT}
 			  | trexp (A.StringExp(sval)) = {exp=(), ty=T.STRING}
+			  | trexp (A.WhileExp(test, body, pos)) = (checkInt(trexp test, pos); trexp body; {exp = (), ty = T.NIL}) (* Assuming loops return null *)
+			  | trexp (A.ForExp(var, escape, lo, hi, body, pos)) = (intVar(var); checkInt(lo); checkInt(hi); trexp body; {exp = (), ty = T.NIL})(* TODO define intVar *) 				      | trexp (A.LetExp(decs, body, pos)) = (scopeDown; parseDecs; trexp body; {exp = (), ty = body.ty}; scopeUp;) (* ADD scopedown (pushstack), scopeUp (popstack), and dec parsing *)        
 			  | trexp (A.IfExp(test, then', else', pos))  =
 			    case else' of NONE => (checkInt(trexp test, pos); trexp then'; {exp=(), ty=(trexp then').ty})
-					| SOME exp => (checkInt(trexp test, pos); checkThenElse(trexp then', trexp else', pos); {exp = (), ty=(trexp then').ty})
-			  | trexp (A.WhileExp(test, body, pos)) = (checkInt(trexp test, pos); trexp body; {exp = (), ty = (trexp body).ty})
+					| SOME exp => (checkInt(trexp test, pos); checkThenElse(trexp then', trexp else', pos); {exp = (), ty=(trexp then').ty})			   
 			  | trexp (A.OpExp(left, oper, right, pos)) =
 			  		case oper of A.PlusOp => (checkInt(trexp left, pos); checkInt(trexp right, pos) {exp=(), ty=T.INT})
 			  		  | A.MinusOp => (checkInt(trexp left, pos); checkInt(trexp right, pos) {exp=(), ty=T.INT})
