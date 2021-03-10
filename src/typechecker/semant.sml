@@ -38,6 +38,9 @@ struct
 			  | trexp (A.ForExp(var, escape, lo, hi, body, pos)) = (intVar(var); checkInt(lo); checkInt(hi); trexp body; {exp = (), ty = T.NIL})(* TODO define intVar *)
  			  | trexp (A.LetExp(decs, body, pos)) = (scopeDown; parseDecs; trexp body; scopeUp; {exp = (), ty = T.NIL}) (* ADD scopedown (pushstack), scopeUp (popstack), and dec parsing, also assuming returns nothing *)
 			  | trexp (A.OpExp(left, oper, right, pos)) = (checkInt(trexp left, pos); checkInt(trexp right, pos); {exp=(), ty=T.INT})
+			  | trexp (A.AssignExp(var, exp, pos)) = (addVar(var, (trexp exp).ty); {exp = (), ty=T.NIL}) (* should add variable to map with type second parameter *)
+			  | trexp (A.SeqExp(exps)) = {exp = (), ty = foldl (fn(x, y) => (trexp x).ty) T.NIL exps} (* used foldl here to capture last type, note does not actually keep state *)
+			  (* not sure what to do for callexp *)	      
 								  
 			  | trexp (A.IfExp(test, then', else', pos))  =
 			    	   case else' of NONE => (checkInt(trexp test, pos); trexp then'; {exp=(), ty=(trexp then').ty})
