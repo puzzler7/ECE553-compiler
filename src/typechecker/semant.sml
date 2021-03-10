@@ -41,7 +41,8 @@ struct
 			  | trexp (A.AssignExp(var, exp, pos)) = (addVar(var, (trexp exp).ty); {exp = (), ty=T.NIL}) (* should add variable to map with type second parameter *)
 			  | trexp (A.SeqExp(exps)) = {exp = (), ty = foldl (fn(x, y) => (trexp x).ty) T.NIL exps} (* used foldl here to capture last type, note does not actually keep state *)
 			  (* not sure what to do for callexp *)	      
-								  
+			  | trexp (A.ArrayExp(typ, size, init, pos)) = (checkInt(trexp size, pos); if typ = (trexp init).ty then () else ErrorMsg.Error pos "Initializing array with wrong type"; {exp = (), ty = T.NIL})
+   			  | trexp (A.RecordExp(fields, typ, pos)) = (map (fn(x) => if T.lookup(typ).lookup(#1 x) = (trexp (#2 x)).ty then () else ErrorMsg.Error pos "Wrong initialization of type in record") fields;   {exp = (), ty = typ}) (* FIXME? *)
 			  | trexp (A.IfExp(test, then', else', pos))  =
 			    	   case else' of NONE => (checkInt(trexp test, pos); trexp then'; {exp=(), ty=(trexp then').ty})
 					| SOME exp => (checkInt(trexp test, pos); checkThenElse(trexp then', trexp else', pos); {exp = (), ty=(trexp then').ty})			   
