@@ -8,6 +8,7 @@ absyn.sml
 semant.sml
 main.sml
 prabsyn.sml
+env.sig
 env.sml
 tiger.lex
 tiger.grm

@@ -1,9 +1,8 @@
 signature SEMANT = 
 sig
-	type venv = Env.enventry Symbol.table
-	type tenv = ty Symbol.table
-	structure Translate = struct type exp = unit end
-	type expty = {exp: Translate.exp, ty: Types.ty}
+	type venvType
+	type tenvType
+	type expty
 
 	val transVar: venv * tenv * Absyn.var -> expty
 	val transExp: venv * tenv * Absyn.exp -> expty
@@ -12,24 +11,24 @@ sig
 	val transProg: Absyn.exp -> unit
 end
 
-structure Semant:
-	sig val transProg: Absyn.exp -> unit end = 
+structure Semant = 
 struct
+	structure Translate = struct type exp = unit end
+	type venvType = Env.enventry Symbol.table
+	type tenvType = ty Symbol.table
+	type expty = {exp: Translate.exp, ty: Types.ty}
+
     structure A = Absyn
     structure S = Symbol
-    structure TypeTable = RedBlackMapFn (struct type ord_key = S.symbol
-				    val compare = (fn(s1, s2) => Int.compare(((fn(s, n) => n) s1),((fn (s, n) => n) s2))) (* use rbmap or hashmap here? *) 
-			    end)
-	val stack = ref [TypeTable.empty]
+
+	val stack: Table { tenv: tenvType, venv: venvType } list ref = ref []
+	val tenv: tenvType = ref Env.base_tenv
+	val venv: venvType = ref Env.base_venv
+	
 	fun checkInt ({exp,T.INT}, pos) = ()
 	  | checkInt ({exp, ty}, pos) = ErrorMsg.Error pos "Not int type"
 	fun checkThenElse ({exp1, ty1}, {exp2, ty2}, pos) = if ty1 = ty2 then () else ErrorMsg.Error pos "Then Else disagree" (* not sure if this works *)
-	fun transProg (A.VarDec({name: S.symbol,
-		     escape: bool ref,
-		     typ: (S.symbol * pos) option,
-		     init: exp,
-		     pos: pos}
-		      )) = transProg(init); (* several questions: how do we get types for variable declarations, how do we traverse the tree so all the types are loaded, i.e. at what stage do we check for type mismatch *)  			       
+	fun transProg(exp) = transExp(exp) (* several questions: how do we get types for variable declarations, how do we traverse the tree so all the types are loaded, i.e. at what stage do we check for type mismatch *)  			       
 	fun transExp (venv, tenv, exp) = 
 		let fun trexp (A.NilExp) = {exp=(), ty=T.NIL}
 			  | trexp (A.IntExp(ival)) = {exp=(), ty=T.INT}

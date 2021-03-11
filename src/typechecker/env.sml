@@ -1,4 +1,4 @@
-structure ENV = 
+structure Env = 
 struct
 	structure S = Symbol
 	structure T = Types
