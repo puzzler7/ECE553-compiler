@@ -36,9 +36,10 @@ struct
 	
 	fun lookupType (t, v, pos) = (case S.look(t, v) of NONE => (ErrorMsg.error pos "Type undefined"; T.NIL)
                                                         | SOME x => x)		
-    fun symbolFromVar (A.SimpleVar(s, pos)) = s
+	fun symbolFromVar (A.SimpleVar(s, pos)) = s						      
 	  | symbolFromVar (A.FieldVar(v, s, pos)) = s
-	  | symbolFromVar (A.SubscriptVar(v, e, pos)) = symbolFromVar(v)	
+	  | symbolFromVar (A.SubscriptVar(v, e, pos)) = symbolFromVar(v)
+	  
 	fun posFromVar (A.SimpleVar(s, pos)) = pos
 	  | posFromVar (A.FieldVar(v, s, pos)) = pos
 	  | posFromVar (A.SubscriptVar(v, e, pos)) = pos		
@@ -48,34 +49,32 @@ struct
 	    stack := {tenv = !tenv, venv = !venv}::(!stack)
 	fun scopeUp () =
 	    (fn(a::l) => (tenv := #tenv(a); venv := #venv(a); stack := l)) (!stack) 
-	  												     
+
+  	fun transVar (venv, tenv, var)=
+	    {exp = (), ty = (case S.look((!venv), symbolFromVar(var)) of
+				 SOME x => (case x of
+						Env.VarEntry({ty}) => ty
+					      | Env.FunEntry({formals, result}) => (ErrorMsg.error (posFromVar var) "Calling function as variable!"; result))
+			       | NONE => (ErrorMsg.error (posFromVar var) "Variable does not exist!"; T.NIL))}
+					     			    
 	fun transExp (exp) = 
 		let fun trexp (A.NilExp) = {exp=(), ty=T.NIL}
 			  | trexp (A.IntExp(ival)) = {exp=(), ty=T.INT}
 			  | trexp (A.StringExp(sval)) = {exp=(), ty=T.STRING}
-			  | trexp (A.VarExp(lvalue)) = {exp=(), ty = 
-			  		case S.look((!venv), symbolFromVar(lvalue)) of 
-			  			SOME x => (case x of 
-			  						   Env.VarEntry({ty}) => ty
-			  						   | Env.FunEntry({formals, result}) => (ErrorMsg.error(posFromVar(lvalue),"Calling function as variable!"); result)) (*Is this okay?*)
-			  			| NONE => (ErrorMsg.error (posFromVar(lvalue),"Variable does not exist!"); T.NIL)
-			  			} (* Break Lvalue into cases later *)
-			  | trexp (A.WhileExp({test, body, pos})) = (checkInt(trexp test, pos); trexp body; {exp = (), ty = T.NIL}) 
-			
+			  | trexp (A.VarExp(lvalue)) = transVar(venv, tenv, lvalue)
+			  | trexp (A.WhileExp({test, body, pos})) = (checkInt(trexp test, pos); trexp body; {exp = (), ty = T.NIL})
 			  | trexp (A.ForExp({var, escape, lo, hi, body, pos})) = (scopeDown(); venv:=S.enter(!venv, var, Env.VarEntry{ty=T.INT}); checkInt(trexp lo, pos); checkInt(trexp hi, pos); trexp body; scopeUp(); {exp = (), ty = T.NIL})
- 			  | trexp (A.LetExp({decs, body, pos})) = (scopeDown; (*parseDecs;*) trexp body; scopeUp; {exp = (), ty = T.NIL}) 
+			  | trexp (A.LetExp({decs, body, pos})) = (scopeDown; (*parseDecs;*) trexp body; scopeUp; {exp = (), ty = T.NIL})
+								      
 			  | trexp (A.OpExp({left, oper, right, pos})) = (checkInt(trexp left, pos); checkInt(trexp right, pos); {exp=(), ty=T.INT})
-			  (*| trexp (A.AssignExp({var, exp, pos})) = (venv := S.enter(!venv, var, Env.VarEntry{ty = #ty(trexp exp)}); {exp = (), ty=T.NIL})*) (*lvalue*) 
+			  | trexp (A.AssignExp({var, exp, pos})) = (if #ty(trexp exp) = #ty(transVar(venv, tenv, var)) then () else ErrorMsg.error pos "Assigning wrong type to variable"; {exp = (), ty=T.NIL})  
 			  | trexp (A.SeqExp(exps)) = {exp = (), ty = foldl (fn(x, y) => #ty(trexp (#1 x))) T.NIL exps}
 			  | trexp (A.CallExp({func, args, pos})) = (case S.look(!venv, func) of SOME x =>
 												(case x of  Env.FunEntry({formals, result}) => (checkArgs(formals, map (fn (x) => #ty(trexp x)) args, pos); {exp = (), ty = result})
 													  | Env.VarEntry({ty})  => (ErrorMsg.error pos "Variable is not function"; {exp = (), ty = T.NIL}))
 																       
 											      | NONE => (ErrorMsg.error pos "Variable undefined"; {exp = (), ty = T.NIL}))
-							       
-									      
-												  		   		   
-					       									  	      
+							       			      									  		   		   			       									  	      
 			  | trexp (A.ArrayExp({typ, size, init, pos})) = (checkInt(trexp size, pos); if lookupType(!tenv, typ, pos) = #ty(trexp init) then () else ErrorMsg.error pos "Initializing array with wrong type"; {exp = (), ty = T.ARRAY(lookupType(!tenv, typ, pos), ref ())})
    			 (* | trexp (A.RecordExp({fields, typ, pos})) = (map (fn(x) => if findINdex(lookupType(!tenv, typ, pos), (#1 x), pos) = #ty(trexp (#2 x)) then () else ErrorMsg.Error pos "Wrong initialization of type in record") fields;   {exp = (), ty = typ}) *) (* Fixme *)
 			  | trexp (A.IfExp({test, then', else', pos})) = (checkInt(trexp test, pos); (case else' of NONE => ()
