@@ -3,400 +3,500 @@
 exports[`The textbook tests parses test/testcases/merge.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/queens.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test1.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test2.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test3.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test4.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test5.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test6.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test7.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test8.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test9.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test10.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test11.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test12.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test13.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test14.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test15.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test16.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test17.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test18.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test19.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test20.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test21.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test22.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test23.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test24.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test25.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test26.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test27.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test28.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test29.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test30.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test31.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test32.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test33.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test34.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test35.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test36.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test37.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test38.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test39.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test40.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test41.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test42.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test43.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test44.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test45.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test46.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test47.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
 exports[`The textbook tests parses test/testcases/test48.tig correctly 1`] = `
 "
 val it = true : bool
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;
 
@@ -404,7 +504,9 @@ exports[`The textbook tests parses test/testcases/test49.tig correctly 1`] = `
 "
 val it = true : bool
 test/testcases/test49.tig:5.18:syntax error: inserting  PLUS
-val it = () : unit
 
+uncaught exception Match [nonexhaustive match failure]
+  raised at: semant.sml:38.112
+- 
 "
 `;

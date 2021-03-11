@@ -12,7 +12,7 @@ const getRelativePathOfTests = (dir) => {
 }
 
 const getScript = (filePath) => {
-    return `CM.make "src/typechecker/sources.cm"; Main.main("${filePath}");`
+    return `CM.make "src/typechecker/sources.cm"; Main.typecheckOnly("${filePath}");`
 }
 
 describe('The textbook tests', () => {
