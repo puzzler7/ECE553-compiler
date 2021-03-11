@@ -4,36 +4,39 @@ sig
 	type tenvType
 	type expty
 
-	val transVar: venv * tenv * Absyn.var -> expty
-	val transExp: venv * tenv * Absyn.exp -> expty
-	val transDec: venv * tenv * Absyn.dec -> {venv: venv, tenv: tenv}
-	val transTy:         tenv * Absyn.ty  -> Types.ty
+	val transVar: venvType * tenvType * Absyn.var -> expty
+	val transExp: venvType * tenvType * Absyn.exp -> expty
+	val transDec: venvType * tenvType * Absyn.dec -> {venv: venvType, tenv: tenvType}
+	val transTy:         tenvType * Absyn.ty  -> Types.ty
 	val transProg: Absyn.exp -> unit
 end
 
 structure Semant = 
 struct
+
+	structure A = Absyn
+    structure S = Symbol
+	structure T = Types
+	type ty = Types.ty
+
 	structure Translate = struct type exp = unit end
 	type venvType = Env.enventry Symbol.table
 	type tenvType = ty Symbol.table
 	type expty = {exp: Translate.exp, ty: Types.ty}
 
-    structure A = Absyn
-    structure S = Symbol
-
-	val stack: Table { tenv: tenvType, venv: venvType } list ref = ref []
-	val tenv: tenvType = ref Env.base_tenv
-	val venv: venvType = ref Env.base_venv
+	val stack: { tenv: tenvType, venv: venvType } list ref = ref []
+	val tenv: (tenvType) ref = ref Env.base_tenv
+	val venv: (venvType) ref = ref Env.base_venv
 	
-	fun checkInt ({exp,T.INT}, pos) = ()
-	  | checkInt ({exp, ty}, pos) = ErrorMsg.Error pos "Not int type"
-	fun checkThenElse ({exp1, ty1}, {exp2, ty2}, pos) = if ty1 = ty2 then () else ErrorMsg.Error pos "Then Else disagree" (* not sure if this works *)
-	fun transProg(exp) = transExp(exp) (* several questions: how do we get types for variable declarations, how do we traverse the tree so all the types are loaded, i.e. at what stage do we check for type mismatch *)  			       
-	fun transExp (venv, tenv, exp) = 
+	fun checkInt ({exp, ty = T.INT}, pos) = ()
+	  | checkInt ({exp, ty}, pos) = ErrorMsg.error pos "Not int type"
+	fun checkThenElse ({exp1, ty1}, {exp2, ty2}, pos) = if ty1 = ty2 then () else ErrorMsg.error pos "Then Else disagree" (* not sure if this works *)  			       
+	fun transExp (exp) = 
 		let fun trexp (A.NilExp) = {exp=(), ty=T.NIL}
 			  | trexp (A.IntExp(ival)) = {exp=(), ty=T.INT}
 			  | trexp (A.StringExp(sval)) = {exp=(), ty=T.STRING}
-			  | trexp (A.WhileExp(test, body, pos)) = (checkInt(trexp test, pos); trexp body; {exp = (), ty = T.NIL}) (* Assuming loops return null *)
+			  | trexp (A.WhileExp({test, body, pos})) = (checkInt(trexp test, pos); trexp body; {exp = (), ty = T.NIL}) (* Assuming loops return null *)
+			(*
 			  | trexp (A.ForExp(var, escape, lo, hi, body, pos)) = (intVar(var); checkInt(lo); checkInt(hi); trexp body; {exp = (), ty = T.NIL})(* TODO define intVar *)
  			  | trexp (A.LetExp(decs, body, pos)) = (scopeDown; parseDecs; trexp body; scopeUp; {exp = (), ty = T.NIL}) (* ADD scopedown (pushstack), scopeUp (popstack), and dec parsing, also assuming returns nothing *)
 			  | trexp (A.OpExp(left, oper, right, pos)) = (checkInt(trexp left, pos); checkInt(trexp right, pos); {exp=(), ty=T.INT})
@@ -45,10 +48,9 @@ struct
 			  | trexp (A.IfExp(test, then', else', pos))  =
 			    	   case else' of NONE => (checkInt(trexp test, pos); trexp then'; {exp=(), ty=(trexp then').ty})
 					| SOME exp => (checkInt(trexp test, pos); checkThenElse(trexp then', trexp else', pos); {exp = (), ty=(trexp then').ty})			   
-					
-			  		
-					    
+			*)		    
   		in 
 			trexp exp
 		end
+	fun transProg(exp) = (transExp(exp); ()) (* several questions: how do we get types for variable declarations, how do we traverse the tree so all the types are loaded, i.e. at what stage do we check for type mismatch *)
 end

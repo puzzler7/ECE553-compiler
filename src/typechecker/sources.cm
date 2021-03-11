@@ -10,6 +10,7 @@ main.sml
 prabsyn.sml
 env.sig
 env.sml
+types.sml
 tiger.lex
 tiger.grm
 $/smlnj-lib.cm
