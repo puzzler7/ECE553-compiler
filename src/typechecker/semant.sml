@@ -35,7 +35,13 @@ struct
 	  | checkArgs (a::l1, b::l2, pos) = if a = b then checkArgs(l1, l2, pos) else ErrorMsg.error pos "Argument type mismatch"
 	
 	fun lookupType (t, v, pos) = (case S.look(t, v) of NONE => (ErrorMsg.error pos "Type undefined"; T.NIL)
-                                                        | SOME x => x)				
+                                                        | SOME x => x)		
+    fun symbolFromVar (A.SimpleVar(s, pos)) = s
+	  | symbolFromVar (A.FieldVar(v, s, pos)) = s
+	  | symbolFromVar (A.SubscriptVar(v, e, pos)) = symbolFromVar(v)	
+	fun posFromVar (A.SimpleVar(s, pos)) = pos
+	  | posFromVar (A.FieldVar(v, s, pos)) = pos
+	  | posFromVar (A.SubscriptVar(v, e, pos)) = pos		
    	fun checkInt ({exp, ty = T.INT}, pos) = ()
 	  | checkInt ({exp, ty}, pos) = ErrorMsg.error pos "Not int type"
 	fun scopeDown () =
@@ -47,7 +53,13 @@ struct
 		let fun trexp (A.NilExp) = {exp=(), ty=T.NIL}
 			  | trexp (A.IntExp(ival)) = {exp=(), ty=T.INT}
 			  | trexp (A.StringExp(sval)) = {exp=(), ty=T.STRING}
-			  (*| trexp (A.VarExp(lvalue)) = {exp=(), ty = S.look(venv, lvalue)}*) (* Break Lvalue into cases later *)
+			  | trexp (A.VarExp(lvalue)) = {exp=(), ty = 
+			  		case S.look((!venv), symbolFromVar(lvalue)) of 
+			  			SOME x => (case x of 
+			  						   Env.VarEntry({ty}) => ty
+			  						   | Env.FunEntry({formals, result}) => (ErrorMsg.error(posFromVar(lvalue),"Calling function as variable!"); result)) (*Is this okay?*)
+			  			| NONE => (ErrorMsg.error (posFromVar(lvalue),"Variable does not exist!"); T.NIL)
+			  			} (* Break Lvalue into cases later *)
 			  | trexp (A.WhileExp({test, body, pos})) = (checkInt(trexp test, pos); trexp body; {exp = (), ty = T.NIL}) 
 			
 			  | trexp (A.ForExp({var, escape, lo, hi, body, pos})) = (scopeDown(); venv:=S.enter(!venv, var, Env.VarEntry{ty=T.INT}); checkInt(trexp lo, pos); checkInt(trexp hi, pos); trexp body; scopeUp(); {exp = (), ty = T.NIL})
