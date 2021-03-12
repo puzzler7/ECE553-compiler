@@ -52,13 +52,25 @@ struct
             fun transparam{name,escape,typ,pos} = {name=name,ty=lookupType(!tenv, typ, pos)}
                   
             val params' = map transparam params
-             
-			       
+            	       
+            
+        in venv := S.enter(!venv,name, Env.FunEntry{formals= map #ty params', result=result_ty}) 
+	end
+	    
+   fun funcBody (name, params, result, pos) =
+        let val result_ty = (case result of NONE => T.NIL
+                                          | SOME(rt, pos) => lookupType(!tenv,rt,pos))
+
+            fun transparam{name,escape,typ,pos} = {name=name,ty=lookupType(!tenv, typ, pos)}
+
+            val params' = map transparam params
+
+
             fun enterparam ({name,ty},venv) =
                 S.enter(venv,name,Env.VarEntry{ty=ty})
-        in (venv := S.enter(!venv,name, Env.FunEntry{formals= map #ty params', result=result_ty}); scopeDown; venv := foldr enterparam (!venv) params'; result_ty) 
-	end
-   
+        in (scopeDown; venv := foldr enterparam (!venv) params'; result_ty)
+        end
+
 
 	    (* Use to check first element against the second, order matters i.e. assign type of second element to first *)
     fun checkTypeEqual(T.UNIT, T.UNIT) = true
@@ -129,8 +141,8 @@ struct
 									 (case S.look(!tenv, name) of SOME(T.NAME(n, r)) => r := SOME(transTy(tenv, ty))); tenv)}
       | transDec (venv,tenv,A.TypeDec({name,ty,pos}::tydeclist)) = (tenv := S.enter(!tenv, name, T.NAME(name, ref NONE)); transDec(venv, tenv, A.TypeDec(tydeclist));
 								    (case S.look(!tenv, name) of SOME(T.NAME(n, r)) => r := SOME(transTy(tenv, ty))); {venv=venv,tenv=tenv})
-      | transDec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (checkTypeEqual(funcDecl(name, params, result, pos), #ty(transExp(venv, tenv, body))); scopeUp; {venv = venv, tenv = tenv})
-      | transDec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (checkTypeEqual(funcDecl(name, params, result, pos), #ty(transExp(venv, tenv, body))); scopeUp; transDec(venv,tenv,A.FunctionDec(fundeclist)); {venv = venv, tenv = tenv})								    
+      | transDec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (funcDecl(name, params, result, pos); checkTypeEqual(funcBody(name, params, result, pos), #ty(transExp(venv, tenv, body))); scopeUp; {venv = venv, tenv = tenv})
+      | transDec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (funcDecl(name, params, result, pos); transDec(venv,tenv,A.FunctionDec(fundeclist)); checkTypeEqual(funcBody(name, params, result, pos), #ty(transExp(venv, tenv, body))); scopeUp; {venv = venv, tenv = tenv})								    
 									      
  	
 
