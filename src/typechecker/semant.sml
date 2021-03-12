@@ -106,9 +106,10 @@ struct
             | NONE => (E.error pos "type does not exist";T.NIL))
       | transTy(tenv, A.RecordTy(fields)) = 
       		let
-      			val name = value (*fixme*)
+      			fun makeSymtyList ([]) = []
+      			  | makeSymtyList ({name, escape, typ, pos}::fields) = (name, typ)::makeSymtyList(fields)
       		in
-      			T.NIL
+      			T.RECORD(makeSymtyList(fields), ref ())
       		end
       | transTy(tenv, A.ArrayTy(sym, pos)) = 
       	(case S.look(tenv, sym) of
