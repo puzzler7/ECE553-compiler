@@ -54,7 +54,7 @@ struct
     fun checkRecordType ([], []) = true
       | checkRecordType ([], x) = false
       | checkRecordType (x, []) = false
-      | checkRecordType ((asym, aexp, apos)::al, (bsym, bty)::bl) = asym=bsym andalso #ty(transExp(aexp))=bty andalso checkRecordType(al, bl)
+      | checkRecordType ((asym, aexp, apos)::al, (bsym, bty)::bl) = asym=bsym andalso #ty(transExp(venv, tenv, aexp))=bty andalso checkRecordType(al, bl)
 
     (*and transVar (venv, tenv, var)=
         {exp = (), ty = (case S.look((!venv), symbolFromVar(var)) of
@@ -92,37 +92,37 @@ struct
             let 
                 val {exp,ty} = transExp(venv,tenv,init) 
             in  
-                {tenv=tenv,venv=S.enter(!venv,name,Env.VarEntry{ty=ty})}
+                {tenv=tenv,venv=(venv:=S.enter(!venv,name,Env.VarEntry{ty=ty});venv)}
             end
-      | transDec (venv, tenv, A.VarDec({name, escape, typ, init, pos})) = 
+      | transDec (venv, tenv, A.VarDec({name, escape, typ=SOME(x), init, pos})) = 
             let 
                 val {exp,ty} = transExp(venv,tenv,init) 
             in  
-                if ty=typ then {tenv=tenv, venv = (venv := S.enter(!venv,name,Env.VarEntry{ty=ty}); venv)}
+                if ty=lookupType(!tenv, #1 x, #2 x) then {tenv=tenv, venv = (venv := S.enter(!venv,name,Env.VarEntry{ty=ty}); venv)}
                 else (E.error pos "named type does not match expression";{tenv=tenv, venv=venv})
             end
-      | transDec (venv,tenv,A.TypeDec[{name,ty,pos}]) = {venv=venv,tenv=S.enter(tenv,name,transTy(tenv,ty))}
-      | transDec (venv,tenv,A.TypeDec({name,ty,pos}::tydeclist)) = (transDec(venv, tenv, tydeclist);{venv=venv,tenv=S.enter(tenv,name,transTy(tenv,ty))})
+      | transDec (venv,tenv,A.TypeDec[{name,ty,pos}]) = {venv=venv,tenv=(tenv:=S.enter(!tenv,name,transTy(tenv,ty));tenv)}
+      | transDec (venv,tenv,A.TypeDec({name,ty,pos}::tydeclist)) = (transDec(venv, tenv, A.TypeDec(tydeclist));{venv=venv,tenv=(tenv:=S.enter(!tenv,name,transTy(tenv,ty));tenv)})
 
     and transTy(tenv, A.NameTy(sym, pos)) = 
-        (case S.look(tenv, sym) of
+        (case S.look(!tenv, sym) of
             SOME(T.NAME(sym, ty)) => T.NAME(sym, ty)
             | SOME(x) => (E.error pos "could not find name type"; T.NIL)
             | NONE => (E.error pos "type does not exist";T.NIL))
       | transTy(tenv, A.RecordTy(fields)) = 
       		let
       			fun makeSymtyList ([]) = []
-      			  | makeSymtyList ({name, escape, typ, pos}::fields) = (name, typ)::makeSymtyList(fields)
+      			  | makeSymtyList ({name, escape, typ, pos}::fields) = (name, lookupType(!tenv, typ, pos))::makeSymtyList(fields)
       		in
       			T.RECORD(makeSymtyList(fields), ref ())
       		end
       | transTy(tenv, A.ArrayTy(sym, pos)) = 
-      	(case S.look(tenv, sym) of
+      	(case S.look(!tenv, sym) of
             SOME(T.ARRAY(ty, ref ())) => T.ARRAY(ty, ref ())
             | SOME(x) => (E.error pos "could not find array type"; T.NIL)
             | NONE => (E.error pos "type does not exist";T.NIL))
 
-    and transExp (exp) = 
+    and transExp (venv, tenv, exp) = 
         let fun trexp (A.NilExp) = {exp=(), ty=T.NIL}
               | trexp (A.IntExp(ival)) = {exp=(), ty=T.INT}
               | trexp (A.StringExp(sval)) = {exp=(), ty=T.STRING}
@@ -142,8 +142,11 @@ struct
                                                                                                                                                                                     
               | trexp (A.ArrayExp({typ, size, init, pos})) = (checkInt(trexp size, pos); if lookupType(!tenv, typ, pos) = #ty(trexp init) then () else E.error pos "Initializing array with wrong type"; {exp = (), ty = T.ARRAY(lookupType(!tenv, typ, pos), ref ())})
                 (* | trexp (A.RecordExp({fields, typ, pos})) = (map (fn(x) => if findINdex(lookupType(!tenv, typ, pos), (#1 x), pos) = #ty(trexp (#2 x)) then () else E.Error pos "Wrong initialization of type in record") fields;   {exp = (), ty = typ}) *) (* Fixme *)
-              | trexp (A.RecordExp({fields, typ, pos})) = (case lookupType(!tenv, typ, pos) of
-                      T.RECORD(symlist, u) => if checkRecordType(fields, symlist) then {exp=(), ty=T.RECORD(symlist, u)} else (E.error pos "Wrong record type!"; {exp=(), ty=T.NIL})
+              | trexp (A.RecordExp({fields, typ, pos})) = 
+              		(case lookupType(!tenv, typ, pos) of
+                      T.RECORD(symlist, u) => if checkRecordType(fields, symlist) 
+	                      then {exp=(), ty=T.RECORD(symlist, u)} 
+	                      else (E.error pos "Wrong record type!"; {exp=(), ty=T.NIL})
                     | x => (E.error pos "Assigning record to not record type"; {exp=(), ty=T.NIL}))
               | trexp (A.IfExp({test, then', else', pos})) = (checkInt(trexp test, pos); (case else' of NONE => ()
                                                          | SOME x => if #ty(trexp then') = #ty(trexp x) then () else E.error pos "Then Else disagree");
@@ -153,6 +156,6 @@ struct
           in 
             trexp exp
         end
-    fun transProg(exp) = (transExp(exp); ()) 
+    fun transProg(exp) = (transExp(venv, tenv, exp); ()) 
                  
 end
