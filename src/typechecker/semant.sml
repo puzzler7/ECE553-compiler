@@ -63,41 +63,46 @@ struct
                           | Env.FunEntry({formals, result}) => (E.error (posFromVar var) "Calling function as variable!"; result))
                    | NONE => (E.error (posFromVar var) "Variable does not exist!"; T.NIL))}*)
 
-    and transVar (venv, tenv, SimpleVar(sym, pos)) = 
+    and transVar (venv, tenv, A.SimpleVar(sym, pos)) = 
     	{exp = (), ty = (case S.look((!venv), sym) of
                  SOME x => (case x of
                         Env.VarEntry({ty}) => ty
                           | Env.FunEntry({formals, result}) => (E.error pos "Calling function as variable!"; result))
                    | NONE => (E.error pos "Variable does not exist!"; T.NIL))}
-      | transVar (venv, tenv, FieldVar(var, sym, pos)) = 
+      | transVar (venv, tenv, A.FieldVar(var, sym, pos)) = 
       		let
       			fun findField([], sym) = T.NIL
       			  | findField((fsym, ty)::fields, sym) = if fsym = sym then ty else findField(fields, sym)
       		in
-      			case transVar(var) of
-      				T.RECORD(fields, u) => findField(fields, sym)
-      				| x => (E.error pos "field var on non-record type"; T.NIL)
+      			{exp = (), ty=(case #ty(transVar(venv, tenv, var)) of
+      					T.RECORD(fields, u) => findField(fields, sym)
+				      | x => (E.error pos "field var on non-record type"; T.NIL))}
+				       
       		end
-      | transVar (venv, tenv, SubscriptVar(var, exp, pos)) = 
-      		(case transVar(var) of
-      			T.ARRAY(ty, u) => if checkInt(transExp(exp)) then ty else T.NIL
-      			| x => (E.error pos "subscript var on non-array type"; T.NIL) )
+      | transVar (venv, tenv, A.SubscriptVar(var, exp, pos)) = 
+      	let  val ty = (case #ty(transVar(venv, tenv, var)) of
+      			   T.ARRAY(ty, u) => (checkInt(transExp(venv, tenv, exp), pos); ty) 
+      			   | x => (E.error pos "subscript var on non-array type"; T.NIL))
+	in
+   		    {exp = (), ty = ty}
+	end
+	    
        
-    and transDec(venv, tenv, A.VarDec(name, escape, typ=NONE, init, pos)) = 
+    and transDec (venv, tenv, A.VarDec({name, escape, typ=NONE, init, pos})) = 
             let 
                 val {exp,ty} = transExp(venv,tenv,init) 
             in  
-                {tenv=tenv,venv=S.enter(venv,name,Env.VarEntry{ty=ty})}
+                {tenv=tenv,venv=S.enter(!venv,name,Env.VarEntry{ty=ty})}
             end
-      | transDec(venv, tenv, A.VarDec(name, escape, typ, init, pos)) = 
+      | transDec (venv, tenv, A.VarDec({name, escape, typ, init, pos})) = 
             let 
                 val {exp,ty} = transExp(venv,tenv,init) 
             in  
-                if ty=typ then {tenv=tenv,venv=S.enter(venv,name,Env.VarEntry{ty=ty})}
+                if ty=typ then {tenv=tenv, venv = (venv := S.enter(!venv,name,Env.VarEntry{ty=ty}); venv)}
                 else (E.error pos "named type does not match expression";{tenv=tenv, venv=venv})
             end
-      | transDec(venv,tenv,A.TypeDec[{name,ty}]) = {venv=venv,tenv=S.enter(tenv,name,transTy(tenv,ty))}
-      | transDec(venv,tenv,A.TypeDec({name,ty}::tydeclist)) = (transDec(venv, tenv, tydeclist);{venv=venv,tenv=S.enter(tenv,name,transTy(tenv,ty))})
+      | transDec (venv,tenv,A.TypeDec[{name,ty,pos}]) = {venv=venv,tenv=S.enter(tenv,name,transTy(tenv,ty))}
+      | transDec (venv,tenv,A.TypeDec({name,ty,pos}::tydeclist)) = (transDec(venv, tenv, tydeclist);{venv=venv,tenv=S.enter(tenv,name,transTy(tenv,ty))})
 
     and transTy(tenv, A.NameTy(sym, pos)) = 
         (case S.look(tenv, sym) of
@@ -106,13 +111,13 @@ struct
             | NONE => (E.error pos "type does not exist";T.NIL))
       | transTy(tenv, A.RecordTy(fields)) = 
       		let
-      			val name = value (*fixme*)
+      			val name = 2 (*fixme*)
       		in
       			T.NIL
       		end
       | transTy(tenv, A.ArrayTy(sym, pos)) = 
       	(case S.look(tenv, sym) of
-            SOME(T.Array(ty, u)) => T.Array(ty, u)
+            SOME(T.ARRAY(ty, ref ())) => T.ARRAY(ty, ref ())
             | SOME(x) => (E.error pos "could not find array type"; T.NIL)
             | NONE => (E.error pos "type does not exist";T.NIL))
 
