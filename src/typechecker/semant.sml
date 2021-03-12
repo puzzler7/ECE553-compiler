@@ -138,8 +138,8 @@ struct
               | trexp (A.IntExp(ival)) = {exp=(), ty=T.INT}
               | trexp (A.StringExp(sval)) = {exp=(), ty=T.STRING}
               | trexp (A.VarExp(lvalue)) = transVar(venv, tenv, lvalue)
-              | trexp (A.WhileExp({test, body, pos})) = (checkInt(trexp test, pos); trexp body; {exp = (), ty = T.NIL})
-              | trexp (A.ForExp({var, escape, lo, hi, body, pos})) = (scopeDown; venv:=S.enter(!venv, var, Env.VarEntry{ty=T.INT}); checkInt(trexp lo, pos); checkInt(trexp hi, pos); trexp body; scopeUp(); {exp = (), ty = T.NIL})
+              | trexp (A.WhileExp({test, body, pos})) = (checkInt(trexp test, pos); if #ty(trexp body)=T.UNIT then () else E.error pos "while loop must be unit"; {exp = (), ty = T.NIL})
+              | trexp (A.ForExp({var, escape, lo, hi, body, pos})) = (scopeDown; venv:=S.enter(!venv, var, Env.VarEntry{ty=T.INT}); checkInt(trexp lo, pos); checkInt(trexp hi, pos); if #ty(trexp body) = T.UNIT then () else E.error pos "for loop must be unit"; scopeUp(); {exp = (), ty = T.NIL})
               | trexp (A.LetExp({decs, body, pos})) = 
               let
               	val expty = (scopeDown; map (fn(x)=>(transDec(venv,tenv,x))) decs; trexp body)
