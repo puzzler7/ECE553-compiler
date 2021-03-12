@@ -27,6 +27,7 @@ struct
     type tenvType = ty Symbol.table
     type expty = {exp: Translate.exp, ty: Types.ty}
 
+    val loopdepth = ref 0
     val stack: { tenv: tenvType, venv: venvType } list ref = ref []
     val tenv: (tenvType) ref = ref Env.base_tenv
     val venv: (venvType) ref = ref Env.base_venv
@@ -150,7 +151,7 @@ struct
 
     and transTy(tenv, A.NameTy(sym, pos)) = 
         (case S.look(!tenv, sym) of
-        	SOME(x) => T.NAME((print(" namesymbol:");print(S.name sym); sym), ref (SOME(x))) 
+        	SOME(x) => T.NAME(sym, ref (SOME(x))) 
             | NONE => (E.error pos "type does not exist";T.NIL))
             (*SOME(T.NAME(sym, ty)) => T.NAME(sym, ty)
             | SOME(x) => (E.error pos "could not find name type"; T.NIL)
@@ -163,7 +164,7 @@ struct
       			T.RECORD(makeSymtyList(fields), ref ())
       		end
       | transTy(tenv, A.ArrayTy(sym, pos)) = 
-      	(case S.look(!tenv, (print(S.name sym);sym)) of
+      	(case S.look(!tenv, sym) of
             SOME(x) => T.ARRAY(x, ref ())
             | NONE => (E.error pos "type does not exist";T.NIL))
             (*SOME(T.ARRAY(ty, ref ())) => T.ARRAY(ty, ref ())
@@ -175,8 +176,8 @@ struct
               | trexp (A.IntExp(ival)) = {exp=(), ty=T.INT}
               | trexp (A.StringExp(sval)) = {exp=(), ty=T.STRING}
               | trexp (A.VarExp(lvalue)) = transVar(venv, tenv, lvalue)
-              | trexp (A.WhileExp({test, body, pos})) = (checkInt(trexp test, pos); if #ty(trexp body)=T.UNIT then () else E.error pos "while loop must be unit"; {exp = (), ty = T.NIL})
-              | trexp (A.ForExp({var, escape, lo, hi, body, pos})) = (scopeDown; venv:=S.enter(!venv, var, Env.VarEntry{ty=T.INT}); checkInt(trexp lo, pos); checkInt(trexp hi, pos); if #ty(trexp body) = T.UNIT then () else E.error pos "for loop must be unit"; scopeUp(); {exp = (), ty = T.NIL})
+              | trexp (A.WhileExp({test, body, pos})) = (checkInt(trexp test, pos); if #ty(trexp body)=T.UNIT then (scopeDown; loopdepth:= !loopdepth+1;()) else E.error pos "while loop must be unit"; {exp = (), ty = T.NIL})
+              | trexp (A.ForExp({var, escape, lo, hi, body, pos})) = (scopeDown; venv:=S.enter(!venv, var, Env.VarEntry{ty=T.INT}); checkInt(trexp lo, pos); checkInt(trexp hi, pos); if #ty(trexp body) = T.UNIT then (loopdepth:= !loopdepth+1;()) else E.error pos "for loop must be unit"; scopeUp(); {exp = (), ty = T.NIL})
               | trexp (A.LetExp({decs, body, pos})) = 
               let
               	val expty = (scopeDown; map (fn(x)=>(transDec(venv,tenv,x))) decs; trexp body)
@@ -195,7 +196,7 @@ struct
                                                                                                                                                                                     
               | trexp (A.ArrayExp({typ, size, init, pos})) = (
               	checkInt(trexp size, pos); 
-              	(case lookupType(!tenv, (print(S.name typ);typ), pos) of
+              	(case lookupType(!tenv, typ, pos) of
               		T.ARRAY(ty, u) => if checkTypeEqual(ty,#ty(trexp init)) then () 
               				  else E.error pos "Initializing array with wrong type"
 		      | T.NAME(n, r) => case !r of SOME(T.ARRAY(ty, u)) => if checkTypeEqual(ty,#ty(trexp init)) then ()
@@ -219,7 +220,10 @@ struct
                     | x => (E.error pos "Assigning record to not record type"; {exp=(), ty=T.NIL}))
               | trexp (A.IfExp({test, then', else', pos})) = (checkInt(trexp test, pos); (case else' of NONE => ()
                                                          | SOME x => if #ty(trexp then') = #ty(trexp x) then () else E.error pos "Then Else disagree");
-                                      {exp=(), ty= #ty(trexp then')})              
+                                      {exp=(), ty= #ty(trexp then')})     
+              | trexp (A.BreakExp(pos)) = if !loopdepth > 0 
+              		then (scopeUp; loopdepth:= !loopdepth-1;{exp=(),ty=T.NIL})
+              		else (E.error pos "break not in loop!"; {exp=(), ty=T.NIL})      
                                           
                         
           in 
