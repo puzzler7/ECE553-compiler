@@ -36,7 +36,29 @@ struct
       | checkArgs (a::l1, b::l2, pos) = if a = b then checkArgs(l1, l2, pos) else E.error pos "Argument type mismatch"
     
     fun lookupType (t, v, pos) = (case S.look(t, v) of NONE => (E.error pos "Type undefined"; T.NIL)
-                                                        | SOME x => x) 
+                                                     | SOME x => x)
+    fun checkInt ({exp, ty = T.INT}, pos) = ()
+      | checkInt ({exp, ty}, pos) = E.error pos "Not int type"
+    fun scopeDown () =
+        stack := {tenv = !tenv, venv = !venv}::(!stack)
+    fun scopeUp () =
+        (fn(a::l) => (tenv := #tenv(a); venv := #venv(a); stack := l)) (!stack)
+				     
+
+    fun funcDecl (name, params, result, pos) =
+	let val result_ty = (case result of NONE => T.NIL
+					  | SOME(rt, pos) => lookupType(!tenv,rt,pos))
+				
+            fun transparam{name,escape,typ,pos} = {name=name,ty=lookupType(!tenv, typ, pos)}
+                  
+            val params' = map transparam params
+             
+			       
+            fun enterparam ({name,ty},venv) =
+                S.enter(venv,name,Env.VarEntry{ty=ty})
+        in (venv := S.enter(!venv,name, Env.FunEntry{formals= map #ty params', result=result_ty}); scopeDown; venv := foldr enterparam (!venv) params'; result_ty) 
+	end
+   
 
     fun checkTypeEqual(T.UNIT, T.UNIT) = true
       | checkTypeEqual(T.INT, T.INT) = true
@@ -50,13 +72,6 @@ struct
       						 | SOME(y) => checkTypeEqual(y, x))
       | checkTypeEqual(x, y) = false       
    
-    fun checkInt ({exp, ty = T.INT}, pos) = ()
-      | checkInt ({exp, ty}, pos) = E.error pos "Not int type"
-    fun scopeDown () =
-        stack := {tenv = !tenv, venv = !venv}::(!stack)
-    fun scopeUp () =
-        (fn(a::l) => (tenv := #tenv(a); venv := #venv(a); stack := l)) (!stack)
-
     fun checkRecordType ([], []) = true
       | checkRecordType ([], x) = false
       | checkRecordType (x, []) = false
@@ -110,6 +125,12 @@ struct
             end
       | transDec (venv,tenv,A.TypeDec[{name,ty,pos}]) = {venv=venv,tenv=(tenv:=S.enter(!tenv,name,transTy(tenv,ty));tenv)}
       | transDec (venv,tenv,A.TypeDec({name,ty,pos}::tydeclist)) = (tenv:=S.enter(!tenv,name,transTy(tenv,ty)); transDec(venv, tenv, A.TypeDec(tydeclist));{venv=venv,tenv=tenv})
+      | transDec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (checkTypeEqual(funcDecl(name, params, result, pos), #ty(transExp(venv, tenv, body))); scopeUp; {venv = venv, tenv = tenv})
+      | transDec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (checkTypeEqual(funcDecl(name, params, result, pos), #ty(transExp(venv, tenv, body))); scopeUp; transDec(venv,tenv,A.FunctionDec(fundeclist)); {venv = venv, tenv = tenv})								    
+									      
+ 	
+
+    
 
     and transTy(tenv, A.NameTy(sym, pos)) = 
         (case S.look(!tenv, sym) of
