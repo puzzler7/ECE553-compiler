@@ -12,6 +12,7 @@ val it = () : unit
 exports[`The textbook tests correctly finds type errors in test/testcases/test10.tig 1`] = `
 "
 val it = true : bool
+test/testcases/test10.tig:2.1:while loop must be unit
 val it = () : unit
 
 "
@@ -21,9 +22,10 @@ exports[`The textbook tests correctly finds type errors in test/testcases/test11
 "
 val it = true : bool
 test/testcases/test11.tig:2.1:Not int type
+test/testcases/test11.tig:2.1:for loop must be unit
 
 uncaught exception Match [nonexhaustive match failure]
-  raised at: src/typechecker/semant.sml:58.71
+  raised at: src/typechecker/semant.sml:45.71
 - 
 "
 `;
@@ -78,20 +80,18 @@ val it = () : unit
 exports[`The textbook tests correctly finds type errors in test/testcases/test18.tig 1`] = `
 "
 val it = true : bool
+test/testcases/test18.tig:5.4:Variable undefined
+val it = () : unit
 
-uncaught exception Match [nonexhaustive match failure]
-  raised at: src/typechecker/semant.sml:112.179
-- 
 "
 `;
 
 exports[`The textbook tests correctly finds type errors in test/testcases/test19.tig 1`] = `
 "
 val it = true : bool
+test/testcases/test19.tig:5.4:Variable undefined
+val it = () : unit
 
-uncaught exception Match [nonexhaustive match failure]
-  raised at: src/typechecker/semant.sml:112.179
-- 
 "
 `;
 
@@ -100,6 +100,7 @@ exports[`The textbook tests correctly finds type errors in test/testcases/test20
 val it = true : bool
 test/testcases/test20.tig:3.18:Variable does not exist!
 test/testcases/test20.tig:3.19:Not int type
+test/testcases/test20.tig:3.1:while loop must be unit
 val it = () : unit
 
 "
@@ -108,10 +109,9 @@ val it = () : unit
 exports[`The textbook tests correctly finds type errors in test/testcases/test21.tig 1`] = `
 "
 val it = true : bool
+test/testcases/test21.tig:8.11:Not int type
+val it = () : unit
 
-uncaught exception Match [nonexhaustive match failure]
-  raised at: src/typechecker/semant.sml:112.179
-- 
 "
 `;
 
@@ -213,30 +213,27 @@ val it = () : unit
 exports[`The textbook tests correctly finds type errors in test/testcases/test34.tig 1`] = `
 "
 val it = true : bool
+test/testcases/test34.tig:5.2:Argument type mismatch
+val it = () : unit
 
-uncaught exception Match [nonexhaustive match failure]
-  raised at: src/typechecker/semant.sml:112.179
-- 
 "
 `;
 
 exports[`The textbook tests correctly finds type errors in test/testcases/test35.tig 1`] = `
 "
 val it = true : bool
+test/testcases/test35.tig:5.2:Argument type mismatch
+val it = () : unit
 
-uncaught exception Match [nonexhaustive match failure]
-  raised at: src/typechecker/semant.sml:112.179
-- 
 "
 `;
 
 exports[`The textbook tests correctly finds type errors in test/testcases/test36.tig 1`] = `
 "
 val it = true : bool
+test/testcases/test36.tig:5.2:Too many arguments
+val it = () : unit
 
-uncaught exception Match [nonexhaustive match failure]
-  raised at: src/typechecker/semant.sml:112.179
-- 
 "
 `;
 
@@ -251,20 +248,16 @@ val it = true : bool
 exports[`The textbook tests correctly finds type errors in test/testcases/test39.tig 1`] = `
 "
 val it = true : bool
+val it = () : unit
 
-uncaught exception Match [nonexhaustive match failure]
-  raised at: src/typechecker/semant.sml:112.179
-- 
 "
 `;
 
 exports[`The textbook tests correctly finds type errors in test/testcases/test40.tig 1`] = `
 "
 val it = true : bool
+val it = () : unit
 
-uncaught exception Match [nonexhaustive match failure]
-  raised at: src/typechecker/semant.sml:112.179
-- 
 "
 `;
 
@@ -300,10 +293,33 @@ val it = () : unit
 exports[`The textbook tests finds no type errors in test/testcases/merge.tig 1`] = `
 "
 val it = true : bool
+test/testcases/merge.tig:11.20:Not int type
+test/testcases/merge.tig:11.20:Not int type
+test/testcases/merge.tig:11.33:Not int type
+test/testcases/merge.tig:11.33:Not int type
+test/testcases/merge.tig:11.8:while loop must be unit
+test/testcases/merge.tig:15.6:while loop must be unit
+test/testcases/merge.tig:20.27:Type undefined
+test/testcases/merge.tig:26.15:Wrong record type!
+test/testcases/merge.tig:26.15:Wrong record type!
+test/testcases/merge.tig:31.8:Not int type
+test/testcases/merge.tig:31.8:Not int type
+test/testcases/merge.tig:32.13:Not int type
+test/testcases/merge.tig:32.13:Not int type
+test/testcases/merge.tig:34.36:Argument type mismatch
+test/testcases/merge.tig:34.12:Wrong record type!
+test/testcases/merge.tig:35.36:Argument type mismatch
+test/testcases/merge.tig:35.12:Wrong record type!
+test/testcases/merge.tig:34.36:Argument type mismatch
+test/testcases/merge.tig:34.12:Wrong record type!
+test/testcases/merge.tig:32.9:Then Else disagree
+test/testcases/merge.tig:41.12:Then Else disagree
+test/testcases/merge.tig:46.8:Not int type
+test/testcases/merge.tig:46.8:Not int type
+test/testcases/merge.tig:47.41:Argument type mismatch
+test/testcases/merge.tig:46.4:Then Else disagree
+val it = () : unit
 
-uncaught exception Match [nonexhaustive match failure]
-  raised at: src/typechecker/semant.sml:112.179
-- 
 "
 `;
 
@@ -312,7 +328,7 @@ exports[`The textbook tests finds no type errors in test/testcases/queens.tig 1`
 val it = true : bool
 intintArrayintArrayintArrayintArray
 uncaught exception Match [nonexhaustive match failure]
-  raised at: src/typechecker/semant.sml:112.179
+  raised at: src/typechecker/semant.sml:45.71
 - 
 "
 `;
@@ -344,10 +360,8 @@ val it = () : unit
 exports[`The textbook tests finds no type errors in test/testcases/test4.tig 1`] = `
 "
 val it = true : bool
+val it = () : unit
 
-uncaught exception Match [nonexhaustive match failure]
-  raised at: src/typechecker/semant.sml:112.179
-- 
 "
 `;
 
@@ -365,20 +379,18 @@ val it = () : unit
 exports[`The textbook tests finds no type errors in test/testcases/test6.tig 1`] = `
 "
 val it = true : bool
+test/testcases/test6.tig:5.3:Variable undefined
+val it = () : unit
 
-uncaught exception Match [nonexhaustive match failure]
-  raised at: src/typechecker/semant.sml:112.179
-- 
 "
 `;
 
 exports[`The textbook tests finds no type errors in test/testcases/test7.tig 1`] = `
 "
 val it = true : bool
+test/testcases/test7.tig:5.4:Variable undefined
+val it = () : unit
 
-uncaught exception Match [nonexhaustive match failure]
-  raised at: src/typechecker/semant.sml:112.179
-- 
 "
 `;
 
@@ -393,9 +405,10 @@ val it = () : unit
 exports[`The textbook tests finds no type errors in test/testcases/test12.tig 1`] = `
 "
 val it = true : bool
+test/testcases/test12.tig:6.2:for loop must be unit
 
 uncaught exception Match [nonexhaustive match failure]
-  raised at: src/typechecker/semant.sml:58.71
+  raised at: src/typechecker/semant.sml:45.71
 - 
 "
 `;
@@ -403,10 +416,8 @@ uncaught exception Match [nonexhaustive match failure]
 exports[`The textbook tests finds no type errors in test/testcases/test27.tig 1`] = `
 "
 val it = true : bool
+val it = () : unit
 
-uncaught exception Match [nonexhaustive match failure]
-  raised at: src/typechecker/semant.sml:112.179
-- 
 "
 `;
 
@@ -484,9 +495,7 @@ val it = true : bool
 exports[`The textbook tests finds no type errors in test/testcases/test48.tig 1`] = `
 "
 val it = true : bool
+ namesymbol:intval it = () : unit
 
-uncaught exception Match [nonexhaustive match failure]
-  raised at: src/typechecker/semant.sml:112.179
-- 
 "
 `;
