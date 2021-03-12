@@ -45,10 +45,9 @@ struct
       | checkTypeEqual(T.ARRAY(ty1, u1), T.ARRAY(ty2, u2)) = u1=u2
       | checkTypeEqual(T.RECORD(symty1, u1), T.RECORD(symty2, u2)) = u1=u2
       | checkTypeEqual(T.NAME(sym, ty), x) = 
-      	checkTypeEqual(x, T.NAME(sym, ty)) = 
-      		(print("type equal:");print(S.name sym);case !ty of 
-      			NONE => false
-      			| SOME(y) => checkTypeEqual(x, y))
+      	if T.NAME(sym, ty) = x then true else (case !ty of 
+      						   NONE => false
+      						 | SOME(y) => checkTypeEqual(y, x))
       | checkTypeEqual(x, y) = false       
    
     fun checkInt ({exp, ty = T.INT}, pos) = ()
@@ -110,7 +109,7 @@ struct
                 else (E.error pos "named type does not match expression";{tenv=tenv, venv=venv})
             end
       | transDec (venv,tenv,A.TypeDec[{name,ty,pos}]) = {venv=venv,tenv=(tenv:=S.enter(!tenv,name,transTy(tenv,ty));tenv)}
-      | transDec (venv,tenv,A.TypeDec({name,ty,pos}::tydeclist)) = (transDec(venv, tenv, A.TypeDec(tydeclist));{venv=venv,tenv=(tenv:=S.enter(!tenv,name,transTy(tenv,ty));tenv)})
+      | transDec (venv,tenv,A.TypeDec({name,ty,pos}::tydeclist)) = (tenv:=S.enter(!tenv,name,transTy(tenv,ty)); transDec(venv, tenv, A.TypeDec(tydeclist));{venv=venv,tenv=tenv})
 
     and transTy(tenv, A.NameTy(sym, pos)) = 
         (case S.look(!tenv, sym) of
