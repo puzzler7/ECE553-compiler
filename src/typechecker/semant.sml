@@ -36,15 +36,22 @@ struct
       | checkArgs (a::l1, b::l2, pos) = if a = b then checkArgs(l1, l2, pos) else E.error pos "Argument type mismatch"
     
     fun lookupType (t, v, pos) = (case S.look(t, v) of NONE => (E.error pos "Type undefined"; T.NIL)
-                                                        | SOME x => x)        
-    fun symbolFromVar (A.SimpleVar(s, pos)) = s                              
-      | symbolFromVar (A.FieldVar(v, s, pos)) = s
-      | symbolFromVar (A.SubscriptVar(v, e, pos)) = symbolFromVar(v)
-      
-    fun posFromVar (A.SimpleVar(s, pos)) = pos
-      | posFromVar (A.FieldVar(v, s, pos)) = pos
-      | posFromVar (A.SubscriptVar(v, e, pos)) = pos        
-       fun checkInt ({exp, ty = T.INT}, pos) = ()
+                                                        | SOME x => x) 
+
+    fun checkTypeEqual(T.UNIT, T.UNIT) = true
+      | checkTypeEqual(T.INT, T.INT) = true
+      | checkTypeEqual(T.STRING, T.STRING) = true
+      | checkTypeEqual(T.NIL, T.NIL) = true
+      | checkTypeEqual(T.ARRAY(ty1, u1), T.ARRAY(ty2, u2)) = u1=u2
+      | checkTypeEqual(T.RECORD(symty1, u1), T.RECORD(symty2, u2)) = u1=u2
+      | checkTypeEqual(T.NAME(sym, ty), x) = 
+      	checkTypeEqual(x, T.NAME(sym, ty)) = 
+      		(print("type equal:");print(S.name sym);case !ty of 
+      			NONE => false
+      			| SOME(y) => checkTypeEqual(x, y))
+      | checkTypeEqual(x, y) = false       
+   
+    fun checkInt ({exp, ty = T.INT}, pos) = ()
       | checkInt ({exp, ty}, pos) = E.error pos "Not int type"
     fun scopeDown () =
         stack := {tenv = !tenv, venv = !venv}::(!stack)
@@ -98,7 +105,8 @@ struct
             let 
                 val {exp,ty} = transExp(venv,tenv,init) 
             in  
-                if ty=lookupType(!tenv, #1 x, #2 x) then {tenv=tenv, venv = (venv := S.enter(!venv,name,Env.VarEntry{ty=ty}); venv)}
+                if ty=lookupType(!tenv, #1 x, #2 x) then 
+                	{tenv=tenv, venv = (venv := S.enter(!venv,name,Env.VarEntry{ty=ty}); venv)}
                 else (E.error pos "named type does not match expression";{tenv=tenv, venv=venv})
             end
       | transDec (venv,tenv,A.TypeDec[{name,ty,pos}]) = {venv=venv,tenv=(tenv:=S.enter(!tenv,name,transTy(tenv,ty));tenv)}
@@ -106,9 +114,11 @@ struct
 
     and transTy(tenv, A.NameTy(sym, pos)) = 
         (case S.look(!tenv, sym) of
-            SOME(T.NAME(sym, ty)) => T.NAME(sym, ty)
-            | SOME(x) => (E.error pos "could not find name type"; T.NIL)
+        	SOME(x) => T.NAME((print(" namesymbol:");print(S.name sym); sym), ref (SOME(x))) 
             | NONE => (E.error pos "type does not exist";T.NIL))
+            (*SOME(T.NAME(sym, ty)) => T.NAME(sym, ty)
+            | SOME(x) => (E.error pos "could not find name type"; T.NIL)
+            | NONE => (E.error pos "type does not exist";T.NIL))*)
       | transTy(tenv, A.RecordTy(fields)) = 
       		let
       			fun makeSymtyList ([]) = []
@@ -117,10 +127,12 @@ struct
       			T.RECORD(makeSymtyList(fields), ref ())
       		end
       | transTy(tenv, A.ArrayTy(sym, pos)) = 
-      	(case S.look(!tenv, sym) of
-            SOME(T.ARRAY(ty, ref ())) => T.ARRAY(ty, ref ())
-            | SOME(x) => (E.error pos "could not find array type"; T.NIL)
+      	(case S.look(!tenv, (print(S.name sym);sym)) of
+            SOME(x) => T.ARRAY(x, ref ())
             | NONE => (E.error pos "type does not exist";T.NIL))
+            (*SOME(T.ARRAY(ty, ref ())) => T.ARRAY(ty, ref ())
+            | SOME(x) => (E.error pos "could not find array type"; T.NIL)
+            | NONE => (E.error pos "type does not exist";T.NIL))*)
 
     and transExp (venv, tenv, exp) = 
         let fun trexp (A.NilExp) = {exp=(), ty=T.NIL}
@@ -128,8 +140,13 @@ struct
               | trexp (A.StringExp(sval)) = {exp=(), ty=T.STRING}
               | trexp (A.VarExp(lvalue)) = transVar(venv, tenv, lvalue)
               | trexp (A.WhileExp({test, body, pos})) = (checkInt(trexp test, pos); trexp body; {exp = (), ty = T.NIL})
-              | trexp (A.ForExp({var, escape, lo, hi, body, pos})) = (scopeDown(); venv:=S.enter(!venv, var, Env.VarEntry{ty=T.INT}); checkInt(trexp lo, pos); checkInt(trexp hi, pos); trexp body; scopeUp(); {exp = (), ty = T.NIL})
-              | trexp (A.LetExp({decs, body, pos})) = (scopeDown; (*parseDecs;*) trexp body; scopeUp; {exp = (), ty = T.NIL})
+              | trexp (A.ForExp({var, escape, lo, hi, body, pos})) = (scopeDown; venv:=S.enter(!venv, var, Env.VarEntry{ty=T.INT}); checkInt(trexp lo, pos); checkInt(trexp hi, pos); trexp body; scopeUp(); {exp = (), ty = T.NIL})
+              | trexp (A.LetExp({decs, body, pos})) = 
+              let
+              	val expty = (scopeDown; map (fn(x)=>(transDec(venv,tenv,x))) decs; trexp body)
+              in
+              	(scopeUp; expty)
+              end
                                       
               | trexp (A.OpExp({left, oper, right, pos})) = (checkInt(trexp left, pos); checkInt(trexp right, pos); {exp=(), ty=T.INT})
               | trexp (A.AssignExp({var, exp, pos})) = (if #ty(trexp exp) = #ty(transVar(venv, tenv, var)) then () else E.error pos "Assigning wrong type to variable"; {exp = (), ty=T.NIL})  
@@ -140,7 +157,13 @@ struct
                                                                        
                                                   | NONE => (E.error pos "Variable undefined"; {exp = (), ty = T.NIL}))
                                                                                                                                                                                     
-              | trexp (A.ArrayExp({typ, size, init, pos})) = (checkInt(trexp size, pos); if lookupType(!tenv, typ, pos) = #ty(trexp init) then () else E.error pos "Initializing array with wrong type"; {exp = (), ty = T.ARRAY(lookupType(!tenv, typ, pos), ref ())})
+              | trexp (A.ArrayExp({typ, size, init, pos})) = (
+              	checkInt(trexp size, pos); 
+              	(case lookupType(!tenv, (print(S.name typ);typ), pos) of
+              		T.ARRAY(ty, u) => if checkTypeEqual(ty,#ty(trexp init)) then () 
+              			else E.error pos "Initializing array with wrong type"
+              		| x => (E.error pos "array type mismatch"));
+              	{exp = (), ty = lookupType(!tenv, typ, pos)})
                 (* | trexp (A.RecordExp({fields, typ, pos})) = (map (fn(x) => if findINdex(lookupType(!tenv, typ, pos), (#1 x), pos) = #ty(trexp (#2 x)) then () else E.Error pos "Wrong initialization of type in record") fields;   {exp = (), ty = typ}) *) (* Fixme *)
               | trexp (A.RecordExp({fields, typ, pos})) = 
               		(case lookupType(!tenv, typ, pos) of
