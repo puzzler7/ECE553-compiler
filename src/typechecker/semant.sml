@@ -46,6 +46,10 @@ struct
     fun scopeUp () =
         (fn(a::l) => (tenv := #tenv(a); venv := #venv(a); stack := l)) (!stack)
 				     
+    val seenFns:(S.symbol list) ref = ref []
+
+    fun checkIfSeen(x, []) = false
+      | checkIfSeen(x, a::b) = a = x orelse checkIfSeen(x, b)
 
     fun funcDecl (name, params, result, pos) =
 	let val result_ty = (case result of NONE => T.UNIT
@@ -56,7 +60,8 @@ struct
             val params' = map transparam params
             	       
             
-        in venv := S.enter(!venv,name, Env.FunEntry{formals= map #ty params', result=result_ty}) 
+        in (if checkIfSeen(name, (!seenFns)) then E.error pos "function declared twice in same fundec" else seenFns:= name :: !seenFns;
+        	venv := S.enter(!venv,name, Env.FunEntry{formals= map #ty params', result=result_ty})) 
 	end
 	    
    fun funcBody (name, params, result, pos) =
@@ -175,7 +180,7 @@ struct
 									 (case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); tenv)}
       | transDec (venv,tenv,A.TypeDec({name,ty,pos}::tydeclist)) = (tenv := S.enter(!tenv, name, T.NAME(name, ref NONE)); transDec(venv, tenv, A.TypeDec(tydeclist));
 								    (case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); {venv=venv,tenv=tenv})
-      | transDec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (funcDecl(name, params, result, pos); checkTypeEqual(funcBody(name, params, result, pos), #ty(transExp(venv, tenv, body))); scopeUp; {venv = venv, tenv = tenv})
+      | transDec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (funcDecl(name, params, result, pos); checkTypeEqual(funcBody(name, params, result, pos), #ty(transExp(venv, tenv, body))); scopeUp;seenFns:= [];{venv = venv, tenv = tenv})
       | transDec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (funcDecl(name, params, result, pos); transDec(venv,tenv,A.FunctionDec(fundeclist)); checkTypeEqual(funcBody(name, params, result, pos), #ty(transExp(venv, tenv, body))); scopeUp; {venv = venv, tenv = tenv})								    
 									      
  	
@@ -263,9 +268,8 @@ struct
                     | x => (E.error pos "Assigning record to not record type"; {exp=(), ty=T.NIL}))
               | trexp (A.IfExp({test, then', else', pos})) = (checkInt(trexp test, pos); 
               	(case else' of 
-              		NONE => ()
-                  | SOME x => if #ty(trexp then') = #ty(trexp x) then () else E.error pos "Then Else disagree");
-                  if checkTypeEqual(#ty(trexp then'), T.UNIT) then () else E.error pos "If returns non-unit";
+              		NONE => if checkTypeEqual(#ty(trexp then'), T.UNIT) then () else E.error pos "If returns non-unit"
+                  | SOME x => if (checkTypeEqual(#ty(trexp then'), #ty(trexp x)) orelse checkTypeEqual(#ty(trexp x), #ty(trexp then'))) then () else E.error pos "Then Else disagree");
                   {exp=(), ty= #ty(trexp then')})     
               | trexp (A.BreakExp(pos)) = if !loopdepth > 0 
               		then (scopeUp; loopdepth:= !loopdepth-1;{exp=(),ty=T.NIL})
