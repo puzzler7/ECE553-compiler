@@ -1,3 +1,4 @@
+exception CycleInTypeDec
 signature SEMANT = 
 sig
     type venvType
@@ -87,6 +88,10 @@ struct
       						 | SOME(y) => checkTypeEqual(y, x))
       | checkTypeEqual(x, y) = false   
 
+    fun existsCycle(T.NAME(sym, ty)) =	case !ty of NONE => false
+						  | SOME(x) => checkTypeEqual(x, T.NAME(sym, ty))
+									     
+	      	
     fun getArrayFromName(T.ARRAY(ty, u)) = T.ARRAY(ty, u)    
       | getArrayFromName(T.NAME(sym, ty)) = (case !ty of 
       						   NONE => T.NIL
@@ -167,9 +172,9 @@ struct
                 else (E.error pos "named type does not match expression";{tenv=tenv, venv=venv})
             end
       | transDec (venv,tenv,A.TypeDec[{name,ty,pos}]) = {venv=venv,tenv=(tenv:= S.enter(!tenv, name, T.NAME(name, ref NONE));
-									 (case S.look(!tenv, name) of SOME(T.NAME(n, r)) => r := SOME(transTy(tenv, ty))); tenv)}
+									 (case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); tenv)}
       | transDec (venv,tenv,A.TypeDec({name,ty,pos}::tydeclist)) = (tenv := S.enter(!tenv, name, T.NAME(name, ref NONE)); transDec(venv, tenv, A.TypeDec(tydeclist));
-								    (case S.look(!tenv, name) of SOME(T.NAME(n, r)) => r := SOME(transTy(tenv, ty))); {venv=venv,tenv=tenv})
+								    (case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); {venv=venv,tenv=tenv})
       | transDec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (funcDecl(name, params, result, pos); checkTypeEqual(funcBody(name, params, result, pos), #ty(transExp(venv, tenv, body))); scopeUp; {venv = venv, tenv = tenv})
       | transDec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (funcDecl(name, params, result, pos); transDec(venv,tenv,A.FunctionDec(fundeclist)); checkTypeEqual(funcBody(name, params, result, pos), #ty(transExp(venv, tenv, body))); scopeUp; {venv = venv, tenv = tenv})								    
 									      
