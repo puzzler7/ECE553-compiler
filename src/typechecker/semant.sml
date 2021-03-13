@@ -47,7 +47,7 @@ struct
 				     
 
     fun funcDecl (name, params, result, pos) =
-	let val result_ty = (case result of NONE => T.NIL
+	let val result_ty = (case result of NONE => T.UNIT
 					  | SOME(rt, pos) => lookupType(!tenv,rt,pos))
 				
             fun transparam{name,escape,typ,pos} = {name=name,ty=lookupType(!tenv, typ, pos)}
@@ -59,7 +59,7 @@ struct
 	end
 	    
    fun funcBody (name, params, result, pos) =
-        let val result_ty = (case result of NONE => T.NIL
+        let val result_ty = (case result of NONE => T.UNIT
                                           | SOME(rt, pos) => lookupType(!tenv,rt,pos))
 
             fun transparam{name,escape,typ,pos} = {name=name,ty=lookupType(!tenv, typ, pos)}
@@ -92,21 +92,27 @@ struct
       						   NONE => T.NIL
       						 | SOME(y) => getArrayFromName(y))
       | getArrayFromName(x) = T.NIL
+
+    fun getRecordFromName(T.RECORD(l, u)) = T.RECORD(l, u)    
+      | getRecordFromName(T.NAME(sym, ty)) = (case !ty of 
+      						   NONE => T.NIL
+      						 | SOME(y) => getRecordFromName(y))
+      | getRecordFromName(x) = T.NIL
    
     fun checkComparisonOp(T.INT, T.INT) = true
-      | checkComparisonOp(T.NIL, T.NIL) = false
       | checkComparisonOp(T.STRING, T.STRING) = true
+      | checkComparisonOp(T.NIL, T.NIL) = false
       | checkComparisonOp(T.NIL, x) = true
       | checkComparisonOp(x, T.NIL) = true
       | checkComparisonOp(x, y) = false
 
     fun checkEqualityOp(T.INT, T.INT) = true
-      | checkEqualityOp(T.NIL, T.NIL) = false
-      | checkEqualityOp(T.STRING, T.STRING) = true
-      | checkEqualityOp(T.NIL, x) = true
-      | checkEqualityOp(x, T.NIL) = true
       | checkEqualityOp(T.RECORD(l1, u1), T.RECORD(l2, u2)) = true
       | checkEqualityOp(T.ARRAY(ty1, u1), T.ARRAY(ty2, u2)) = true
+      | checkEqualityOp(T.STRING, T.STRING) = true
+      | checkEqualityOp(T.NIL, T.NIL) = false
+      | checkEqualityOp(T.NIL, x) = true
+      | checkEqualityOp(x, T.NIL) = true
       | checkEqualityOp(x, y) = false
 
     fun checkRecordType ([], []) = true
@@ -132,7 +138,7 @@ struct
       			fun findField([], sym) = T.NIL
       			  | findField((fsym, ty)::fields, sym) = if fsym = sym then ty else findField(fields, sym)
       		in
-      			{exp = (), ty=(case #ty(transVar(venv, tenv, var)) of
+      			{exp = (), ty=(case getRecordFromName(#ty(transVar(venv, tenv, var))) of
       					T.RECORD(fields, u) => findField(fields, sym)
 				      | x => (E.error pos "field var on non-record type"; T.NIL))}
 				       
@@ -150,14 +156,14 @@ struct
             let 
                 val {exp,ty} = transExp(venv,tenv,init) 
             in  
-                {tenv=tenv,venv=(venv:=S.enter(!venv,name,Env.VarEntry{ty=ty});venv)}
+                (if checkTypeEqual(ty, T.NIL) then E.error pos "assigning nil to non-record" else();{tenv=tenv,venv=(venv:=S.enter(!venv,name,Env.VarEntry{ty=ty});venv)})
             end
       | transDec (venv, tenv, A.VarDec({name, escape, typ=SOME(x), init, pos})) = 
             let 
                 val {exp,ty} = transExp(venv,tenv,init) 
             in  
-                if checkTypeEqual(ty, lookupType(!tenv, #1 x, #2 x)) then 
-                	{tenv=tenv, venv = (venv := S.enter(!venv,name,Env.VarEntry{ty=ty}); venv)}
+                if checkTypeEqual(lookupType(!tenv, #1 x, #2 x), ty) then 
+                	{tenv=tenv, venv = (venv := S.enter(!venv,name,Env.VarEntry{ty=lookupType(!tenv, #1 x, #2 x)}); venv)}
                 else (E.error pos "named type does not match expression";{tenv=tenv, venv=venv})
             end
       | transDec (venv,tenv,A.TypeDec[{name,ty,pos}]) = {venv=venv,tenv=(tenv:= S.enter(!tenv, name, T.NAME(name, ref NONE));
@@ -194,7 +200,7 @@ struct
             | NONE => (E.error pos "type does not exist";T.NIL))*)
 
     and transExp (venv, tenv, exp) = 
-        let fun trexp (A.NilExp) = {exp=(), ty=T.UNIT}
+        let fun trexp (A.NilExp) = {exp=(), ty=T.NIL}
               | trexp (A.IntExp(ival)) = {exp=(), ty=T.INT}
               | trexp (A.StringExp(sval)) = {exp=(), ty=T.STRING}
               | trexp (A.VarExp(lvalue)) = transVar(venv, tenv, lvalue)
@@ -211,7 +217,7 @@ struct
               let
               	val expty = (scopeDown; map (fn(x)=>(transDec(venv,tenv,x))) decs; trexp body)
               in
-              	(scopeUp; expty)
+              	(scopeUp; (*if checkTypeEqual(#ty expty, T.UNIT) then () else E.error pos "let returns non unit";*)expty)
               end
                                       
               | trexp (A.OpExp({left, oper, right, pos})) = 
@@ -227,8 +233,8 @@ struct
               		  | A.GeOp => if checkComparisonOp(#ty(trexp left), #ty(trexp right)) then {exp=(), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=(), ty=T.INT})
               		  | A.LeOp => if checkComparisonOp(#ty(trexp left), #ty(trexp right)) then {exp=(), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=(), ty=T.INT}))
 
-              | trexp (A.AssignExp({var, exp, pos})) = (if #ty(trexp exp) = #ty(transVar(venv, tenv, var)) then () else E.error pos "Assigning wrong type to variable"; {exp = (), ty=T.NIL})  
-              | trexp (A.SeqExp(exps)) = {exp = (), ty = foldl (fn(x, y) => #ty(trexp (#1 x))) T.NIL exps}
+              | trexp (A.AssignExp({var, exp, pos})) = (if checkTypeEqual(#ty(transVar(venv, tenv, var)), #ty(trexp exp)) then () else E.error pos "Assigning wrong type to variable"; {exp = (), ty=T.UNIT})  
+              | trexp (A.SeqExp(exps)) = {exp = (), ty = foldl (fn(x, y) => #ty(trexp (#1 x))) T.UNIT exps}
               | trexp (A.CallExp({func, args, pos})) = (case S.look(!venv, func) of SOME x =>
                                                 (case x of  Env.FunEntry({formals, result}) => (checkArgs(formals, map (fn (x) => #ty(trexp x)) args, pos); {exp = (), ty = result})
                                                       | Env.VarEntry({ty})  => (E.error pos "Variable is not function"; {exp = (), ty = T.NIL}))
@@ -243,19 +249,12 @@ struct
 				  | x => (E.error pos "array type mismatch"));
 		
               	{exp = (), ty = lookupType(!tenv, typ, pos)})
-                (* | trexp (A.RecordExp({fields, typ, pos})) = (map (fn(x) => if findINdex(lookupType(!tenv, typ, pos), (#1 x), pos) = #ty(trexp (#2 x)) then () else E.Error pos "Wrong initialization of type in record") fields;   {exp = (), ty = typ}) *) (* Fixme *)
+
               | trexp (A.RecordExp({fields, typ, pos})) = 
-              		(case lookupType(!tenv, typ, pos) of
+              		(case getRecordFromName(lookupType(!tenv, typ, pos)) of
                       T.RECORD(symlist, u) => if checkRecordType(fields, symlist) 
 	                      then {exp=(), ty=T.RECORD(symlist, u)} 
 	                      else (E.error pos "Wrong record type!"; {exp=(), ty=T.NIL})
-			  | T.NAME(n, r) => case !r of SOME(T.RECORD(symlist, u)) => if checkRecordType(fields, symlist)
-												       
-										     then {exp=(), ty=T.RECORD(symlist, u)}
-											      
-										     else (E.error pos "Wrong record type!"; {exp=(), ty=T.NIL})
-											      
- 
                     | x => (E.error pos "Assigning record to not record type"; {exp=(), ty=T.NIL}))
               | trexp (A.IfExp({test, then', else', pos})) = (checkInt(trexp test, pos); 
               	(case else' of 

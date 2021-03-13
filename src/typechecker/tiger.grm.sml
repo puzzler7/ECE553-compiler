@@ -791,7 +791,8 @@ end)
  in ( LrTable.NT 0, ( result, lvalue1left, exp1right), rest671)
 end
 |  ( 23, ( ( _, ( _, _, RPAREN1right)) :: ( _, ( _, LPAREN1left, _))
- :: rest671)) => let val  result = MlyValue.exp (fn _ => (A.NilExp))
+ :: rest671)) => let val  result = MlyValue.exp (fn _ => (A.SeqExp([])
+))
  in ( LrTable.NT 0, ( result, LPAREN1left, RPAREN1right), rest671)
 end
 |  ( 24, ( ( _, ( _, _, RPAREN1right)) :: ( _, ( MlyValue.exps exps1,
