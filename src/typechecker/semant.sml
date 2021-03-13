@@ -80,22 +80,36 @@ struct
         end
 
 
+   fun leftrec(T.NAME(sym, ty), x) = if T.NAME(sym, ty) = x then true else (case !ty of
+																		       
+										NONE => false
+									      | SOME(T.NAME(symb, typ)) => leftrec(T.NAME(symb, typ), x)
+									      | SOME(q) => checkTypeEqual(q, x))
+     | leftrec (y,x) = false
+      
+   and rightrec(x, T.NAME(sym, ty)) = if T.NAME(sym, ty) = x then true else (case !ty of
+										 NONE => false
+									       | SOME(y) => rightrec(x, y))
+     | rightrec (x, y) = false
+			     
+      
+      
+								     
 	    (* Use to check first element against the second, order matters i.e. assign type of second element to first *)
-    fun checkTypeEqual(T.UNIT, T.UNIT) = true
+    and checkTypeEqual(T.UNIT, T.UNIT) = true
       | checkTypeEqual(T.INT, T.INT) = true
       | checkTypeEqual(T.STRING, T.STRING) = true
       | checkTypeEqual(T.NIL, T.NIL) = true
       | checkTypeEqual(T.RECORD(symty1, u1), T.NIL)  = true
       | checkTypeEqual(T.ARRAY(ty1, u1), T.ARRAY(ty2, u2)) = u1=u2
       | checkTypeEqual(T.RECORD(symty1, u1), T.RECORD(symty2, u2)) = u1=u2
-      | checkTypeEqual(T.NAME(sym, ty), x) = 
-      	if T.NAME(sym, ty) = x then true else (case !ty of 
-      						   NONE => false
-      						 | SOME(y) => checkTypeEqual(y, x))
-      | checkTypeEqual(x, y) = false   
+      | checkTypeEqual(T.NAME(sym1, ty1), T.NAME(sym2, ty2)) = rightrec(T.NAME(sym1, ty1), T.NAME(sym2, ty2)) orelse rightrec(T.NAME(sym1, ty1), T.NAME(sym2, ty2))
+      | checkTypeEqual (T.NAME(sym, ty), x) = leftrec(T.NAME(sym, ty),x) 
+      | checkTypeEqual (x, y) = false 
+				   
 
     fun existsCycle(T.NAME(sym, ty)) =	case !ty of NONE => false
-						  | SOME(x) => checkTypeEqual(x, T.NAME(sym, ty))
+						  | SOME(x) => leftrec(x, T.NAME(sym, ty))
 									     
 	      	
     fun getArrayFromName(T.ARRAY(ty, u)) = T.ARRAY(ty, u)    
