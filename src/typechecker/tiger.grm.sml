@@ -767,7 +767,7 @@ MlyValue.exp exp2, _, _)) :: _ :: ( _, ( MlyValue.exp exp1, _, _)) ::
  val  exp2 = exp2 ()
  val  exp3 = exp3 ()
  in (
-A.ForExp({var=Symbol.symbol ID, escape=ref true, lo=exp1, hi=exp2, body=exp3, pos=FORleft})
+A.ForExp({var=Symbol.symbol ID, escape=ref false, lo=exp1, hi=exp2, body=exp3, pos=FORleft})
 )
 end)
  in ( LrTable.NT 0, ( result, FOR1left, exp3right), rest671)
@@ -933,12 +933,15 @@ end)
  in ( LrTable.NT 11, ( result, hackybrackthing1left, 
 hackybrackthing1right), rest671)
 end
-|  ( 41, ( ( _, ( MlyValue.hackybrackthing hackybrackthing1, _, 
-hackybrackthing1right)) :: _ :: ( _, ( MlyValue.lvalue lvalue1, (
-lvalueleft as lvalue1left), _)) :: rest671)) => let val  result = 
-MlyValue.lvalue (fn _ => let val  (lvalue as lvalue1) = lvalue1 ()
+|  ( 41, ( ( _, ( MlyValue.hackybrackthing hackybrackthing1, 
+hackybrackthingleft, hackybrackthing1right)) :: _ :: ( _, ( 
+MlyValue.lvalue lvalue1, (lvalueleft as lvalue1left), _)) :: rest671))
+ => let val  result = MlyValue.lvalue (fn _ => let val  (lvalue as 
+lvalue1) = lvalue1 ()
  val  (hackybrackthing as hackybrackthing1) = hackybrackthing1 ()
- in (A.FieldVar(lvalue, #id hackybrackthing, lvalueleft))
+ in (
+A.SubscriptVar(A.FieldVar(lvalue, #id hackybrackthing, lvalueleft), #exp hackybrackthing, hackybrackthingleft)
+)
 end)
  in ( LrTable.NT 11, ( result, lvalue1left, hackybrackthing1right), 
 rest671)
@@ -1046,7 +1049,7 @@ end
  ()
  val  (typeid as typeid1) = typeid1 ()
  in (
-[{name=Symbol.symbol ID, escape=ref true, typ=typeid, pos=IDleft}])
+[{name=Symbol.symbol ID, escape=ref false, typ=typeid, pos=IDleft}])
 
 end)
  in ( LrTable.NT 8, ( result, ID1left, typeid1right), rest671)
@@ -1058,7 +1061,7 @@ result = MlyValue.tyfields (fn _ => let val  (ID as ID1) = ID1 ()
  val  (typeid as typeid1) = typeid1 ()
  val  (tyfields as tyfields1) = tyfields1 ()
  in (
-[{name=Symbol.symbol ID, escape=ref true, typ=typeid, pos=IDleft}] @ tyfields
+[{name=Symbol.symbol ID, escape=ref false, typ=typeid, pos=IDleft}] @ tyfields
 )
 end)
  in ( LrTable.NT 8, ( result, ID1left, tyfields1right), rest671)
@@ -1073,7 +1076,7 @@ VAR1left, _)) :: rest671)) => let val  result = MlyValue.vardec (fn _
  => let val  (ID as ID1) = ID1 ()
  val  (exp as exp1) = exp1 ()
  in (
-A.VarDec({name=Symbol.symbol ID, escape=ref true, typ=NONE, init=exp, pos=ASSIGNleft})
+A.VarDec({name=Symbol.symbol ID, escape=ref false, typ=NONE, init=exp, pos=ASSIGNleft})
 )
 end)
  in ( LrTable.NT 9, ( result, VAR1left, exp1right), rest671)
@@ -1086,7 +1089,7 @@ rest671)) => let val  result = MlyValue.vardec (fn _ => let val  (ID
  val  (typeid as typeid1) = typeid1 ()
  val  (exp as exp1) = exp1 ()
  in (
-A.VarDec({name=Symbol.symbol ID, escape=ref true, typ=SOME(typeid, typeidleft), init=exp, pos=ASSIGNleft})
+A.VarDec({name=Symbol.symbol ID, escape=ref false, typ=SOME(typeid, typeidleft), init=exp, pos=ASSIGNleft})
 )
 end)
  in ( LrTable.NT 9, ( result, VAR1left, exp1right), rest671)

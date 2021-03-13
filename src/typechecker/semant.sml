@@ -32,10 +32,6 @@ struct
     val stack: { tenv: tenvType, venv: venvType } list ref = ref []
     val tenv: (tenvType) ref = ref Env.base_tenv
     val venv: (venvType) ref = ref Env.base_venv
-    fun checkArgs ([], [], pos) = ()
-      | checkArgs (a::l1, [], pos) = E.error pos "Insufficient arguments"
-      | checkArgs ([], b::l2, pos) = E.error pos "Too many arguments"
-      | checkArgs (a::l1, b::l2, pos) = if a = b then checkArgs(l1, l2, pos) else E.error pos "Argument type mismatch"
     
     fun lookupType (t, v, pos) = (case S.look(t, v) of NONE => (E.error pos "Type undefined"; T.NIL)
                                                      | SOME x => x)
@@ -93,6 +89,11 @@ struct
       						   NONE => false
       						 | SOME(y) => checkTypeEqual(y, x))
       | checkTypeEqual(x, y) = false   
+
+    fun checkArgs ([], [], pos) = ()
+      | checkArgs (a::l1, [], pos) = E.error pos "Insufficient arguments"
+      | checkArgs ([], b::l2, pos) = E.error pos "Too many arguments"
+      | checkArgs (a::l1, b::l2, pos) = if checkTypeEqual(a, b) then checkArgs(l1, l2, pos) else E.error pos "Argument type mismatch"
 
     fun existsCycle(T.NAME(sym, ty)) =	case !ty of NONE => false
 						  | SOME(x) => checkTypeEqual(x, T.NAME(sym, ty))
@@ -181,8 +182,8 @@ struct
 					(case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else ();seenTypes := [];tenv)}
       | transDec (venv,tenv,A.TypeDec({name,ty,pos}::tydeclist)) = (tenv := S.enter(!tenv, name, T.NAME(name, ref NONE)); transDec(venv, tenv, A.TypeDec(tydeclist));
 								    (case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else seenTypes:= name:: !seenTypes; {venv=venv,tenv=tenv})
-      | transDec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (funcDecl(name, params, result, pos); checkTypeEqual(funcBody(name, params, result, pos), #ty(transExp(venv, tenv, body))); scopeUp;seenFns:= [];{venv = venv, tenv = tenv})
-      | transDec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (funcDecl(name, params, result, pos);transDec(venv,tenv,A.FunctionDec(fundeclist)); checkTypeEqual(funcBody(name, params, result, pos), #ty(transExp(venv, tenv, body))); scopeUp; {venv = venv, tenv = tenv})								    
+      | transDec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (funcDecl(name, params, result, pos); if checkTypeEqual(funcBody(name, params, result, pos), #ty(transExp(venv, tenv, body))) then () else E.error pos "function body and return type differ"; scopeUp;seenFns:= [];{venv = venv, tenv = tenv})
+      | transDec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (funcDecl(name, params, result, pos);transDec(venv,tenv,A.FunctionDec(fundeclist)); if checkTypeEqual(funcBody(name, params, result, pos), #ty(transExp(venv, tenv, body))) then () else E.error pos "function body and return type differ"; scopeUp; {venv = venv, tenv = tenv})								    
 									      
  	
 
@@ -215,7 +216,7 @@ struct
               | trexp (A.IntExp(ival)) = {exp=(), ty=T.INT}
               | trexp (A.StringExp(sval)) = {exp=(), ty=T.STRING}
               | trexp (A.VarExp(lvalue)) = transVar(venv, tenv, lvalue)
-              | trexp (A.WhileExp({test, body, pos})) = (checkInt(trexp test, pos); if #ty(trexp body)=T.UNIT then (scopeDown; loopdepth:= !loopdepth+1;()) else E.error pos "while loop must be unit"; {exp = (), ty = T.NIL})
+              | trexp (A.WhileExp({test, body, pos})) = (checkInt(trexp test, pos); if #ty(trexp body)=T.UNIT then (scopeDown; loopdepth:= !loopdepth+1;()) else E.error pos "while loop must be unit"; {exp = (), ty = T.UNIT})
               | trexp (A.ForExp({var, escape, lo, hi, body, pos})) = 
               	(scopeDown;
               	 venv:=S.enter(!venv, var, Env.VarEntry{ty=T.INT});
