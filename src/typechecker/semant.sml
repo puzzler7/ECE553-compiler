@@ -179,9 +179,9 @@ struct
                 else (E.error pos "named type does not match expression";{tenv=tenv, venv=venv})
             end
       | transDec (venv,tenv,A.TypeDec[{name,ty,pos}]) = {venv=venv,tenv=(tenv:= S.enter(!tenv, name, T.NAME(name, ref NONE));
-					(case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else ();seenTypes := [];tenv)}
+					(case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else seenTypes:= name:: !seenTypes;tenv)}
       | transDec (venv,tenv,A.TypeDec({name,ty,pos}::tydeclist)) = (tenv := S.enter(!tenv, name, T.NAME(name, ref NONE)); transDec(venv, tenv, A.TypeDec(tydeclist));
-								    (case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else seenTypes:= name:: !seenTypes; {venv=venv,tenv=tenv})
+								    (case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else seenTypes:= name:: !seenTypes; seenTypes := [];{venv=venv,tenv=tenv})
       | transDec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (funcDecl(name, params, result, pos); if checkTypeEqual(funcBody(name, params, result, pos), #ty(transExp(venv, tenv, body))) then () else E.error pos "function body and return type differ"; scopeUp;seenFns:= [];{venv = venv, tenv = tenv})
       | transDec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (funcDecl(name, params, result, pos);transDec(venv,tenv,A.FunctionDec(fundeclist)); if checkTypeEqual(funcBody(name, params, result, pos), #ty(transExp(venv, tenv, body))) then () else E.error pos "function body and return type differ"; scopeUp; {venv = venv, tenv = tenv})								    
 									      
@@ -281,6 +281,6 @@ struct
           in 
             trexp exp
         end
-    fun transProg(exp) = (transExp(venv, tenv, exp); ()) 
+    fun transProg(exp) = (seenTypes:= []; seenFns:= [];transExp(venv, tenv, exp);()) 
                  
 end
