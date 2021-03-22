@@ -22,18 +22,15 @@ exports[`The textbook tests correctly finds type errors in test/testcases/test11
 "
 val it = true : bool
 test/testcases/test11.tig:2.1:Not int type
-test/testcases/test11.tig:2.1:for loop must be unit
+val it = () : unit
 
-uncaught exception Match [nonexhaustive match failure]
-  raised at: src/typechecker/semant.sml:45.71
-- 
 "
 `;
 
 exports[`The textbook tests correctly finds type errors in test/testcases/test13.tig 1`] = `
 "
 val it = true : bool
-test/testcases/test13.tig:3.3:Not int type
+test/testcases/test13.tig:3.3:Bad types for comparison operator
 val it = () : unit
 
 "
@@ -42,8 +39,7 @@ val it = () : unit
 exports[`The textbook tests correctly finds type errors in test/testcases/test14.tig 1`] = `
 "
 val it = true : bool
-intarrtypetest/testcases/test14.tig:12.9:Not int type
-test/testcases/test14.tig:12.9:Not int type
+test/testcases/test14.tig:12.9:Bad types for comparison operator
 val it = () : unit
 
 "
@@ -52,6 +48,7 @@ val it = () : unit
 exports[`The textbook tests correctly finds type errors in test/testcases/test15.tig 1`] = `
 "
 val it = true : bool
+test/testcases/test15.tig:3.1:If returns non-unit
 val it = () : unit
 
 "
@@ -60,10 +57,10 @@ val it = () : unit
 exports[`The textbook tests correctly finds type errors in test/testcases/test16.tig 1`] = `
 "
 val it = true : bool
-test/testcases/test16.tig:4.8:type does not exist
- namesymbol:atest/testcases/test16.tig:6.8:type does not exist
- namesymbol:aval it = () : unit
 
+uncaught exception CycleInTypeDec
+  raised at: src/typechecker/semant.sml:200.137-200.151
+- 
 "
 `;
 
@@ -71,7 +68,6 @@ exports[`The textbook tests correctly finds type errors in test/testcases/test17
 "
 val it = true : bool
 test/testcases/test17.tig:4.23:Type undefined
-test/testcases/test17.tig:6.28:Type undefined
 val it = () : unit
 
 "
@@ -89,7 +85,8 @@ val it = () : unit
 exports[`The textbook tests correctly finds type errors in test/testcases/test19.tig 1`] = `
 "
 val it = true : bool
-test/testcases/test19.tig:5.4:Variable undefined
+test/testcases/test19.tig:8.16:Variable does not exist!
+test/testcases/test19.tig:8.4:Argument type mismatch
 val it = () : unit
 
 "
@@ -100,7 +97,6 @@ exports[`The textbook tests correctly finds type errors in test/testcases/test20
 val it = true : bool
 test/testcases/test20.tig:3.18:Variable does not exist!
 test/testcases/test20.tig:3.19:Not int type
-test/testcases/test20.tig:3.1:while loop must be unit
 val it = () : unit
 
 "
@@ -110,6 +106,7 @@ exports[`The textbook tests correctly finds type errors in test/testcases/test21
 "
 val it = true : bool
 test/testcases/test21.tig:8.11:Not int type
+test/testcases/test21.tig:5.1:function body and return type differ
 val it = () : unit
 
 "
@@ -174,7 +171,7 @@ val it = () : unit
 exports[`The textbook tests correctly finds type errors in test/testcases/test29.tig 1`] = `
 "
 val it = true : bool
-intintarrtype2test/testcases/test29.tig:7.21:named type does not match expression
+test/testcases/test29.tig:7.21:named type does not match expression
 test/testcases/test29.tig:9.2:Variable does not exist!
 val it = () : unit
 
@@ -194,7 +191,7 @@ val it = () : unit
 exports[`The textbook tests correctly finds type errors in test/testcases/test32.tig 1`] = `
 "
 val it = true : bool
-intarraytytest/testcases/test32.tig:6.11:Initializing array with wrong type
+test/testcases/test32.tig:6.11:Initializing array with wrong type
 val it = () : unit
 
 "
@@ -205,6 +202,7 @@ exports[`The textbook tests correctly finds type errors in test/testcases/test33
 val it = true : bool
 test/testcases/test33.tig:3.10:Type undefined
 test/testcases/test33.tig:3.10:Assigning record to not record type
+test/testcases/test33.tig:3.7:assigning nil to non-record
 val it = () : unit
 
 "
@@ -240,7 +238,8 @@ val it = () : unit
 exports[`The textbook tests correctly finds type errors in test/testcases/test38.tig 1`] = `
 "
 val it = true : bool
- namesymbol:int namesymbol:stringval it = () : unit
+test/testcases/test38.tig:5.2:repeated type name in typedec
+val it = () : unit
 
 "
 `;
@@ -248,6 +247,7 @@ val it = true : bool
 exports[`The textbook tests correctly finds type errors in test/testcases/test39.tig 1`] = `
 "
 val it = true : bool
+test/testcases/test39.tig:6.2:function declared twice in same fundec
 val it = () : unit
 
 "
@@ -256,6 +256,7 @@ val it = () : unit
 exports[`The textbook tests correctly finds type errors in test/testcases/test40.tig 1`] = `
 "
 val it = true : bool
+test/testcases/test40.tig:3.2:function body and return type differ
 val it = () : unit
 
 "
@@ -273,6 +274,7 @@ val it = () : unit
 exports[`The textbook tests correctly finds type errors in test/testcases/test45.tig 1`] = `
 "
 val it = true : bool
+test/testcases/test45.tig:5.7:assigning nil to non-record
 val it = () : unit
 
 "
@@ -293,31 +295,6 @@ val it = () : unit
 exports[`The textbook tests finds no type errors in test/testcases/merge.tig 1`] = `
 "
 val it = true : bool
-test/testcases/merge.tig:11.20:Not int type
-test/testcases/merge.tig:11.20:Not int type
-test/testcases/merge.tig:11.33:Not int type
-test/testcases/merge.tig:11.33:Not int type
-test/testcases/merge.tig:11.8:while loop must be unit
-test/testcases/merge.tig:15.6:while loop must be unit
-test/testcases/merge.tig:20.27:Type undefined
-test/testcases/merge.tig:26.15:Wrong record type!
-test/testcases/merge.tig:26.15:Wrong record type!
-test/testcases/merge.tig:31.8:Not int type
-test/testcases/merge.tig:31.8:Not int type
-test/testcases/merge.tig:32.13:Not int type
-test/testcases/merge.tig:32.13:Not int type
-test/testcases/merge.tig:34.36:Argument type mismatch
-test/testcases/merge.tig:34.12:Wrong record type!
-test/testcases/merge.tig:35.36:Argument type mismatch
-test/testcases/merge.tig:35.12:Wrong record type!
-test/testcases/merge.tig:34.36:Argument type mismatch
-test/testcases/merge.tig:34.12:Wrong record type!
-test/testcases/merge.tig:32.9:Then Else disagree
-test/testcases/merge.tig:41.12:Then Else disagree
-test/testcases/merge.tig:46.8:Not int type
-test/testcases/merge.tig:46.8:Not int type
-test/testcases/merge.tig:47.41:Argument type mismatch
-test/testcases/merge.tig:46.4:Then Else disagree
 val it = () : unit
 
 "
@@ -326,17 +303,15 @@ val it = () : unit
 exports[`The textbook tests finds no type errors in test/testcases/queens.tig 1`] = `
 "
 val it = true : bool
-intintArrayintArrayintArrayintArray
-uncaught exception Match [nonexhaustive match failure]
-  raised at: src/typechecker/semant.sml:45.71
-- 
+val it = () : unit
+
 "
 `;
 
 exports[`The textbook tests finds no type errors in test/testcases/test1.tig 1`] = `
 "
 val it = true : bool
-intarrtypeval it = () : unit
+val it = () : unit
 
 "
 `;
@@ -344,7 +319,7 @@ intarrtypeval it = () : unit
 exports[`The textbook tests finds no type errors in test/testcases/test2.tig 1`] = `
 "
 val it = true : bool
- namesymbol:intmyintarrtypeval it = () : unit
+val it = () : unit
 
 "
 `;
@@ -368,9 +343,6 @@ val it = () : unit
 exports[`The textbook tests finds no type errors in test/testcases/test5.tig 1`] = `
 "
 val it = true : bool
-test/testcases/test5.tig:4.26:Type undefined
-test/testcases/test5.tig:7.23:Type undefined
-test/testcases/test5.tig:8.28:Type undefined
 val it = () : unit
 
 "
@@ -379,7 +351,6 @@ val it = () : unit
 exports[`The textbook tests finds no type errors in test/testcases/test6.tig 1`] = `
 "
 val it = true : bool
-test/testcases/test6.tig:5.3:Variable undefined
 val it = () : unit
 
 "
@@ -388,7 +359,6 @@ val it = () : unit
 exports[`The textbook tests finds no type errors in test/testcases/test7.tig 1`] = `
 "
 val it = true : bool
-test/testcases/test7.tig:5.4:Variable undefined
 val it = () : unit
 
 "
@@ -405,11 +375,8 @@ val it = () : unit
 exports[`The textbook tests finds no type errors in test/testcases/test12.tig 1`] = `
 "
 val it = true : bool
-test/testcases/test12.tig:6.2:for loop must be unit
+val it = () : unit
 
-uncaught exception Match [nonexhaustive match failure]
-  raised at: src/typechecker/semant.sml:45.71
-- 
 "
 `;
 
@@ -424,10 +391,6 @@ val it = () : unit
 exports[`The textbook tests finds no type errors in test/testcases/test30.tig 1`] = `
 "
 val it = true : bool
-int namesymbol:abtest/testcases/test30.tig:7.17:array type mismatch
-test/testcases/test30.tig:7.14:named type does not match expression
-test/testcases/test30.tig:9.3:Variable does not exist!
-test/testcases/test30.tig:9.3:subscript var on non-array type
 val it = () : unit
 
 "
@@ -444,7 +407,7 @@ val it = () : unit
 exports[`The textbook tests finds no type errors in test/testcases/test41.tig 1`] = `
 "
 val it = true : bool
- namesymbol:int namesymbol:stringval it = () : unit
+val it = () : unit
 
 "
 `;
@@ -452,8 +415,6 @@ val it = true : bool
 exports[`The textbook tests finds no type errors in test/testcases/test42.tig 1`] = `
 "
 val it = true : bool
-intrectype1stringarrtype1arrtype2arrtype3arrtype1test/testcases/test42.tig:27.15:Assigning wrong type to variable
-test/testcases/test42.tig:28.15:Assigning wrong type to variable
 val it = () : unit
 
 "
@@ -462,8 +423,6 @@ val it = () : unit
 exports[`The textbook tests finds no type errors in test/testcases/test44.tig 1`] = `
 "
 val it = true : bool
-test/testcases/test44.tig:5.16:named type does not match expression
-test/testcases/test44.tig:9.2:Variable does not exist!
 val it = () : unit
 
 "
@@ -472,13 +431,6 @@ val it = () : unit
 exports[`The textbook tests finds no type errors in test/testcases/test46.tig 1`] = `
 "
 val it = true : bool
-test/testcases/test46.tig:4.16:named type does not match expression
-test/testcases/test46.tig:6.2:Variable does not exist!
-test/testcases/test46.tig:6.4:Not int type
-test/testcases/test46.tig:6.4:Not int type
-test/testcases/test46.tig:7.2:Variable does not exist!
-test/testcases/test46.tig:7.4:Not int type
-test/testcases/test46.tig:7.4:Not int type
 val it = () : unit
 
 "
@@ -487,7 +439,7 @@ val it = () : unit
 exports[`The textbook tests finds no type errors in test/testcases/test47.tig 1`] = `
 "
 val it = true : bool
- namesymbol:int namesymbol:stringval it = () : unit
+val it = () : unit
 
 "
 `;
@@ -495,7 +447,7 @@ val it = true : bool
 exports[`The textbook tests finds no type errors in test/testcases/test48.tig 1`] = `
 "
 val it = true : bool
- namesymbol:intval it = () : unit
+val it = () : unit
 
 "
 `;
