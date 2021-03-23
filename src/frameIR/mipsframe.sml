@@ -19,8 +19,8 @@ struct
             numLocals: ref 0
         })
 
-    fun name Frame({name, formals}) = name
-    fun formals Frame({name, formals}) = formals
+    fun name Frame({name, formals, numLocals}) = name
+    fun formals Frame({name, formals, numLocals}) = formals
 
     fun allocLocal Frame({name, formals}) escape = 
 
