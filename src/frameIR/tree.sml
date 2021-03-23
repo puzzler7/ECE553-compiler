@@ -33,11 +33,11 @@ struct
   type label=Temp.label
   type size = int
 
-datatype stm = SEQ of stm * stm
+datatype stm = SEQ of stm list
              | LABEL of label
              | JUMP of exp * label list
              | CJUMP of relop * exp * exp * label * label
-	     | MOVE of exp * exp
+	           | MOVE of exp * exp
              | EXP of exp
 
      and exp = BINOP of binop * exp * exp

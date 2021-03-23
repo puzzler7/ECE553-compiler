@@ -4,8 +4,8 @@ struct
 	structure T = Types
 	type access = unit	
 	type ty = Types.ty
-	datatype enventry = VarEntry of {ty: ty}
-					  | FunEntry of {formals: ty list, result: ty}
+	datatype enventry = VarEntry of {access: Translate.access, ty: ty}
+		  			  | FunEntry of {level: Translate.level, formals: ty list, result: ty}
 	val base_tenv = S.enter(S.enter(S.empty, S.symbol "int", T.INT), S.symbol "string", T.STRING)
 	val base_venv : enventry S.table =
 		S.enter(
