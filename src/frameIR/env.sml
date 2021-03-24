@@ -2,6 +2,7 @@ structure Env =
 struct
 	structure S = Symbol
 	structure T = Types
+	structure TR = Translate
 	type access = unit	
 	type ty = Types.ty
 	datatype enventry = VarEntry of {access: Translate.access, ty: ty}
@@ -20,34 +21,34 @@ struct
 											S.enter(
 												S.empty,
 												S.symbol "print",
-												FunEntry { formals = [T.STRING], result = T.UNIT }
+												FunEntry { level=TR.outermost, formals = [T.STRING], result = T.UNIT }
 											),
 											S.symbol "flush",
-											FunEntry { formals = [], result = T.UNIT }
+											FunEntry { level=TR.outermost, formals = [], result = T.UNIT }
 										),
 										S.symbol "getchar",
-										FunEntry { formals = [], result = T.STRING }
+										FunEntry { level=TR.outermost, formals = [], result = T.STRING }
 									),
 									S.symbol "ord",
-									FunEntry { formals = [T.STRING], result = T.INT }
+									FunEntry { level=TR.outermost, formals = [T.STRING], result = T.INT }
 								),
 								S.symbol "chr",
-								FunEntry { formals = [T.INT], result = T.STRING }
+								FunEntry { level=TR.outermost, formals = [T.INT], result = T.STRING }
 							),
 							S.symbol "size",
-							FunEntry { formals = [T.STRING], result = T.INT }
+							FunEntry { level=TR.outermost, level=TR.outermost, formals = [T.STRING], result = T.INT }
 						),
 						S.symbol "substring",
-						FunEntry { formals = [T.STRING, T.INT, T.INT], result = T.STRING }
+						FunEntry { level=TR.outermost, formals = [T.STRING, T.INT, T.INT], result = T.STRING }
 					),
 					S.symbol "concat",
-					FunEntry { formals = [T.STRING, T.STRING], result = T.STRING }
+					FunEntry { level=TR.outermost, formals = [T.STRING, T.STRING], result = T.STRING }
 				),
 				S.symbol "not",
-				FunEntry { formals = [T.INT], result = T.INT }
+				FunEntry { level=TR.outermost, formals = [T.INT], result = T.INT }
 			),
 			S.symbol "exit",
-			FunEntry { formals = [T.INT], result = T.UNIT }
+			FunEntry { level=TR.outermost, formals = [T.INT], result = T.UNIT }
 		)
 	 (* predefined functions, these all need to be added, from appendix A*)
 end

@@ -17,7 +17,7 @@ sig
     val subscriptVar
     val stringVar
     val recordVar
-    val whileIR = exp * exp -> exp
+    val whileIR = exp * exp * exp -> exp
     val forIR
     val letIR
     (*Maybe need one for every absyn exp?*)
@@ -41,8 +41,10 @@ struct
     structure F = MipsFrame
     structure E = ErrorMsg
 
-    type level = unit ref
+    type level = {unique=unit ref, frame=F.frame, parent=level, link=int}
     type access = level * Frame.access
+
+    val outermost = {unique=ref (), frame=nil, parent=nil, link=0}
 
     fun unEx  (Ex e) = e
       | unEx  (Cx genstm) =
@@ -99,13 +101,13 @@ struct
 
     fun arrayVar (size, init) = Ex(F.externalCall("initArray", [unEx(size), unEx(init)])) 
 
-    fun whileIR(test, body) = 
+    fun whileIR(test, body, done) = 
         let
             cond = unCx(test)
             bdy = unNx(body)
             bodylabel = Temp.newlabel()
             tst = Temp.newlabel()
-            done = Temp.newlabel() (*I think something special might need to happen with breaks - do they get passed in?*)
+            (*done = Temp.newlabel()*) (*I think something special might need to happen with breaks - do they get passed in?*)
         in
             Nx(TR.SEQ([TR.LABEL(tst), cond(bodylabel, done), TR.LABEL(bodylabel), TR.EXP(bdy),
              TR.JUMP(TR.NAME(tst), [tst]), TR.LABEL(done)]))
