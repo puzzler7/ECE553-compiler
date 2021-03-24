@@ -23,10 +23,10 @@ struct
     structure E = ErrorMsg
     type ty = Types.ty
 
-    structure Translate = struct type exp = unit end
+    structure TR = Translate
     type venvType = Env.enventry Symbol.table
     type tenvType = ty Symbol.table
-    type expty = {exp: Translate.exp, ty: Types.ty}
+    type expty = {exp: TR.exp, ty: Types.ty}
 
     val loopdepth = ref 0
     val stack: { tenv: tenvType, venv: venvType } list ref = ref []
@@ -231,11 +231,11 @@ struct
             | NONE => (E.error pos "type does not exist";T.NIL))*)
 
     and transExp (venv, tenv, exp) = 
-        let fun trexp (A.NilExp) = {exp=(), ty=T.NIL}
-              | trexp (A.IntExp(ival)) = {exp=(), ty=T.INT}
+        let fun trexp (A.NilExp) = {exp=TR.nilIR(), ty=T.NIL}
+              | trexp (A.IntExp(ival)) = {exp=TR.intIR(ival), ty=T.INT}
               | trexp (A.StringExp(sval)) = {exp=(), ty=T.STRING}
               | trexp (A.VarExp(lvalue)) = transVar(venv, tenv, lvalue)
-              | trexp (A.WhileExp({test, body, pos})) = (checkInt(trexp test, pos); if #ty(trexp body)=T.UNIT then (scopeDown; loopdepth:= !loopdepth+1;()) else E.error pos "while loop must be unit"; {exp = (), ty = T.UNIT})
+              | trexp (A.WhileExp({test, body, pos})) = (checkInt(trexp test, pos); if #ty(trexp body)=T.UNIT then (scopeDown; loopdepth:= !loopdepth+1;()) else E.error pos "while loop must be unit"; {exp = TR.whileIR(#exp (trexp test), #exp (trexp body)), ty = T.UNIT})
               | trexp (A.ForExp({var, escape, lo, hi, body, pos})) = 
               	(scopeDown;
               	 venv:=S.enter(!venv, var, Env.VarEntry{ty=T.INT});
@@ -253,24 +253,24 @@ struct
                                       
               | trexp (A.OpExp({left, oper, right, pos})) = 
               		(case oper of 
-              			A.PlusOp => (checkInt(trexp left, pos); checkInt(trexp right, pos); {exp=(), ty=T.INT})
-              		  | A.MinusOp =>(checkInt(trexp left, pos); checkInt(trexp right, pos); {exp=(), ty=T.INT})
-              		  | A.DivideOp =>(checkInt(trexp left, pos); checkInt(trexp right, pos); {exp=(), ty=T.INT})
-              		  | A.TimesOp =>(checkInt(trexp left, pos); checkInt(trexp right, pos); {exp=(), ty=T.INT})
-              		  | A.EqOp => if checkEqualityOp(#ty(trexp left), #ty(trexp right)) then {exp=(), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=(), ty=T.INT})
-              		  | A.NeqOp => if checkEqualityOp(#ty(trexp left), #ty(trexp right)) then {exp=(), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=(), ty=T.INT})
-              		  | A.GtOp => if checkComparisonOp(#ty(trexp left), #ty(trexp right)) then {exp=(), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=(), ty=T.INT})
-              		  | A.LtOp => if checkComparisonOp(#ty(trexp left), #ty(trexp right)) then {exp=(), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=(), ty=T.INT})
-              		  | A.GeOp => if checkComparisonOp(#ty(trexp left), #ty(trexp right)) then {exp=(), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=(), ty=T.INT})
-              		  | A.LeOp => if checkComparisonOp(#ty(trexp left), #ty(trexp right)) then {exp=(), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=(), ty=T.INT}))
+              			A.PlusOp => (checkInt(trexp left, pos); checkInt(trexp right, pos); {exp=(TR.binopIR(oper, #exp (trexp left), #exp (trexp right)), ty=T.INT})
+              		  | A.MinusOp =>(checkInt(trexp left, pos); checkInt(trexp right, pos); {exp=TR.binopIR(oper, #exp (trexp left), #exp (trexp right)), ty=T.INT})
+              		  | A.DivideOp =>(checkInt(trexp left, pos); checkInt(trexp right, pos); {exp=TR.binopIR(oper, #exp (trexp left), #exp (trexp right)), ty=T.INT})
+              		  | A.TimesOp =>(checkInt(trexp left, pos); checkInt(trexp right, pos); {exp=TR.binopIR(oper, #exp (trexp left), #exp (trexp right)), ty=T.INT})
+              		  | A.EqOp => if checkEqualityOp(#ty(trexp left), #ty(trexp right)) then {exp=TR.relopIR(oper, #exp (trexp left), #exp (trexp right), #ty (trexp right)), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=TR.nilIR(), ty=T.INT})
+              		  | A.NeqOp => if checkEqualityOp(#ty(trexp left), #ty(trexp right)) then {exp=TR.relopIR(oper, #exp (trexp left), #exp (trexp right), #ty (trexp right)), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=TR.nilIR(), ty=T.INT})
+              		  | A.GtOp => if checkComparisonOp(#ty(trexp left), #ty(trexp right)) then {exp=TR.relopIR(oper, #exp (trexp left), #exp (trexp right), #ty (trexp right)), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=TR.nilIR(), ty=T.INT})
+              		  | A.LtOp => if checkComparisonOp(#ty(trexp left), #ty(trexp right)) then {exp=TR.relopIR(oper, #exp (trexp left), #exp (trexp right), #ty (trexp right)), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=TR.nilIR(), ty=T.INT})
+              		  | A.GeOp => if checkComparisonOp(#ty(trexp left), #ty(trexp right)) then {exp=TR.relopIR(oper, #exp (trexp left), #exp (trexp right), #ty (trexp right)), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=TR.nilIR(), ty=T.INT})
+              		  | A.LeOp => if checkComparisonOp(#ty(trexp left), #ty(trexp right)) then {exp=TR.relopIR(oper, #exp (trexp left), #exp (trexp right), #ty (trexp right)), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=TR.nilIR(), ty=T.INT}))
 
-              | trexp (A.AssignExp({var, exp, pos})) = (if checkTypeEqual(#ty(transVar(venv, tenv, var)), #ty(trexp exp)) then () else E.error pos "Assigning wrong type to variable"; {exp = (), ty=T.UNIT})  
+              | trexp (A.AssignExp({var, exp, pos})) = (if checkTypeEqual(#ty(transVar(venv, tenv, var)), #ty(trexp exp)) then () else E.error pos "Assigning wrong type to variable"; {exp =(), ty=T.UNIT})  
               | trexp (A.SeqExp(exps)) = {exp = (), ty = foldl (fn(x, y) => #ty(trexp (#1 x))) T.UNIT exps}
               | trexp (A.CallExp({func, args, pos})) = (case S.look(!venv, func) of SOME x =>
                                                 (case x of  Env.FunEntry({formals, result}) => (checkArgs(formals, map (fn (x) => #ty(trexp x)) args, pos); {exp = (), ty = result})
-                                                      | Env.VarEntry({ty})  => (E.error pos "Variable is not function"; {exp = (), ty = T.NIL}))
+                                                      | Env.VarEntry({ty})  => (E.error pos "Variable is not function"; {exp = TR.nilIR(), ty = T.NIL}))
                                                                        
-                                                  | NONE => (E.error pos "Variable undefined"; {exp = (), ty = T.NIL}))
+                                                  | NONE => (E.error pos "Variable undefined"; {exp = TR.nilIR(), ty = T.NIL}))
                                                                                                                                                                                     
               | trexp (A.ArrayExp({typ, size, init, pos})) = (
               	checkInt(trexp size, pos); 
@@ -285,8 +285,8 @@ struct
               		(case getRecordFromName(lookupType(!tenv, typ, pos)) of
                       T.RECORD(symlist, u) => if checkRecordType(fields, symlist) 
 	                      then {exp=(), ty=T.RECORD(symlist, u)} 
-	                      else (E.error pos "Wrong record type!"; {exp=(), ty=T.NIL})
-                    | x => (E.error pos "Assigning record to not record type"; {exp=(), ty=T.NIL}))
+	                      else (E.error pos "Wrong record type!"; {exp=TR.nilIR(), ty=T.NIL})
+                    | x => (E.error pos "Assigning record to not record type"; {exp=TR.nilIR(), ty=T.NIL}))
               | trexp (A.IfExp({test, then', else', pos})) = (checkInt(trexp test, pos); 
               	(case else' of 
               		NONE => if checkTypeEqual(#ty(trexp then'), T.UNIT) then () else E.error pos "If returns non-unit"
@@ -294,7 +294,7 @@ struct
                   {exp=(), ty= #ty(trexp then')})     
               | trexp (A.BreakExp(pos)) = if !loopdepth > 0 
               		then (scopeUp; loopdepth:= !loopdepth-1;{exp=(),ty=T.NIL})
-              		else (E.error pos "break not in loop!"; {exp=(), ty=T.NIL})      
+              		else (E.error pos "break not in loop!"; {exp=TR.nilIR(), ty=T.NIL})      
                                           
                         
           in 

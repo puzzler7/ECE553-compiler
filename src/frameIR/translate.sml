@@ -17,21 +17,26 @@ sig
     val subscriptVar
     val stringVar
     val recordVar
-    val whileIR
+    val whileIR = exp * exp -> exp
     val forIR
+    val letIR
     (*Maybe need one for every absyn exp?*)
-    val binopIR = Tr.binop * exp * exp -> exp
-    val relopIR = Tr.relop * exp * exp *  -> exp
+    val binopIR = TR.binop * exp * exp -> exp
+    val relopIR = TR.relop * exp * exp * Types.ty -> exp
     val conditionalIR = exp * exp * exp -> exp
+    val nilIR = unit -> exp
+    val intIR = int -> exp
+    val stringIR = string -> exp (*to do*)
+
 
     val unEx: exp -> Tree.exp
     val unNx: exp -> Tree.stm
-    val unCx: exp -> (Temp.label * Temp.label -> Temp.stm)
+    val unCx: exp -> (Temp.label * Temp.label -> Tree.stm)
 end
     
 structure Translate : TRANSLATE = 
 struct
-    structure Tr = Tree
+    structure TR = Tree
     structure T = Types
     structure F = MipsFrame
     structure E = ErrorMsg
@@ -44,32 +49,32 @@ struct
             let val r = Temp.newtemp()
                 val t = Temp.newlabel() and f = Temp.newlabel()
             in 
-                Tr.ESEQ(seq[Tr.MOVE(Tr.TEMP r, Tr.CONST 1),
+                TR.ESEQ(TR.SEQ[TR.MOVE(TR.TEMP r, TR.CONST 1),
                             genstm(t,f),T.LABEL f,
-                            Tr.MOVE(Tr.TEMP r, Tr.CONST 0).Tr.LABEL t],
-                        Tr.TEMP r)
+                            TR.MOVE(TR.TEMP r, TR.CONST 0).TR.LABEL t],
+                        TR.TEMP r)
             end
-      | unEx  (Nx s) = Tr.ESEQ(s/Tr.CONST 0)
+      | unEx  (Nx s) = TR.ESEQ(s, TR.CONST 0)
 
     fun unNx (Nx n) = n
-      | unNx (Ex e) = Tr.EXP(e)
+      | unNx (Ex e) = TR.EXP(e)
       | unNx (Cx c) = unNx(Ex(unEx(c)))
 
     fun unCx (Cx c) = c
-      | unCx (Ex e) = fn (t, f) => Tr.CJUMP(Tr.EQ, e, Tr.CONST(1), t, f)
-      | unCx (Nx n) = (E.error 0 "Cannot unCx an Nx"; fn (t, f) => Tr.EXP(Tr.CONST 0))
+      | unCx (Ex e) = fn (t, f) => TR.CJUMP(TR.EQ, e, TR.CONST(1), t, f)
+      | unCx (Nx n) = (E.error 0 "Cannot unCx an Nx"; fn (t, f) => TR.EXP(TR.CONST 0))
 
-    fun binopIR (bop, left, right) = Ex(Tr.BINOP(bop, unEx(left), unEx(right)))
+    fun binopIR (bop, left, right) = Ex(TR.BINOP(bop, unEx(left), unEx(right)))
 
     fun relopIR (rop, left, right, ty) = 
         case (rop, ty) of
-            (Tr.EQ, T.STRING) => (*Need external calls for all of these*)
-          | (Tr.NE, T.STRING) =>
-          | (Tr.LE, T.STRING) =>
-          | (Tr.LT, T.STRING) =>
-          | (Tr.GE, T.STRING) =>
-          | (Tr.GT, T.STRING) =>
-          | (r, x) => Cx(fn(t, f) => Tr.CJUMP(r, unEx(left), unEx(right), t, f))
+            (TR.EQ, T.STRING) => (*Need external calls for all of these*)
+          | (TR.NE, T.STRING) =>
+          | (TR.LE, T.STRING) =>
+          | (TR.LT, T.STRING) =>
+          | (TR.GE, T.STRING) =>
+          | (TR.GT, T.STRING) =>
+          | (r, x) => Cx(fn(t, f) => TR.CJUMP(r, unEx(left), unEx(right), t, f))
 
     fun conditionalIR(test, then', else') = 
         let
@@ -81,10 +86,28 @@ struct
             val r = Temp.newtemp()
             val join = Temp.newlabel()
         in
-            Ex(Tr.ESEQ(TR.SEQ[
-                e1(t, f), Tr.LABEL(t), Tr.MOVE(Tr.TEMP(r), e2), Tr.JUMP(Tr.NAME(join), [join])
-                Tr.LABEL(f), Tr.MOVE(Tr.TEMP(r), e3), Tr.JUMP(Tr.NAME(join), [join])
-                ]), Tr.TEMP(r)
+            Ex(TR.ESEQ(TR.SEQ[
+                e1(t, f), TR.LABEL(t), TR.MOVE(TR.TEMP(r), e2), TR.JUMP(TR.NAME(join), [join])
+                TR.LABEL(f), TR.MOVE(TR.TEMP(r), e3), TR.JUMP(TR.NAME(join), [join])
+                ]), TR.TEMP(r)
             )
+        end
+
+    fun nilIR () = Ex(TR.CONST 0)
+
+    fun intIR (n) = Ex(TR.CONST n)
+
+    fun arrayVar (size, init) = Ex(F.externalCall("initArray", [unEx(size), unEx(init)])) 
+
+    fun whileIR(test, body) = 
+        let
+            cond = unCx(test)
+            bdy = unNx(body)
+            bodylabel = Temp.newlabel()
+            tst = Temp.newlabel()
+            done = Temp.newlabel() (*I think something special might need to happen with breaks - do they get passed in?*)
+        in
+            Nx(TR.SEQ([TR.LABEL(tst), cond(bodylabel, done), TR.LABEL(bodylabel), TR.EXP(bdy),
+             TR.JUMP(TR.NAME(tst), [tst]), TR.LABEL(done)]))
         end
 end
