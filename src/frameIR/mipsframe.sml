@@ -27,4 +27,6 @@ struct
     val FP = Temp.newtemp()
     val wordSize = 4
     val exp: access  -> Tree.exp -> Tree.exp
+
+    fun externalCall(s, args) = Tree.CALL(Tree.NAME(Temp.namedlabel s), args)
 end

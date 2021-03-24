@@ -9,4 +9,6 @@ sig type frame
     val FP: Temp.temp
     val wordSize: int
     val exp: access  -> Tree.exp -> Tree.exp
+
+    val externalCall: string * Tree.exp list -> Tree.exp
 end
