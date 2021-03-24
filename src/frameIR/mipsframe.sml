@@ -26,7 +26,9 @@ struct
 
     val FP = Temp.newtemp()
     val wordSize = 4
-    val exp: access  -> Tree.exp -> Tree.exp
+
+    fun exp (InFrame(i)) = fn(fp) => Tree.MEM(Tree.BINOP(Tree.PLUS, fp, Tree.CONST(i)))
+      | exp (InReg(reg)) = fn (fp) => Tree.TEMP(reg)
 
     fun externalCall(s, args) = Tree.CALL(Tree.NAME(Temp.namedlabel s), args)
 end
