@@ -12,22 +12,22 @@ sig
     val allocLocal: level -> bool -> access
 
     val simpleVar: access * level  -> exp
-    val arrayVar exp * exp -> exp
-    val structVar
+    val arrayVar: exp * exp -> exp
+    (*val structVar
     val subscriptVar
     val stringVar
     val recordVar
-    val whileIR = exp * exp * exp -> exp
-    val letIR
+    val letIR*)
+    val whileIR: exp * exp * exp -> exp
     (*Maybe need one for every absyn exp?*)
-    val binopIR = TR.binop * exp * exp -> exp
-    val relopIR = TR.relop * exp * exp * Types.ty -> exp
-    val conditionalIR = exp * exp * exp -> exp
-    val nilIR = unit -> exp
-    val intIR = int -> exp
-    val stringIR = string -> exp (*to do*)
-    val breakIR = Temp.label -> exp
-    val assignIR = exp * exp -> exp
+    val binopIR: TR.binop * exp * exp -> exp
+    val relopIR: TR.relop * exp * exp * Types.ty -> exp
+    val conditionalIR: exp * exp * exp -> exp
+    val nilIR: unit -> exp
+    val intIR: int -> exp
+    val stringIR: string -> exp (*to do*)
+    val breakIR: Temp.label -> exp
+    val assignIR: exp * exp -> exp
 
 
     val unEx: exp -> Tree.exp
@@ -42,10 +42,10 @@ struct
     structure F = MipsFrame
     structure E = ErrorMsg
 
-    type level = {unique=unit ref, frame=F.frame, parent=level, link=int}
+    type level = {unique: unit ref, frame: F.frame, parent:level, link: int}
     type access = level * Frame.access
 
-    val outermost = {unique=ref (), frame=nil, parent=nil, link=0}
+    val outermost = {unique = ref (), frame = nil, parent = nil, link = 0}
 
     fun unEx  (Ex e) = e
       | unEx  (Cx genstm) =
@@ -53,8 +53,8 @@ struct
                 val t = Temp.newlabel() and f = Temp.newlabel()
             in 
                 TR.ESEQ(TR.SEQ[TR.MOVE(TR.TEMP r, TR.CONST 1),
-                            genstm(t,f),T.LABEL f,
-                            TR.MOVE(TR.TEMP r, TR.CONST 0).TR.LABEL t],
+                            genstm(t,f),TR.LABEL f,
+                            TR.MOVE(TR.TEMP r, TR.CONST 0), TR.LABEL t],
                         TR.TEMP r)
             end
       | unEx  (Nx s) = TR.ESEQ(s, TR.CONST 0)
@@ -64,20 +64,20 @@ struct
       | unNx (Cx c) = unNx(Ex(unEx(c)))
 
     fun unCx (Cx c) = c
-      | unCx (Ex e) = fn (t, f) => TR.CJUMP(TR.EQ, e, TR.CONST(1), t, f)
-      | unCx (Nx n) = (E.error 0 "Cannot unCx an Nx"; fn (t, f) => TR.EXP(TR.CONST 0))
+      | unCx (Ex e) = (fn (t, f) => TR.CJUMP(TR.EQ, e, TR.CONST(1), t, f))
+      | unCx (Nx n) = ((E.error 0 "Cannot unCx an Nx"); (fn (t, f) => TR.EXP(TR.CONST 0)))
 
     fun binopIR (bop, left, right) = Ex(TR.BINOP(bop, unEx(left), unEx(right)))
 
     fun relopIR (rop, left, right, ty) = 
-        case (rop, ty) of
-            (TR.EQ, T.STRING) => (*Need external calls for all of these*)
+        case (rop, ty) of (*Need external calls for all of these*)
+          (*  (TR.EQ, T.STRING) => 
           | (TR.NE, T.STRING) =>
           | (TR.LE, T.STRING) =>
           | (TR.LT, T.STRING) =>
           | (TR.GE, T.STRING) =>
           | (TR.GT, T.STRING) =>
-          | (r, x) => Cx(fn(t, f) => TR.CJUMP(r, unEx(left), unEx(right), t, f))
+          |*) (r, x) => Cx(fn(t, f) => TR.CJUMP(r, unEx(left), unEx(right), t, f))
 
     fun conditionalIR(test, then', else') = 
         let
@@ -104,10 +104,10 @@ struct
 
     fun whileIR(test, body, done) = 
         let
-            cond = unCx(test)
-            bdy = unNx(body)
-            bodylabel = Temp.newlabel()
-            tst = Temp.newlabel()
+            val cond = unCx(test)
+            val bdy = unNx(body)
+            val bodylabel = Temp.newlabel()
+            val tst = Temp.newlabel()
             (*done = Temp.newlabel()*) (*I think something special might need to happen with breaks - do they get passed in?*)
         in
             Nx(TR.SEQ([TR.LABEL(tst), cond(bodylabel, done), TR.LABEL(bodylabel), TR.EXP(bdy),

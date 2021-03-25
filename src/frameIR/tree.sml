@@ -3,7 +3,7 @@ sig
   type label = Temp.label
   type size
 
-datatype stm = SEQ of stm * stm
+datatype stm = SEQ of stm list
              | LABEL of label
              | JUMP of exp * label list
              | CJUMP of relop * exp * exp * label * label
@@ -53,6 +53,9 @@ datatype stm = SEQ of stm list
 
       and relop = EQ | NE | LT | GT | LE | GE 
 	        | ULT | ULE | UGT | UGE
+
+      fun notRel (x) = x
+      fun commute (x) = x (*to do*)
 
 end
 

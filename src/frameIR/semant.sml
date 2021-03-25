@@ -141,7 +141,7 @@ struct
       | checkEqualityOp(x, T.NIL) = true
       | checkEqualityOp(x, y) = false
 
-    fun forToWhile(A.ForExp({var, escape, lo, hi, body, pos}) = 
+    fun forToWhile(A.ForExp({var, escape, lo, hi, body, pos})) = 
         let val limit = S.symbol "__limit"
         in
           A.LetExp({decs=[A.VarDec{name=var, escape=ref false, typ=SOME((int, pos)), init=lo, pos=pos},
@@ -262,15 +262,21 @@ struct
               | trexp (A.IntExp(ival), break) = {exp=TR.intIR(ival), ty=T.INT}
               | trexp (A.StringExp(sval), break) = {exp=(), ty=T.STRING}
               | trexp (A.VarExp(lvalue), break) = transVar(venv, tenv, lvalue)
-              | trexp (A.WhileExp({test, body, pos}), break) = (checkInt(trexp (test, break), pos); if #ty(trexp (body, break))=T.UNIT then (scopeDown; loopdepth:= !loopdepth+1;()) else E.error pos "while loop must be unit"; val newbreak = Temp.newlabel(); {exp = TR.whileIR(#exp (trexp (test, break)), #exp (trexp (body, break)), newbreak), ty = T.UNIT})
+              | trexp (A.WhileExp({test, body, pos}), break) = (checkInt(trexp (test, break), pos); if #ty(trexp (body, break))=T.UNIT then (scopeDown; loopdepth:= !loopdepth+1;()) else (E.error pos "while loop must be unit"); 
+                let val newbreak = Temp.newlabel() in {exp = TR.whileIR(#exp (trexp (test, break)), #exp (trexp (body, break)), newbreak), ty = T.UNIT} end)
               | trexp (A.ForExp({var, escape, lo, hi, body, pos}), break) = 
-              	(scopeDown;
+              	(scopeDown; (*Remove this scopedown now that we're turning it into a let/while?*)
               	 venv:=S.enter(!venv, var, Env.VarEntry{ty=T.INT});
-              	 checkInt(trexp (lo, break), pos); checkInt(trexp (hi, break), pos);
+              	 checkInt(trexp (lo, break), pos);
+                 checkInt(trexp (hi, break), pos);
               	  (if #ty(trexp (body, break)) = T.UNIT 
               	  then (loopdepth:= !loopdepth+1;()) 
               	  else (E.error pos "for loop must be unit";()));
-              	  trexp (forToWhile(A.ForExp({var, escape, lo, hi, body, pos})), break)
+              	  let 
+                    val x = A.ForExp({var=var, escape=escape, lo=lo, hi=hi, body=body, pos=pos})
+                    val fwhile = forToWhile(x) 
+                  in trexp (fwhile, break) 
+                  end)
               | trexp (A.LetExp({decs, body, pos}), break) = 
               let
               	val expty = (scopeDown; map (fn(x)=>(transDec(venv,tenv,x))) decs; trexp (body, break))
@@ -280,7 +286,7 @@ struct
                                       
               | trexp (A.OpExp({left, oper, right, pos}), break) = 
               		(case oper of 
-              			A.PlusOp => (checkInt(trexp (left, break), pos); checkInt(trexp (right, break), pos); {exp=(TR.binopIR(oper, #exp (trexp (left, break)), #exp (trexp (right, break))), ty=T.INT})
+              			A.PlusOp => (checkInt(trexp (left, break), pos); checkInt(trexp (right, break), pos); {exp=TR.binopIR(oper, #exp (trexp (left, break)), #exp (trexp (right, break))), ty=T.INT})
               		  | A.MinusOp =>(checkInt(trexp (left, break), pos); checkInt(trexp (right, break), pos); {exp=TR.binopIR(oper, #exp (trexp (left, break)), #exp (trexp (right, break))), ty=T.INT})
               		  | A.DivideOp =>(checkInt(trexp (left, break), pos); checkInt(trexp (right, break), pos); {exp=TR.binopIR(oper, #exp (trexp (left, break)), #exp (trexp (right, break))), ty=T.INT})
               		  | A.TimesOp =>(checkInt(trexp (left, break), pos); checkInt(trexp (right, break), pos); {exp=TR.binopIR(oper, #exp (trexp (left, break)), #exp (trexp (right, break))), ty=T.INT})
