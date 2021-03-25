@@ -43,7 +43,7 @@ struct
     )
 
     val FP = Temp.newtemp()
-    val SP
+    val RV = Temp.newtemp()
     val RA = Temp.newtemp()
 
     fun exp (InFrame(i)) fp = Tree.MEM(Tree.BINOP(Tree.PLUS, fp, Tree.CONST(i)))
