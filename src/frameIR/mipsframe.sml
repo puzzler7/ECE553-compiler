@@ -8,9 +8,15 @@ struct
         formals: access list, 
         numLocals: int ref
     }
+
     datatype access = 
       InFrame of int 
     | InReg of Temp.temp
+
+    datatype frag = 
+        PROC of {body: Tree.stm, frame: frame} 
+    |   STRING of Temp.label * string
+
 
     (* in MIPS $a0-$a3 is $4-$7 *)
     fun newFrame({name: Temp.label, formals: bool list}) = 
@@ -37,10 +43,13 @@ struct
     )
 
     val FP = Temp.newtemp()
+    val SP
     val RA = Temp.newtemp()
 
     fun exp (InFrame(i)) fp = Tree.MEM(Tree.BINOP(Tree.PLUS, fp, Tree.CONST(i)))
       | exp (InReg(reg)) fp = Tree.TEMP(reg)
 
     fun externalCall(s, args) = Tree.CALL(Tree.NAME(Temp.namedlabel s), args)
+
+    fun procEntryExit1(frame,body) = body
 end
