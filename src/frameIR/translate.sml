@@ -12,7 +12,7 @@ sig
     val allocLocal: level -> bool -> access
 
     val simpleVar: access * level  -> exp
-    val arrayVar (*To be added*)
+    val arrayVar exp * exp -> exp
     val structVar
     val subscriptVar
     val stringVar
@@ -26,6 +26,8 @@ sig
     val nilIR = unit -> exp
     val intIR = int -> exp
     val stringIR = string -> exp (*to do*)
+    val breakIR = Temp.label -> exp
+    val assignIR = exp * exp -> exp
 
 
     val unEx: exp -> Tree.exp
@@ -111,4 +113,8 @@ struct
             Nx(TR.SEQ([TR.LABEL(tst), cond(bodylabel, done), TR.LABEL(bodylabel), TR.EXP(bdy),
              TR.JUMP(TR.NAME(tst), [tst]), TR.LABEL(done)]))
         end
+
+    fun breakIR (label) = Nx(TR.JUMP(TR.NAME(label), [label]))
+
+    fun assignIR (var, ex) = Nx(TR.MOVE(unEx(var), unEx(ex)))
 end
