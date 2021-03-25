@@ -18,7 +18,6 @@ sig
     val stringVar
     val recordVar
     val whileIR = exp * exp * exp -> exp
-    val forIR
     val letIR
     (*Maybe need one for every absyn exp?*)
     val binopIR = TR.binop * exp * exp -> exp
