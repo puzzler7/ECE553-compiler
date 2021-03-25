@@ -36,7 +36,7 @@ struct
 								FunEntry { level=TR.outermost, formals = [T.INT], result = T.STRING }
 							),
 							S.symbol "size",
-							FunEntry { level=TR.outermost, level=TR.outermost, formals = [T.STRING], result = T.INT }
+							FunEntry { level=TR.outermost, formals = [T.STRING], result = T.INT }
 						),
 						S.symbol "substring",
 						FunEntry { level=TR.outermost, formals = [T.STRING, T.INT, T.INT], result = T.STRING }
