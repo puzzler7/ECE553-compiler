@@ -19,24 +19,28 @@ struct
         in
             Frame({
                 name = name, 
-            name = name, 
-                name = name, 
                 formals = getAssign(formals, 0),
-                numLocals: ref 0
+                numLocals = ref 0
             })
         end
 
     fun name Frame({name, formals, numLocals}) = name
     fun formals Frame({name, formals, numLocals}) = formals
 
-    fun allocLocal Frame({name, formals, numLocals}) false = numLocals := !numLocals + 1; InReg(Temp.newtemp())
-    |   allocLocal Frame({name, formals, numLocals}) true = numLocals := !numLocals + 1; InFrame(frameSize - 4 * numLocals)
+    fun allocLocal Frame({name, formals, numLocals}) false = (
+        numLocals := !numLocals + 1; 
+        InReg(Temp.newtemp())
+    )
+    |   allocLocal Frame({name, formals, numLocals}) true = (
+        numLocals := !numLocals + 1; 
+        InFrame(frameSize - 4 * !numLocals)
+    )
 
     val FP = Temp.newtemp()
     val RA = Temp.newtemp()
 
-    fun exp (InFrame(i)) = fn(fp) => Tree.MEM(Tree.BINOP(Tree.PLUS, fp, Tree.CONST(i)))
-      | exp (InReg(reg)) = fn(fp) => Tree.TEMP(reg)
+    fun exp (InFrame(i)) fp = Tree.MEM(Tree.BINOP(Tree.PLUS, fp, Tree.CONST(i)))
+      | exp (InReg(reg)) fp = Tree.TEMP(reg)
 
     fun externalCall(s, args) = Tree.CALL(Tree.NAME(Temp.namedlabel s), args)
 end

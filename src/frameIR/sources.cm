@@ -10,7 +10,6 @@ main.sml
 prabsyn.sml
 env.sig
 env.sml
-translate.sig
 translate.sml
 tree.sml
 temp.sig
