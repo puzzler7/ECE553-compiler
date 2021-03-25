@@ -3,15 +3,15 @@ struct
     val wordSize = 4
     val frameSize = 96
 
+    datatype access = 
+      InFrame of int 
+    | InReg of Temp.temp
+
     datatype frame = Frame of {
         name: Temp.label, 
         formals: access list, 
         numLocals: int ref
     }
-
-    datatype access = 
-      InFrame of int 
-    | InReg of Temp.temp
 
     datatype frag = 
         PROC of {body: Tree.stm, frame: frame} 
@@ -30,14 +30,14 @@ struct
             })
         end
 
-    fun name Frame({name, formals, numLocals}) = name
-    fun formals Frame({name, formals, numLocals}) = formals
+    fun name (Frame({name, formals, numLocals})) = name
+    fun formals (Frame({name, formals, numLocals})) = formals
 
-    fun allocLocal Frame({name, formals, numLocals}) false = (
+    fun allocLocal (Frame({name, formals, numLocals})) false = (
         numLocals := !numLocals + 1; 
         InReg(Temp.newtemp())
     )
-    |   allocLocal Frame({name, formals, numLocals}) true = (
+    |   allocLocal (Frame({name, formals, numLocals})) true = (
         numLocals := !numLocals + 1; 
         InFrame(frameSize - 4 * !numLocals)
     )
@@ -51,5 +51,5 @@ struct
 
     fun externalCall(s, args) = Tree.CALL(Tree.NAME(Temp.namedlabel s), args)
 
-    fun procEntryExit1(frame,body) = body
+    fun procEntryExit1(frame,body) = ()
 end
