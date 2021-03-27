@@ -15,7 +15,7 @@ fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
 	    emit(A.OPER{assem="sw $s1, " ^ int i ^ "($s0)\n'", src=[munchExp el, munchExp e2], dst=[],jump=NONE})
 	  | munchStm(T.MOVE(T.MEM(T.BINOP(T.PLUS,T.CONST i,el)),e2)) =
 	    emit(A.OPER{assem="sw $s1, " ^ int i ^ "($s0)\n", src=[munchExp el, munchExp e2], dst=[],jump=NONE})
-       (* | munchStm(T.MOVE(T.MEM(el),T.MEM(e2))) =
+       (* Shouldn't combine steps | munchStm(T.MOVE(T.MEM(el),T.MEM(e2))) =
 	    emit(A.OPER{assem="move $s1", src=[munchExp el, munchExp e2], dst=[j,jump=NONE]})
 	  | munchStm(T.MOVE(T.MEM(T.CONST i),e2)) =
 	    emit(A.OPER{assem="STORE M[r0+" ^ int i ^ "] <- 's0\n", src=[munchExp e2], dst=[],jump=NONE})
@@ -23,8 +23,14 @@ fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
 	    emit(A.OPER{assem="STORE M['s0] <- 'sl\n", src=[munchExp el, munchExp e2], dst= [] ,jump=NONE})*)
 	  | munchStm(T.MOVE(T.TEMP i, e2) ) =
 	    emit(A.OPER{assem="move $d0, $s0\n", src=[munchExp e2], dst=[i], jump=NONE})
-	(*| munchStm(T.LABEL lab) =
-	    emit(A.LABEL{assem=lab ^ ":\n", lab=lab})*)
+	  | munchStm (T.JUMP(T.NAME lab)) =
+	    emit(A.OPER{assem="j lab", src=[], dst=[], jump = lab})
+	  | munchStm (T.JUMP(e1)) =
+	    emit(A.OPER{assem="jr $s0", src=[munchExp e1], dst=[], jump = NONE (* what to put? *)})
+	  | munchStm (T.CJUMP(T.EQ,e1,e2,t,f)) =
+	    emit(A.OPER{assem="beq $s0, $s1, something true, something false", src=[munchExp e1, munchExp e2], dst=[], jump=NONE (*what to put*)})		       
+	  | munchStm(T.LABEL lab) =
+	    emit(A.LABEL{assem=lab ^ ":\n", lab=lab})
       
 	and munchExp(T.MEM(T.BINOP(T.PLUS,el,T.CONST i))) =
 	    result(fn r => emit(A.OPER{assem="lw $d0, "^ int i ^ "($s0)\n", src =[munchExp el], dst=[r], jump=NONE}))
@@ -42,7 +48,27 @@ fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
 	    result(fn r => emit(A.OPER{assem="addi $d0, $0, " ^ int i ^ "\n", src=[], dst=[r], jump=NONE}))
 	  | munchExp(T.BINOP(T.PLUS,el,e2)) =
 	    result(fn r => emit(A.OPER{assem="add $d0, $s0, $sl\n", src=[munchExp el, munchExp e2], dst=[r], jump=NONE}))
+	  | munchExp (T.BINOP(T.MINUS, e1, e2))  =
+	    result(fn r => emit(A.OPER{assem="sub $d0, $s0, $s1\n", src=[munchExp e1, munchExp e2], dst=[r], jump=NONE}))
+	  | munchExp (T.BINOP(T.MUL, e1, e2)) =
+	    result(fn r => emit(A.OPER{assem="mul $d0, $s0, $s1\n", src=[munchExp e1, munchExp e2], dst=[r], jump=NONE}))
+	  | munchExp (T.BINOP(T.DIV, e1, e2)) =
+	    result(fn r => emit(A.OPER{assem="div $s0, $s1\n move $d0, $lo\n", src=[munchExp e1, munchExp e2], dst=[r], jump=NONE}))
+	  | munchExp (T.BINOP(T.AND, e1, e2)) =
+	    result(fn r => emit(A.OPER{assem="and $d0, $s0, $s1\n", src=[munchExp e1, munchExp e2], dst=[r], jump=NONE}))
+	  | munchExp (T.BINOP(T.OR, e1, e2)) =
+            result(fn r => emit(A.OPER{assem="or $d0, $s0, $s1\n", src=[munchExp e1, munchExp e2], dst=[r], jump=NONE}))
+	  | munchExp (T.BINOP(T.XOR, e1, e2)) =
+            result(fn r => emit(A.OPER{assem="xor $d0, $s0, $s1\n", src=[munchExp e1, munchExp e2], dst=[r], jump=NONE}))  
+          | munchExp (T.BINOP(T.LSHIFT, e1, e2)) =
+	    result(fn r => emit(A.OPER{assem="sllv $d0, $s0, $s1\n", src=[munchExp e1, munchExp e2], dst=[r], jump=NONE}))
+	  | munchExp (T.BINOP(T.RSHIFT, e1, e2)) =
+            result(fn r => emit(A.OPER{assem="srlv $d0, $s0, $s1\n", src=[munchExp e1, munchExp e2], dst=[r], jump=NONE}))
+	  | munchExp (T.BINOP(T.ARSHIFT, e1, e2)) =
+            result(fn r => emit(A.OPER{assem="srav $d0, $s0, $s1\n", src=[munchExp e1, munchExp e2], dst=[r], jump=NONE}))
+
 	  | munchExp(T.TEMP t) = t
+				     
 		     
 in munchStm stm;
 rev(!ilist)
