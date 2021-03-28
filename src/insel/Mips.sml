@@ -28,11 +28,25 @@ fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
 	  | munchStm (T.JUMP(e1)) =
 	    emit(A.OPER{assem="jr $s0", src=[munchExp e1], dst=[], jump = NONE (* what to put? *)})
 	  | munchStm (T.CJUMP(T.EQ,e1,e2,t,f)) =
-	    emit(A.OPER{assem="beq $s0, $s1, something true, something false", src=[munchExp e1, munchExp e2], dst=[], jump=NONE (*what to put*)})		       
+	    emit(A.OPER{assem="beq $s0, $s1, t \n bne $s0, $s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=NONE (*what to put*)})
+	  | munchStm (T.CJUMP(T.NE,e1,e2,t,f)) =
+	    emit(A.OPER{assem="bne $s0, $s1, t \n beq $s0, $s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=NONE (*what to put*)})
+	  | munchStm (T.CJUMP(T.LT,e1,e2,t,f)) =
+            emit(A.OPER{assem="blt $s0, $s1, t \n bge $s0, $s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=NONE (*what to put*)})
+          | munchStm (T.CJUMP(T.GT,e1,e2,t,f)) =
+            emit(A.OPER{assem="bgt $s0, $s1, t \n ble $s0, $s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=NONE (*what to put*)})
+	  | munchStm (T.CJUMP(T.LE,e1,e2,t,f)) =
+            emit(A.OPER{assem="ble $s0, $s1, t \n bgt $s0, $s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=NONE (*what to put*)})
+          | munchStm (T.CJUMP(T.GE,e1,e2,t,f)) =
+            emit(A.OPER{assem="bge $s0, $s1, t \n blt $s0, $s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=NONE (*what to put*)})
+		(* TODO : U instructions *)
+	  | munchStm (T.EXP e1) =
+	    emit(A.OPER{assem="add $s0, $0, $s0\n", src=[munchExp e1], dst=[], jump=NONE})		
 	  | munchStm(T.LABEL lab) =
 	    emit(A.LABEL{assem=lab ^ ":\n", lab=lab})
       
-	and munchExp(T.MEM(T.BINOP(T.PLUS,el,T.CONST i))) =
+	and munchExp(T.ESEQ(a,b)) = (munchExp a; munchExp b)
+ 	  | munchExp(T.MEM(T.BINOP(T.PLUS,el,T.CONST i))) =
 	    result(fn r => emit(A.OPER{assem="lw $d0, "^ int i ^ "($s0)\n", src =[munchExp el], dst=[r], jump=NONE}))
 	  | munchExp(T.MEM(T.BINOP(T.PLUS,T.CONST i,el))) =    
 	    result(fn r => emit(A.OPER{assem="lw $d0, " ^ int i ^ "($s0)\n", src=[munchExp el], dst=[r], jump=NONE}))
