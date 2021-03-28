@@ -1,38 +1,37 @@
-structure Main = struct
+structure Main : sig 
+	val parse : string -> Absyn.exp
+	val main : string -> unit 
+	val typecheckOnly : string -> unit 
+end =
+struct 
+	structure TigerLrVals = TigerLrValsFun(structure Token = LrParser.Token)
+	structure Lex = TigerLexFun(structure Tokens = TigerLrVals.Tokens)
+	structure TigerP = Join(structure ParserData = TigerLrVals.ParserData
+		structure Lex=Lex
+		structure LrParser = LrParser)
+	fun parse filename =
+		let val _ = (ErrorMsg.reset(); ErrorMsg.fileName := filename)
+			val file = TextIO.openIn filename
+			fun get _ = TextIO.input file
+			fun parseerror(s,p1,p2) = ErrorMsg.error p1 s
+				val lexer = LrParser.Stream.streamify (Lex.makeLexer get)
+				val (absyn, _) = TigerP.parse(30,lexer,parseerror,())
+		in TextIO.closeIn file;
+			absyn
+		end handle LrParser.ParseError => raise ErrorMsg.Error
 
-   structure Tr = Translate
-   structure F = Frame
-   structure R = RegAlloc
-
- fun getsome (SOME x) = x
-
-   fun emitproc out (F.PROC{body,frame}) =
-     let val _ = print ("emit " ^ Frame.name frame ^ "\n")
-(*         val _ = Printtree.printtree(out,body); *)
-	 val stms = Canon.linearize body
-(*         val _ = app (fn s => Printtree.printtree(out,s)) stms; *)
-         val stms' = Canon.traceSchedule(Canon.basicBlocks stms)
-	 val instrs =   List.concat(map (Mips.codegen frame) stms') 
-         val format0 = Assem.format(Temp.makestring)
-      in  app (fn i => TextIO.output(out,format0 i)) instrs;
-     end
-     end
-    | emitproc out (F.STRING(lab,s)) = TextIO.output(out,F.string(lab,s))
-
-   fun withOpenFile fname f = 
-       let val out = TextIO.openOut fname
-        in (f out before TextIO.closeOut out) 
-	    handle e => (TextIO.closeOut out; raise e)
-       end 
-
-   fun compile filename = 
-       let val absyn = Parse.parse filename
-           val frags = (FindEscape.prog absyn; Semant.transProg absyn)
-        in 
-            withOpenFile (filename ^ ".s") 
-	     (fn out => (app (emitproc out) frags))
-       end
-
+	fun main filename = 
+		let val tree = parse(filename)
+		in
+			(PrintAbsyn.print(TextIO.stdOut, tree);
+			Semant.transProg(tree))
+		end
+	
+	fun typecheckOnly filename = 
+		let val tree = parse(filename)
+		in
+			Semant.transProg(tree)
+		end
 end
 
 
