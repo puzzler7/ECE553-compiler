@@ -23,10 +23,10 @@ struct
     structure E = ErrorMsg
     type ty = Types.ty
 
-    structure Translate = struct type exp = unit end
+    structure TR = Translate
     type venvType = Env.enventry Symbol.table
     type tenvType = ty Symbol.table
-    type expty = {exp: Translate.exp, ty: Types.ty}
+    type expty = {exp: TR.exp, ty: Types.ty}
 
     val loopdepth = ref 0
     val stack: { tenv: tenvType, venv: venvType } list ref = ref []
@@ -48,7 +48,7 @@ struct
     fun checkIfSeen(x, []) = false
       | checkIfSeen(x, a::b) = a = x orelse checkIfSeen(x, b)
 
-    fun funcDecl (name, params, result, pos) =
+    fun funcDecl (name, params, result, level, pos) =
 	let val result_ty = (case result of NONE => T.UNIT
 					  | SOME(rt, pos) => lookupType(!tenv,rt,pos))
 				
@@ -58,7 +58,7 @@ struct
             	       
             
         in (if checkIfSeen(name, (!seenFns)) then E.error pos "function declared twice in same fundec" else seenFns:= name :: !seenFns;
-        	venv := S.enter(!venv,name, Env.FunEntry{formals= map #ty params', result=result_ty})) 
+        	venv := S.enter(!venv,name, Env.FunEntry{level=level, formals= map #ty params', result=result_ty})) 
 	end
 	    
    fun funcBody (name, params, result, pos) =
@@ -141,10 +141,37 @@ struct
       | checkEqualityOp(x, T.NIL) = true
       | checkEqualityOp(x, y) = false
 
-    fun checkRecordType ([], []) = true
-      | checkRecordType ([], x) = false
-      | checkRecordType (x, []) = false
-      | checkRecordType ((asym, aexp, apos)::al, (bsym, bty)::bl) = asym=bsym andalso checkTypeEqual(bty, #ty(transExp(venv, tenv, aexp))) andalso checkRecordType(al, bl)
+    fun forToWhile(A.ForExp({var, escape, lo, hi, body, pos})) = 
+        let val limit = S.symbol "__limit"
+        in
+          A.LetExp({decs=[A.VarDec{name=var, escape=ref false, typ=SOME((S.symbol "int", pos)), init=lo, pos=pos},
+              A.VarDec{name=limit, escape=ref false, typ=SOME((S.symbol "int", pos)), init=hi, pos=pos}],
+            body=A.WhileExp{test=A.OpExp{left=A.VarExp(A.SimpleVar(var, pos)),
+                oper=A.LeOp,
+                right=A.VarExp(A.SimpleVar(limit, pos)),
+                pos=pos},
+              body=A.SeqExp[(body, pos), (*body, if i==limit then break, increment*)
+                  (A.IfExp{test=A.OpExp{left=A.VarExp(A.SimpleVar(var, pos)),
+                            oper=A.LtOp,
+                            right=A.VarExp(A.SimpleVar(limit, pos)),
+                            pos=pos},
+                        then'=A.BreakExp(pos),
+                        else'=NONE,
+                        pos=pos}, pos),
+                  (A.AssignExp{var=A.SimpleVar(var, pos),
+                      exp=A.OpExp{left=A.VarExp(A.SimpleVar(var, pos)),
+                          oper=A.PlusOp,
+                          right=A.IntExp(1),
+                          pos=pos},
+                      pos=pos}, pos)],
+              pos=pos},
+            pos=pos})
+        end
+
+    fun checkRecordType ([], [], _, _) = true
+      | checkRecordType ([], x, _, _) = false
+      | checkRecordType (x, [], _, _) = false
+      | checkRecordType ((asym, aexp, apos)::al, (bsym, bty)::bl, break, level) = asym=bsym andalso checkTypeEqual(bty, #ty(transExp(venv, tenv, aexp, break, level))) andalso checkRecordType(al, bl, break, level)
 
     (*and transVar (venv, tenv, var)=
         {exp = (), ty = (case S.look((!venv), symbolFromVar(var)) of
@@ -153,42 +180,42 @@ struct
                           | Env.FunEntry({formals, result}) => (E.error (posFromVar var) "Calling function as variable!"; result))
                    | NONE => (E.error (posFromVar var) "Variable does not exist!"; T.NIL))}*)
 
-    and transVar (venv, tenv, A.SimpleVar(sym, pos)) = 
-    	{exp = (), ty = (case S.look((!venv), sym) of
+    and transVar (venv, tenv, A.SimpleVar(sym, pos), break, level) = 
+    	{exp = TR.FIXME, ty = (case S.look((!venv), sym) of
                  SOME x => (case x of
                         Env.VarEntry({ty}) => ty
-                          | Env.FunEntry({formals, result}) => (E.error pos "Calling function as variable!"; result))
+                          | Env.FunEntry({level, formals, result}) => (E.error pos "Calling function as variable!"; result))
                    | NONE => (E.error pos "Variable does not exist!"; T.NIL))}
-      | transVar (venv, tenv, A.FieldVar(var, sym, pos)) = 
+      | transVar (venv, tenv, A.FieldVar(var, sym, pos), break, level) = 
       		let
       			fun findField([], sym) = T.NIL
       			  | findField((fsym, ty)::fields, sym) = if fsym = sym then ty else findField(fields, sym)
       		in
-      			{exp = (), ty=(case getRecordFromName(#ty(transVar(venv, tenv, var))) of
+      			{exp = TR.FIXME, ty=(case getRecordFromName(#ty(transVar(venv, tenv, var, break, level))) of
       					T.RECORD(fields, u) => findField(fields, sym)
 				      | x => (E.error pos "field var on non-record type"; T.NIL))}
 				       
       		end
-      | transVar (venv, tenv, A.SubscriptVar(var, exp, pos)) = 
-      	let  val ty = (case getArrayFromName(#ty(transVar(venv, tenv, var))) of
-      			   T.ARRAY(ty, u) => (checkInt(transExp(venv, tenv, exp), pos); ty) 
+      | transVar (venv, tenv, A.SubscriptVar(var, exp, pos), break, level) = 
+      	let  val ty = (case getArrayFromName(#ty(transVar(venv, tenv, var, break, level))) of
+      			   T.ARRAY(ty, u) => (checkInt(transExp(venv, tenv, exp, break, level), pos); ty) 
       			   | x => (E.error pos "subscript var on non-array type"; T.NIL))
 	in
-   		    {exp = (), ty = ty}
+   		    {exp = TR.FIXME, ty = ty}
 	end
 	    
        
-    and transDec(venv, tenv, dec) = 
+    and transDec(venv, tenv, dec, break, level) = 
     	let
 	    	fun trdec (venv, tenv, A.VarDec({name, escape, typ=NONE, init, pos})) = 
 	            let 
-	                val {exp,ty} = transExp(venv,tenv,init) 
+	                val {exp,ty} = transExp(venv,tenv,init, break, level) 
 	            in  
 	                (if checkTypeEqual(T.NIL, ty) then E.error pos "assigning nil to non-record" else();{tenv=tenv,venv=(venv:=S.enter(!venv,name,Env.VarEntry{ty=ty});venv)})
 	            end
 	      | trdec (venv, tenv, A.VarDec({name, escape, typ=SOME(x), init, pos})) = 
 	            let 
-	                val {exp,ty} = transExp(venv,tenv,init) 
+	                val {exp,ty} = transExp(venv,tenv,init, break, level) 
 	            in  
 	                if checkTypeEqual(lookupType(!tenv, #1 x, #2 x), ty) then 
 	                	{tenv=tenv, venv = (venv := S.enter(!venv,name,Env.VarEntry{ty=lookupType(!tenv, #1 x, #2 x)}); venv)}
@@ -198,8 +225,8 @@ struct
 						(case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else seenTypes:= name:: !seenTypes;tenv)}
 	      | trdec (venv,tenv,A.TypeDec({name,ty,pos}::tydeclist)) = (tenv := S.enter(!tenv, name, T.NAME(name, ref NONE)); trdec(venv, tenv, A.TypeDec(tydeclist));
 									    (case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else seenTypes:= name:: !seenTypes;{venv=venv,tenv=tenv})
-	      | trdec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (funcDecl(name, params, result, pos); if checkTypeEqual(funcBody(name, params, result, pos), #ty(transExp(venv, tenv, body))) then () else E.error pos "function body and return type differ"; scopeUp;{venv = venv, tenv = tenv})
-	      | trdec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (funcDecl(name, params, result, pos);trdec(venv, tenv, A.FunctionDec(fundeclist)); if checkTypeEqual(funcBody(name, params, result, pos), #ty(transExp(venv, tenv, body))) then () else E.error pos "function body and return type differ"; scopeUp; {venv = venv, tenv = tenv})				
+	      | trdec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (funcDecl(name, params, result, level, pos); if checkTypeEqual(funcBody(name, params, result, pos), #ty(transExp(venv, tenv, body, break, level))) then () else E.error pos "function body and return type differ"; scopeUp;{venv = venv, tenv = tenv})
+	      | trdec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (funcDecl(name, params, result, level, pos);trdec(venv, tenv, A.FunctionDec(fundeclist)); if checkTypeEqual(funcBody(name, params, result, pos), #ty(transExp(venv, tenv, body, break, level))) then () else E.error pos "function body and return type differ"; scopeUp; {venv = venv, tenv = tenv})				
 	    in
 	    	(seenFns := []; seenTypes:= []; trdec(venv, tenv, dec))
 	    end				    
@@ -230,75 +257,81 @@ struct
             | SOME(x) => (E.error pos "could not find array type"; T.NIL)
             | NONE => (E.error pos "type does not exist";T.NIL))*)
 
-    and transExp (venv, tenv, exp) = 
-        let fun trexp (A.NilExp) = {exp=(), ty=T.NIL}
-              | trexp (A.IntExp(ival)) = {exp=(), ty=T.INT}
-              | trexp (A.StringExp(sval)) = {exp=(), ty=T.STRING}
-              | trexp (A.VarExp(lvalue)) = transVar(venv, tenv, lvalue)
-              | trexp (A.WhileExp({test, body, pos})) = (checkInt(trexp test, pos); if #ty(trexp body)=T.UNIT then (scopeDown; loopdepth:= !loopdepth+1;()) else E.error pos "while loop must be unit"; {exp = (), ty = T.UNIT})
-              | trexp (A.ForExp({var, escape, lo, hi, body, pos})) = 
-              	(scopeDown;
+    and transExp (venv, tenv, exp, break, level) = 
+        let fun trexp (A.NilExp, break) = {exp=TR.nilIR(), ty=T.NIL}
+              | trexp (A.IntExp(ival), break) = {exp=TR.intIR(ival), ty=T.INT}
+              | trexp (A.StringExp(sval), break) = {exp=TR.FIXME, ty=T.STRING}
+              | trexp (A.VarExp(lvalue), break) = transVar(venv, tenv, lvalue)
+              | trexp (A.WhileExp({test, body, pos}), break) = (checkInt(trexp (test, break), pos); if #ty(trexp (body, break))=T.UNIT then (scopeDown; loopdepth:= !loopdepth+1;()) else (E.error pos "while loop must be unit"); 
+                let val newbreak = Temp.newlabel() in {exp = TR.whileIR(#exp (trexp (test, break)), #exp (trexp (body, break)), newbreak), ty = T.UNIT} end)
+              | trexp (A.ForExp({var, escape, lo, hi, body, pos}), break) = 
+              	(scopeDown; (*Remove this scopedown now that we're turning it into a let/while?*)
               	 venv:=S.enter(!venv, var, Env.VarEntry{ty=T.INT});
-              	 checkInt(trexp lo, pos); checkInt(trexp hi, pos);
-              	  (if #ty(trexp body) = T.UNIT 
+              	 checkInt(trexp (lo, break), pos);
+                 checkInt(trexp (hi, break), pos);
+              	  (if #ty(trexp (body, break)) = T.UNIT 
               	  then (loopdepth:= !loopdepth+1;()) 
               	  else (E.error pos "for loop must be unit";()));
-              	  {exp = (), ty = T.UNIT})
-              | trexp (A.LetExp({decs, body, pos})) = 
+              	  let 
+                    val x = A.ForExp({var=var, escape=escape, lo=lo, hi=hi, body=body, pos=pos})
+                    val fwhile = forToWhile(x) 
+                  in trexp (fwhile, break) 
+                  end)
+              | trexp (A.LetExp({decs, body, pos}), break) = 
               let
-              	val expty = (scopeDown; map (fn(x)=>(transDec(venv,tenv,x))) decs; trexp body)
+              	val expty = (scopeDown; map (fn(x)=>(transDec(venv,tenv,x))) decs; trexp (body, break))
               in
               	(scopeUp; (*if checkTypeEqual(#ty expty, T.UNIT) then () else E.error pos "let returns non unit";*)expty)
               end
                                       
-              | trexp (A.OpExp({left, oper, right, pos})) = 
+              | trexp (A.OpExp({left, oper, right, pos}), break) = 
               		(case oper of 
-              			A.PlusOp => (checkInt(trexp left, pos); checkInt(trexp right, pos); {exp=(), ty=T.INT})
-              		  | A.MinusOp =>(checkInt(trexp left, pos); checkInt(trexp right, pos); {exp=(), ty=T.INT})
-              		  | A.DivideOp =>(checkInt(trexp left, pos); checkInt(trexp right, pos); {exp=(), ty=T.INT})
-              		  | A.TimesOp =>(checkInt(trexp left, pos); checkInt(trexp right, pos); {exp=(), ty=T.INT})
-              		  | A.EqOp => if checkEqualityOp(#ty(trexp left), #ty(trexp right)) then {exp=(), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=(), ty=T.INT})
-              		  | A.NeqOp => if checkEqualityOp(#ty(trexp left), #ty(trexp right)) then {exp=(), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=(), ty=T.INT})
-              		  | A.GtOp => if checkComparisonOp(#ty(trexp left), #ty(trexp right)) then {exp=(), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=(), ty=T.INT})
-              		  | A.LtOp => if checkComparisonOp(#ty(trexp left), #ty(trexp right)) then {exp=(), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=(), ty=T.INT})
-              		  | A.GeOp => if checkComparisonOp(#ty(trexp left), #ty(trexp right)) then {exp=(), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=(), ty=T.INT})
-              		  | A.LeOp => if checkComparisonOp(#ty(trexp left), #ty(trexp right)) then {exp=(), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=(), ty=T.INT}))
+              			A.PlusOp => (checkInt(trexp (left, break), pos); checkInt(trexp (right, break), pos); {exp=TR.binopIR(oper, #exp (trexp (left, break)), #exp (trexp (right, break))), ty=T.INT})
+              		  | A.MinusOp =>(checkInt(trexp (left, break), pos); checkInt(trexp (right, break), pos); {exp=TR.binopIR(oper, #exp (trexp (left, break)), #exp (trexp (right, break))), ty=T.INT})
+              		  | A.DivideOp =>(checkInt(trexp (left, break), pos); checkInt(trexp (right, break), pos); {exp=TR.binopIR(oper, #exp (trexp (left, break)), #exp (trexp (right, break))), ty=T.INT})
+              		  | A.TimesOp =>(checkInt(trexp (left, break), pos); checkInt(trexp (right, break), pos); {exp=TR.binopIR(oper, #exp (trexp (left, break)), #exp (trexp (right, break))), ty=T.INT})
+              		  | A.EqOp => if checkEqualityOp(#ty(trexp (left, break)), #ty(trexp (right, break))) then {exp=TR.relopIR(oper, #exp (trexp (left, break)), #exp (trexp (right, break)), #ty (trexp (right, break))), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=TR.nilIR(), ty=T.INT})
+              		  | A.NeqOp => if checkEqualityOp(#ty(trexp (left, break)), #ty(trexp (right, break))) then {exp=TR.relopIR(oper, #exp (trexp (left, break)), #exp (trexp (right, break)), #ty (trexp (right, break))), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=TR.nilIR(), ty=T.INT})
+              		  | A.GtOp => if checkComparisonOp(#ty(trexp (left, break)), #ty(trexp (right, break))) then {exp=TR.relopIR(oper, #exp (trexp (left, break)), #exp (trexp (right, break)), #ty (trexp (right, break))), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=TR.nilIR(), ty=T.INT})
+              		  | A.LtOp => if checkComparisonOp(#ty(trexp (left, break)), #ty(trexp (right, break))) then {exp=TR.relopIR(oper, #exp (trexp (left, break)), #exp (trexp (right, break)), #ty (trexp (right, break))), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=TR.nilIR(), ty=T.INT})
+              		  | A.GeOp => if checkComparisonOp(#ty(trexp (left, break)), #ty(trexp (right, break))) then {exp=TR.relopIR(oper, #exp (trexp (left, break)), #exp (trexp (right, break)), #ty (trexp (right, break))), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=TR.nilIR(), ty=T.INT})
+              		  | A.LeOp => if checkComparisonOp(#ty(trexp (left, break)), #ty(trexp (right, break))) then {exp=TR.relopIR(oper, #exp (trexp (left, break)), #exp (trexp (right, break)), #ty (trexp (right, break))), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=TR.nilIR(), ty=T.INT}))
 
-              | trexp (A.AssignExp({var, exp, pos})) = (if checkTypeEqual(#ty(transVar(venv, tenv, var)), #ty(trexp exp)) then () else E.error pos "Assigning wrong type to variable"; {exp = (), ty=T.UNIT})  
-              | trexp (A.SeqExp(exps)) = {exp = (), ty = foldl (fn(x, y) => #ty(trexp (#1 x))) T.UNIT exps}
-              | trexp (A.CallExp({func, args, pos})) = (case S.look(!venv, func) of SOME x =>
-                                                (case x of  Env.FunEntry({formals, result}) => (checkArgs(formals, map (fn (x) => #ty(trexp x)) args, pos); {exp = (), ty = result})
-                                                      | Env.VarEntry({ty})  => (E.error pos "Variable is not function"; {exp = (), ty = T.NIL}))
+              | trexp (A.AssignExp({var, exp, pos}), break) = (if checkTypeEqual(#ty(transVar(venv, tenv, var)), #ty(trexp (exp, break))) then () else E.error pos "Assigning wrong type to variable"; {exp = TR.assignIR(var, exp), ty=T.UNIT})  
+              | trexp (A.SeqExp(exps), break) = foldl (fn(x, y) => (trexp (#1 x, break))) T.UNIT exps
+              | trexp (A.CallExp({func, args, pos}), break) = (case S.look(!venv, func) of SOME x =>
+                                                (case x of  Env.FunEntry({level=level, formals=formals, result=result}) => (checkArgs(formals, map (fn (x) => #ty(trexp (x, break))) args, pos); {exp = TR.FIXME, ty = result})
+                                                      | Env.VarEntry({ty})  => (E.error pos "Variable is not function"; {exp = TR.nilIR(), ty = T.NIL}))
                                                                        
-                                                  | NONE => (E.error pos "Variable undefined"; {exp = (), ty = T.NIL}))
+                                                  | NONE => (E.error pos "Variable undefined"; {exp = TR.nilIR(), ty = T.NIL}))
                                                                                                                                                                                     
-              | trexp (A.ArrayExp({typ, size, init, pos})) = (
-              	checkInt(trexp size, pos); 
+              | trexp (A.ArrayExp({typ, size, init, pos}), break) = (
+              	checkInt(trexp (size, break), pos); 
               	(case getArrayFromName(lookupType(!tenv, typ, pos)) of
-              		T.ARRAY(ty, u) => if checkTypeEqual(ty,#ty(trexp init)) then () 
+              		T.ARRAY(ty, u) => if checkTypeEqual(ty,#ty(trexp (init, break))) then () 
               				  else E.error pos "Initializing array with wrong type"
 				  | x => (E.error pos "array type mismatch"));
 		
-              	{exp = (), ty = lookupType(!tenv, typ, pos)})
+              	{exp = TR.arrayVar(size, init), ty = lookupType(!tenv, typ, pos)})
 
-              | trexp (A.RecordExp({fields, typ, pos})) = 
+              | trexp (A.RecordExp({fields, typ, pos}), break) = 
               		(case getRecordFromName(lookupType(!tenv, typ, pos)) of
-                      T.RECORD(symlist, u) => if checkRecordType(fields, symlist) 
-	                      then {exp=(), ty=T.RECORD(symlist, u)} 
-	                      else (E.error pos "Wrong record type!"; {exp=(), ty=T.NIL})
-                    | x => (E.error pos "Assigning record to not record type"; {exp=(), ty=T.NIL}))
-              | trexp (A.IfExp({test, then', else', pos})) = (checkInt(trexp test, pos); 
+                      T.RECORD(symlist, u) => if checkRecordType(fields, symlist, break, level) 
+	                      then {exp=TR.FIXME, ty=T.RECORD(symlist, u)} 
+	                      else (E.error pos "Wrong record type!"; {exp=TR.nilIR(), ty=T.NIL})
+                    | x => (E.error pos "Assigning record to not record type"; {exp=TR.nilIR(), ty=T.NIL}))
+              | trexp (A.IfExp({test, then', else', pos}), break) = (checkInt(trexp (test, break), pos); 
               	(case else' of 
-              		NONE => if checkTypeEqual(#ty(trexp then'), T.UNIT) then () else E.error pos "If returns non-unit"
-                  | SOME x => if (checkTypeEqual(#ty(trexp then'), #ty(trexp x)) orelse checkTypeEqual(#ty(trexp x), #ty(trexp then'))) then () else E.error pos "Then Else disagree");
-                  {exp=(), ty= #ty(trexp then')})     
-              | trexp (A.BreakExp(pos)) = if !loopdepth > 0 
-              		then (scopeUp; loopdepth:= !loopdepth-1;{exp=(),ty=T.NIL})
-              		else (E.error pos "break not in loop!"; {exp=(), ty=T.NIL})      
+              		NONE => if checkTypeEqual(#ty(trexp (then', break)), T.UNIT) then () else E.error pos "If returns non-unit"
+                  | SOME x => if (checkTypeEqual(#ty(trexp (then', break)), #ty(trexp (x, break))) orelse checkTypeEqual(#ty(trexp (x, break)), #ty(trexp (then', break)))) then () else E.error pos "Then Else disagree");
+                  {exp=TR.FIXME, ty= #ty(trexp (then', break))})     
+              | trexp (A.BreakExp(pos), break) = if !loopdepth > 0 
+              		then (scopeUp; loopdepth:= !loopdepth-1;{exp=TR.breakIR(break),ty=T.NIL})
+              		else (E.error pos "break not in loop!"; {exp=TR.nilIR(), ty=T.NIL})      
                                           
                         
           in 
-            trexp exp
+            trexp (exp, break)
         end
     fun transProg(exp) = (seenTypes:= []; seenFns:= [];transExp(venv, tenv, exp);()) 
                  
