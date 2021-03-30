@@ -22,8 +22,8 @@ sig
     val letIR*)
     val whileIR: exp * exp * Temp.label -> exp
     (*Maybe need one for every absyn exp?*)
-    val binopIR: Tree.binop * exp * exp -> exp
-    val relopIR: Tree.relop * exp * exp * Types.ty -> exp
+    val binopIR: Absyn.oper * exp * exp -> exp
+    val relopIR: Absyn.oper * exp * exp * Types.ty -> exp
     val conditionalIR: exp * exp * exp -> exp
     val nilIR: unit -> exp
     val intIR: int -> exp
@@ -42,6 +42,7 @@ struct
     structure T = Types
     structure F = MipsFrame
     structure E = ErrorMsg
+    structure A = Absyn
 
     type level = {unique: unit ref, frame: F.frame, link: int}
     type access = level * F.access
@@ -76,17 +77,29 @@ struct
       | unCx (Nx n) = ((E.error 0 "Cannot unCx an Nx"); (fn (t, f) => TR.EXP(TR.CONST 0)))
       | unCx (FIXME) = unCx(Ex(TR.CONST 0))
 
-    fun binopIR (bop, left, right) = Ex(TR.BINOP(bop, unEx(left), unEx(right)))
+    fun aToTbinop(A.PlusOp) = TR.PLUS (*Match is nonexhaustive, which is fine*)
+     |  aToTbinop(A.MinusOp) = TR.MINUS
+     |  aToTbinop(A.TimesOp) = TR.MUL
+     |  aToTbinop(A.DivideOp) = TR.DIV
+
+    fun aToTrelop(A.EqOp) = TR.EQ (*Match is nonexhaustive, which is fine*)
+      | aToTrelop(A.NeqOp) = TR.NE
+      | aToTrelop(A.GtOp) = TR.GT
+      | aToTrelop(A.GeOp) = TR.GE
+      | aToTrelop(A.LtOp) = TR.LT
+      | aToTrelop(A.LeOp) = TR.LE
+
+    fun binopIR (bop, left, right) = Ex(TR.BINOP(aToTbinop bop, unEx(left), unEx(right)))
 
     fun relopIR (rop, left, right, ty) = 
         case (rop, ty) of (*Need external calls for all of these*)
-            (TR.EQ, T.STRING) => Ex(F.externalCall("stringEqual", [unEx(left), unEx(right)]) )
-          | (TR.NE, T.STRING) => Ex(TR.BINOP(TR.MINUS, TR.CONST(1), (F.externalCall("stringEqual", [unEx(left), unEx(right)]))))
-          | (TR.LE, T.STRING) => Ex(TR.BINOP(TR.MINUS, F.externalCall("stringLT", [unEx(left), unEx(right)]), (F.externalCall("stringEqual", [unEx(left), unEx(right)]))))
-          | (TR.LT, T.STRING) => Ex(F.externalCall("stringLT", [unEx(left), unEx(right)]))
-          | (TR.GE, T.STRING) => Ex(TR.BINOP(TR.MINUS, TR.CONST(1), (F.externalCall("stringLT", [unEx(left), unEx(right)]))))
-          | (TR.GT, T.STRING) => Ex(TR.BINOP(TR.MINUS, TR.CONST(1), (TR.BINOP(TR.MINUS, F.externalCall("stringLT", [unEx(left), unEx(right)]), (F.externalCall("stringEqual", [unEx(left), unEx(right)]))))))
-          | (r, x) => Cx(fn(t, f) => TR.CJUMP(r, unEx(left), unEx(right), t, f))
+            (A.EqOp, T.STRING) => Ex(F.externalCall("stringEqual", [unEx(left), unEx(right)]) )
+          | (A.NeqOp, T.STRING) => Ex(TR.BINOP(TR.MINUS, TR.CONST(1), (F.externalCall("stringEqual", [unEx(left), unEx(right)]))))
+          | (A.LeOp, T.STRING) => Ex(TR.BINOP(TR.MINUS, F.externalCall("stringLT", [unEx(left), unEx(right)]), (F.externalCall("stringEqual", [unEx(left), unEx(right)]))))
+          | (A.LtOp, T.STRING) => Ex(F.externalCall("stringLT", [unEx(left), unEx(right)]))
+          | (A.GeOp, T.STRING) => Ex(TR.BINOP(TR.MINUS, TR.CONST(1), (F.externalCall("stringLT", [unEx(left), unEx(right)]))))
+          | (A.GtOp, T.STRING) => Ex(TR.BINOP(TR.MINUS, TR.CONST(1), (TR.BINOP(TR.MINUS, F.externalCall("stringLT", [unEx(left), unEx(right)]), (F.externalCall("stringEqual", [unEx(left), unEx(right)]))))))
+          | (r, x) => Cx(fn(t, f) => TR.CJUMP(aToTrelop(r), unEx(left), unEx(right), t, f))
 
     fun conditionalIR(test, then', else') = 
         let

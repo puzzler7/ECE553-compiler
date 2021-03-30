@@ -261,7 +261,7 @@ struct
         let fun trexp (A.NilExp, break) = {exp=TR.nilIR(), ty=T.NIL}
               | trexp (A.IntExp(ival), break) = {exp=TR.intIR(ival), ty=T.INT}
               | trexp (A.StringExp(sval), break) = {exp=TR.FIXME, ty=T.STRING}
-              | trexp (A.VarExp(lvalue), break) = transVar(venv, tenv, lvalue)
+              | trexp (A.VarExp(lvalue), break) = transVar(venv, tenv, lvalue, break, level)
               | trexp (A.WhileExp({test, body, pos}), break) = (checkInt(trexp (test, break), pos); if #ty(trexp (body, break))=T.UNIT then (scopeDown; loopdepth:= !loopdepth+1;()) else (E.error pos "while loop must be unit"); 
                 let val newbreak = Temp.newlabel() in {exp = TR.whileIR(#exp (trexp (test, break)), #exp (trexp (body, break)), newbreak), ty = T.UNIT} end)
               | trexp (A.ForExp({var, escape, lo, hi, body, pos}), break) = 
@@ -279,7 +279,7 @@ struct
                   end)
               | trexp (A.LetExp({decs, body, pos}), break) = 
               let
-              	val expty = (scopeDown; map (fn(x)=>(transDec(venv,tenv,x))) decs; trexp (body, break))
+              	val expty = (scopeDown; map (fn(x)=>(transDec(venv,tenv,x, break, level))) decs; trexp (body, break))
               in
               	(scopeUp; (*if checkTypeEqual(#ty expty, T.UNIT) then () else E.error pos "let returns non unit";*)expty)
               end
@@ -297,7 +297,7 @@ struct
               		  | A.GeOp => if checkComparisonOp(#ty(trexp (left, break)), #ty(trexp (right, break))) then {exp=TR.relopIR(oper, #exp (trexp (left, break)), #exp (trexp (right, break)), #ty (trexp (right, break))), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=TR.nilIR(), ty=T.INT})
               		  | A.LeOp => if checkComparisonOp(#ty(trexp (left, break)), #ty(trexp (right, break))) then {exp=TR.relopIR(oper, #exp (trexp (left, break)), #exp (trexp (right, break)), #ty (trexp (right, break))), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=TR.nilIR(), ty=T.INT}))
 
-              | trexp (A.AssignExp({var, exp, pos}), break) = (if checkTypeEqual(#ty(transVar(venv, tenv, var)), #ty(trexp (exp, break))) then () else E.error pos "Assigning wrong type to variable"; {exp = TR.assignIR(var, exp), ty=T.UNIT})  
+              | trexp (A.AssignExp({var, exp, pos}), break) = (if checkTypeEqual(#ty(transVar(venv, tenv, var,break, level)), #ty(trexp (exp, break))) then () else E.error pos "Assigning wrong type to variable"; {exp = TR.assignIR(#exp (transVar(venv, tenv,var, break, level)), #exp(trexp(exp, break))), ty=T.UNIT})  
               | trexp (A.SeqExp(exps), break) = foldl (fn(x, y) => (trexp (#1 x, break))) T.UNIT exps
               | trexp (A.CallExp({func, args, pos}), break) = (case S.look(!venv, func) of SOME x =>
                                                 (case x of  Env.FunEntry({level=level, formals=formals, result=result}) => (checkArgs(formals, map (fn (x) => #ty(trexp (x, break))) args, pos); {exp = TR.FIXME, ty = result})
@@ -312,7 +312,7 @@ struct
               				  else E.error pos "Initializing array with wrong type"
 				  | x => (E.error pos "array type mismatch"));
 		
-              	{exp = TR.arrayVar(size, init), ty = lookupType(!tenv, typ, pos)})
+              	{exp = TR.arrayVar(#exp (trexp(size, break)), #exp (trexp(init, break))), ty = lookupType(!tenv, typ, pos)})
 
               | trexp (A.RecordExp({fields, typ, pos}), break) = 
               		(case getRecordFromName(lookupType(!tenv, typ, pos)) of
@@ -333,6 +333,6 @@ struct
           in 
             trexp (exp, break)
         end
-    fun transProg(exp) = (seenTypes:= []; seenFns:= [];transExp(venv, tenv, exp);()) 
+    fun transProg(exp) = (seenTypes:= []; seenFns:= [];transExp(venv, tenv, exp, Temp.newlabel(), Translate.outermost);()) 
                  
 end
