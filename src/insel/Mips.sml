@@ -10,10 +10,19 @@ structure A = Assem
 structure T = Tree
 		   		  
 fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
-    let val ilist = ref (nil: A.instr list)		
+    let val ilist = ref (nil: A.instr list)
+	val calldefs = [(* Insert $v0, $v1, $t0-$t7, $ra here *)]
 	fun emit x= ilist := x :: !ilist
 	fun result(gen) = let val t = Temp.newtemp() in gen t; t end
-	fun munchStm(T.SEQ(a,b)) = (munchStm a; munchStm b)
+	fun munchArgs(i, []) = []
+	  | munchArgs(i, exp::args)  =
+	    result(fn r =>
+		      if i < 4
+		      then emit(A.OPER{assem = "move $a" ^ Int.toString(i) ^ ", $s0\n", src = [munchExp exp], dst=[(*r?*)], jump = NONE})
+		      else emit(A.OPER{assem = "addi $sp, $sp, -4\n sw $s0, 0($sp)", src = [munchExp exp], dst=[], jump=NONE}))
+	    ::munchArgs(i+1, args) 
+	    
+	and munchStm(T.SEQ(a,b)) = (munchStm a; munchStm b)
 	  | munchStm(T.MOVE(T.MEM(T.BINOP(T.PLUS,el,T.CONST i)),e2)) =
 	    emit(A.OPER{assem="sw $s1, " ^ Int.toString(i) ^ "($s0)\n'", src=[munchExp el, munchExp e2], dst=[],jump=NONE})
 	  | munchStm(T.MOVE(T.MEM(T.BINOP(T.PLUS,T.CONST i,el)),e2)) =
@@ -50,7 +59,9 @@ fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
           | munchStm (T.CJUMP(T.ULE,e1,e2,t,f)) =
             emit(A.OPER{assem="bleu $s0, $s1, t \n bgtu $s0, $s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
           | munchStm (T.CJUMP(T.UGE,e1,e2,t,f)) =
-            emit(A.OPER{assem="bgeu $s0, $s1, t \n bltu $s0, $s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})  	
+            emit(A.OPER{assem="bgeu $s0, $s1, t \n bltu $s0, $s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
+  	  | munchStm (T.EXP(T.CALL(e, args))) = (* somehow need to be able to list actual registers in calldefs *)
+	    emit(A.OPER{assem="jalr $s0\n", src=munchExp(e)::munchArgs(0,args), dst=calldefs, jump = NONE (* somehow need to extract label from temp? *)})
 	  | munchStm (T.EXP e1) =
 	    emit(A.OPER{assem="add $s0, $0, $s0\n", src=[munchExp e1], dst=[], jump=NONE})		
 	  | munchStm(T.LABEL lab) =
