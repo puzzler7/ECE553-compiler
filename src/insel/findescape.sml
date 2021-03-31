@@ -19,7 +19,7 @@ struct
         stack := !env::(!stack)
     fun scopeUp () = (
 		  fn(a::l) => (env := a; stack := l) 
-		| fn([]) => (E.error pos "Trying to scopeUp on empty escape analysis stack wtf"; ())
+		    | ([]) => (E.error 177013 "Trying to scopeUp on empty escape analysis stack wtf"; ())
 	) (!stack)
 
 	fun funcBody (params, result, level) =

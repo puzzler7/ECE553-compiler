@@ -20,6 +20,7 @@ temp.sml
 translate.sml
 temp.sig
 mipsframe.sml
+findescape.sml
 tiger.lex
 tiger.grm
 $/smlnj-lib.cm
