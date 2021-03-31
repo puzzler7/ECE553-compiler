@@ -17,8 +17,10 @@ struct
 
 	fun scopeDown () =
         stack := !env::(!stack)
-    fun scopeUp () =
-        (fn(a::l) => (env := a; stack := l)) (!stack)
+    fun scopeUp () = (
+		  fn(a::l) => (env := a; stack := l) 
+		| fn([]) => (E.error pos "Trying to scopeUp on empty escape analysis stack wtf"; ())
+	) (!stack)
 
 	fun funcBody (params, result, level) =
         let
