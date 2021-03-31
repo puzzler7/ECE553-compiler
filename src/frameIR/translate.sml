@@ -8,9 +8,9 @@ sig
                  | FIXME
 
     val outermost: level
-    (*val newLevel: {parent: level, name: Temp.label,formals: bool list} -> level
+    val newLevel: {parent: level, name: Temp.label,formals: bool list} -> level
     val formals: level -> access list
-    val allocLocal: level -> bool -> access*)
+    val allocLocal: level -> bool -> access
 
     val arrayVar: exp * exp -> exp
     (*val simpleVar: access * level  -> exp
@@ -48,6 +48,19 @@ struct
     type access = level * F.access
 
     val outermost:level = {unique = ref (), frame = F.newFrame({name=Temp.newlabel(), formals=[]}), link = 0}
+
+    (*fix links*)
+    fun newLevel ({parent=parent, name=name, formals=formals}) = {unique=ref (), link = 0, frame=F.newFrame({name=name, formals=formals})}
+
+    fun formals (lvl:level) = 
+      let
+        fun addLvl([]) = []
+          | addLvl(a::b) = (lvl, a)::addLvl(b)
+      in 
+        addLvl(F.formals(#frame lvl))
+      end
+
+    fun allocLocal (lvl:level) (esc) = (lvl, F.allocLocal(#frame lvl)(esc))
 
     datatype exp = Ex of Tree.exp
                  | Nx of Tree.stm
