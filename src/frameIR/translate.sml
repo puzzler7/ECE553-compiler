@@ -13,8 +13,8 @@ sig
     val allocLocal: level -> bool -> access
 
     val arrayVar: exp * exp -> exp
-    (*val simpleVar: access * level  -> exp
-    val structVar
+    val simpleVar: access  -> exp
+    (*val structVar
     val subscriptVar
     val stringVar
     val recordVar
@@ -34,6 +34,8 @@ sig
     val unEx: exp -> Tree.exp
     val unNx: exp -> Tree.stm
     val unCx: exp -> (Temp.label * Temp.label -> Tree.stm)
+
+    val NIL: exp
 end
     
 structure Translate : TRANSLATE = 
@@ -67,6 +69,8 @@ struct
                  | Cx of Temp.label * Temp.label  -> Tree.stm
                  | FIXME
 
+    val NIL = Ex(TR.CONST 0)
+
     fun unEx  (Ex e) = e
       | unEx  (Cx genstm) =
             let val r = Temp.newtemp()
@@ -89,6 +93,8 @@ struct
       | unCx (Ex e) = (fn (t, f) => TR.CJUMP(TR.EQ, e, TR.CONST(1), t, f))
       | unCx (Nx n) = ((E.error 0 "Cannot unCx an Nx"); (fn (t, f) => TR.EXP(TR.CONST 0)))
       | unCx (FIXME) = unCx(Ex(TR.CONST 0))
+
+    fun simpleVar((lvl, acc):access) = Ex(F.exp(acc)(TR.CONST 0)) (*FIXME fp/static link stuff?*)
 
     fun aToTbinop(A.PlusOp) = TR.PLUS (*Match is nonexhaustive, which is fine*)
      |  aToTbinop(A.MinusOp) = TR.MINUS

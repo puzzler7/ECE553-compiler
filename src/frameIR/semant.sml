@@ -182,11 +182,20 @@ struct
                    | NONE => (E.error (posFromVar var) "Variable does not exist!"; T.NIL))}*)
 
     and transVar (venv, tenv, A.SimpleVar(sym, pos), break, level) = 
-    	{exp = TR.FIXME, ty = (case S.look((!venv), sym) of
+        let
+          val ty = (case S.look((!venv), sym) of
                  SOME x => (case x of
                         Env.VarEntry({access, ty}) => ty
                           | Env.FunEntry({level, formals, result}) => (E.error pos "Calling function as variable!"; result))
-                   | NONE => (E.error pos "Variable does not exist!"; T.NIL))}
+                   | NONE => (E.error pos "Variable does not exist!"; T.NIL))
+          val exp = (case S.look((!venv), sym) of
+                 SOME x => (case x of
+                        Env.VarEntry({access, ty}) => TR.simpleVar(access)
+                          | Env.FunEntry({level, formals, result}) => (E.error pos "Calling function as variable!"; TR.NIL))
+                   | NONE => (E.error pos "Variable does not exist!"; TR.NIL))
+        in
+          {exp=exp, ty=ty}
+        end
       | transVar (venv, tenv, A.FieldVar(var, sym, pos), break, level) = 
       		let
       			fun findField([], sym) = T.NIL
@@ -334,6 +343,6 @@ struct
           in 
             trexp (exp, break)
         end
-    fun transProg(exp) = (seenTypes:= []; seenFns:= [];transExp(venv, tenv, exp, Temp.newlabel(), Translate.outermost);()) 
+    fun transProg(exp) = (seenTypes:= []; seenFns:= [];transExp(venv, tenv, Find.findEscape(exp), Temp.newlabel(), Translate.outermost);()) 
                  
 end
