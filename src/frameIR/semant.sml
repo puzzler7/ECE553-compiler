@@ -21,6 +21,7 @@ struct
     structure S = Symbol
     structure T = Types
     structure E = ErrorMsg
+    structure Find = FindEscape
     type ty = Types.ty
 
     structure TR = Translate
@@ -183,7 +184,7 @@ struct
     and transVar (venv, tenv, A.SimpleVar(sym, pos), break, level) = 
     	{exp = TR.FIXME, ty = (case S.look((!venv), sym) of
                  SOME x => (case x of
-                        Env.VarEntry({ty}) => ty
+                        Env.VarEntry({access, ty}) => ty
                           | Env.FunEntry({level, formals, result}) => (E.error pos "Calling function as variable!"; result))
                    | NONE => (E.error pos "Variable does not exist!"; T.NIL))}
       | transVar (venv, tenv, A.FieldVar(var, sym, pos), break, level) = 
@@ -211,14 +212,14 @@ struct
 	            let 
 	                val {exp,ty} = transExp(venv,tenv,init, break, level) 
 	            in  
-	                (if checkTypeEqual(T.NIL, ty) then E.error pos "assigning nil to non-record" else();{tenv=tenv,venv=(venv:=S.enter(!venv,name,Env.VarEntry{ty=ty});venv)})
+	                (if checkTypeEqual(T.NIL, ty) then E.error pos "assigning nil to non-record" else();{tenv=tenv,venv=(venv:=S.enter(!venv,name,Env.VarEntry{access=TR.allocLocal(level)(!escape),ty=ty});venv)})
 	            end
 	      | trdec (venv, tenv, A.VarDec({name, escape, typ=SOME(x), init, pos})) = 
 	            let 
 	                val {exp,ty} = transExp(venv,tenv,init, break, level) 
 	            in  
 	                if checkTypeEqual(lookupType(!tenv, #1 x, #2 x), ty) then 
-	                	{tenv=tenv, venv = (venv := S.enter(!venv,name,Env.VarEntry{ty=lookupType(!tenv, #1 x, #2 x)}); venv)}
+	                	{tenv=tenv, venv = (venv := S.enter(!venv,name,Env.VarEntry{access=TR.allocLocal(level)(!escape),ty=lookupType(!tenv, #1 x, #2 x)}); venv)}
 	                else (E.error pos "named type does not match expression";{tenv=tenv, venv=venv})
 	            end
 	      | trdec (venv,tenv,A.TypeDec[{name,ty,pos}]) = {venv=venv,tenv=(tenv:= S.enter(!tenv, name, T.NAME(name, ref NONE));
@@ -266,7 +267,7 @@ struct
                 let val newbreak = Temp.newlabel() in {exp = TR.whileIR(#exp (trexp (test, break)), #exp (trexp (body, break)), newbreak), ty = T.UNIT} end)
               | trexp (A.ForExp({var, escape, lo, hi, body, pos}), break) = 
               	(scopeDown; (*Remove this scopedown now that we're turning it into a let/while?*)
-              	 venv:=S.enter(!venv, var, Env.VarEntry{ty=T.INT});
+              	 venv:=S.enter(!venv, var, Env.VarEntry{access=TR.allocLocal(level)(!escape),ty=T.INT});
               	 checkInt(trexp (lo, break), pos);
                  checkInt(trexp (hi, break), pos);
               	  (if #ty(trexp (body, break)) = T.UNIT 
@@ -301,7 +302,7 @@ struct
               | trexp (A.SeqExp(exps), break) = foldl (fn(x, y) => (trexp (#1 x, break))) T.UNIT exps
               | trexp (A.CallExp({func, args, pos}), break) = (case S.look(!venv, func) of SOME x =>
                                                 (case x of  Env.FunEntry({level=level, formals=formals, result=result}) => (checkArgs(formals, map (fn (x) => #ty(trexp (x, break))) args, pos); {exp = TR.FIXME, ty = result})
-                                                      | Env.VarEntry({ty})  => (E.error pos "Variable is not function"; {exp = TR.nilIR(), ty = T.NIL}))
+                                                      | Env.VarEntry({access, ty})  => (E.error pos "Variable is not function"; {exp = TR.nilIR(), ty = T.NIL}))
                                                                        
                                                   | NONE => (E.error pos "Variable undefined"; {exp = TR.nilIR(), ty = T.NIL}))
                                                                                                                                                                                     
