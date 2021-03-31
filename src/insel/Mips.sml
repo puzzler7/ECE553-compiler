@@ -8,6 +8,7 @@ end
 structure MIPSGen: CODEGEN = struct
 structure A = Assem
 structure T = Tree
+structure Frame = MipsFrame 		  
 		   		  
 fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
     let val ilist = ref (nil: A.instr list)
@@ -22,7 +23,7 @@ fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
 		      else emit(A.OPER{assem = "addi $sp, $sp, -4\n sw $s0, 0($sp)", src = [munchExp exp], dst=[], jump=NONE}))
 	    ::munchArgs(i+1, args) 
 	    
-	and munchStm(T.SEQ(a,b)) = (munchStm a; munchStm b)
+	and munchStm(T.SEQ(a)) = ((map munchStm a); ())  
 	  | munchStm(T.MOVE(T.MEM(T.BINOP(T.PLUS,el,T.CONST i)),e2)) =
 	    emit(A.OPER{assem="sw $s1, " ^ Int.toString(i) ^ "($s0)\n'", src=[munchExp el, munchExp e2], dst=[],jump=NONE})
 	  | munchStm(T.MOVE(T.MEM(T.BINOP(T.PLUS,T.CONST i,el)),e2)) =
