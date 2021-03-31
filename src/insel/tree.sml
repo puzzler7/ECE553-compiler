@@ -3,7 +3,7 @@ sig
   type label = Temp.label
   type size
 
-datatype stm = SEQ of stm * stm
+datatype stm = SEQ of stm list
              | LABEL of label
              | JUMP of exp * label list
              | CJUMP of relop * exp * exp * label * label
@@ -24,8 +24,8 @@ datatype stm = SEQ of stm * stm
       and relop = EQ | NE | LT | GT | LE | GE 
 	        | ULT | ULE | UGT | UGE
 
-(*  val notRel : relop -> relop 
-  val commute: relop -> relop*)
+  val notRel : relop -> relop
+  val commute: relop -> relop
 end
 
 structure Tree : TREE = 
@@ -33,11 +33,11 @@ struct
   type label=Temp.label
   type size = int
 
-datatype stm = SEQ of stm * stm
+datatype stm = SEQ of stm list
              | LABEL of label
              | JUMP of exp * label list
              | CJUMP of relop * exp * exp * label * label
-	     | MOVE of exp * exp
+	           | MOVE of exp * exp
              | EXP of exp
 
      and exp = BINOP of binop * exp * exp
@@ -53,6 +53,9 @@ datatype stm = SEQ of stm * stm
 
       and relop = EQ | NE | LT | GT | LE | GE 
 	        | ULT | ULE | UGT | UGE
+
+      fun notRel (x) = x
+      fun commute (x) = x (*to do*)
 
 end
 

@@ -12,10 +12,14 @@ semant.sml
 main.sml
 prabsyn.sml
 env.sig
+frame.sig
 env.sml
 types.sml
 temp.sml
+
+translate.sml
 temp.sig
+mipsframe.sml
 tiger.lex
 tiger.grm
 $/smlnj-lib.cm
