@@ -299,7 +299,7 @@ struct
               		  | A.LeOp => if checkComparisonOp(#ty(trexp (left, break)), #ty(trexp (right, break))) then {exp=TR.relopIR(oper, #exp (trexp (left, break)), #exp (trexp (right, break)), #ty (trexp (right, break))), ty=T.INT} else (E.error pos "Bad types for comparison operator"; {exp=TR.nilIR(), ty=T.INT}))
 
               | trexp (A.AssignExp({var, exp, pos}), break) = (if checkTypeEqual(#ty(transVar(venv, tenv, var,break, level)), #ty(trexp (exp, break))) then () else E.error pos "Assigning wrong type to variable"; {exp = TR.assignIR(#exp (transVar(venv, tenv,var, break, level)), #exp(trexp(exp, break))), ty=T.UNIT})  
-              | trexp (A.SeqExp(exps), break) = foldl (fn(x, y) => (trexp (#1 x, break))) T.UNIT exps
+              | trexp (A.SeqExp(exps), break) = foldl (fn(x, y) => (trexp ((#1 x), break))) {exp=TR.Ex(Tree.CONST 0), ty=T.UNIT} exps
               | trexp (A.CallExp({func, args, pos}), break) = (case S.look(!venv, func) of SOME x =>
                                                 (case x of  Env.FunEntry({level=level, formals=formals, result=result}) => (checkArgs(formals, map (fn (x) => #ty(trexp (x, break))) args, pos); {exp = TR.FIXME, ty = result})
                                                       | Env.VarEntry({access, ty})  => (E.error pos "Variable is not function"; {exp = TR.nilIR(), ty = T.NIL}))
