@@ -59,20 +59,20 @@ struct
             	       
             
         in (if checkIfSeen(name, (!seenFns)) then E.error pos "function declared twice in same fundec" else seenFns:= name :: !seenFns;
-        	venv := S.enter(!venv,name, Env.FunEntry{level=level, formals= map #ty params', result=result_ty})) 
+        	venv := S.enter(!venv,name, Env.FunEntry{level=level, formals= map #ty params', result=result_ty})) (*FIXME new level?*)
 	end
 	    
-   fun funcBody (name, params, result, pos) =
+   fun funcBody (name, params: A.field list, result, pos, level) =
         let val result_ty = (case result of NONE => T.UNIT
                                           | SOME(rt, pos) => lookupType(!tenv,rt,pos))
 
-            fun transparam{name,escape,typ,pos} = {name=name,ty=lookupType(!tenv, typ, pos)}
+            fun transparam{name,escape,typ,pos} = {name=name,escape=escape,ty=lookupType(!tenv, typ, pos)}
 
             val params' = map transparam params
 
 
-            fun enterparam ({name,ty},venv) =
-                S.enter(venv,name,Env.VarEntry{ty=ty})
+            fun enterparam ({name,escape,ty},venv) =
+                S.enter(venv,name,Env.VarEntry{access=TR.allocLocal(level)(!escape), ty=ty})
         in (scopeDown; venv := foldr enterparam (!venv) params'; result_ty)
         end
 
@@ -235,8 +235,8 @@ struct
 						(case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else seenTypes:= name:: !seenTypes;tenv)}
 	      | trdec (venv,tenv,A.TypeDec({name,ty,pos}::tydeclist)) = (tenv := S.enter(!tenv, name, T.NAME(name, ref NONE)); trdec(venv, tenv, A.TypeDec(tydeclist));
 									    (case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else seenTypes:= name:: !seenTypes;{venv=venv,tenv=tenv})
-	      | trdec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (funcDecl(name, params, result, level, pos); if checkTypeEqual(funcBody(name, params, result, pos), #ty(transExp(venv, tenv, body, break, level))) then () else E.error pos "function body and return type differ"; scopeUp;{venv = venv, tenv = tenv})
-	      | trdec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (funcDecl(name, params, result, level, pos);trdec(venv, tenv, A.FunctionDec(fundeclist)); if checkTypeEqual(funcBody(name, params, result, pos), #ty(transExp(venv, tenv, body, break, level))) then () else E.error pos "function body and return type differ"; scopeUp; {venv = venv, tenv = tenv})				
+	      | trdec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (funcDecl(name, params, result, level, pos); if checkTypeEqual(funcBody(name, params, result, pos, level), #ty(transExp(venv, tenv, body, break, level))) then () else E.error pos "function body and return type differ"; scopeUp;{venv = venv, tenv = tenv})
+	      | trdec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (funcDecl(name, params, result, level, pos);trdec(venv, tenv, A.FunctionDec(fundeclist)); if checkTypeEqual(funcBody(name, params, result, pos, level), #ty(transExp(venv, tenv, body, break, level))) then () else E.error pos "function body and return type differ"; scopeUp; {venv = venv, tenv = tenv})				
 	    in
 	    	(seenFns := []; seenTypes:= []; trdec(venv, tenv, dec))
 	    end				    
@@ -349,10 +349,12 @@ struct
     fun transProg(exp) = let
       val lbl = Temp.newlabel()
       val lvl = TR.newLevel{parent=TR.outermost, name=lbl, formals=[]}
+      val e = #exp(transExp(venv, tenv, Find.findEscape(exp), lbl, lvl))
     in
       (seenTypes:= [];
         seenFns:= [];
-        TR.procEntryExit{body=(#exp(transExp(venv, tenv, Find.findEscape(exp), lbl, lvl))), level=lvl};
+        TR.procEntryExit{body=e, level=lvl};
+        Printtree.printtree(TextIO.stdOut, TR.unNx(e));
         TR.getResult())
     end
        
