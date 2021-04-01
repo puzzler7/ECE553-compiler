@@ -37,9 +37,9 @@ fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
 	  | munchStm (T.MOVE(T.TEMP t, T.CALL(e, args)))  =
 	    emit(A.OPER{assem="jalr `s0\n move `d0, $v0\n", src=munchExp(e)::munchArgs(0, args), dst=t::calldefs, jump = NONE})
 	  | munchStm(T.MOVE(T.TEMP i, e2) ) =
-	    emit(A.OPER{assem="move `d0, `s0\n", src=[munchExp e2], dst=[i], jump=NONE})
+	    emit(A.MOVE{assem="move `d0, `s0\n", src=[munchExp e2], dst=[i], jump=NONE})
 	  | munchStm (T.MOVE(e1, e2))  =
-	    emit(A.OPER{assem="move `d0, `s0\n", src=[munchExp e2], dst=[munchExp e1], jump = NONE}) (*Useless, only for making match exhaustive *)
+	    emit(A.MOVE{assem="move `d0, `s0\n", src=[munchExp e2], dst=[munchExp e1]}) (*Useless, only for making match exhaustive *)
   	  | munchStm (T.JUMP(T.NAME l, [lab])) =
 	    emit(A.OPER{assem="j lab\n", src=[], dst=[], jump = SOME([lab])})
 	  | munchStm (T.JUMP(e1, l)) =
