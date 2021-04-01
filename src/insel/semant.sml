@@ -69,10 +69,10 @@ struct
             fun transparam{name,escape,typ,pos} = {name=name,escape=escape,ty=lookupType(!tenv, typ, pos)}
 
             val params' = map transparam params
-
-
-            fun enterparam ({name,escape,ty},venv) =
-                S.enter(venv,name,Env.VarEntry{access=TR.allocLocal(level)(!escape), ty=ty})
+	    val names' = map #name params
+	    
+            fun enterparam ({name,escape,ty},v) =
+                S.enter(v,name,Env.VarEntry{access=TR.allocLocal(level)(!escape), ty=ty})
         in (scopeDown(); venv := foldr enterparam (!venv) params'; result_ty)
         end
 
@@ -187,12 +187,12 @@ struct
                  SOME x => (case x of
                         Env.VarEntry({access, ty}) => ty
                           | Env.FunEntry({level, label, formals, result}) => (E.error pos "Calling function as variable!"; result))
-                   | NONE => (E.error pos "Variable does not exist!"; T.NIL))
+                   | NONE => (E.error pos ("Variable " ^ S.name(sym) ^ " does not exist!"); T.NIL))
           val exp = (case S.look((!venv), sym) of
                  SOME x => (case x of
                         Env.VarEntry({access, ty}) => TR.simpleVar(access)
                           | Env.FunEntry({level, label, formals, result}) => (E.error pos "Calling function as variable!"; TR.NIL))
-                   | NONE => (E.error pos "Variable does not exist!"; TR.NIL))
+                   | NONE => (E.error pos ("Variable " ^ S.name(sym) ^ " does not exist!"); TR.NIL))
         in
           {exp=exp, ty=ty}
         end
@@ -237,8 +237,8 @@ struct
 						(case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else seenTypes:= name:: !seenTypes;tenv), exp=TR.NIL}
 	      | trdec (venv,tenv,A.TypeDec({name,ty,pos}::tydeclist)) = (tenv := S.enter(!tenv, name, T.NAME(name, ref NONE)); trdec(venv, tenv, A.TypeDec(tydeclist));
 									    (case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else seenTypes:= name:: !seenTypes;{venv=venv,tenv=tenv, exp=TR.NIL})
-	      | trdec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (funcDecl(name, params, result, level, pos); if checkTypeEqual(funcBody(name, params, result, pos, level), #ty(transExp(venv, tenv, body, break, level))) then () else E.error pos "function body and return type differ"; scopeUp();{venv = venv, tenv = tenv, exp=TR.fundecIR(#exp(transExp(venv, tenv, body, break, level)))})
-	      | trdec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (funcDecl(name, params, result, level, pos);trdec(venv, tenv, A.FunctionDec(fundeclist)); if checkTypeEqual(funcBody(name, params, result, pos, level), #ty(transExp(venv, tenv, body, break, level))) then () else E.error pos "function body and return type differ"; scopeUp(); {venv = venv, tenv = tenv, exp=TR.fundecIR(#exp(transExp(venv, tenv, body, break, level)))})				
+	      | trdec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (funcDecl(name, params, result, level, pos); let val rt = funcBody(name, params, result, pos, level) val trbody = transExp(venv, tenv, body, break, level) in (if checkTypeEqual(rt, #ty(trbody)) then () else E.error pos "function body and return type differ"; scopeUp(); {venv = venv, tenv = tenv, exp=TR.fundecIR(#exp(trbody))}) end)
+	      | trdec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (funcDecl(name, params, result, level, pos); trdec(venv, tenv, A.FunctionDec(fundeclist)); let val rt = funcBody(name, params, result, pos, level) val trbody = transExp(venv, tenv, body, break, level) in (if checkTypeEqual(rt, #ty(trbody)) then () else E.error pos "function body and return type differ"; scopeUp(); {venv = venv, tenv = tenv, exp=TR.fundecIR(#exp(trbody))}) end)				
 	    in
 	    	(seenFns := []; seenTypes:= []; trdec(venv, tenv, dec))
 	    end				    
@@ -280,11 +280,13 @@ struct
 												
 								in
 								    (if #ty(trbody)=T.UNIT then () else (E.error pos "while loop must be unit");
-								     {exp = TR.whileIR(#exp (trexp (test, break)), #exp (trexp (body, break)), newbreak), ty = T.UNIT})
+								     {exp = TR.whileIR(#exp (trexp (test, break)), #exp (trbody), newbreak), ty = T.UNIT})
 								end)
 	      | trexp (A.ForExp({var, escape, lo, hi, body, pos}), break) =
              	 (*Remove this scopedown now that we're turning it into a let/while?*)
-              	(venv:=S.enter(!venv, var, Env.VarEntry{access=TR.allocLocal(level)(!escape),ty=T.INT});                     	
+              	(venv:=S.enter(!venv, var, Env.VarEntry{access=TR.allocLocal(level)(!escape),ty=T.INT});
+                 checkInt(trexp (lo, break), pos);
+                 checkInt(trexp (hi, break), pos);
 		let
 		    val x = A.ForExp({var=var, escape=escape, lo=lo, hi=hi, body=body, pos=pos})
                     val fwhile = forToWhile(x) 
@@ -334,17 +336,26 @@ struct
 	                      then {exp=TR.FIXME, ty=T.RECORD(symlist, u)} 
 	                      else (E.error pos "Wrong record type!"; {exp=TR.nilIR(), ty=T.NIL})
                     | x => (E.error pos "Assigning record to not record type"; {exp=TR.nilIR(), ty=T.NIL}))
-              | trexp (A.IfExp({test, then', else', pos}), break) = (checkInt(trexp (test, break), pos); 
-              	(case else' of 
-              		NONE => if checkTypeEqual(#ty(trexp (then', break)), T.UNIT) then () else E.error pos "If returns non-unit"
-                  | SOME x => if (checkTypeEqual(#ty(trexp (then', break)), #ty(trexp (x, break))) orelse checkTypeEqual(#ty(trexp (x, break)), #ty(trexp (then', break)))) then () else E.error pos "Then Else disagree");
-                  {exp=TR.conditionalIR(#exp(trexp(test, break)), #exp(trexp(then', break)), 
-                    case else' of SOME(elseopt) => #exp(trexp(elseopt, break))
+              | trexp (A.IfExp({test, then', else', pos}), break) =
+		let val trtest = trexp(test, break)
+		    val trthen = trexp(then', break)
+		    val trelse = case else' of NONE => NONE
+					     | SOME x => SOME(trexp(x, break))
+		in
+		    (checkInt(trtest, pos);
+		     (case trelse of			  
+              		NONE => if checkTypeEqual(#ty(trthen), T.UNIT) then () else E.error pos "If returns non-unit"
+                      | SOME x => if (checkTypeEqual(#ty(trthen), #ty(x)) orelse checkTypeEqual(#ty(x), #ty(trthen))) then () else E.error pos "Then Else disagree");
+		
+                  {exp=TR.conditionalIR(#exp(trtest), #exp(trthen), 
+                    case trelse of SOME(elseopt) => #exp(elseopt)
                       | NONE => TR.NIL
-                    ), ty= #ty(trexp (then', break))})     
-              | trexp (A.BreakExp(pos), break) = (print(Int.toString(!loopdepth)); if !loopdepth > 0 
+				       ), ty= #ty(trthen)})			
+		end
+		    
+              | trexp (A.BreakExp(pos), break) = if !loopdepth > 0 
               		then (scopeUp(); loopdepth:= !loopdepth-1;{exp=TR.breakIR(break),ty=T.UNIT})
-              		else (E.error pos "break not in loop!"; {exp=TR.nilIR(), ty=T.UNIT}))      
+              		else (E.error pos "break not in loop!"; {exp=TR.nilIR(), ty=T.UNIT})      
                                           
                         
           in 
