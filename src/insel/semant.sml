@@ -50,7 +50,7 @@ struct
       | checkIfSeen(x, a::b) = a = x orelse checkIfSeen(x, b)
 
     fun funcDecl (name, params, result, level, pos) =
-	let val result_ty = (case result of NONE => T.UNIT
+	     let val result_ty = (case result of NONE => T.UNIT
 					  | SOME(rt, pos) => lookupType(!tenv,rt,pos))
 				
             fun transparam{name,escape,typ,pos} = {name=name,ty=lookupType(!tenv, typ, pos)}
@@ -60,7 +60,7 @@ struct
             
         in (if checkIfSeen(name, (!seenFns)) then E.error pos "function declared twice in same fundec" else seenFns:= name :: !seenFns;
         	venv := S.enter(!venv,name, Env.FunEntry{level=level, label=Temp.newlabel(), formals= map #ty params', result=result_ty})) (*FIXME new level?*)
-	end
+	     end
 	    
    fun funcBody (name, params: A.field list, result, pos, level) =
         let val result_ty = (case result of NONE => T.UNIT
@@ -316,7 +316,7 @@ struct
               | trexp (A.AssignExp({var, exp, pos}), break) = (if checkTypeEqual(#ty(transVar(venv, tenv, var,break, level)), #ty(trexp (exp, break))) then () else E.error pos "Assigning wrong type to variable"; {exp = TR.assignIR(#exp (transVar(venv, tenv,var, break, level)), #exp(trexp(exp, break))), ty=T.UNIT})  
               | trexp (A.SeqExp(exps), break) = foldl (fn(x, y) => (trexp ((#1 x), break))) {exp=TR.Ex(Tree.CONST 0), ty=T.UNIT} exps
               | trexp (A.CallExp({func, args, pos}), break) = (case S.look(!venv, func) of SOME x =>
-                                                (case x of  Env.FunEntry({level=level, label=label, formals=formals, result=result}) => (checkArgs(formals, map (fn (x) => #ty(trexp (x, break))) args, pos); {exp = TR.FIXME, ty = result})
+                                                (case x of  Env.FunEntry({level=level, label=label, formals=formals, result=result}) => (checkArgs(formals, map (fn (x) => #ty(trexp (x, break))) args, pos); {exp = TR.callIR(label, map (fn (x) => #exp(trexp (x, break))) args), ty = result})
                                                       | Env.VarEntry({access, ty})  => (E.error pos "Variable is not function"; {exp = TR.nilIR(), ty = T.NIL}))
                                                                        
                                                   | NONE => (E.error pos "Variable undefined"; {exp = TR.nilIR(), ty = T.NIL}))
