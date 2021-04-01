@@ -31,7 +31,7 @@ struct
 
             fun enterparam ({ name, scopeLevel, escape }, env) =
                 S.enter(env, name, EscapeEntry({ scopeLevel=scopeLevel, escape=escape }))
-        in (scopeDown; env := foldr enterparam (!env) params')
+        in (scopeDown(); env := foldr enterparam (!env) params')
     end
 
     fun transVar (A.SimpleVar(sym, pos), level) = (
@@ -59,9 +59,9 @@ struct
               | trexp (A.IntExp(ival), level) = ()
               | trexp (A.StringExp(sval), level) = ()
               | trexp (A.VarExp(lvalue), level) = transVar(lvalue, level)
-              | trexp (A.WhileExp({test, body, pos}), level) = (trexp(test, level); scopeDown; trexp(body, level+1); scopeUp())
+              | trexp (A.WhileExp({test, body, pos}), level) = (trexp(test, level); scopeDown(); trexp(body, level+1); scopeUp())
               | trexp (A.ForExp({var, escape, lo, hi, body, pos}), level) = (
-                 scopeDown;
+                 scopeDown();
               	 env := S.enter(!env, var, EscapeEntry({ scopeLevel=level+1, escape=escape }));
               	 trexp(lo, level+1); 
 				 trexp(hi, level+1);
@@ -69,7 +69,7 @@ struct
                 )
               | trexp (A.LetExp({decs, body, pos}), level) = 
               let
-              	val expty = (scopeDown; map (fn(x)=>(transDec(x, level+1))) decs; trexp(body, level+1))
+              	val expty = (scopeDown(); map (fn(x)=>(transDec(x, level+1))) decs; trexp(body, level+1))
               in
               	scopeUp()
               end
