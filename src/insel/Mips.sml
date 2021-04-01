@@ -12,7 +12,7 @@ structure Frame = MipsFrame
 		   		  
 fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
     let val ilist = ref (nil: A.instr list)
-	val calldefs = [(* Insert $v0, $v1, $t0-$t7, $ra here *)]
+	val calldefs = [Frame.RA, Frame.V0, Frame.V1]@Frame.callersaves
 	fun emit x= ilist := x :: !ilist
 	fun result(gen) = let val t = Temp.newtemp() in gen t; t end
 	fun munchArgs(i, []) = []
@@ -34,6 +34,8 @@ fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
 	    emit(A.OPER{assem="STORE M[r0+" ^ int i ^ "] <- `s0\n", src=[munchExp e2], dst=[],jump=NONE})
 	  | munchStm(T.MOVE(T.MEM(el),e2)) =
 	    emit(A.OPER{assem="STORE M[`s0] <- `sl\n", src=[munchExp el, munchExp e2], dst= [] ,jump=NONE})*)
+	  | munchStm (T.MOVE(T.TEMP t, T.CALL(T.NAME l, args)))  =	    
+            emit(A.OPER{assem="jal " ^ Symbol.name(l) ^ "\nmove `d0, $v0\n", src=munchArgs(0, args), dst=t::calldefs, jump = NONE})
 	  | munchStm (T.MOVE(T.TEMP t, T.CALL(e, args)))  =
 	    emit(A.OPER{assem="jalr `s0\n move `d0, $v0\n", src=munchExp(e)::munchArgs(0, args), dst=t::calldefs, jump = NONE})
 	  | munchStm(T.MOVE(T.TEMP i, e2) ) =
@@ -41,29 +43,31 @@ fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
 	  | munchStm (T.MOVE(e1, e2))  =
 	    emit(A.MOVE{assem="move `d0, `s0\n", src=(munchExp e2), dst=(munchExp e1)}) (*Useless, only for making match exhaustive *)
   	  | munchStm (T.JUMP(T.NAME l, [lab])) =
-	    emit(A.OPER{assem="j lab\n", src=[], dst=[], jump = SOME([lab])})
+	    emit(A.OPER{assem="j " ^ Symbol.name(lab) ^ "\n", src=[], dst=[], jump = SOME([lab])})
 	  | munchStm (T.JUMP(e1, l)) =
 	    emit(A.OPER{assem="jr `s0\n", src=[munchExp e1], dst=[], jump = SOME(l)})
 	  | munchStm (T.CJUMP(T.EQ,e1,e2,t,f)) =
-	    emit(A.OPER{assem="beq `s0, `s1, t \n bne `s0, `s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
+	    emit(A.OPER{assem="beq `s0, `s1, " ^ Symbol.name(t) ^ "\nbne `s0, `s1, " ^ Symbol.name(f) ^ "\n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
 	  | munchStm (T.CJUMP(T.NE,e1,e2,t,f)) =
-	    emit(A.OPER{assem="bne `s0, `s1, t \n beq `s0, `s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
+	    emit(A.OPER{assem="bne `s0, `s1, " ^ Symbol.name(t) ^ "\nbeq `s0, `s1, " ^ Symbol.name(f) ^ "\n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
 	  | munchStm (T.CJUMP(T.LT,e1,e2,t,f)) =
-            emit(A.OPER{assem="blt `s0, `s1, t \n bge `s0, `s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
+            emit(A.OPER{assem="blt `s0, `s1, " ^ Symbol.name(t) ^ "\nbge `s0, `s1, " ^ Symbol.name(f) ^ "\n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
           | munchStm (T.CJUMP(T.GT,e1,e2,t,f)) =
-            emit(A.OPER{assem="bgt `s0, `s1, t \n ble `s0, `s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
+            emit(A.OPER{assem="bgt `s0, `s1, " ^ Symbol.name(t) ^ "\nble `s0, `s1, " ^ Symbol.name(f) ^ "\n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
 	  | munchStm (T.CJUMP(T.LE,e1,e2,t,f)) =
-            emit(A.OPER{assem="ble `s0, `s1, t \n bgt `s0, `s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
+            emit(A.OPER{assem="ble `s0, `s1, " ^ Symbol.name(t) ^ "\nbgt `s0, `s1, " ^ Symbol.name(f) ^ "\n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
           | munchStm (T.CJUMP(T.GE,e1,e2,t,f)) =
-            emit(A.OPER{assem="bge `s0, `s1, t \n blt `s0, `s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
+            emit(A.OPER{assem="bge `s0, `s1, " ^ Symbol.name(t) ^ "\nblt `s0, `s1, " ^ Symbol.name(f) ^ "\n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
 	  | munchStm (T.CJUMP(T.ULT,e1,e2,t,f)) =
-            emit(A.OPER{assem="bltu `s0, `s1, t \n bgeu `s0, `s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
+            emit(A.OPER{assem="bltu `s0, `s1, " ^ Symbol.name(t) ^ "\nbgeu `s0, `s1, " ^ Symbol.name(f) ^ "\n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
           | munchStm (T.CJUMP(T.UGT,e1,e2,t,f)) =
-            emit(A.OPER{assem="bgtu `s0, `s1, t \n bleu `s0, `s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
+            emit(A.OPER{assem="bgtu `s0, `s1, " ^ Symbol.name(t) ^ "\nbleu `s0, `s1, " ^ Symbol.name(f) ^ "\n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
           | munchStm (T.CJUMP(T.ULE,e1,e2,t,f)) =
-            emit(A.OPER{assem="bleu `s0, `s1, t \n bgtu `s0, `s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
+            emit(A.OPER{assem="bleu `s0, `s1, " ^ Symbol.name(t) ^ "\nbgtu `s0, `s1, " ^ Symbol.name(f) ^ "\n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
           | munchStm (T.CJUMP(T.UGE,e1,e2,t,f)) =
-            emit(A.OPER{assem="bgeu `s0, `s1, t \n bltu `s0, `s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
+            emit(A.OPER{assem="bgeu `s0, `s1, t \nbltu `s0, `s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
+	  | munchStm (T.EXP(T.CALL(T.NAME l, args))) = 	    
+            emit(A.OPER{assem="jal " ^ Symbol.name(l) ^ "\n", src=munchArgs(0,args), dst=calldefs, jump = NONE})
   	  | munchStm (T.EXP(T.CALL(e, args))) = (* somehow need to be able to list actual registers in calldefs *)
 	    emit(A.OPER{assem="jalr `s0\n", src=munchExp(e)::munchArgs(0,args), dst=calldefs, jump = NONE})
 	  | munchStm (T.EXP e1) =
@@ -93,7 +97,7 @@ fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
 	  | munchExp (T.BINOP(T.MUL, e1, e2)) =
 	    result(fn r => emit(A.OPER{assem="mul `d0, `s0, `s1\n", src=[munchExp e1, munchExp e2], dst=[r], jump=NONE}))
 	  | munchExp (T.BINOP(T.DIV, e1, e2)) =
-	    result(fn r => emit(A.OPER{assem="div `s0, `s1\n move `d0, $lo\n", src=[munchExp e1, munchExp e2], dst=[r], jump=NONE}))
+	    result(fn r => emit(A.OPER{assem="div `s0, `s1\nmove `d0, $lo\n", src=[munchExp e1, munchExp e2], dst=[r], jump=NONE}))
 	  | munchExp (T.BINOP(T.AND, e1, e2)) =
 	    result(fn r => emit(A.OPER{assem="and `d0, `s0, `s1\n", src=[munchExp e1, munchExp e2], dst=[r], jump=NONE}))
 	  | munchExp (T.BINOP(T.OR, e1, e2)) =
