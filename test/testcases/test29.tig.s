@@ -6,6 +6,5 @@ addi t134, $0, 0
 move $a1, t134
 jalr t130
  move t129, $v0
-add t129, $0, t129
 j lab
 L12:
