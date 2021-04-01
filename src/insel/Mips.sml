@@ -41,9 +41,9 @@ fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
 	  | munchStm (T.MOVE(e1, e2))  =
 	    emit(A.OPER{assem="move 'd0, 's0\n", src=[munchExp e2], dst=[munchExp e1], jump = NONE}) (*Useless, only for making match exhaustive *)
   	  | munchStm (T.JUMP(T.NAME l, [lab])) =
-	    emit(A.OPER{assem="j lab", src=[], dst=[], jump = SOME([lab])})
+	    emit(A.OPER{assem="j lab\n", src=[], dst=[], jump = SOME([lab])})
 	  | munchStm (T.JUMP(e1, l)) =
-	    emit(A.OPER{assem="jr 's0", src=[munchExp e1], dst=[], jump = SOME(l)})
+	    emit(A.OPER{assem="jr 's0\n", src=[munchExp e1], dst=[], jump = SOME(l)})
 	  | munchStm (T.CJUMP(T.EQ,e1,e2,t,f)) =
 	    emit(A.OPER{assem="beq 's0, 's1, t \n bne 's0, 's1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
 	  | munchStm (T.CJUMP(T.NE,e1,e2,t,f)) =
