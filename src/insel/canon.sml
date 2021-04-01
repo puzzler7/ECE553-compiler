@@ -41,7 +41,7 @@ struct
   infix %
   fun (T.EXP(T.CONST _)) % x = x
     | x % (T.EXP(T.CONST _)) = x
-    | x % y = T.SEQ(x,y)
+    | x % y = T.SEQ([x,y])
 
   fun commute(T.EXP(T.CONST _), _) = true
     | commute(_, T.NAME _) = true
@@ -73,8 +73,13 @@ struct
 		 	 in stms % build(el')
 			end
 
-  and do_stm(T.SEQ(a,b)) = 
-               do_stm a % do_stm b
+  and do_stm(T.SEQ(a::l)) = let      
+              fun ds([], ret) = ret
+                  | ds(a::b, ret) = ds(do_stm b, ret % do_stm a)
+              in
+                ds(l, a)
+              end
+    | do_stm(T.SEQ([])) = (print("terrible things have happened in canon"); do_stm T.STM(T.CONST 0))
     | do_stm(T.JUMP(e,labs)) = 
 	       reorder_stm([e],fn [e] => T.JUMP(e,labs))
     | do_stm(T.CJUMP(p,a,b,t,f)) = 

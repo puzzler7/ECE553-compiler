@@ -349,7 +349,7 @@ struct
     fun transProg(exp) = let
       val lbl = Temp.newlabel()
       val lvl = TR.newLevel{parent=TR.outermost, name=lbl, formals=[]}
-      val e = #exp(transExp(venv, tenv, Find.findEscape(exp), lbl, lvl))
+      val e = #exp(transExp(venv, tenv, (*Find.findEscape*) exp, lbl, lvl))
     in
       (seenTypes:= [];
         seenFns:= [];

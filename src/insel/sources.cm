@@ -3,11 +3,13 @@ Group is
 Mips.sml
 assem.sml
 tree.sml
+
 errormsg.sml
 table.sig
 table.sml
 symbol.sml
 absyn.sml
+canon.sml
 semant.sml
 main.sml
 prabsyn.sml
