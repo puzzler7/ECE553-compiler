@@ -29,6 +29,9 @@ sig
     val intIR: int -> exp
     val breakIR: Temp.label -> exp
     val assignIR: exp * exp -> exp
+    val letIR: exp list * exp -> exp
+    val fundecIR: exp -> exp
+    val callIR: Temp.label * exp list -> exp
 
 
     val unEx: exp -> Tree.exp
@@ -42,6 +45,7 @@ sig
     structure F: FRAME
     val getResult  : unit -> F.frag list
     val fraglist: F.frag list ref
+    val resetFragList: unit -> unit
 end
     
 structure Translate : TRANSLATE = 
@@ -144,6 +148,26 @@ struct
             )
         end
 
+    fun letIR(explist, body) = let
+      fun etoslist([]) = []
+        | etoslist(a::b) = TR.EXP(unEx(a))::etoslist(b)
+    in
+      Ex(TR.ESEQ(TR.SEQ(etoslist(explist)), unEx(body)))
+    end
+
+    fun fundecIR(body) = let
+      val b = unEx(body)
+      val name = Temp.newlabel()
+    in
+      Nx(TR.SEQ[
+        TR.LABEL(name),
+        TR.MOVE(TR.TEMP(F.RV), b),
+        TR.JUMP(TR.TEMP(F.RA), [])
+      ])
+    end
+                                                        (*FIXME static link here*)
+    fun callIR(name, explist) = Ex(TR.CALL(TR.NAME(name), (TR.CONST 0)::(map unEx explist)))
+
     fun nilIR () = Ex(TR.CONST 0)
 
     fun intIR (n) = Ex(TR.CONST n)
@@ -166,6 +190,8 @@ struct
     fun assignIR (var, ex) = Nx(TR.MOVE(unEx(var), unEx(ex)))
 
     fun getResult() = !fraglist
+
+    fun resetFragList() = (fraglist := []; ())
 
     fun procEntryExit({body=body, level=lvl:level}) = fraglist := F.PROC{body=unNx(body), frame= (#frame lvl)}::(!fraglist)
 end

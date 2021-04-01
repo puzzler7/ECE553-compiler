@@ -59,7 +59,7 @@ struct
             	       
             
         in (if checkIfSeen(name, (!seenFns)) then E.error pos "function declared twice in same fundec" else seenFns:= name :: !seenFns;
-        	venv := S.enter(!venv,name, Env.FunEntry{level=level, formals= map #ty params', result=result_ty})) (*FIXME new level?*)
+        	venv := S.enter(!venv,name, Env.FunEntry{level=level, label=Temp.newlabel(), formals= map #ty params', result=result_ty})) (*FIXME new level?*)
 	end
 	    
    fun funcBody (name, params: A.field list, result, pos, level) =
@@ -186,12 +186,12 @@ struct
           val ty = (case S.look((!venv), sym) of
                  SOME x => (case x of
                         Env.VarEntry({access, ty}) => ty
-                          | Env.FunEntry({level, formals, result}) => (E.error pos "Calling function as variable!"; result))
+                          | Env.FunEntry({level, label, formals, result}) => (E.error pos "Calling function as variable!"; result))
                    | NONE => (E.error pos "Variable does not exist!"; T.NIL))
           val exp = (case S.look((!venv), sym) of
                  SOME x => (case x of
                         Env.VarEntry({access, ty}) => TR.simpleVar(access)
-                          | Env.FunEntry({level, formals, result}) => (E.error pos "Calling function as variable!"; TR.NIL))
+                          | Env.FunEntry({level, label, formals, result}) => (E.error pos "Calling function as variable!"; TR.NIL))
                    | NONE => (E.error pos "Variable does not exist!"; TR.NIL))
         in
           {exp=exp, ty=ty}
@@ -291,7 +291,7 @@ struct
                   end)
               | trexp (A.LetExp({decs, body, pos}), break) = 
               let
-              	val explist = (scopeDown; map (fn(x)=>(#exp(transDec(venv,tenv,x, break, level)))) decs) (*FIXME*)
+              	val explist = (scopeDown; map (fn(x)=>(#exp(transDec(venv,tenv,x, break, level)))) decs)
                 val expty = trexp (body, break)
               in
               	(scopeUp; (*if checkTypeEqual(#ty expty, T.UNIT) then () else E.error pos "let returns non unit";*){exp=TR.letIR(explist, #exp(expty)), ty=(#ty(expty))})
@@ -313,7 +313,7 @@ struct
               | trexp (A.AssignExp({var, exp, pos}), break) = (if checkTypeEqual(#ty(transVar(venv, tenv, var,break, level)), #ty(trexp (exp, break))) then () else E.error pos "Assigning wrong type to variable"; {exp = TR.assignIR(#exp (transVar(venv, tenv,var, break, level)), #exp(trexp(exp, break))), ty=T.UNIT})  
               | trexp (A.SeqExp(exps), break) = foldl (fn(x, y) => (trexp ((#1 x), break))) {exp=TR.Ex(Tree.CONST 0), ty=T.UNIT} exps
               | trexp (A.CallExp({func, args, pos}), break) = (case S.look(!venv, func) of SOME x =>
-                                                (case x of  Env.FunEntry({level=level, formals=formals, result=result}) => (checkArgs(formals, map (fn (x) => #ty(trexp (x, break))) args, pos); {exp = TR.FIXME, ty = result})
+                                                (case x of  Env.FunEntry({level=level, label=label, formals=formals, result=result}) => (checkArgs(formals, map (fn (x) => #ty(trexp (x, break))) args, pos); {exp = TR.FIXME, ty = result})
                                                       | Env.VarEntry({access, ty})  => (E.error pos "Variable is not function"; {exp = TR.nilIR(), ty = T.NIL}))
                                                                        
                                                   | NONE => (E.error pos "Variable undefined"; {exp = TR.nilIR(), ty = T.NIL}))

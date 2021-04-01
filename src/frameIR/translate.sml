@@ -31,6 +31,7 @@ sig
     val assignIR: exp * exp -> exp
     val letIR: exp list * exp -> exp
     val fundecIR: exp -> exp
+    val callIR: Temp.label * exp list -> exp
 
 
     val unEx: exp -> Tree.exp
@@ -164,6 +165,8 @@ struct
         TR.JUMP(TR.TEMP(F.RA), [])
       ])
     end
+                                                        (*FIXME static link here*)
+    fun callIR(name, explist) = Ex(TR.CALL(TR.NAME(name), (TR.CONST 0)::(map unEx explist)))
 
     fun nilIR () = Ex(TR.CONST 0)
 

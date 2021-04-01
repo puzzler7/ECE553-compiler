@@ -7,7 +7,7 @@ sig
 
     val transVar: venvType * tenvType * Absyn.var -> expty
     val transExp: venvType * tenvType * Absyn.exp -> expty
-    val transDec: venvType * tenvType * Absyn.dec -> {venv: venvType, tenv: tenvType}
+    val transDec: venvType * tenvType * Absyn.dec -> {venv: venvType, tenv: tenvType, exp: Translate.exp}
     val transTy:         tenvType * Absyn.ty  -> Types.ty
     val transProg: Absyn.exp -> unit
 end
@@ -59,7 +59,7 @@ struct
             	       
             
         in (if checkIfSeen(name, (!seenFns)) then E.error pos "function declared twice in same fundec" else seenFns:= name :: !seenFns;
-        	venv := S.enter(!venv,name, Env.FunEntry{level=level, formals= map #ty params', result=result_ty})) (*FIXME new level?*)
+        	venv := S.enter(!venv,name, Env.FunEntry{level=level, label=Temp.newlabel(), formals= map #ty params', result=result_ty})) (*FIXME new level?*)
 	end
 	    
    fun funcBody (name, params: A.field list, result, pos, level) =
@@ -186,12 +186,12 @@ struct
           val ty = (case S.look((!venv), sym) of
                  SOME x => (case x of
                         Env.VarEntry({access, ty}) => ty
-                          | Env.FunEntry({level, formals, result}) => (E.error pos "Calling function as variable!"; result))
+                          | Env.FunEntry({level, label, formals, result}) => (E.error pos "Calling function as variable!"; result))
                    | NONE => (E.error pos "Variable does not exist!"; T.NIL))
           val exp = (case S.look((!venv), sym) of
                  SOME x => (case x of
                         Env.VarEntry({access, ty}) => TR.simpleVar(access)
-                          | Env.FunEntry({level, formals, result}) => (E.error pos "Calling function as variable!"; TR.NIL))
+                          | Env.FunEntry({level, label, formals, result}) => (E.error pos "Calling function as variable!"; TR.NIL))
                    | NONE => (E.error pos "Variable does not exist!"; TR.NIL))
         in
           {exp=exp, ty=ty}
@@ -220,23 +220,25 @@ struct
 	    	fun trdec (venv, tenv, A.VarDec({name, escape, typ=NONE, init, pos})) = 
 	            let 
 	                val {exp,ty} = transExp(venv,tenv,init, break, level) 
+                  val acc = TR.allocLocal(level)(!escape)
 	            in  
-	                (if checkTypeEqual(T.NIL, ty) then E.error pos "assigning nil to non-record" else();{tenv=tenv,venv=(venv:=S.enter(!venv,name,Env.VarEntry{access=TR.allocLocal(level)(!escape),ty=ty});venv)})
+	                (if checkTypeEqual(T.NIL, ty) then E.error pos "assigning nil to non-record" else();{tenv=tenv,venv=(venv:=S.enter(!venv,name,Env.VarEntry{access=acc,ty=ty});venv), exp=TR.assignIR(TR.simpleVar(acc), exp)})
 	            end
 	      | trdec (venv, tenv, A.VarDec({name, escape, typ=SOME(x), init, pos})) = 
 	            let 
 	                val {exp,ty} = transExp(venv,tenv,init, break, level) 
+                  val acc = TR.allocLocal(level)(!escape)
 	            in  
 	                if checkTypeEqual(lookupType(!tenv, #1 x, #2 x), ty) then 
-	                	{tenv=tenv, venv = (venv := S.enter(!venv,name,Env.VarEntry{access=TR.allocLocal(level)(!escape),ty=lookupType(!tenv, #1 x, #2 x)}); venv)}
-	                else (E.error pos "named type does not match expression";{tenv=tenv, venv=venv})
+	                	{tenv=tenv, venv = (venv := S.enter(!venv,name,Env.VarEntry{access=acc,ty=lookupType(!tenv, #1 x, #2 x)}); venv), exp=TR.assignIR(TR.simpleVar(acc), exp)}
+	                else (E.error pos "named type does not match expression";{tenv=tenv, venv=venv, exp=TR.assignIR(TR.simpleVar(acc), exp)})
 	            end
 	      | trdec (venv,tenv,A.TypeDec[{name,ty,pos}]) = {venv=venv,tenv=(tenv:= S.enter(!tenv, name, T.NAME(name, ref NONE));
-						(case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else seenTypes:= name:: !seenTypes;tenv)}
+						(case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else seenTypes:= name:: !seenTypes;tenv), exp=TR.NIL}
 	      | trdec (venv,tenv,A.TypeDec({name,ty,pos}::tydeclist)) = (tenv := S.enter(!tenv, name, T.NAME(name, ref NONE)); trdec(venv, tenv, A.TypeDec(tydeclist));
-									    (case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else seenTypes:= name:: !seenTypes;{venv=venv,tenv=tenv})
-	      | trdec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (funcDecl(name, params, result, level, pos); if checkTypeEqual(funcBody(name, params, result, pos, level), #ty(transExp(venv, tenv, body, break, level))) then () else E.error pos "function body and return type differ"; scopeUp;{venv = venv, tenv = tenv})
-	      | trdec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (funcDecl(name, params, result, level, pos);trdec(venv, tenv, A.FunctionDec(fundeclist)); if checkTypeEqual(funcBody(name, params, result, pos, level), #ty(transExp(venv, tenv, body, break, level))) then () else E.error pos "function body and return type differ"; scopeUp; {venv = venv, tenv = tenv})				
+									    (case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else seenTypes:= name:: !seenTypes;{venv=venv,tenv=tenv, exp=TR.NIL})
+	      | trdec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (funcDecl(name, params, result, level, pos); if checkTypeEqual(funcBody(name, params, result, pos, level), #ty(transExp(venv, tenv, body, break, level))) then () else E.error pos "function body and return type differ"; scopeUp;{venv = venv, tenv = tenv, exp=TR.fundecIR(#exp(transExp(venv, tenv, body, break, level)))})
+	      | trdec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (funcDecl(name, params, result, level, pos);trdec(venv, tenv, A.FunctionDec(fundeclist)); if checkTypeEqual(funcBody(name, params, result, pos, level), #ty(transExp(venv, tenv, body, break, level))) then () else E.error pos "function body and return type differ"; scopeUp; {venv = venv, tenv = tenv, exp=TR.fundecIR(#exp(transExp(venv, tenv, body, break, level)))})				
 	    in
 	    	(seenFns := []; seenTypes:= []; trdec(venv, tenv, dec))
 	    end				    
@@ -289,9 +291,10 @@ struct
                   end)
               | trexp (A.LetExp({decs, body, pos}), break) = 
               let
-              	val expty = (scopeDown; map (fn(x)=>(transDec(venv,tenv,x, break, level))) decs; trexp (body, break))
+              	val explist = (scopeDown; map (fn(x)=>(#exp(transDec(venv,tenv,x, break, level)))) decs)
+                val expty = trexp (body, break)
               in
-              	(scopeUp; (*if checkTypeEqual(#ty expty, T.UNIT) then () else E.error pos "let returns non unit";*)expty)
+              	(scopeUp; (*if checkTypeEqual(#ty expty, T.UNIT) then () else E.error pos "let returns non unit";*){exp=TR.letIR(explist, #exp(expty)), ty=(#ty(expty))})
               end
                                       
               | trexp (A.OpExp({left, oper, right, pos}), break) = 
@@ -310,7 +313,7 @@ struct
               | trexp (A.AssignExp({var, exp, pos}), break) = (if checkTypeEqual(#ty(transVar(venv, tenv, var,break, level)), #ty(trexp (exp, break))) then () else E.error pos "Assigning wrong type to variable"; {exp = TR.assignIR(#exp (transVar(venv, tenv,var, break, level)), #exp(trexp(exp, break))), ty=T.UNIT})  
               | trexp (A.SeqExp(exps), break) = foldl (fn(x, y) => (trexp ((#1 x), break))) {exp=TR.Ex(Tree.CONST 0), ty=T.UNIT} exps
               | trexp (A.CallExp({func, args, pos}), break) = (case S.look(!venv, func) of SOME x =>
-                                                (case x of  Env.FunEntry({level=level, formals=formals, result=result}) => (checkArgs(formals, map (fn (x) => #ty(trexp (x, break))) args, pos); {exp = TR.FIXME, ty = result})
+                                                (case x of  Env.FunEntry({level=level, label=label, formals=formals, result=result}) => (checkArgs(formals, map (fn (x) => #ty(trexp (x, break))) args, pos); {exp = TR.FIXME, ty = result})
                                                       | Env.VarEntry({access, ty})  => (E.error pos "Variable is not function"; {exp = TR.nilIR(), ty = T.NIL}))
                                                                        
                                                   | NONE => (E.error pos "Variable undefined"; {exp = TR.nilIR(), ty = T.NIL}))
@@ -349,10 +352,11 @@ struct
     fun transProg(exp) = let
       val lbl = Temp.newlabel()
       val lvl = TR.newLevel{parent=TR.outermost, name=lbl, formals=[]}
-      val e = #exp(transExp(venv, tenv, (*Find.findEscape*) exp, lbl, lvl))
+      val e = #exp(transExp(venv, tenv, Find.findEscape(exp), lbl, lvl))(*Find.findEscape(exp)*)
     in
       (seenTypes:= [];
         seenFns:= [];
+        TR.resetFragList();
         TR.procEntryExit{body=e, level=lvl};
         Printtree.printtree(TextIO.stdOut, TR.unNx(e));
         TR.getResult())
