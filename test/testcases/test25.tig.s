@@ -1,6 +1,7 @@
 L13:
 addi t130, $0, 0
 move t129, t130
-add t129, $0, t129
+addi t131, $0, 0
+add t131, $0, t131
 j lab
 L12:

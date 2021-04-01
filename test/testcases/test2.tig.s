@@ -1,10 +1,11 @@
-L16:
-addi t136, $0, 10
-move $a0, t136
-addi t138, $0, 0
-move $a1, t138
-jal initArray
-move t134, $v0
-add t134, $0, t134
-j L15
-L15:
+L13:
+initArray:
+addi t132, $0, 10
+move $a0, t132
+addi t134, $0, 0
+move $a1, t134
+jalr t130
+ move t129, $v0
+add t129, $0, t129
+j lab
+L12:
