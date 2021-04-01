@@ -145,16 +145,16 @@ struct
     fun forToWhile(A.ForExp({var, escape, lo, hi, body, pos})) = 
         let val limit = S.symbol "__limit"
         in
-          A.LetExp({decs=[A.VarDec{name=var, escape=ref false, typ=SOME((S.symbol "int", pos)), init=lo, pos=pos},
-              A.VarDec{name=limit, escape=ref false, typ=SOME((S.symbol "int", pos)), init=hi, pos=pos}],
+          A.LetExp({decs=[A.VarDec{name=var, escape=ref false, typ=SOME((S.symbol "int", pos)), init=lo, pos=pos}],
+             (* A.VarDec{name=limit, escape=ref false, typ=SOME((S.symbol "int", pos)), init=hi, pos=pos}], *)
             body=A.WhileExp{test=A.OpExp{left=A.VarExp(A.SimpleVar(var, pos)),
                 oper=A.LeOp,
-                right=A.VarExp(A.SimpleVar(limit, pos)),
+                right=hi,
                 pos=pos},
               body=A.SeqExp[(body, pos), (*body, if i==limit then break, increment*)
                   (A.IfExp{test=A.OpExp{left=A.VarExp(A.SimpleVar(var, pos)),
-                            oper=A.LtOp,
-                            right=A.VarExp(A.SimpleVar(limit, pos)),
+                            oper=A.GtOp,
+                            right=hi,
                             pos=pos},
                         then'=A.BreakExp(pos),
                         else'=NONE,
@@ -274,21 +274,22 @@ struct
               | trexp (A.IntExp(ival), break) = {exp=TR.intIR(ival), ty=T.INT}
               | trexp (A.StringExp(sval), break) = {exp=TR.FIXME, ty=T.STRING}
               | trexp (A.VarExp(lvalue), break) = transVar(venv, tenv, lvalue, break, level)
-              | trexp (A.WhileExp({test, body, pos}), break) = (checkInt(trexp (test, break), pos); if #ty(trexp (body, break))=T.UNIT then (scopeDown(); loopdepth:= !loopdepth+1;()) else (E.error pos "while loop must be unit"); 
-                let val newbreak = Temp.newlabel() in {exp = TR.whileIR(#exp (trexp (test, break)), #exp (trexp (body, break)), newbreak), ty = T.UNIT} end)
-              | trexp (A.ForExp({var, escape, lo, hi, body, pos}), break) = 
-              	(scopeDown(); (*Remove this scopedown now that we're turning it into a let/while?*)
-              	 venv:=S.enter(!venv, var, Env.VarEntry{access=TR.allocLocal(level)(!escape),ty=T.INT});
-              	 checkInt(trexp (lo, break), pos);
-                 checkInt(trexp (hi, break), pos);
-              	  (if #ty(trexp (body, break)) = T.UNIT 
-              	  then (loopdepth:= !loopdepth+1;()) 
-              	  else (E.error pos "for loop must be unit";()));
-              	  let 
-                    val x = A.ForExp({var=var, escape=escape, lo=lo, hi=hi, body=body, pos=pos})
+              | trexp (A.WhileExp({test, body, pos}), break) = (checkInt(trexp (test, break), pos); scopeDown(); loopdepth:= !loopdepth+1;
+								let val trbody = trexp(body, break)
+								    val newbreak = Temp.newlabel()
+												
+								in
+								    (if #ty(trbody)=T.UNIT then () else (E.error pos "while loop must be unit");
+								     {exp = TR.whileIR(#exp (trexp (test, break)), #exp (trexp (body, break)), newbreak), ty = T.UNIT})
+								end)
+	      | trexp (A.ForExp({var, escape, lo, hi, body, pos}), break) =
+             	 (*Remove this scopedown now that we're turning it into a let/while?*)
+              	(venv:=S.enter(!venv, var, Env.VarEntry{access=TR.allocLocal(level)(!escape),ty=T.INT});                     	
+		let
+		    val x = A.ForExp({var=var, escape=escape, lo=lo, hi=hi, body=body, pos=pos})
                     val fwhile = forToWhile(x) 
-                  in trexp (fwhile, break) 
-                  end)
+		in trexp (fwhile, break) 
+                end)
               | trexp (A.LetExp({decs, body, pos}), break) = 
               let
               	val explist = (scopeDown(); map (fn(x)=>(#exp(transDec(venv,tenv,x, break, level)))) decs)
@@ -341,9 +342,9 @@ struct
                     case else' of SOME(elseopt) => #exp(trexp(elseopt, break))
                       | NONE => TR.NIL
                     ), ty= #ty(trexp (then', break))})     
-              | trexp (A.BreakExp(pos), break) = if !loopdepth > 0 
-              		then (scopeUp(); loopdepth:= !loopdepth-1;{exp=TR.breakIR(break),ty=T.NIL})
-              		else (E.error pos "break not in loop!"; {exp=TR.nilIR(), ty=T.NIL})      
+              | trexp (A.BreakExp(pos), break) = (print(Int.toString(!loopdepth)); if !loopdepth > 0 
+              		then (scopeUp(); loopdepth:= !loopdepth-1;{exp=TR.breakIR(break),ty=T.UNIT})
+              		else (E.error pos "break not in loop!"; {exp=TR.nilIR(), ty=T.UNIT}))      
                                           
                         
           in 

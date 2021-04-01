@@ -143,7 +143,7 @@ struct
         in
             Ex(TR.ESEQ(TR.SEQ[
                 e1(t, f), TR.LABEL(t), TR.MOVE(TR.TEMP(r), e2), TR.JUMP(TR.NAME(join), [join]),
-                TR.LABEL(f), TR.MOVE(TR.TEMP(r), e3), TR.JUMP(TR.NAME(join), [join])
+                TR.LABEL(f), TR.MOVE(TR.TEMP(r), e3), TR.JUMP(TR.NAME(join), [join]), TR.LABEL(join)
                 ], TR.TEMP(r))
             )
         end
