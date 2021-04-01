@@ -36,6 +36,12 @@ sig
     val unCx: exp -> (Temp.label * Temp.label -> Tree.stm)
 
     val NIL: exp
+
+    val procEntryExit  : {level: level, body: exp}  -> unit
+
+    structure F: FRAME
+    val getResult  : unit -> F.frag list
+    val fraglist: F.frag list ref
 end
     
 structure Translate : TRANSLATE = 
@@ -50,6 +56,7 @@ struct
     type access = level * F.access
 
     val outermost:level = {unique = ref (), frame = F.newFrame({name=Temp.newlabel(), formals=[]}), link = 0}
+    val fraglist: F.frag list ref = ref []
 
     (*fix links*)
     fun newLevel ({parent=parent, name=name, formals=formals}) = {unique=ref (), link = 0, frame=F.newFrame({name=name, formals=formals})}
@@ -157,4 +164,8 @@ struct
     fun breakIR (label) = Nx(TR.JUMP(TR.NAME(label), [label]))
 
     fun assignIR (var, ex) = Nx(TR.MOVE(unEx(var), unEx(ex)))
+
+    fun getResult() = !fraglist
+
+    fun procEntryExit({body=body, level=lvl:level}) = fraglist := F.PROC{body=unNx(body), frame= (#frame lvl)}::(!fraglist)
 end

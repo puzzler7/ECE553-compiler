@@ -334,7 +334,10 @@ struct
               	(case else' of 
               		NONE => if checkTypeEqual(#ty(trexp (then', break)), T.UNIT) then () else E.error pos "If returns non-unit"
                   | SOME x => if (checkTypeEqual(#ty(trexp (then', break)), #ty(trexp (x, break))) orelse checkTypeEqual(#ty(trexp (x, break)), #ty(trexp (then', break)))) then () else E.error pos "Then Else disagree");
-                  {exp=TR.FIXME, ty= #ty(trexp (then', break))})     
+                  {exp=TR.conditionalIR(#exp(trexp(test, break)), #exp(trexp(then', break)), 
+                    case else' of SOME(elseopt) => #exp(trexp(elseopt, break))
+                      | NONE => TR.NIL
+                    ), ty= #ty(trexp (then', break))})     
               | trexp (A.BreakExp(pos), break) = if !loopdepth > 0 
               		then (scopeUp; loopdepth:= !loopdepth-1;{exp=TR.breakIR(break),ty=T.NIL})
               		else (E.error pos "break not in loop!"; {exp=TR.nilIR(), ty=T.NIL})      
@@ -343,6 +346,15 @@ struct
           in 
             trexp (exp, break)
         end
-    fun transProg(exp) = (seenTypes:= []; seenFns:= [];transExp(venv, tenv, Find.findEscape(exp), Temp.newlabel(), Translate.outermost);()) 
+    fun transProg(exp) = let
+      val lbl = Temp.newlabel()
+      val lvl = TR.newLevel{parent=TR.outermost, name=lbl, formals=[]}
+    in
+      (seenTypes:= [];
+        seenFns:= [];
+        TR.procEntryExit{body=(#exp(transExp(venv, tenv, Find.findEscape(exp), lbl, lvl))), level=lvl};
+        TR.getResult())
+    end
+       
                  
 end
