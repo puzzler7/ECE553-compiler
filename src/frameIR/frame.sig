@@ -9,6 +9,7 @@ sig type frame
 
     val FP: Temp.temp
     val RV: Temp.temp
+    val RA: Temp.temp
     val wordSize: int
     val exp: access  -> Tree.exp -> Tree.exp
 

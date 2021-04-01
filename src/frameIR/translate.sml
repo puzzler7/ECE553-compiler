@@ -30,6 +30,7 @@ sig
     val breakIR: Temp.label -> exp
     val assignIR: exp * exp -> exp
     val letIR: exp list * exp -> exp
+    val fundecIR: exp -> exp
 
 
     val unEx: exp -> Tree.exp
@@ -151,6 +152,17 @@ struct
         | etoslist(a::b) = TR.EXP(unEx(a))::etoslist(b)
     in
       Ex(TR.ESEQ(TR.SEQ(etoslist(explist)), unEx(body)))
+    end
+
+    fun fundecIR(body) = let
+      val b = unEx(body)
+      val name = Temp.newlabel()
+    in
+      Nx(TR.SEQ[
+        TR.LABEL(name),
+        TR.MOVE(TR.TEMP(F.RV), b),
+        TR.JUMP(TR.TEMP(F.RA), [])
+      ])
     end
 
     fun nilIR () = Ex(TR.CONST 0)
