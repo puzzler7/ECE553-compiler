@@ -75,11 +75,11 @@ struct
 
   and do_stm(T.SEQ(a::l)) = let      
               fun ds([], ret) = ret
-                  | ds(a::b, ret) = ds(do_stm b, ret % do_stm a)
+                  | ds(a::b, ret) = ds(b, ret % do_stm a)
               in
                 ds(l, a)
               end
-    | do_stm(T.SEQ([])) = (print("terrible things have happened in canon"); do_stm T.STM(T.CONST 0))
+    | do_stm(T.SEQ([])) = (print("terrible things have happened in canon"); do_stm (T.EXP(T.CONST 0)))
     | do_stm(T.JUMP(e,labs)) = 
 	       reorder_stm([e],fn [e] => T.JUMP(e,labs))
     | do_stm(T.CJUMP(p,a,b,t,f)) = 
@@ -91,7 +91,7 @@ struct
     | do_stm(T.MOVE(T.MEM e,b)) = 
 	       reorder_stm([e,b],fn[e,b]=>T.MOVE(T.MEM e,b))
     | do_stm(T.MOVE(T.ESEQ(s,e),b)) = 
-	       do_stm(T.SEQ(s,T.MOVE(e,b)))
+	       do_stm(T.SEQ([s,T.MOVE(e,b)]))
     | do_stm(T.EXP(T.CALL(e,el))) = 
 	       reorder_stm(e::el,fn e::el => T.EXP(T.CALL(e,el)))
     | do_stm(T.EXP e) = 
@@ -112,7 +112,7 @@ struct
     | do_exp e = reorder_exp([],fn[]=>e)
 
   (* linear gets rid of the top-level SEQ's, producing a list *)
-  fun linear(T.SEQ(a,b),l) = linear(a,linear(b,l))
+  fun linear(T.SEQ([sl]),l) = sl::l(*linear(a,linear(b,l))*)
     | linear(s,l) = s::l
 
  in (* body of linearize *)

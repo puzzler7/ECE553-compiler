@@ -2,6 +2,11 @@ structure Main = struct
 
    structure Tr = Translate
    structure F = MipsFrame
+   structure TigerLrVals = TigerLrValsFun(structure Token = LrParser.Token)
+   structure Lex = TigerLexFun(structure Tokens = TigerLrVals.Tokens)
+   structure TigerP = Join(structure ParserData = TigerLrVals.ParserData
+    structure Lex=Lex
+    structure LrParser = LrParser)
    
  fun getsome (SOME x) = x
 
@@ -15,7 +20,7 @@ structure Main = struct
          val format0 = Assem.format(Temp.makestring)
      in  (app (fn i => TextIO.output(out,format0 i)) instrs)	     
      end
-   | emitproc out (F.STRING(lab,s)) = TextIO.output(out,F.string(lab,s))
+   | emitproc out (F.STRING(lab,s)) = TextIO.output(out,F.STRING(lab,s))
 						   
    fun withOpenFile fname f = 
        let val out = TextIO.openOut fname
