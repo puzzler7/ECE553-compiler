@@ -1,7 +1,7 @@
 structure Main : sig 
 	val parse : string -> Absyn.exp
-	val main : string -> unit 
-	val typecheckOnly : string -> unit 
+	val main : string -> MipsFrame.frag list
+	val typecheckOnly : string -> MipsFrame.frag list
 end =
 struct 
 	structure TigerLrVals = TigerLrValsFun(structure Token = LrParser.Token)
@@ -23,8 +23,8 @@ struct
 	fun main filename = 
 		let val tree = parse(filename)
 		in
-			(PrintAbsyn.print(TextIO.stdOut, tree);
-			Semant.transProg(tree))
+			(*(PrintAbsyn.print(TextIO.stdOut, tree);*)
+			Semant.transProg(tree)
 		end
 	
 	fun typecheckOnly filename = 

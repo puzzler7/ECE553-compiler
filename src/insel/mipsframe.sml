@@ -51,5 +51,5 @@ struct
 
     fun externalCall(s, args) = Tree.CALL(Tree.NAME(Temp.namedlabel s), args)
 
-    fun procEntryExit1(frame,body) = ()
+    fun procEntryExit1(frame,body) = body
 end

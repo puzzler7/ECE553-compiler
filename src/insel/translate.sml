@@ -13,8 +13,8 @@ sig
     val allocLocal: level -> bool -> access
 
     val arrayVar: exp * exp -> exp
-    (*val simpleVar: access * level  -> exp
-    val structVar
+    val simpleVar: access  -> exp
+    (*val structVar
     val subscriptVar
     val stringVar
     val recordVar
@@ -34,6 +34,14 @@ sig
     val unEx: exp -> Tree.exp
     val unNx: exp -> Tree.stm
     val unCx: exp -> (Temp.label * Temp.label -> Tree.stm)
+
+    val NIL: exp
+
+    val procEntryExit  : {level: level, body: exp}  -> unit
+
+    structure F: FRAME
+    val getResult  : unit -> F.frag list
+    val fraglist: F.frag list ref
 end
     
 structure Translate : TRANSLATE = 
@@ -48,6 +56,7 @@ struct
     type access = level * F.access
 
     val outermost:level = {unique = ref (), frame = F.newFrame({name=Temp.newlabel(), formals=[]}), link = 0}
+    val fraglist: F.frag list ref = ref []
 
     (*fix links*)
     fun newLevel ({parent=parent, name=name, formals=formals}) = {unique=ref (), link = 0, frame=F.newFrame({name=name, formals=formals})}
@@ -66,6 +75,8 @@ struct
                  | Nx of Tree.stm
                  | Cx of Temp.label * Temp.label  -> Tree.stm
                  | FIXME
+
+    val NIL = Ex(TR.CONST 0)
 
     fun unEx  (Ex e) = e
       | unEx  (Cx genstm) =
@@ -89,6 +100,8 @@ struct
       | unCx (Ex e) = (fn (t, f) => TR.CJUMP(TR.EQ, e, TR.CONST(1), t, f))
       | unCx (Nx n) = ((E.error 0 "Cannot unCx an Nx"); (fn (t, f) => TR.EXP(TR.CONST 0)))
       | unCx (FIXME) = unCx(Ex(TR.CONST 0))
+
+    fun simpleVar((lvl, acc):access) = Ex(F.exp(acc)(TR.CONST 0)) (*FIXME fp/static link stuff?*)
 
     fun aToTbinop(A.PlusOp) = TR.PLUS (*Match is nonexhaustive, which is fine*)
      |  aToTbinop(A.MinusOp) = TR.MINUS
@@ -151,4 +164,8 @@ struct
     fun breakIR (label) = Nx(TR.JUMP(TR.NAME(label), [label]))
 
     fun assignIR (var, ex) = Nx(TR.MOVE(unEx(var), unEx(ex)))
+
+    fun getResult() = !fraglist
+
+    fun procEntryExit({body=body, level=lvl:level}) = fraglist := F.PROC{body=unNx(body), frame= (#frame lvl)}::(!fraglist)
 end
