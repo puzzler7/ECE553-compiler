@@ -50,6 +50,7 @@ struct
     (* Register stuff *)
     val ZERO = Temp.newtemp()
     val V0 = Temp.newtemp()
+    val RV = V0
     val V1 = Temp.newtemp()
     val A0 = Temp.newtemp()
     val A1 = Temp.newtemp()
