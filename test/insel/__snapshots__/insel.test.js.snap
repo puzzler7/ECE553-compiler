@@ -3,198 +3,7 @@
 exports[`The textbook tests compiles test/testcases/merge.tig correctly 1`] = `
 "
 val it = true : bool
-test/testcases/merge.tig:46.7:Variable does not exist!
-test/testcases/merge.tig:46.7:Variable does not exist!
-test/testcases/merge.tig:46.8:Bad types for comparison operator
-test/testcases/merge.tig:47.19:Variable does not exist!
-test/testcases/merge.tig:47.19:Variable does not exist!
-test/testcases/merge.tig:47.19:field var on non-record type
-test/testcases/merge.tig:47.10:Argument type mismatch
-test/testcases/merge.tig:47.51:Variable does not exist!
-test/testcases/merge.tig:47.51:Variable does not exist!
-test/testcases/merge.tig:47.51:field var on non-record type
-test/testcases/merge.tig:46.7:Variable does not exist!
-test/testcases/merge.tig:46.7:Variable does not exist!
-test/testcases/merge.tig:46.8:Bad types for comparison operator
-test/testcases/merge.tig:47.19:Variable does not exist!
-test/testcases/merge.tig:47.19:Variable does not exist!
-test/testcases/merge.tig:47.19:field var on non-record type
-test/testcases/merge.tig:47.10:Argument type mismatch
-test/testcases/merge.tig:47.51:Variable does not exist!
-test/testcases/merge.tig:47.51:Variable does not exist!
-test/testcases/merge.tig:47.51:field var on non-record type
-test/testcases/merge.tig:31.7:Variable does not exist!
-test/testcases/merge.tig:31.7:Variable does not exist!
-test/testcases/merge.tig:31.8:Bad types for comparison operator
-test/testcases/merge.tig:31.18:Variable does not exist!
-test/testcases/merge.tig:31.18:Variable does not exist!
-test/testcases/merge.tig:32.12:Variable does not exist!
-test/testcases/merge.tig:32.12:Variable does not exist!
-test/testcases/merge.tig:32.13:Bad types for comparison operator
-test/testcases/merge.tig:32.23:Variable does not exist!
-test/testcases/merge.tig:32.23:Variable does not exist!
-test/testcases/merge.tig:33.12:Variable does not exist!
-test/testcases/merge.tig:33.12:Variable does not exist!
-test/testcases/merge.tig:33.12:field var on non-record type
-test/testcases/merge.tig:33.22:Variable does not exist!
-test/testcases/merge.tig:33.22:Variable does not exist!
-test/testcases/merge.tig:33.22:field var on non-record type
-test/testcases/merge.tig:33.20:Bad types for comparison operator
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:field var on non-record type
-test/testcases/merge.tig:34.12:Wrong record type!
-test/testcases/merge.tig:35.23:Variable does not exist!
-test/testcases/merge.tig:35.23:Variable does not exist!
-test/testcases/merge.tig:35.23:field var on non-record type
-test/testcases/merge.tig:35.12:Wrong record type!
-test/testcases/merge.tig:33.12:Variable does not exist!
-test/testcases/merge.tig:33.12:Variable does not exist!
-test/testcases/merge.tig:33.12:field var on non-record type
-test/testcases/merge.tig:33.22:Variable does not exist!
-test/testcases/merge.tig:33.22:Variable does not exist!
-test/testcases/merge.tig:33.22:field var on non-record type
-test/testcases/merge.tig:33.20:Bad types for comparison operator
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:field var on non-record type
-test/testcases/merge.tig:34.12:Wrong record type!
-test/testcases/merge.tig:35.23:Variable does not exist!
-test/testcases/merge.tig:35.23:Variable does not exist!
-test/testcases/merge.tig:35.23:field var on non-record type
-test/testcases/merge.tig:35.12:Wrong record type!
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:field var on non-record type
-test/testcases/merge.tig:34.12:Wrong record type!
-test/testcases/merge.tig:32.12:Variable does not exist!
-test/testcases/merge.tig:32.12:Variable does not exist!
-test/testcases/merge.tig:32.13:Bad types for comparison operator
-test/testcases/merge.tig:32.23:Variable does not exist!
-test/testcases/merge.tig:32.23:Variable does not exist!
-test/testcases/merge.tig:33.12:Variable does not exist!
-test/testcases/merge.tig:33.12:Variable does not exist!
-test/testcases/merge.tig:33.12:field var on non-record type
-test/testcases/merge.tig:33.22:Variable does not exist!
-test/testcases/merge.tig:33.22:Variable does not exist!
-test/testcases/merge.tig:33.22:field var on non-record type
-test/testcases/merge.tig:33.20:Bad types for comparison operator
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:field var on non-record type
-test/testcases/merge.tig:34.12:Wrong record type!
-test/testcases/merge.tig:35.23:Variable does not exist!
-test/testcases/merge.tig:35.23:Variable does not exist!
-test/testcases/merge.tig:35.23:field var on non-record type
-test/testcases/merge.tig:35.12:Wrong record type!
-test/testcases/merge.tig:33.12:Variable does not exist!
-test/testcases/merge.tig:33.12:Variable does not exist!
-test/testcases/merge.tig:33.12:field var on non-record type
-test/testcases/merge.tig:33.22:Variable does not exist!
-test/testcases/merge.tig:33.22:Variable does not exist!
-test/testcases/merge.tig:33.22:field var on non-record type
-test/testcases/merge.tig:33.20:Bad types for comparison operator
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:field var on non-record type
-test/testcases/merge.tig:34.12:Wrong record type!
-test/testcases/merge.tig:35.23:Variable does not exist!
-test/testcases/merge.tig:35.23:Variable does not exist!
-test/testcases/merge.tig:35.23:field var on non-record type
-test/testcases/merge.tig:35.12:Wrong record type!
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:field var on non-record type
-test/testcases/merge.tig:34.12:Wrong record type!
-test/testcases/merge.tig:32.23:Variable does not exist!
-test/testcases/merge.tig:32.23:Variable does not exist!
-test/testcases/merge.tig:31.7:Variable does not exist!
-test/testcases/merge.tig:31.7:Variable does not exist!
-test/testcases/merge.tig:31.8:Bad types for comparison operator
-test/testcases/merge.tig:31.18:Variable does not exist!
-test/testcases/merge.tig:31.18:Variable does not exist!
-test/testcases/merge.tig:32.12:Variable does not exist!
-test/testcases/merge.tig:32.12:Variable does not exist!
-test/testcases/merge.tig:32.13:Bad types for comparison operator
-test/testcases/merge.tig:32.23:Variable does not exist!
-test/testcases/merge.tig:32.23:Variable does not exist!
-test/testcases/merge.tig:33.12:Variable does not exist!
-test/testcases/merge.tig:33.12:Variable does not exist!
-test/testcases/merge.tig:33.12:field var on non-record type
-test/testcases/merge.tig:33.22:Variable does not exist!
-test/testcases/merge.tig:33.22:Variable does not exist!
-test/testcases/merge.tig:33.22:field var on non-record type
-test/testcases/merge.tig:33.20:Bad types for comparison operator
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:field var on non-record type
-test/testcases/merge.tig:34.12:Wrong record type!
-test/testcases/merge.tig:35.23:Variable does not exist!
-test/testcases/merge.tig:35.23:Variable does not exist!
-test/testcases/merge.tig:35.23:field var on non-record type
-test/testcases/merge.tig:35.12:Wrong record type!
-test/testcases/merge.tig:33.12:Variable does not exist!
-test/testcases/merge.tig:33.12:Variable does not exist!
-test/testcases/merge.tig:33.12:field var on non-record type
-test/testcases/merge.tig:33.22:Variable does not exist!
-test/testcases/merge.tig:33.22:Variable does not exist!
-test/testcases/merge.tig:33.22:field var on non-record type
-test/testcases/merge.tig:33.20:Bad types for comparison operator
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:field var on non-record type
-test/testcases/merge.tig:34.12:Wrong record type!
-test/testcases/merge.tig:35.23:Variable does not exist!
-test/testcases/merge.tig:35.23:Variable does not exist!
-test/testcases/merge.tig:35.23:field var on non-record type
-test/testcases/merge.tig:35.12:Wrong record type!
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:field var on non-record type
-test/testcases/merge.tig:34.12:Wrong record type!
-test/testcases/merge.tig:32.12:Variable does not exist!
-test/testcases/merge.tig:32.12:Variable does not exist!
-test/testcases/merge.tig:32.13:Bad types for comparison operator
-test/testcases/merge.tig:32.23:Variable does not exist!
-test/testcases/merge.tig:32.23:Variable does not exist!
-test/testcases/merge.tig:33.12:Variable does not exist!
-test/testcases/merge.tig:33.12:Variable does not exist!
-test/testcases/merge.tig:33.12:field var on non-record type
-test/testcases/merge.tig:33.22:Variable does not exist!
-test/testcases/merge.tig:33.22:Variable does not exist!
-test/testcases/merge.tig:33.22:field var on non-record type
-test/testcases/merge.tig:33.20:Bad types for comparison operator
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:field var on non-record type
-test/testcases/merge.tig:34.12:Wrong record type!
-test/testcases/merge.tig:35.23:Variable does not exist!
-test/testcases/merge.tig:35.23:Variable does not exist!
-test/testcases/merge.tig:35.23:field var on non-record type
-test/testcases/merge.tig:35.12:Wrong record type!
-test/testcases/merge.tig:33.12:Variable does not exist!
-test/testcases/merge.tig:33.12:Variable does not exist!
-test/testcases/merge.tig:33.12:field var on non-record type
-test/testcases/merge.tig:33.22:Variable does not exist!
-test/testcases/merge.tig:33.22:Variable does not exist!
-test/testcases/merge.tig:33.22:field var on non-record type
-test/testcases/merge.tig:33.20:Bad types for comparison operator
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:field var on non-record type
-test/testcases/merge.tig:34.12:Wrong record type!
-test/testcases/merge.tig:35.23:Variable does not exist!
-test/testcases/merge.tig:35.23:Variable does not exist!
-test/testcases/merge.tig:35.23:field var on non-record type
-test/testcases/merge.tig:35.12:Wrong record type!
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:Variable does not exist!
-test/testcases/merge.tig:34.23:field var on non-record type
-test/testcases/merge.tig:34.12:Wrong record type!
-test/testcases/merge.tig:32.23:Variable does not exist!
-test/testcases/merge.tig:32.23:Variable does not exist!
-test/testcases/merge.tig:31.18:Variable does not exist!
-test/testcases/merge.tig:31.18:Variable does not exist!
+test/testcases/merge.tig:54.5:Variable undefined
 EXP(
  ESEQ(
   SEQ(
@@ -207,12 +16,14 @@ EXP(
        BINOP(PLUS,
         CONST 0,
         CONST 92)),
-      CONST 0),
+      CALL(
+       NAME L3,
+        CONST 0)),
      CONST 0)),
    EXP(
     ESEQ(
      SEQ(
-      LABEL L83,
+      LABEL L12,
       MOVE(
        TEMP t101,
        ESEQ(
@@ -223,50 +34,69 @@ EXP(
             MEM(
              BINOP(PLUS,
               CONST 0,
-              CONST 76)),
+              CONST 88)),
             CONST 0),
            CONST 0)),
          EXP(
           ESEQ(
            SEQ(
-            LABEL L79,
+            LABEL L13,
             MOVE(
              TEMP t101,
              ESEQ(
               SEQ(
                CJUMP(GE,
-                CONST 0,
-                CONST 0,
-                L76,L77),
-               LABEL L76,
+                CALL(
+                 NAME L4,
+                  CONST 0,
+                  MEM(
+                   BINOP(PLUS,
+                    CONST 0,
+                    CONST 92))),
+                CALL(
+                 NAME L4,
+                  CONST 0,
+                  NAME L39),
+                L50,L51),
+               LABEL L50,
                MOVE(
-                TEMP t146,
+                TEMP t134,
                 ESEQ(
                  SEQ(
                   MOVE(
-                   TEMP t145,
+                   TEMP t133,
                    CONST 1),
                   CJUMP(LE,
-                   CONST 0,
-                   CONST 0,
-                   L74,L75),
-                  LABEL L75,
+                   CALL(
+                    NAME L4,
+                     CONST 0,
+                     MEM(
+                      BINOP(PLUS,
+                       CONST 0,
+                       CONST 92))),
+                   CALL(
+                    NAME L4,
+                     CONST 0,
+                     NAME L45),
+                   L48,L49),
+                  LABEL L49,
                   MOVE(
-                   TEMP t145,
+                   TEMP t133,
                    CONST 0),
-                  LABEL L74,
+                  LABEL L48,
 ),
-                 TEMP t145)),
+                 TEMP t133)),
                JUMP(
-                NAME L78),
-               LABEL L77,
+                NAME L52),
+               LABEL L51,
                MOVE(
-                TEMP t146,
+                TEMP t134,
                 CONST 0),
                JUMP(
-                NAME L78),
+                NAME L52),
+               LABEL L52,
 ),
-              TEMP t146)),
+              TEMP t134)),
             JUMP(
              TEMP t128),
 ),
@@ -275,7 +105,7 @@ EXP(
         MEM(
          BINOP(PLUS,
           CONST 0,
-          CONST 76)))),
+          CONST 88)))),
       JUMP(
        TEMP t128),
 ),
@@ -285,7 +115,7 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L179,
+      LABEL L64,
       MOVE(
        TEMP t101,
        ESEQ(
@@ -293,36 +123,85 @@ EXP(
          EXP(
           ESEQ(
            MOVE(
-            TEMP t181,
-            CONST 0),
+            TEMP t153,
+            ESEQ(
+             SEQ(
+              MOVE(
+               TEMP t152,
+               CALL(
+                NAME malloc,
+                 BINOP(MUL,
+                  CONST 1,
+                  CONST 4))),
+              MOVE(
+               MEM(
+                BINOP(PLUS,
+                 TEMP t152,
+                 CONST 0)),
+               CONST 0),
+),
+             TEMP t152)),
            CONST 0)),
          EXP(
           ESEQ(
            MOVE(
-            TEMP t182,
-            CONST 0),
+            TEMP t154,
+            CALL(
+             NAME L12,
+              CONST 0,
+              TEMP t153)),
            CONST 0)),
 ),
         ESEQ(
          SEQ(
           CJUMP(EQ,
-           CONST 0,
+           MEM(
+            BINOP(PLUS,
+             TEMP t153,
+             BINOP(MUL,
+              CONST 0,
+              CONST 4))),
            CONST 1,
-           L176,L177),
-          LABEL L176,
+           L114,L115),
+          LABEL L114,
           MOVE(
-           TEMP t183,
-           CONST 0),
-          JUMP(
-           NAME L178),
-          LABEL L177,
-          MOVE(
-           TEMP t183,
-           CONST 0),
-          JUMP(
-           NAME L178),
+           TEMP t156,
+           ESEQ(
+            SEQ(
+             MOVE(
+              TEMP t155,
+              CALL(
+               NAME malloc,
+                BINOP(MUL,
+                 CONST 2,
+                 CONST 4))),
+             MOVE(
+              MEM(
+               BINOP(PLUS,
+                TEMP t155,
+                CONST 0)),
+              TEMP t154),
+             MOVE(
+              MEM(
+               BINOP(PLUS,
+                TEMP t155,
+                CONST 4)),
+              CALL(
+               NAME L64,
+                CONST 0)),
 ),
-         TEMP t183))),
+            TEMP t155)),
+          JUMP(
+           NAME L116),
+          LABEL L115,
+          MOVE(
+           TEMP t156,
+           CONST 0),
+          JUMP(
+           NAME L116),
+          LABEL L116,
+),
+         TEMP t156))),
       JUMP(
        TEMP t128),
 ),
@@ -330,2542 +209,34 @@ EXP(
    EXP(
     ESEQ(
      MOVE(
-      TEMP t184,
-      CONST 0),
+      TEMP t157,
+      CALL(
+       NAME L64,
+        CONST 0)),
      CONST 0)),
    EXP(
     ESEQ(
      MOVE(
-      TEMP t185,
-      CONST 0),
+      TEMP t158,
+      CALL(
+       NAME L64,
+        CONST 0)),
      CONST 0)),
 ),
   CONST 0))
 emit L11
-val it = () : unit
 
+uncaught exception Subscript [subscript out of bounds]
+  raised at: Basis/Implementation/list.sml:67.35-67.44
+             main.sml:28.46
+- 
 "
 `;
 
 exports[`The textbook tests compiles test/testcases/queens.tig correctly 1`] = `
 "
 val it = true : bool
-test/testcases/queens.tig:24.11:If returns non-unit
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:break not in loop!
-test/testcases/queens.tig:24.11:break not in loop!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:If returns non-unit
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:break not in loop!
-test/testcases/queens.tig:24.11:break not in loop!
-test/testcases/queens.tig:24.11:If returns non-unit
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:break not in loop!
-test/testcases/queens.tig:24.11:break not in loop!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:If returns non-unit
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:break not in loop!
-test/testcases/queens.tig:24.11:break not in loop!
-test/testcases/queens.tig:22.9:Variable does not exist!
-test/testcases/queens.tig:22.9:Variable does not exist!
-test/testcases/queens.tig:22.9:Variable does not exist!
-test/testcases/queens.tig:22.9:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.24:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.24:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.24:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.24:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.24:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.24:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:24.11:If returns non-unit
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:break not in loop!
-test/testcases/queens.tig:24.11:break not in loop!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.24:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.24:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.24:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:If returns non-unit
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:break not in loop!
-test/testcases/queens.tig:24.11:break not in loop!
-test/testcases/queens.tig:22.9:Variable does not exist!
-test/testcases/queens.tig:22.9:Variable does not exist!
-test/testcases/queens.tig:22.9:Variable does not exist!
-test/testcases/queens.tig:22.9:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.24:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.24:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.24:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.24:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.24:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.24:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:24.11:If returns non-unit
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:break not in loop!
-test/testcases/queens.tig:24.11:break not in loop!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.24:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.29:Not int type
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.30:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.46:Not int type
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:25.47:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.24:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.37:Not int type
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.38:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.54:Not int type
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:26.55:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.16:Variable does not exist!
-test/testcases/queens.tig:27.12:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.24:Not int type
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:28.23:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.23:Not int type
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.24:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.40:Not int type
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:29.41:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:If returns non-unit
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:Variable does not exist!
-test/testcases/queens.tig:24.11:break not in loop!
-test/testcases/queens.tig:24.11:break not in loop!
-test/testcases/queens.tig:15.7:If returns non-unit
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:break not in loop!
-test/testcases/queens.tig:15.7:break not in loop!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:If returns non-unit
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:break not in loop!
-test/testcases/queens.tig:15.7:break not in loop!
-test/testcases/queens.tig:15.7:If returns non-unit
-test/testcases/queens.tig:15.7:break not in loop!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Not int type
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Assigning wrong type to variable
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Not int type
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:If returns non-unit
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:break not in loop!
-test/testcases/queens.tig:15.7:break not in loop!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Not int type
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Assigning wrong type to variable
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Not int type
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:break not in loop!
-test/testcases/queens.tig:14.9:If returns non-unit
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:break not in loop!
-test/testcases/queens.tig:14.9:break not in loop!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:15.7:If returns non-unit
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:break not in loop!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Not int type
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Assigning wrong type to variable
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Not int type
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Bad types for comparison operator
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Bad types for comparison operator
-test/testcases/queens.tig:15.7:If returns non-unit
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Bad types for comparison operator
-test/testcases/queens.tig:15.7:break not in loop!
-test/testcases/queens.tig:15.7:break not in loop!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Not int type
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Assigning wrong type to variable
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Not int type
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:break not in loop!
-test/testcases/queens.tig:14.9:If returns non-unit
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:break not in loop!
-test/testcases/queens.tig:14.9:break not in loop!
-test/testcases/queens.tig:15.7:If returns non-unit
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:break not in loop!
-test/testcases/queens.tig:15.7:break not in loop!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:If returns non-unit
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:break not in loop!
-test/testcases/queens.tig:15.7:break not in loop!
-test/testcases/queens.tig:15.7:If returns non-unit
-test/testcases/queens.tig:15.7:break not in loop!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Not int type
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Assigning wrong type to variable
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Not int type
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:If returns non-unit
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:break not in loop!
-test/testcases/queens.tig:15.7:break not in loop!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Not int type
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Assigning wrong type to variable
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Not int type
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:break not in loop!
-test/testcases/queens.tig:14.9:If returns non-unit
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:break not in loop!
-test/testcases/queens.tig:14.9:break not in loop!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:15.7:If returns non-unit
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:break not in loop!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Not int type
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Assigning wrong type to variable
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Not int type
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Bad types for comparison operator
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:16.27:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Bad types for comparison operator
-test/testcases/queens.tig:15.7:If returns non-unit
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Bad types for comparison operator
-test/testcases/queens.tig:15.7:break not in loop!
-test/testcases/queens.tig:15.7:break not in loop!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Not int type
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Assigning wrong type to variable
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Not int type
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:15.7:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:break not in loop!
-test/testcases/queens.tig:14.9:If returns non-unit
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:Variable does not exist!
-test/testcases/queens.tig:14.9:break not in loop!
-test/testcases/queens.tig:14.9:break not in loop!
+test/testcases/queens.tig:32.5:Variable undefined
 EXP(
  ESEQ(
   SEQ(
@@ -2957,10 +328,13 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L579,
+      LABEL L12,
       MOVE(
        TEMP t101,
-       CONST 0),
+       CALL(
+        NAME L1,
+         CONST 0,
+         NAME L61)),
       JUMP(
        TEMP t128),
 ),
@@ -2971,7 +345,7 @@ emit L11
 
 uncaught exception Subscript [subscript out of bounds]
   raised at: Basis/Implementation/list.sml:67.35-67.44
-             src/insel/main.sml:28.46
+             main.sml:28.46
 - 
 "
 `;
@@ -3037,11 +411,33 @@ EXP(
    EXP(
     ESEQ(
      MOVE(
-      TEMP t129,
-      CONST 0),
+      TEMP t130,
+      ESEQ(
+       SEQ(
+        MOVE(
+         TEMP t129,
+         CALL(
+          NAME malloc,
+           BINOP(MUL,
+            CONST 2,
+            CONST 4))),
+        MOVE(
+         MEM(
+          BINOP(PLUS,
+           TEMP t129,
+           CONST 0)),
+         NAME L13),
+        MOVE(
+         MEM(
+          BINOP(PLUS,
+           TEMP t129,
+           CONST 4)),
+         CONST 1000),
+),
+       TEMP t129)),
      CONST 0)),
 ),
-  TEMP t129))
+  TEMP t130))
 emit L11
 val it = () : unit
 
@@ -3051,73 +447,41 @@ val it = () : unit
 exports[`The textbook tests compiles test/testcases/test4.tig correctly 1`] = `
 "
 val it = true : bool
-test/testcases/test4.tig:6.7:Variable does not exist!
-test/testcases/test4.tig:6.7:Variable does not exist!
-test/testcases/test4.tig:6.7:Variable does not exist!
-test/testcases/test4.tig:6.7:Variable does not exist!
-test/testcases/test4.tig:8.9:Variable does not exist!
-test/testcases/test4.tig:8.9:Variable does not exist!
-test/testcases/test4.tig:8.11:Not int type
-test/testcases/test4.tig:8.21:Variable does not exist!
-test/testcases/test4.tig:8.21:Variable does not exist!
-test/testcases/test4.tig:8.22:Not int type
-test/testcases/test4.tig:8.21:Variable does not exist!
-test/testcases/test4.tig:8.21:Variable does not exist!
-test/testcases/test4.tig:8.9:Variable does not exist!
-test/testcases/test4.tig:8.9:Variable does not exist!
-test/testcases/test4.tig:8.21:Variable does not exist!
-test/testcases/test4.tig:8.21:Variable does not exist!
-test/testcases/test4.tig:8.22:Not int type
-test/testcases/test4.tig:8.21:Variable does not exist!
-test/testcases/test4.tig:8.21:Variable does not exist!
-test/testcases/test4.tig:6.7:Variable does not exist!
-test/testcases/test4.tig:6.7:Variable does not exist!
-test/testcases/test4.tig:6.7:Variable does not exist!
-test/testcases/test4.tig:6.7:Variable does not exist!
-test/testcases/test4.tig:8.9:Variable does not exist!
-test/testcases/test4.tig:8.9:Variable does not exist!
-test/testcases/test4.tig:8.11:Not int type
-test/testcases/test4.tig:8.21:Variable does not exist!
-test/testcases/test4.tig:8.21:Variable does not exist!
-test/testcases/test4.tig:8.22:Not int type
-test/testcases/test4.tig:8.21:Variable does not exist!
-test/testcases/test4.tig:8.21:Variable does not exist!
-test/testcases/test4.tig:8.9:Variable does not exist!
-test/testcases/test4.tig:8.9:Variable does not exist!
-test/testcases/test4.tig:8.21:Variable does not exist!
-test/testcases/test4.tig:8.21:Variable does not exist!
-test/testcases/test4.tig:8.22:Not int type
-test/testcases/test4.tig:8.21:Variable does not exist!
-test/testcases/test4.tig:8.21:Variable does not exist!
 EXP(
  ESEQ(
   SEQ(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L19,
+      LABEL L12,
       MOVE(
        TEMP t101,
        ESEQ(
         SEQ(
          CJUMP(EQ,
+          TEMP t130,
           CONST 0,
-          CONST 0,
-          L16,L17),
-         LABEL L16,
+          L13,L14),
+         LABEL L13,
          MOVE(
           TEMP t131,
           CONST 1),
          JUMP(
-          NAME L18),
-         LABEL L17,
+          NAME L15),
+         LABEL L14,
          MOVE(
           TEMP t131,
           BINOP(MUL,
-           CONST 0,
-           CONST 0)),
+           TEMP t130,
+           CALL(
+            NAME L12,
+             CONST 0,
+             BINOP(MINUS,
+              TEMP t130,
+              CONST 1)))),
          JUMP(
-          NAME L18),
+          NAME L15),
+         LABEL L15,
 ),
         TEMP t131)),
       JUMP(
@@ -3125,7 +489,10 @@ EXP(
 ),
      CONST 0)),
 ),
-  CONST 0))
+  CALL(
+   NAME L12,
+    CONST 0,
+    CONST 10)))
 emit L11
 val it = () : unit
 
@@ -3143,11 +510,33 @@ EXP(
    EXP(
     ESEQ(
      MOVE(
-      TEMP t129,
-      CONST 0),
+      TEMP t130,
+      ESEQ(
+       SEQ(
+        MOVE(
+         TEMP t129,
+         CALL(
+          NAME malloc,
+           BINOP(MUL,
+            CONST 2,
+            CONST 4))),
+        MOVE(
+         MEM(
+          BINOP(PLUS,
+           TEMP t129,
+           CONST 0)),
+         CONST 0),
+        MOVE(
+         MEM(
+          BINOP(PLUS,
+           TEMP t129,
+           CONST 4)),
+         CONST 0),
+),
+       TEMP t129)),
      CONST 0)),
 ),
-  TEMP t129))
+  TEMP t130))
 emit L11
 val it = () : unit
 
@@ -3157,30 +546,31 @@ val it = () : unit
 exports[`The textbook tests compiles test/testcases/test6.tig correctly 1`] = `
 "
 val it = true : bool
-test/testcases/test6.tig:8.15:Variable does not exist!
-test/testcases/test6.tig:8.15:Variable does not exist!
-test/testcases/test6.tig:8.3:Argument type mismatch
-test/testcases/test6.tig:5.15:Variable does not exist!
-test/testcases/test6.tig:5.15:Variable does not exist!
-test/testcases/test6.tig:5.16:Not int type
-test/testcases/test6.tig:5.15:Variable does not exist!
-test/testcases/test6.tig:5.15:Variable does not exist!
 EXP(
  ESEQ(
   SEQ(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L15,
+      LABEL L12,
       MOVE(
        TEMP t101,
-       CONST 0),
+       CALL(
+        NAME L13,
+         CONST 0,
+         BINOP(PLUS,
+          TEMP t132,
+          CONST 1))),
       JUMP(
        TEMP t128),
 ),
      CONST 0)),
 ),
-  CONST 0))
+  CALL(
+   NAME L12,
+    CONST 0,
+    CONST 0,
+    NAME L17)))
 emit L11
 val it = () : unit
 
@@ -3190,21 +580,13 @@ val it = () : unit
 exports[`The textbook tests compiles test/testcases/test7.tig correctly 1`] = `
 "
 val it = true : bool
-test/testcases/test7.tig:8.16:Variable does not exist!
-test/testcases/test7.tig:8.16:Variable does not exist!
-test/testcases/test7.tig:8.4:Argument type mismatch
-test/testcases/test7.tig:5.16:Variable does not exist!
-test/testcases/test7.tig:5.16:Variable does not exist!
-test/testcases/test7.tig:5.17:Not int type
-test/testcases/test7.tig:5.16:Variable does not exist!
-test/testcases/test7.tig:5.16:Variable does not exist!
 EXP(
  ESEQ(
   SEQ(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L15,
+      LABEL L12,
       MOVE(
        TEMP t101,
        CONST 0),
@@ -3213,7 +595,11 @@ EXP(
 ),
      CONST 0)),
 ),
-  CONST 0))
+  CALL(
+   NAME L12,
+    CONST 0,
+    CONST 0,
+    NAME L18)))
 emit L11
 val it = () : unit
 
@@ -3242,6 +628,7 @@ EXP(
     CONST 40),
    JUMP(
     NAME L14),
+   LABEL L14,
 ),
   TEMP t129))
 emit L11
@@ -3260,19 +647,20 @@ EXP(
    CJUMP(GT,
     CONST 5,
     CONST 4,
-    L12,L13),
-   LABEL L12,
+    L13,L14),
+   LABEL L13,
    MOVE(
     TEMP t129,
     CONST 13),
    JUMP(
-    NAME L14),
-   LABEL L13,
+    NAME L15),
+   LABEL L14,
    MOVE(
     TEMP t129,
-    CONST 0),
+    NAME L12),
    JUMP(
-    NAME L14),
+    NAME L15),
+   LABEL L15,
 ),
   TEMP t129))
 emit L11
@@ -3310,49 +698,9 @@ exports[`The textbook tests compiles test/testcases/test11.tig correctly 1`] = `
 "
 val it = true : bool
 test/testcases/test11.tig:2.1:Not int type
-test/testcases/test11.tig:2.1:named type does not match expression
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:If returns non-unit
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:break not in loop!
-test/testcases/test11.tig:2.1:break not in loop!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:If returns non-unit
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:Variable does not exist!
-test/testcases/test11.tig:2.1:break not in loop!
-test/testcases/test11.tig:2.1:break not in loop!
+test/testcases/test11.tig:2.1:Bad types for comparison operator
+test/testcases/test11.tig:2.1:Bad types for comparison operator
+test/testcases/test11.tig:2.1:Bad types for comparison operator
 EXP(
  ESEQ(
   SEQ(
@@ -3362,29 +710,23 @@ EXP(
       TEMP t130,
       CONST 10),
      CONST 0)),
-   EXP(
-    ESEQ(
-     MOVE(
-      TEMP t131,
-      CONST 0),
-     CONST 0)),
 ),
   ESEQ(
    SEQ(
-    LABEL L20,
-    CJUMP(LE,
-     TEMP t129,
+    LABEL L21,
+    CJUMP(EQ,
      CONST 0,
-     L19,L15),
-    LABEL L19,
+     CONST 1,
+     L20,L18),
+    LABEL L20,
     MOVE(
-     TEMP t129,
+     TEMP t130,
      BINOP(PLUS,
-      TEMP t129,
+      TEMP t130,
       CONST 1)),
     JUMP(
-     NAME L20),
-    LABEL L15,
+     NAME L21),
+    LABEL L18,
 ),
    CONST 0)))
 emit L11
@@ -3396,36 +738,6 @@ val it = () : unit
 exports[`The textbook tests compiles test/testcases/test12.tig correctly 1`] = `
 "
 val it = true : bool
-test/testcases/test12.tig:6.2:If returns non-unit
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:break not in loop!
-test/testcases/test12.tig:6.2:break not in loop!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:If returns non-unit
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:Variable does not exist!
-test/testcases/test12.tig:6.2:break not in loop!
-test/testcases/test12.tig:6.2:break not in loop!
 EXP(
  ESEQ(
   SEQ(
@@ -3447,28 +759,22 @@ EXP(
        TEMP t130,
        CONST 0),
       CONST 0)),
-    EXP(
-     ESEQ(
-      MOVE(
-       TEMP t131,
-       CONST 100),
-      CONST 0)),
 ),
    ESEQ(
     SEQ(
-     LABEL L20,
+     LABEL L17,
      CJUMP(LE,
-      TEMP t129,
-      CONST 0,
-      L19,L15),
-     LABEL L19,
+      TEMP t130,
+      CONST 100,
+      L16,L15),
+     LABEL L16,
      MOVE(
-      TEMP t129,
+      TEMP t130,
       BINOP(PLUS,
-       TEMP t129,
+       TEMP t130,
        CONST 1)),
      JUMP(
-      NAME L20),
+      NAME L17),
      LABEL L15,
 ),
     CONST 0))))
@@ -3494,7 +800,6 @@ exports[`The textbook tests compiles test/testcases/test14.tig correctly 1`] = `
 "
 val it = true : bool
 test/testcases/test14.tig:12.9:Bad types for comparison operator
-test/testcases/test14.tig:12.9:Bad types for comparison operator
 EXP(
  ESEQ(
   SEQ(
@@ -3503,13 +808,35 @@ EXP(
    EXP(
     ESEQ(
      MOVE(
-      TEMP t129,
-      CONST 0),
+      TEMP t130,
+      ESEQ(
+       SEQ(
+        MOVE(
+         TEMP t129,
+         CALL(
+          NAME malloc,
+           BINOP(MUL,
+            CONST 2,
+            CONST 4))),
+        MOVE(
+         MEM(
+          BINOP(PLUS,
+           TEMP t129,
+           CONST 0)),
+         NAME L13),
+        MOVE(
+         MEM(
+          BINOP(PLUS,
+           TEMP t129,
+           CONST 4)),
+         CONST 0),
+),
+       TEMP t129)),
      CONST 0)),
    EXP(
     ESEQ(
      MOVE(
-      TEMP t130,
+      TEMP t131,
       CALL(
        NAME initArray,
         CONST 3,
@@ -3521,21 +848,22 @@ EXP(
     CJUMP(EQ,
      CONST 0,
      CONST 1,
-     L12,L13),
-    LABEL L12,
+     L14,L15),
+    LABEL L14,
     MOVE(
-     TEMP t131,
+     TEMP t132,
      CONST 3),
     JUMP(
-     NAME L14),
-    LABEL L13,
+     NAME L16),
+    LABEL L15,
     MOVE(
-     TEMP t131,
+     TEMP t132,
      CONST 4),
     JUMP(
-     NAME L14),
+     NAME L16),
+    LABEL L16,
 ),
-   TEMP t131)))
+   TEMP t132)))
 emit L11
 val it = () : unit
 
@@ -3565,6 +893,7 @@ EXP(
     CONST 0),
    JUMP(
     NAME L14),
+   LABEL L14,
 ),
   TEMP t129))
 emit L11
@@ -3578,7 +907,7 @@ exports[`The textbook tests compiles test/testcases/test16.tig correctly 1`] = `
 val it = true : bool
 
 uncaught exception CycleInTypeDec
-  raised at: src/insel/semant.sml:239.137-239.151
+  raised at: semant.sml:251.137-251.151
 - 
 "
 `;
@@ -3612,14 +941,13 @@ exports[`The textbook tests compiles test/testcases/test18.tig correctly 1`] = `
 "
 val it = true : bool
 test/testcases/test18.tig:5.4:Variable undefined
-test/testcases/test18.tig:5.4:Variable undefined
 EXP(
  ESEQ(
   SEQ(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L13,
+      LABEL L12,
       MOVE(
        TEMP t101,
        CONST 0),
@@ -3630,22 +958,26 @@ EXP(
    EXP(
     ESEQ(
      MOVE(
-      TEMP t131,
+      TEMP t133,
       CONST 0),
      CONST 0)),
    EXP(
     ESEQ(
      SEQ(
-      LABEL L15,
+      LABEL L13,
       MOVE(
        TEMP t101,
-       CONST 0),
+       NAME L16),
       JUMP(
        TEMP t128),
 ),
      CONST 0)),
 ),
-  CONST 0))
+  CALL(
+   NAME L12,
+    CONST 0,
+    CONST 0,
+    NAME L18)))
 emit L11
 val it = () : unit
 
@@ -3655,24 +987,13 @@ val it = () : unit
 exports[`The textbook tests compiles test/testcases/test19.tig correctly 1`] = `
 "
 val it = true : bool
-test/testcases/test19.tig:8.16:Variable does not exist!
-test/testcases/test19.tig:8.16:Variable does not exist!
-test/testcases/test19.tig:8.4:Argument type mismatch
-test/testcases/test19.tig:8.16:Variable does not exist!
-test/testcases/test19.tig:8.16:Variable does not exist!
-test/testcases/test19.tig:8.4:Argument type mismatch
-test/testcases/test19.tig:5.16:Variable does not exist!
-test/testcases/test19.tig:5.16:Variable does not exist!
-test/testcases/test19.tig:5.17:Not int type
-test/testcases/test19.tig:5.16:Variable does not exist!
-test/testcases/test19.tig:5.16:Variable does not exist!
 EXP(
  ESEQ(
   SEQ(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L15,
+      LABEL L12,
       MOVE(
        TEMP t101,
        CONST 0),
@@ -3681,7 +1002,11 @@ EXP(
 ),
      CONST 0)),
 ),
-  CONST 0))
+  CALL(
+   NAME L12,
+    CONST 0,
+    CONST 0,
+    NAME L18)))
 emit L11
 val it = () : unit
 
@@ -3691,16 +1016,11 @@ val it = () : unit
 exports[`The textbook tests compiles test/testcases/test20.tig correctly 1`] = `
 "
 val it = true : bool
-test/testcases/test20.tig:3.18:Variable does not exist!
-test/testcases/test20.tig:3.18:Variable does not exist!
+test/testcases/test20.tig:3.18:Variable i does not exist!
+test/testcases/test20.tig:3.18:Variable i does not exist!
 test/testcases/test20.tig:3.19:Not int type
-test/testcases/test20.tig:3.18:Variable does not exist!
-test/testcases/test20.tig:3.18:Variable does not exist!
-test/testcases/test20.tig:3.18:Variable does not exist!
-test/testcases/test20.tig:3.18:Variable does not exist!
-test/testcases/test20.tig:3.19:Not int type
-test/testcases/test20.tig:3.18:Variable does not exist!
-test/testcases/test20.tig:3.18:Variable does not exist!
+test/testcases/test20.tig:3.18:Variable i does not exist!
+test/testcases/test20.tig:3.18:Variable i does not exist!
 SEQ(
  LABEL L14,
  CJUMP(GT,
@@ -3724,77 +1044,42 @@ exports[`The textbook tests compiles test/testcases/test21.tig correctly 1`] = `
 "
 val it = true : bool
 test/testcases/test21.tig:8.11:Not int type
-test/testcases/test21.tig:8.11:Not int type
 test/testcases/test21.tig:5.1:function body and return type differ
-test/testcases/test21.tig:6.7:Variable does not exist!
-test/testcases/test21.tig:6.7:Variable does not exist!
-test/testcases/test21.tig:6.7:Variable does not exist!
-test/testcases/test21.tig:6.7:Variable does not exist!
-test/testcases/test21.tig:8.9:Variable does not exist!
-test/testcases/test21.tig:8.9:Variable does not exist!
-test/testcases/test21.tig:8.11:Not int type
-test/testcases/test21.tig:8.21:Variable does not exist!
-test/testcases/test21.tig:8.21:Variable does not exist!
-test/testcases/test21.tig:8.22:Not int type
-test/testcases/test21.tig:8.21:Variable does not exist!
-test/testcases/test21.tig:8.21:Variable does not exist!
-test/testcases/test21.tig:8.11:Not int type
-test/testcases/test21.tig:8.9:Variable does not exist!
-test/testcases/test21.tig:8.9:Variable does not exist!
-test/testcases/test21.tig:8.21:Variable does not exist!
-test/testcases/test21.tig:8.21:Variable does not exist!
-test/testcases/test21.tig:8.22:Not int type
-test/testcases/test21.tig:8.21:Variable does not exist!
-test/testcases/test21.tig:8.21:Variable does not exist!
-test/testcases/test21.tig:6.7:Variable does not exist!
-test/testcases/test21.tig:6.7:Variable does not exist!
-test/testcases/test21.tig:6.7:Variable does not exist!
-test/testcases/test21.tig:6.7:Variable does not exist!
-test/testcases/test21.tig:8.9:Variable does not exist!
-test/testcases/test21.tig:8.9:Variable does not exist!
-test/testcases/test21.tig:8.11:Not int type
-test/testcases/test21.tig:8.21:Variable does not exist!
-test/testcases/test21.tig:8.21:Variable does not exist!
-test/testcases/test21.tig:8.22:Not int type
-test/testcases/test21.tig:8.21:Variable does not exist!
-test/testcases/test21.tig:8.21:Variable does not exist!
-test/testcases/test21.tig:8.11:Not int type
-test/testcases/test21.tig:8.9:Variable does not exist!
-test/testcases/test21.tig:8.9:Variable does not exist!
-test/testcases/test21.tig:8.21:Variable does not exist!
-test/testcases/test21.tig:8.21:Variable does not exist!
-test/testcases/test21.tig:8.22:Not int type
-test/testcases/test21.tig:8.21:Variable does not exist!
-test/testcases/test21.tig:8.21:Variable does not exist!
 EXP(
  ESEQ(
   SEQ(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L19,
+      LABEL L12,
       MOVE(
        TEMP t101,
        ESEQ(
         SEQ(
          CJUMP(EQ,
+          TEMP t130,
           CONST 0,
-          CONST 0,
-          L16,L17),
-         LABEL L16,
+          L13,L14),
+         LABEL L13,
          MOVE(
           TEMP t131,
           CONST 1),
          JUMP(
-          NAME L18),
-         LABEL L17,
+          NAME L15),
+         LABEL L14,
          MOVE(
           TEMP t131,
           BINOP(MUL,
-           CONST 0,
-           CONST 0)),
+           TEMP t130,
+           CALL(
+            NAME L12,
+             CONST 0,
+             BINOP(MINUS,
+              TEMP t130,
+              CONST 1)))),
          JUMP(
-          NAME L18),
+          NAME L15),
+         LABEL L15,
 ),
         TEMP t131)),
       JUMP(
@@ -3802,7 +1087,10 @@ EXP(
 ),
      CONST 0)),
 ),
-  CONST 0))
+  CALL(
+   NAME L12,
+    CONST 0,
+    CONST 10)))
 emit L11
 val it = () : unit
 
@@ -3812,7 +1100,9 @@ val it = () : unit
 exports[`The textbook tests compiles test/testcases/test22.tig correctly 1`] = `
 "
 val it = true : bool
+test/testcases/test22.tig:7.2:unrecognized field
 test/testcases/test22.tig:7.11:Assigning wrong type to variable
+test/testcases/test22.tig:7.2:unrecognized field
 EXP(
  ESEQ(
   SEQ(
@@ -3821,14 +1111,36 @@ EXP(
    EXP(
     ESEQ(
      MOVE(
-      TEMP t129,
-      CONST 0),
+      TEMP t130,
+      ESEQ(
+       SEQ(
+        MOVE(
+         TEMP t129,
+         CALL(
+          NAME malloc,
+           BINOP(MUL,
+            CONST 2,
+            CONST 4))),
+        MOVE(
+         MEM(
+          BINOP(PLUS,
+           TEMP t129,
+           CONST 0)),
+         NAME L13),
+        MOVE(
+         MEM(
+          BINOP(PLUS,
+           TEMP t129,
+           CONST 4)),
+         CONST 0),
+),
+       TEMP t129)),
      CONST 0)),
 ),
   ESEQ(
    MOVE(
     CONST 0,
-    CONST 0),
+    NAME L15),
    CONST 0)))
 emit L11
 val it = () : unit
@@ -3849,24 +1161,55 @@ EXP(
    EXP(
     ESEQ(
      MOVE(
-      TEMP t129,
-      CONST 0),
+      TEMP t130,
+      ESEQ(
+       SEQ(
+        MOVE(
+         TEMP t129,
+         CALL(
+          NAME malloc,
+           BINOP(MUL,
+            CONST 2,
+            CONST 4))),
+        MOVE(
+         MEM(
+          BINOP(PLUS,
+           TEMP t129,
+           CONST 0)),
+         NAME L13),
+        MOVE(
+         MEM(
+          BINOP(PLUS,
+           TEMP t129,
+           CONST 4)),
+         CONST 0),
+),
+       TEMP t129)),
      CONST 0)),
 ),
   ESEQ(
    MOVE(
-    CONST 0,
-    CONST 0),
+    MEM(
+     BINOP(PLUS,
+      TEMP t130,
+      BINOP(MUL,
+       CONST 1,
+       CONST 4))),
+    NAME L15),
    CONST 0)))
 emit L11
-val it = () : unit
 
+uncaught exception Subscript [subscript out of bounds]
+  raised at: Basis/Implementation/list.sml:67.35-67.44
+             main.sml:28.46
+- 
 "
 `;
 
 exports[`The textbook tests compiles test/testcases/test24.tig correctly 1`] = `
 "
 val it = true : bool
+test/testcases/test24.tig:5.2:subscript var on non-array type
 test/testcases/test24.tig:5.2:subscript var on non-array type
 EXP(
  ESEQ(
@@ -3888,6 +1231,7 @@ val it = () : unit
 exports[`The textbook tests compiles test/testcases/test25.tig correctly 1`] = `
 "
 val it = true : bool
+test/testcases/test25.tig:5.2:field var on non-record type
 test/testcases/test25.tig:5.2:field var on non-record type
 EXP(
  ESEQ(
@@ -3913,7 +1257,7 @@ test/testcases/test26.tig:3.3:Not int type
 EXP(
  BINOP(PLUS,
   CONST 3,
-  CONST 0))
+  NAME L13))
 emit L11
 val it = () : unit
 
@@ -3935,16 +1279,19 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L13,
+      LABEL L12,
       MOVE(
        TEMP t101,
-       TEMP t129),
+       TEMP t131),
       JUMP(
        TEMP t128),
 ),
      CONST 0)),
 ),
-  CONST 0))
+  CALL(
+   NAME L12,
+    CONST 0,
+    CONST 2)))
 emit L11
 val it = () : unit
 
@@ -3955,8 +1302,8 @@ exports[`The textbook tests compiles test/testcases/test28.tig correctly 1`] = `
 "
 val it = true : bool
 test/testcases/test28.tig:7.21:named type does not match expression
-test/testcases/test28.tig:9.2:Variable does not exist!
-test/testcases/test28.tig:9.2:Variable does not exist!
+test/testcases/test28.tig:9.2:Variable rec1 does not exist!
+test/testcases/test28.tig:9.2:Variable rec1 does not exist!
 EXP(
  ESEQ(
   SEQ(
@@ -3965,8 +1312,30 @@ EXP(
    EXP(
     ESEQ(
      MOVE(
-      TEMP t129,
-      CONST 0),
+      TEMP t130,
+      ESEQ(
+       SEQ(
+        MOVE(
+         TEMP t129,
+         CALL(
+          NAME malloc,
+           BINOP(MUL,
+            CONST 2,
+            CONST 4))),
+        MOVE(
+         MEM(
+          BINOP(PLUS,
+           TEMP t129,
+           CONST 0)),
+         NAME L13),
+        MOVE(
+         MEM(
+          BINOP(PLUS,
+           TEMP t129,
+           CONST 4)),
+         CONST 0),
+),
+       TEMP t129)),
      CONST 0)),
 ),
   CONST 0))
@@ -3980,8 +1349,8 @@ exports[`The textbook tests compiles test/testcases/test29.tig correctly 1`] = `
 "
 val it = true : bool
 test/testcases/test29.tig:7.21:named type does not match expression
-test/testcases/test29.tig:9.2:Variable does not exist!
-test/testcases/test29.tig:9.2:Variable does not exist!
+test/testcases/test29.tig:9.2:Variable arr1 does not exist!
+test/testcases/test29.tig:9.2:Variable arr1 does not exist!
 EXP(
  ESEQ(
   SEQ(
@@ -4022,7 +1391,12 @@ EXP(
         CONST 0)),
      CONST 0)),
 ),
-  CONST 0))
+  MEM(
+   BINOP(PLUS,
+    TEMP t129,
+    BINOP(MUL,
+     CONST 2,
+     CONST 4)))))
 emit L11
 val it = () : unit
 
@@ -4033,8 +1407,8 @@ exports[`The textbook tests compiles test/testcases/test31.tig correctly 1`] = `
 "
 val it = true : bool
 test/testcases/test31.tig:3.12:named type does not match expression
-test/testcases/test31.tig:5.2:Variable does not exist!
-test/testcases/test31.tig:5.2:Variable does not exist!
+test/testcases/test31.tig:5.2:Variable a does not exist!
+test/testcases/test31.tig:5.2:Variable a does not exist!
 EXP(
  ESEQ(
   SEQ(
@@ -4042,7 +1416,7 @@ EXP(
     ESEQ(
      MOVE(
       TEMP t129,
-      CONST 0),
+      NAME L12),
      CONST 0)),
 ),
   CONST 0))
@@ -4068,7 +1442,7 @@ EXP(
       CALL(
        NAME initArray,
         CONST 10,
-        CONST 0)),
+        NAME L13)),
      CONST 0)),
 ),
   CONST 0))
@@ -4104,8 +1478,6 @@ val it = () : unit
 exports[`The textbook tests compiles test/testcases/test34.tig correctly 1`] = `
 "
 val it = true : bool
-test/testcases/test34.tig:3.38:Variable does not exist!
-test/testcases/test34.tig:3.38:Variable does not exist!
 test/testcases/test34.tig:5.2:Argument type mismatch
 EXP(
  ESEQ(
@@ -4113,16 +1485,20 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L13,
+      LABEL L12,
       MOVE(
        TEMP t101,
-       CONST 0),
+       TEMP t132),
       JUMP(
        TEMP t128),
 ),
      CONST 0)),
 ),
-  CONST 0))
+  CALL(
+   NAME L12,
+    CONST 0,
+    NAME L15,
+    NAME L16)))
 emit L11
 val it = () : unit
 
@@ -4132,8 +1508,6 @@ val it = () : unit
 exports[`The textbook tests compiles test/testcases/test35.tig correctly 1`] = `
 "
 val it = true : bool
-test/testcases/test35.tig:3.38:Variable does not exist!
-test/testcases/test35.tig:3.38:Variable does not exist!
 test/testcases/test35.tig:5.2:Argument type mismatch
 EXP(
  ESEQ(
@@ -4141,16 +1515,19 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L13,
+      LABEL L12,
       MOVE(
        TEMP t101,
-       CONST 0),
+       TEMP t132),
       JUMP(
        TEMP t128),
 ),
      CONST 0)),
 ),
-  CONST 0))
+  CALL(
+   NAME L12,
+    CONST 0,
+    NAME L14)))
 emit L11
 val it = () : unit
 
@@ -4160,8 +1537,6 @@ val it = () : unit
 exports[`The textbook tests compiles test/testcases/test36.tig correctly 1`] = `
 "
 val it = true : bool
-test/testcases/test36.tig:3.38:Variable does not exist!
-test/testcases/test36.tig:3.38:Variable does not exist!
 test/testcases/test36.tig:5.2:Too many arguments
 EXP(
  ESEQ(
@@ -4169,16 +1544,21 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L13,
+      LABEL L12,
       MOVE(
        TEMP t101,
-       CONST 0),
+       TEMP t132),
       JUMP(
        TEMP t128),
 ),
      CONST 0)),
 ),
-  CONST 0))
+  CALL(
+   NAME L12,
+    CONST 0,
+    CONST 3,
+    NAME L14,
+    CONST 5)))
 emit L11
 val it = () : unit
 
@@ -4201,7 +1581,7 @@ EXP(
     ESEQ(
      MOVE(
       TEMP t130,
-      CONST 0),
+      NAME L12),
      CONST 0)),
 ),
   CONST 0))
@@ -4232,20 +1612,16 @@ exports[`The textbook tests compiles test/testcases/test39.tig correctly 1`] = `
 "
 val it = true : bool
 test/testcases/test39.tig:6.2:function declared twice in same fundec
-test/testcases/test39.tig:6.26:Variable does not exist!
-test/testcases/test39.tig:6.26:Variable does not exist!
-test/testcases/test39.tig:5.26:Variable does not exist!
-test/testcases/test39.tig:5.26:Variable does not exist!
 EXP(
  ESEQ(
   SEQ(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L15,
+      LABEL L12,
       MOVE(
        TEMP t101,
-       CONST 0),
+       TEMP t130),
       JUMP(
        TEMP t128),
 ),
@@ -4262,24 +1638,25 @@ exports[`The textbook tests compiles test/testcases/test40.tig correctly 1`] = `
 "
 val it = true : bool
 test/testcases/test40.tig:3.2:function body and return type differ
-test/testcases/test40.tig:3.22:Variable does not exist!
-test/testcases/test40.tig:3.22:Variable does not exist!
 EXP(
  ESEQ(
   SEQ(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L13,
+      LABEL L12,
       MOVE(
        TEMP t101,
-       CONST 0),
+       TEMP t130),
       JUMP(
        TEMP t128),
 ),
      CONST 0)),
 ),
-  CONST 0))
+  CALL(
+   NAME L12,
+    CONST 0,
+    CONST 2)))
 emit L11
 val it = () : unit
 
@@ -4327,42 +1704,147 @@ EXP(
    EXP(
     ESEQ(
      MOVE(
-      TEMP t130,
+      TEMP t132,
       CALL(
        NAME initArray,
         CONST 5,
-        CONST 0)),
-     CONST 0)),
-   EXP(
-    ESEQ(
-     MOVE(
-      TEMP t131,
-      CALL(
-       NAME initArray,
-        CONST 100,
-        CONST 0)),
-     CONST 0)),
-   EXP(
-    ESEQ(
-     MOVE(
-      TEMP t132,
-      CONST 0),
+        ESEQ(
+         SEQ(
+          MOVE(
+           TEMP t131,
+           CALL(
+            NAME malloc,
+             BINOP(MUL,
+              CONST 4,
+              CONST 4))),
+          MOVE(
+           MEM(
+            BINOP(PLUS,
+             TEMP t131,
+             CONST 0)),
+           NAME L18),
+          MOVE(
+           MEM(
+            BINOP(PLUS,
+             TEMP t131,
+             CONST 4)),
+           NAME L19),
+          MOVE(
+           MEM(
+            BINOP(PLUS,
+             TEMP t131,
+             CONST 8)),
+           CONST 0),
+          MOVE(
+           MEM(
+            BINOP(PLUS,
+             TEMP t131,
+             CONST 12)),
+           CONST 0),
+),
+         TEMP t131))),
      CONST 0)),
    EXP(
     ESEQ(
      MOVE(
       TEMP t133,
-      CONST 0),
+      CALL(
+       NAME initArray,
+        CONST 100,
+        NAME L21)),
+     CONST 0)),
+   EXP(
+    ESEQ(
+     MOVE(
+      TEMP t135,
+      ESEQ(
+       SEQ(
+        MOVE(
+         TEMP t134,
+         CALL(
+          NAME malloc,
+           BINOP(MUL,
+            CONST 4,
+            CONST 4))),
+        MOVE(
+         MEM(
+          BINOP(PLUS,
+           TEMP t134,
+           CONST 0)),
+         NAME L24),
+        MOVE(
+         MEM(
+          BINOP(PLUS,
+           TEMP t134,
+           CONST 4)),
+         NAME L25),
+        MOVE(
+         MEM(
+          BINOP(PLUS,
+           TEMP t134,
+           CONST 8)),
+         CONST 2432),
+        MOVE(
+         MEM(
+          BINOP(PLUS,
+           TEMP t134,
+           CONST 12)),
+         CONST 44),
+),
+       TEMP t134)),
+     CONST 0)),
+   EXP(
+    ESEQ(
+     MOVE(
+      TEMP t137,
+      ESEQ(
+       SEQ(
+        MOVE(
+         TEMP t136,
+         CALL(
+          NAME malloc,
+           BINOP(MUL,
+            CONST 2,
+            CONST 4))),
+        MOVE(
+         MEM(
+          BINOP(PLUS,
+           TEMP t136,
+           CONST 0)),
+         NAME L27),
+        MOVE(
+         MEM(
+          BINOP(PLUS,
+           TEMP t136,
+           CONST 4)),
+         CALL(
+          NAME initArray,
+           CONST 3,
+           CONST 1900)),
+),
+       TEMP t136)),
      CONST 0)),
 ),
   ESEQ(
    MOVE(
-    CONST 0,
+    MEM(
+     BINOP(PLUS,
+      BINOP(PLUS,
+       TEMP t137,
+       BINOP(MUL,
+        CONST 1,
+        CONST 4)),
+      BINOP(MUL,
+       CONST 2,
+       CONST 4))),
     CONST 2323),
    CONST 0)))
 emit L11
-val it = () : unit
 
+uncaught exception Subscript [subscript out of bounds]
+  raised at: Basis/Implementation/list.sml:67.35-67.44
+             main.sml:28.46
+- 
 "
 `;
 
@@ -4502,20 +1984,16 @@ val it = () : unit
 exports[`The textbook tests compiles test/testcases/test48.tig correctly 1`] = `
 "
 val it = true : bool
-test/testcases/test48.tig:6.26:Variable does not exist!
-test/testcases/test48.tig:6.26:Variable does not exist!
-test/testcases/test48.tig:8.26:Variable does not exist!
-test/testcases/test48.tig:8.26:Variable does not exist!
 EXP(
  ESEQ(
   SEQ(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L13,
+      LABEL L12,
       MOVE(
        TEMP t101,
-       CONST 0),
+       TEMP t130),
       JUMP(
        TEMP t128),
 ),
@@ -4525,10 +2003,10 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L15,
+      LABEL L13,
       MOVE(
        TEMP t101,
-       CONST 0),
+       TEMP t132),
       JUMP(
        TEMP t128),
 ),
@@ -4545,12 +2023,12 @@ exports[`The textbook tests compiles test/testcases/test49.tig correctly 1`] = `
 "
 val it = true : bool
 test/testcases/test49.tig:5.18:syntax error: inserting  PLUS
-test/testcases/test49.tig:5.10:Variable does not exist!
-test/testcases/test49.tig:5.10:Variable does not exist!
+test/testcases/test49.tig:5.10:Variable rectype does not exist!
+test/testcases/test49.tig:5.10:Variable rectype does not exist!
 test/testcases/test49.tig:5.18:Not int type
 test/testcases/test49.tig:5.18:Not int type
-test/testcases/test49.tig:5.10:Variable does not exist!
-test/testcases/test49.tig:5.10:Variable does not exist!
+test/testcases/test49.tig:5.10:Variable rectype does not exist!
+test/testcases/test49.tig:5.10:Variable rectype does not exist!
 EXP(
  ESEQ(
   SEQ(

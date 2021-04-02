@@ -1,16 +1,16 @@
-L16:
+L17:
 addi t130, $0, 5
 addi t131, $0, 4
-bgt t130, t131, t 
- ble t130, t131, f 
-L12:
-addi t132, $0, 13
-move t129, t132
-j lab
+bgt t130, t131, L13
+ble t130, t131, L14
 L13:
-addi t133, $0, 0
-move t129, t133
-j lab
-add t129, $0, t129
-j lab
+addi t129, $0, 13
+j L15
+L14:
+la t132, L12
+move t129, t132
+j L15
 L15:
+add t129, $0, t129
+j L16
+L16:

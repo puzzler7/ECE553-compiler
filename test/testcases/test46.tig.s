@@ -1,15 +1,12 @@
 L15:
+addi t129, $0, 0
+addi t130, $0, 1
 addi t131, $0, 0
-move t129, t131
-addi t132, $0, 1
-move t130, t132
-addi t133, $0, 0
-bne t129, t133, t 
- beq t129, t133, f 
+bne t129, t131, L12
+beq t129, t131, L13
 L13:
-addi t134, $0, 0
-move t130, t134
+addi t130, $0, 0
 L12:
 add t130, $0, t130
-j lab
+j L14
 L14:
