@@ -202,8 +202,15 @@ struct
       		let
       			fun findField([], sym) = T.NIL
       			  | findField((fsym, ty)::fields, sym) = if fsym = sym then ty else findField(fields, sym)
+            fun findFieldIdx([], sym, ret) = NONE
+              | findFieldIdx((fsym, ty)::b, sym, ret) = if fsym = sym then SOME(ret) else findFieldIdx(b, sym, ret+1)
       		in
-      			{exp = TR.FIXME, ty=(case getRecordFromName(#ty(transVar(venv, tenv, var, break, level))) of
+      			{exp = (case getRecordFromName(#ty(transVar(venv, tenv, var, break, level))) of
+                T.RECORD(fields, u) => (case findFieldIdx(fields, sym, 0) of
+                  NONE => ((E.error pos "unrecognized field"; TR.NIL))
+                | SOME(x) => TR.fieldVar(#exp(transVar(venv, tenv, var, break, level)), x))
+              | x => (E.error pos "field var on non-record type"; TR.NIL)),
+            ty=(case getRecordFromName(#ty(transVar(venv, tenv, var, break, level))) of
       					T.RECORD(fields, u) => findField(fields, sym)
 				      | x => (E.error pos "field var on non-record type"; T.NIL))}
 				       
@@ -212,9 +219,12 @@ struct
       	let  val ty = (case getArrayFromName(#ty(transVar(venv, tenv, var, break, level))) of
       			   T.ARRAY(ty, u) => (checkInt(transExp(venv, tenv, exp, break, level), pos); ty) 
       			   | x => (E.error pos "subscript var on non-array type"; T.NIL))
-	in
-   		    {exp = TR.FIXME, ty = ty}
-	end
+            val exp =  (case getArrayFromName(#ty(transVar(venv, tenv, var, break, level))) of
+               T.ARRAY(ty, u) => (TR.subscriptVar(#exp(transVar(venv, tenv, var, break, level)), #exp(transExp(venv, tenv, exp, break, level)))) 
+               | x => (E.error pos "subscript var on non-array type"; TR.NIL))
+      	in
+         		    {exp = TR.FIXME, ty = ty}
+      	end
 	    
        
     and transDec(venv, tenv, dec, break, level) = 

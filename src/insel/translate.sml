@@ -15,6 +15,8 @@ sig
     val arrayVar: exp * exp -> exp
     val simpleVar: access  -> exp
     val stringVar: string -> exp
+    val subscriptVar: exp * exp -> exp
+    val fieldVar: exp * int -> exp
     (*val structVar
     val subscriptVar
     val recordVar
@@ -181,11 +183,18 @@ struct
 
     fun arrayVar (size, init) = Ex(F.externalCall("initArray", [unEx(size), unEx(init)])) 
 
-    (*fun recordVar() = ()
+    (*fun recordVar() = ()*)
 
-    fun subscriptVar() = ()
+    fun subscriptVar(var, exp) = let
+      val v = unEx(var)
+      val e = unEx(exp)
+      fun splitVar(TR.MEM(TR.BINOP(x))) = TR.BINOP(x)
+        | splitVar(x) = x
+    in
+      Ex(TR.MEM(TR.BINOP(TR.PLUS, splitVar(v), TR.BINOP(TR.MUL,e, TR.CONST F.wordSize))))
+    end 
 
-    fun fieldVar() = ()*)
+    fun fieldVar(var, offset) = subscriptVar(var, Ex(TR.CONST(offset)))
 
     fun whileIR(test, body, done) = 
         let
