@@ -110,7 +110,7 @@ struct
       val frm = #frame lvl
       val parent = #parent lvl
       fun help(p, ret) = case p of
-        OUTERMOST => (E.error 0 "shouldn't happen follow"; unEx(NIL))
+        OUTERMOST => ret
       | LEVEL(pl) => if #unique pl = #unique uselevel then ret
           else help(#parent pl, (case F.formals(#frame pl) of 
                 [] => (E.error 0 "static link not found in formals"; unEx(NIL))
