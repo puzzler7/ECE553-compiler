@@ -239,11 +239,12 @@ struct
 						(case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else seenTypes:= name:: !seenTypes;tenv), exp=TR.NIL}
 	      | trdec (venv,tenv,A.TypeDec({name,ty,pos}::tydeclist)) = (tenv := S.enter(!tenv, name, T.NAME(name, ref NONE)); trdec(venv, tenv, A.TypeDec(tydeclist));
 									    (case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else seenTypes:= name:: !seenTypes;{venv=venv,tenv=tenv, exp=TR.NIL})
-	      | trdec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (let val rt = funcBody(name, params, result, pos, level)
-          val nm = funcDecl(name, params, result, level, pos);
+	      | trdec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (let 
+										      val nm = funcDecl(name, params, result, level, pos);
+										      val rt = funcBody(name, params, result, pos, level);
          val trbody = transExp(venv, tenv, body, break, level) in (if checkTypeEqual(rt, #ty(trbody)) then () else E.error pos "function body and return type differ"; scopeUp(); {venv = venv, tenv = tenv, exp=TR.fundecIR(#exp(trbody), nm)}) end)
-	      | trdec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (  let val rt = funcBody(name, params, result, pos, level)
-          val nm = funcDecl(name, params, result, level, pos);
+	      | trdec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (  let val nm = funcDecl(name, params, result, level, pos);
+												      val rt = funcBody(name, params, result, pos, level)
           val _ = trdec(venv, tenv, A.FunctionDec(fundeclist));
          val trbody = transExp(venv, tenv, body, break, level) in (if checkTypeEqual(rt, #ty(trbody)) then () else E.error pos "function body and return type differ"; scopeUp(); {venv = venv, tenv = tenv, exp=TR.fundecIR(#exp(trbody), nm)}) end)				
 	    in

@@ -15,13 +15,17 @@ fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
 	val calldefs = [Frame.RA, Frame.V0, Frame.V1]@Frame.callersaves
 	fun emit x= ilist := x :: !ilist
 	fun result(gen) = let val t = Temp.newtemp() in gen t; t end
-	fun munchArgs(i, []) = []
-	  | munchArgs(i, exp::args)  =
+	fun munchArgs(i, (T.CONST c)::args) = munchArgs2(i, c, args)	    
+	and munchArgs2(i, sl, []) = []
+	  | munchArgs2(i, sl, exp::args)  =
 	    result(fn r =>
 		      if i < 4
-		      then emit(A.OPER{assem = "move $a" ^ Int.toString(i) ^ ", `s0\n", src = [munchExp exp], dst=[], jump = NONE})
-		      else emit(A.OPER{assem = "addi $sp, $sp, -4\n sw `s0, 0($sp)", src = [munchExp exp], dst=[], jump=NONE}))
-	    ::munchArgs(i+1, args) 
+		      then emit(A.OPER{assem = "move `d0, `s0\n", src = [munchExp exp], dst=[(case i of 0 => Frame.A0
+												      | 1 => Frame.A1
+												      | 2 => Frame.A2
+												      | 3 => Frame.A3)], jump = NONE})
+		      else emit(A.OPER{assem = "sw `s0, " ^ Int.toString(sl + 4 * i - 12) ^ "(`s1)\n", src = [munchExp exp, Frame.FP], dst=[], jump=NONE})) (* Assume sl is negative*)
+	    ::munchArgs2(i+1, sl, args) 
 	    
 	and munchStm(T.SEQ(a)) = ((map munchStm a); ())  
 	  | munchStm(T.MOVE(T.MEM(T.BINOP(T.PLUS,el,T.CONST i)),e2)) =
@@ -66,7 +70,7 @@ fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
             emit(A.OPER{assem="bleu `s0, `s1, " ^ Symbol.name(t) ^ "\nbgtu `s0, `s1, " ^ Symbol.name(f) ^ "\n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
           | munchStm (T.CJUMP(T.UGE,e1,e2,t,f)) =
             emit(A.OPER{assem="bgeu `s0, `s1, t \nbltu `s0, `s1, f \n", src=[munchExp e1, munchExp e2], dst=[], jump=SOME([t,f])})
-	  | munchStm (T.EXP(T.CALL(T.NAME l, args))) = 	    
+	  | munchStm (T.EXP(T.CALL(T.NAME(l), args))) = 	    
             emit(A.OPER{assem="jal " ^ Symbol.name(l) ^ "\n", src=munchArgs(0,args), dst=calldefs, jump = NONE})
   	  | munchStm (T.EXP(T.CALL(e, args))) = (* somehow need to be able to list actual registers in calldefs *)
 	    emit(A.OPER{assem="jalr `s0\n", src=munchExp(e)::munchArgs(0,args), dst=calldefs, jump = NONE})
@@ -111,9 +115,12 @@ fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
 	  | munchExp (T.BINOP(T.ARSHIFT, e1, e2)) =
             result(fn r => emit(A.OPER{assem="srav `d0, `s0, `s1\n", src=[munchExp e1, munchExp e2], dst=[r], jump=NONE}))
 	  | munchExp (T.NAME lab) = 
-	    result(fn r => emit(A.LABEL{assem=Symbol.name(lab) ^ ":\n", lab = lab}))
-	  | munchExp(T.CALL(e, args)) =
-	    result(fn r => emit(A.OPER{assem="jalr `s0\n", src=munchExp(e)::munchArgs(0, args), dst = calldefs, jump = NONE})) (* SHOULDN'T GET HERE ANYWAYS *)
+	    result(fn r => emit(A.LABEL{assem=Symbol.name(lab) ^ " shouldn't have gotten here:\n", lab = lab}))
+	  | munchExp(T.CALL(T.NAME l, args)) =
+	    result(fn r => emit(A.OPER{assem="jal " ^ Symbol.name(l) ^ "\nmove `d1 `d0\n", src= munchArgs(0, args), dst = [Frame.RV, r]@calldefs, jump = NONE}))
+	  | munchExp(T.CALL(e, args)) =	    
+            result(fn r => emit(A.OPER{assem="jalr `s0\n", src=munchExp(e)::munchArgs(0, args), dst = Frame.RV::calldefs, jump = NONE})) (* SHOULDN'T GET HERE ANYWAYS *)
+
 	  | munchExp(T.TEMP t) = t
 				    		     
 		     

@@ -1,22 +1,28 @@
-L21:
-L19:
-addi t132, $0, 0
-addi t133, $0, 0
-beq t132, t133, t 
- bne t132, t133, f 
+L18:
 L16:
-addi t134, $0, 1
-move t131, t134
-j lab
-L17:
-addi t136, $0, 0
-addi t137, $0, 0
-mul t135, t136, t137
-move t131, t135
-j lab
-move t101, t131
+addi t131, $0, 0
+beq t129, t131, L13
+bne t129, t131, L14
+L13:
+addi t132, $0, 1
+move t130, t132
+j L15
+L14:
+L12:
+addi t138, $0, 1
+sub t137, t129, t138
+move t103, t137
+jalr t135
+mul t133, t129, t134
+move t130, t133
+j L15
+L15:
+move t101, t130
 jr t128
-addi t138, $0, 0
-add t138, $0, t138
-j lab
-L20:
+addi t139, $0, 0
+add t139, $0, t139
+addi t141, $0, 10
+move t103, t141
+jal L12
+j L17
+L17:
