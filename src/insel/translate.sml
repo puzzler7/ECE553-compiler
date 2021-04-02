@@ -5,7 +5,6 @@ sig
     datatype exp = Ex of Tree.exp
                  | Nx of Tree.stm
                  | Cx of Temp.label * Temp.label  -> Tree.stm
-                 | FIXME
 
     val outermost: level
     val newLevel: {parent: level, name: Temp.label,formals: bool list} -> level
@@ -76,7 +75,6 @@ struct
     datatype exp = Ex of Tree.exp
                  | Nx of Tree.stm
                  | Cx of Temp.label * Temp.label  -> Tree.stm
-                 | FIXME
 
     val NIL = Ex(TR.CONST 0)
 
@@ -91,17 +89,14 @@ struct
                         TR.TEMP r)
             end
       | unEx  (Nx s) = TR.ESEQ(s, TR.CONST 0)
-      | unEx (FIXME) = TR.CONST 0
 
     fun unNx (Nx n) = n
       | unNx (Ex e) = TR.EXP(e)
       | unNx (Cx c) = unNx(Ex(unEx(Cx c)))
-      | unNx (FIXME) = TR.EXP(TR.CONST 0)
 
     fun unCx (Cx c) = c
       | unCx (Ex e) = (fn (t, f) => TR.CJUMP(TR.EQ, e, TR.CONST(1), t, f))
       | unCx (Nx n) = ((E.error 0 "Cannot unCx an Nx"); (fn (t, f) => TR.EXP(TR.CONST 0)))
-      | unCx (FIXME) = unCx(Ex(TR.CONST 0))
 
     fun simpleVar((lvl, acc):access) = Ex(F.exp(acc)(TR.CONST 0)) (*FIXME fp/static link stuff?*)
 
