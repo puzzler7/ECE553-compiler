@@ -352,7 +352,7 @@ struct
               | trexp (A.RecordExp({fields, typ, pos}), break) = 
               		(case getRecordFromName(lookupType(!tenv, typ, pos)) of
                       T.RECORD(symlist, u) => if checkRecordType(fields, symlist, break, level) 
-	                      then {exp=TR.FIXME, ty=T.RECORD(symlist, u)} 
+	                      then {exp=TR.recordVar(map (fn(x)=> #exp(trexp(x, break))) (map #2 fields)), ty=T.RECORD(symlist, u)} 
 	                      else (E.error pos "Wrong record type!"; {exp=TR.nilIR(), ty=T.NIL})
                     | x => (E.error pos "Assigning record to not record type"; {exp=TR.nilIR(), ty=T.NIL}))
               | trexp (A.IfExp({test, then', else', pos}), break) =

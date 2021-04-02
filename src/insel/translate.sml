@@ -17,11 +17,7 @@ sig
     val stringVar: string -> exp
     val subscriptVar: exp * exp -> exp
     val fieldVar: exp * int -> exp
-    (*val structVar
-    val subscriptVar
-    val recordVar
-    val stringIR: string -> exp 
-    val letIR*)
+    val recordVar: exp list -> exp
     val whileIR: exp * exp * Temp.label -> exp
     (*Maybe need one for every absyn exp?*)
     val binopIR: Absyn.oper * exp * exp -> exp
@@ -183,7 +179,20 @@ struct
 
     fun arrayVar (size, init) = Ex(F.externalCall("initArray", [unEx(size), unEx(init)])) 
 
-    (*fun recordVar() = ()*)
+    fun recordVar(explist) = let
+      val ret = Temp.newtemp()
+      val len = List.length explist
+      fun moves([], n) = []
+        | moves(a::b, n) = (TR.MOVE(
+          TR.MEM(
+            TR.BINOP(TR.PLUS, TR.TEMP(ret), TR.CONST(n*F.wordSize))
+            ),
+          unEx(a)))::moves(b, n+1)
+    in
+      Ex(TR.ESEQ(TR.SEQ([
+          TR.MOVE(TR.TEMP(ret), F.externalCall("malloc", [TR.BINOP(TR.MUL, TR.CONST len, TR.CONST F.wordSize)]))
+        ] @ moves(explist, 0)), TR.TEMP ret))
+    end
 
     fun subscriptVar(var, exp) = let
       val v = unEx(var)
