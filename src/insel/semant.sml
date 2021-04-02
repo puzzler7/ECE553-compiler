@@ -223,7 +223,7 @@ struct
                T.ARRAY(ty, u) => (TR.subscriptVar(#exp(transVar(venv, tenv, var, break, level)), #exp(transExp(venv, tenv, exp, break, level)))) 
                | x => (E.error pos "subscript var on non-array type"; TR.NIL))
       	in
-         		    {exp = TR.FIXME, ty = ty}
+         		    {exp = exp, ty = ty}
       	end
 	    
        
