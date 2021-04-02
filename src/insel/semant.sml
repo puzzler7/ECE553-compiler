@@ -56,10 +56,12 @@ struct
             fun transparam{name,escape,typ,pos} = {name=name,ty=lookupType(!tenv, typ, pos)}
                   
             val params' = map transparam params
+            val nm = Temp.newlabel()
             	       
             
         in (if checkIfSeen(name, (!seenFns)) then E.error pos "function declared twice in same fundec" else seenFns:= name :: !seenFns;
-        	venv := S.enter(!venv,name, Env.FunEntry{level=level, label=Temp.newlabel(), formals= map #ty params', result=result_ty})) (*FIXME new level?*)
+        	venv := S.enter(!venv,name, Env.FunEntry{level=level, label=nm, formals= map #ty params', result=result_ty});
+          nm) (*FIXME new level?*)
 	     end
 	    
    fun funcBody (name, params: A.field list, result, pos, level) =
@@ -237,8 +239,13 @@ struct
 						(case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else seenTypes:= name:: !seenTypes;tenv), exp=TR.NIL}
 	      | trdec (venv,tenv,A.TypeDec({name,ty,pos}::tydeclist)) = (tenv := S.enter(!tenv, name, T.NAME(name, ref NONE)); trdec(venv, tenv, A.TypeDec(tydeclist));
 									    (case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else seenTypes:= name:: !seenTypes;{venv=venv,tenv=tenv, exp=TR.NIL})
-	      | trdec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (funcDecl(name, params, result, level, pos); let val rt = funcBody(name, params, result, pos, level) val trbody = transExp(venv, tenv, body, break, level) in (if checkTypeEqual(rt, #ty(trbody)) then () else E.error pos "function body and return type differ"; scopeUp(); {venv = venv, tenv = tenv, exp=TR.fundecIR(#exp(trbody))}) end)
-	      | trdec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (funcDecl(name, params, result, level, pos); trdec(venv, tenv, A.FunctionDec(fundeclist)); let val rt = funcBody(name, params, result, pos, level) val trbody = transExp(venv, tenv, body, break, level) in (if checkTypeEqual(rt, #ty(trbody)) then () else E.error pos "function body and return type differ"; scopeUp(); {venv = venv, tenv = tenv, exp=TR.fundecIR(#exp(trbody))}) end)				
+	      | trdec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (let val rt = funcBody(name, params, result, pos, level)
+          val nm = funcDecl(name, params, result, level, pos);
+         val trbody = transExp(venv, tenv, body, break, level) in (if checkTypeEqual(rt, #ty(trbody)) then () else E.error pos "function body and return type differ"; scopeUp(); {venv = venv, tenv = tenv, exp=TR.fundecIR(#exp(trbody), nm)}) end)
+	      | trdec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (  let val rt = funcBody(name, params, result, pos, level)
+          val nm = funcDecl(name, params, result, level, pos);
+          val _ = trdec(venv, tenv, A.FunctionDec(fundeclist));
+         val trbody = transExp(venv, tenv, body, break, level) in (if checkTypeEqual(rt, #ty(trbody)) then () else E.error pos "function body and return type differ"; scopeUp(); {venv = venv, tenv = tenv, exp=TR.fundecIR(#exp(trbody), nm)}) end)				
 	    in
 	    	(seenFns := []; seenTypes:= []; trdec(venv, tenv, dec))
 	    end				    
@@ -272,7 +279,7 @@ struct
     and transExp (venv, tenv, exp, break, level) = 
         let fun trexp (A.NilExp, break) = {exp=TR.nilIR(), ty=T.NIL}
               | trexp (A.IntExp(ival), break) = {exp=TR.intIR(ival), ty=T.INT}
-              | trexp (A.StringExp(sval), break) = {exp=TR.FIXME, ty=T.STRING}
+              | trexp (A.StringExp(sval, pos), break) = {exp=TR.stringVar(sval), ty=T.STRING}
               | trexp (A.VarExp(lvalue), break) = transVar(venv, tenv, lvalue, break, level)
               | trexp (A.WhileExp({test, body, pos}), break) = (checkInt(trexp (test, break), pos); scopeDown(); loopdepth:= !loopdepth+1;
 								let val trbody = trexp(body, break)

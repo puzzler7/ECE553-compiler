@@ -14,9 +14,9 @@ sig
 
     val arrayVar: exp * exp -> exp
     val simpleVar: access  -> exp
+    val stringVar: string -> exp
     (*val structVar
     val subscriptVar
-    val stringVar
     val recordVar
     val stringIR: string -> exp 
     val letIR*)
@@ -30,7 +30,7 @@ sig
     val breakIR: Temp.label -> exp
     val assignIR: exp * exp -> exp
     val letIR: exp list * exp -> exp
-    val fundecIR: exp -> exp
+    val fundecIR: exp * Temp.label -> exp
     val callIR: Temp.label * exp list -> exp
 
 
@@ -148,6 +148,14 @@ struct
             )
         end
 
+    fun stringVar(lit) = let
+      val lbl = Temp.newlabel()
+      val frg = F.STRING(lbl, lit)
+    in
+      (fraglist := ((frg)::(!fraglist));
+      Ex(TR.NAME(lbl)))
+    end
+
     fun letIR(explist, body) = let
       fun etoslist([]) = []
         | etoslist(a::b) = TR.EXP(unEx(a))::etoslist(b)
@@ -155,9 +163,8 @@ struct
       Ex(TR.ESEQ(TR.SEQ(etoslist(explist)), unEx(body)))
     end
 
-    fun fundecIR(body) = let
+    fun fundecIR(body, name) = let
       val b = unEx(body)
-      val name = Temp.newlabel()
     in
       Nx(TR.SEQ[
         TR.LABEL(name),
@@ -173,6 +180,12 @@ struct
     fun intIR (n) = Ex(TR.CONST n)
 
     fun arrayVar (size, init) = Ex(F.externalCall("initArray", [unEx(size), unEx(init)])) 
+
+    (*fun recordVar() = ()
+
+    fun subscriptVar() = ()
+
+    fun fieldVar() = ()*)
 
     fun whileIR(test, body, done) = 
         let
