@@ -3,7 +3,6 @@
 exports[`The textbook tests compiles test/testcases/merge.tig correctly 1`] = `
 "
 val it = true : bool
-test/testcases/merge.tig:54.5:Variable undefined
 EXP(
  ESEQ(
   SEQ(
@@ -14,16 +13,16 @@ EXP(
      MOVE(
       MEM(
        BINOP(PLUS,
-        CONST 0,
+        TEMP t127,
         CONST 92)),
       CALL(
-       NAME L3,
+       NAME L2,
         CONST 0)),
      CONST 0)),
    EXP(
     ESEQ(
      SEQ(
-      LABEL L12,
+      LABEL L11,
       MOVE(
        TEMP t101,
        ESEQ(
@@ -33,32 +32,35 @@ EXP(
            MOVE(
             MEM(
              BINOP(PLUS,
-              CONST 0,
+              TEMP t127,
               CONST 88)),
             CONST 0),
            CONST 0)),
          EXP(
           ESEQ(
            SEQ(
-            LABEL L13,
+            LABEL L12,
             MOVE(
              TEMP t101,
              ESEQ(
               SEQ(
                CJUMP(GE,
                 CALL(
-                 NAME L4,
+                 NAME L3,
                   CONST 0,
                   MEM(
                    BINOP(PLUS,
-                    CONST 0,
+                    MEM(
+                     BINOP(PLUS,
+                      TEMP t127,
+                      CONST 0)),
                     CONST 92))),
                 CALL(
-                 NAME L4,
+                 NAME L3,
                   CONST 0,
-                  NAME L39),
-                L50,L51),
-               LABEL L50,
+                  NAME L38),
+                L49,L50),
+               LABEL L49,
                MOVE(
                 TEMP t134,
                 ESEQ(
@@ -68,33 +70,36 @@ EXP(
                    CONST 1),
                   CJUMP(LE,
                    CALL(
-                    NAME L4,
+                    NAME L3,
                      CONST 0,
                      MEM(
                       BINOP(PLUS,
-                       CONST 0,
+                       MEM(
+                        BINOP(PLUS,
+                         TEMP t127,
+                         CONST 0)),
                        CONST 92))),
                    CALL(
-                    NAME L4,
+                    NAME L3,
                      CONST 0,
-                     NAME L45),
-                   L48,L49),
-                  LABEL L49,
+                     NAME L44),
+                   L47,L48),
+                  LABEL L48,
                   MOVE(
                    TEMP t133,
                    CONST 0),
-                  LABEL L48,
+                  LABEL L47,
 ),
                  TEMP t133)),
                JUMP(
-                NAME L52),
-               LABEL L51,
+                NAME L51),
+               LABEL L50,
                MOVE(
                 TEMP t134,
                 CONST 0),
                JUMP(
-                NAME L52),
-               LABEL L52,
+                NAME L51),
+               LABEL L51,
 ),
               TEMP t134)),
             JUMP(
@@ -104,7 +109,7 @@ EXP(
 ),
         MEM(
          BINOP(PLUS,
-          CONST 0,
+          TEMP t127,
           CONST 88)))),
       JUMP(
        TEMP t128),
@@ -115,7 +120,7 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L64,
+      LABEL L63,
       MOVE(
        TEMP t101,
        ESEQ(
@@ -147,7 +152,7 @@ EXP(
            MOVE(
             TEMP t154,
             CALL(
-             NAME L12,
+             NAME L11,
               CONST 0,
               TEMP t153)),
            CONST 0)),
@@ -162,8 +167,8 @@ EXP(
               CONST 0,
               CONST 4))),
            CONST 1,
-           L114,L115),
-          LABEL L114,
+           L113,L114),
+          LABEL L113,
           MOVE(
            TEMP t156,
            ESEQ(
@@ -187,19 +192,19 @@ EXP(
                 TEMP t155,
                 CONST 4)),
               CALL(
-               NAME L64,
+               NAME L63,
                 CONST 0)),
 ),
             TEMP t155)),
           JUMP(
-           NAME L116),
-          LABEL L115,
+           NAME L115),
+          LABEL L114,
           MOVE(
            TEMP t156,
            CONST 0),
           JUMP(
-           NAME L116),
-          LABEL L116,
+           NAME L115),
+          LABEL L115,
 ),
          TEMP t156))),
       JUMP(
@@ -211,7 +216,7 @@ EXP(
      MOVE(
       TEMP t157,
       CALL(
-       NAME L64,
+       NAME L63,
         CONST 0)),
      CONST 0)),
    EXP(
@@ -219,24 +224,27 @@ EXP(
      MOVE(
       TEMP t158,
       CALL(
-       NAME L64,
+       NAME L63,
         CONST 0)),
      CONST 0)),
 ),
-  CONST 0))
-emit L11
+  CALL(
+   NAME L66,
+    CONST 0,
+    CALL(
+     NAME L64,
+      CONST 0,
+      TEMP t157,
+      TEMP t158))))
+emit L10
+val it = () : unit
 
-uncaught exception Subscript [subscript out of bounds]
-  raised at: Basis/Implementation/list.sml:67.35-67.44
-             main.sml:28.46
-- 
 "
 `;
 
 exports[`The textbook tests compiles test/testcases/queens.tig correctly 1`] = `
 "
 val it = true : bool
-test/testcases/queens.tig:32.5:Variable undefined
 EXP(
  ESEQ(
   SEQ(
@@ -245,7 +253,7 @@ EXP(
      MOVE(
       MEM(
        BINOP(PLUS,
-        CONST 0,
+        TEMP t127,
         CONST 92)),
       CONST 8),
      CONST 0)),
@@ -256,13 +264,13 @@ EXP(
      MOVE(
       MEM(
        BINOP(PLUS,
-        CONST 0,
+        TEMP t127,
         CONST 88)),
       CALL(
        NAME initArray,
         MEM(
          BINOP(PLUS,
-          CONST 0,
+          TEMP t127,
           CONST 92)),
         CONST 0)),
      CONST 0)),
@@ -271,13 +279,13 @@ EXP(
      MOVE(
       MEM(
        BINOP(PLUS,
-        CONST 0,
+        TEMP t127,
         CONST 84)),
       CALL(
        NAME initArray,
         MEM(
          BINOP(PLUS,
-          CONST 0,
+          TEMP t127,
           CONST 92)),
         CONST 0)),
      CONST 0)),
@@ -286,7 +294,7 @@ EXP(
      MOVE(
       MEM(
        BINOP(PLUS,
-        CONST 0,
+        TEMP t127,
         CONST 80)),
       CALL(
        NAME initArray,
@@ -294,11 +302,11 @@ EXP(
          BINOP(PLUS,
           MEM(
            BINOP(PLUS,
-            CONST 0,
+            TEMP t127,
             CONST 92)),
           MEM(
            BINOP(PLUS,
-            CONST 0,
+            TEMP t127,
             CONST 92))),
          CONST 1),
         CONST 0)),
@@ -308,7 +316,7 @@ EXP(
      MOVE(
       MEM(
        BINOP(PLUS,
-        CONST 0,
+        TEMP t127,
         CONST 76)),
       CALL(
        NAME initArray,
@@ -316,11 +324,11 @@ EXP(
          BINOP(PLUS,
           MEM(
            BINOP(PLUS,
-            CONST 0,
+            TEMP t127,
             CONST 92)),
           MEM(
            BINOP(PLUS,
-            CONST 0,
+            TEMP t127,
             CONST 92))),
          CONST 1),
         CONST 0)),
@@ -328,25 +336,25 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L12,
+      LABEL L11,
       MOVE(
        TEMP t101,
        CALL(
-        NAME L1,
+        NAME L0,
          CONST 0,
-         NAME L61)),
+         NAME L60)),
       JUMP(
        TEMP t128),
 ),
      CONST 0)),
 ),
-  CONST 0))
-emit L11
+  CALL(
+   NAME L12,
+    CONST 0,
+    CONST 0)))
+emit L10
+val it = () : unit
 
-uncaught exception Subscript [subscript out of bounds]
-  raised at: Basis/Implementation/list.sml:67.35-67.44
-             main.sml:28.46
-- 
 "
 `;
 
@@ -369,7 +377,7 @@ EXP(
      CONST 0)),
 ),
   TEMP t129))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -394,7 +402,7 @@ EXP(
      CONST 0)),
 ),
   TEMP t129))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -426,7 +434,7 @@ EXP(
           BINOP(PLUS,
            TEMP t129,
            CONST 0)),
-         NAME L13),
+         NAME L12),
         MOVE(
          MEM(
           BINOP(PLUS,
@@ -438,7 +446,7 @@ EXP(
      CONST 0)),
 ),
   TEMP t130))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -453,7 +461,7 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L12,
+      LABEL L11,
       MOVE(
        TEMP t101,
        ESEQ(
@@ -461,27 +469,27 @@ EXP(
          CJUMP(EQ,
           TEMP t130,
           CONST 0,
-          L13,L14),
-         LABEL L13,
+          L12,L13),
+         LABEL L12,
          MOVE(
           TEMP t131,
           CONST 1),
          JUMP(
-          NAME L15),
-         LABEL L14,
+          NAME L14),
+         LABEL L13,
          MOVE(
           TEMP t131,
           BINOP(MUL,
            TEMP t130,
            CALL(
-            NAME L12,
+            NAME L11,
              CONST 0,
              BINOP(MINUS,
               TEMP t130,
               CONST 1)))),
          JUMP(
-          NAME L15),
-         LABEL L15,
+          NAME L14),
+         LABEL L14,
 ),
         TEMP t131)),
       JUMP(
@@ -490,10 +498,10 @@ EXP(
      CONST 0)),
 ),
   CALL(
-   NAME L12,
+   NAME L11,
     CONST 0,
     CONST 10)))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -537,7 +545,7 @@ EXP(
      CONST 0)),
 ),
   TEMP t130))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -552,14 +560,14 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L12,
+      LABEL L11,
       MOVE(
        TEMP t101,
        CALL(
-        NAME L13,
+        NAME L12,
          CONST 0,
          BINOP(PLUS,
-          TEMP t132,
+          TEMP t134,
           CONST 1))),
       JUMP(
        TEMP t128),
@@ -567,11 +575,11 @@ EXP(
      CONST 0)),
 ),
   CALL(
-   NAME L12,
+   NAME L11,
     CONST 0,
     CONST 0,
-    NAME L17)))
-emit L11
+    NAME L16)))
+emit L10
 val it = () : unit
 
 "
@@ -586,7 +594,7 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L12,
+      LABEL L11,
       MOVE(
        TEMP t101,
        CONST 0),
@@ -596,11 +604,11 @@ EXP(
      CONST 0)),
 ),
   CALL(
-   NAME L12,
+   NAME L11,
     CONST 0,
     CONST 0,
-    NAME L18)))
-emit L11
+    NAME L17)))
+emit L10
 val it = () : unit
 
 "
@@ -615,23 +623,23 @@ EXP(
    CJUMP(GT,
     CONST 10,
     CONST 20,
-    L12,L13),
-   LABEL L12,
+    L11,L12),
+   LABEL L11,
    MOVE(
     TEMP t129,
     CONST 30),
    JUMP(
-    NAME L14),
-   LABEL L13,
+    NAME L13),
+   LABEL L12,
    MOVE(
     TEMP t129,
     CONST 40),
    JUMP(
-    NAME L14),
-   LABEL L14,
+    NAME L13),
+   LABEL L13,
 ),
   TEMP t129))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -647,23 +655,23 @@ EXP(
    CJUMP(GT,
     CONST 5,
     CONST 4,
-    L13,L14),
-   LABEL L13,
+    L12,L13),
+   LABEL L12,
    MOVE(
     TEMP t129,
     CONST 13),
    JUMP(
-    NAME L15),
-   LABEL L14,
+    NAME L14),
+   LABEL L13,
    MOVE(
     TEMP t129,
-    NAME L12),
+    NAME L11),
    JUMP(
-    NAME L15),
-   LABEL L15,
+    NAME L14),
+   LABEL L14,
 ),
   TEMP t129))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -674,21 +682,21 @@ exports[`The textbook tests compiles test/testcases/test10.tig correctly 1`] = `
 val it = true : bool
 test/testcases/test10.tig:2.1:while loop must be unit
 SEQ(
- LABEL L14,
+ LABEL L13,
  CJUMP(GT,
   CONST 10,
   CONST 5,
-  L13,L12),
- LABEL L13,
+  L12,L11),
+ LABEL L12,
  EXP(
   BINOP(PLUS,
    CONST 5,
    CONST 6)),
  JUMP(
-  NAME L14),
- LABEL L12,
+  NAME L13),
+ LABEL L11,
 )
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -713,23 +721,23 @@ EXP(
 ),
   ESEQ(
    SEQ(
-    LABEL L21,
+    LABEL L20,
     CJUMP(EQ,
      CONST 0,
      CONST 1,
-     L20,L18),
-    LABEL L20,
+     L19,L17),
+    LABEL L19,
     MOVE(
      TEMP t130,
      BINOP(PLUS,
       TEMP t130,
       CONST 1)),
     JUMP(
-     NAME L21),
-    LABEL L18,
+     NAME L20),
+    LABEL L17,
 ),
    CONST 0)))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -746,7 +754,7 @@ EXP(
      MOVE(
       MEM(
        BINOP(PLUS,
-        CONST 0,
+        TEMP t127,
         CONST 92)),
       CONST 0),
      CONST 0)),
@@ -762,23 +770,23 @@ EXP(
 ),
    ESEQ(
     SEQ(
-     LABEL L17,
+     LABEL L16,
      CJUMP(LE,
       TEMP t130,
       CONST 100,
-      L16,L15),
-     LABEL L16,
+      L15,L14),
+     LABEL L15,
      MOVE(
       TEMP t130,
       BINOP(PLUS,
        TEMP t130,
        CONST 1)),
      JUMP(
-      NAME L17),
-     LABEL L15,
+      NAME L16),
+     LABEL L14,
 ),
     CONST 0))))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -790,7 +798,7 @@ val it = true : bool
 test/testcases/test13.tig:3.3:Bad types for comparison operator
 EXP(
  CONST 0)
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -823,7 +831,7 @@ EXP(
           BINOP(PLUS,
            TEMP t129,
            CONST 0)),
-         NAME L13),
+         NAME L12),
         MOVE(
          MEM(
           BINOP(PLUS,
@@ -848,23 +856,23 @@ EXP(
     CJUMP(EQ,
      CONST 0,
      CONST 1,
-     L14,L15),
-    LABEL L14,
+     L13,L14),
+    LABEL L13,
     MOVE(
      TEMP t132,
      CONST 3),
     JUMP(
-     NAME L16),
-    LABEL L15,
+     NAME L15),
+    LABEL L14,
     MOVE(
      TEMP t132,
      CONST 4),
     JUMP(
-     NAME L16),
-    LABEL L16,
+     NAME L15),
+    LABEL L15,
 ),
    TEMP t132)))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -880,23 +888,23 @@ EXP(
    CJUMP(EQ,
     CONST 20,
     CONST 1,
-    L12,L13),
-   LABEL L12,
+    L11,L12),
+   LABEL L11,
    MOVE(
     TEMP t129,
     CONST 3),
    JUMP(
-    NAME L14),
-   LABEL L13,
+    NAME L13),
+   LABEL L12,
    MOVE(
     TEMP t129,
     CONST 0),
    JUMP(
-    NAME L14),
-   LABEL L14,
+    NAME L13),
+   LABEL L13,
 ),
   TEMP t129))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -907,7 +915,7 @@ exports[`The textbook tests compiles test/testcases/test16.tig correctly 1`] = `
 val it = true : bool
 
 uncaught exception CycleInTypeDec
-  raised at: semant.sml:251.137-251.151
+  raised at: src/insel/semant.sml:251.137-251.151
 - 
 "
 `;
@@ -931,7 +939,7 @@ EXP(
     CONST 0),
 ),
   TEMP t129))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -940,14 +948,14 @@ val it = () : unit
 exports[`The textbook tests compiles test/testcases/test18.tig correctly 1`] = `
 "
 val it = true : bool
-test/testcases/test18.tig:5.4:Variable undefined
+test/testcases/test18.tig:5.4:Function do_nothing2 undefined
 EXP(
  ESEQ(
   SEQ(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L12,
+      LABEL L11,
       MOVE(
        TEMP t101,
        CONST 0),
@@ -964,21 +972,21 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L13,
+      LABEL L12,
       MOVE(
        TEMP t101,
-       NAME L16),
+       NAME L15),
       JUMP(
        TEMP t128),
 ),
      CONST 0)),
 ),
   CALL(
-   NAME L12,
+   NAME L11,
     CONST 0,
     CONST 0,
-    NAME L18)))
-emit L11
+    NAME L17)))
+emit L10
 val it = () : unit
 
 "
@@ -987,13 +995,18 @@ val it = () : unit
 exports[`The textbook tests compiles test/testcases/test19.tig correctly 1`] = `
 "
 val it = true : bool
+test/testcases/test19.tig:8.16:Variable a does not exist!
+test/testcases/test19.tig:8.16:Variable a does not exist!
+test/testcases/test19.tig:8.4:Argument type mismatch
+test/testcases/test19.tig:8.16:Variable a does not exist!
+test/testcases/test19.tig:8.16:Variable a does not exist!
 EXP(
  ESEQ(
   SEQ(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L12,
+      LABEL L11,
       MOVE(
        TEMP t101,
        CONST 0),
@@ -1003,11 +1016,11 @@ EXP(
      CONST 0)),
 ),
   CALL(
-   NAME L12,
+   NAME L11,
     CONST 0,
     CONST 0,
-    NAME L18)))
-emit L11
+    NAME L17)))
+emit L10
 val it = () : unit
 
 "
@@ -1022,19 +1035,19 @@ test/testcases/test20.tig:3.19:Not int type
 test/testcases/test20.tig:3.18:Variable i does not exist!
 test/testcases/test20.tig:3.18:Variable i does not exist!
 SEQ(
- LABEL L14,
+ LABEL L13,
  CJUMP(GT,
   CONST 10,
   CONST 5,
-  L13,L12),
- LABEL L13,
+  L12,L11),
+ LABEL L12,
  EXP(
   CONST 0),
  JUMP(
-  NAME L14),
- LABEL L12,
+  NAME L13),
+ LABEL L11,
 )
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1051,7 +1064,7 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L12,
+      LABEL L11,
       MOVE(
        TEMP t101,
        ESEQ(
@@ -1059,27 +1072,27 @@ EXP(
          CJUMP(EQ,
           TEMP t130,
           CONST 0,
-          L13,L14),
-         LABEL L13,
+          L12,L13),
+         LABEL L12,
          MOVE(
           TEMP t131,
           CONST 1),
          JUMP(
-          NAME L15),
-         LABEL L14,
+          NAME L14),
+         LABEL L13,
          MOVE(
           TEMP t131,
           BINOP(MUL,
            TEMP t130,
            CALL(
-            NAME L12,
+            NAME L11,
              CONST 0,
              BINOP(MINUS,
               TEMP t130,
               CONST 1)))),
          JUMP(
-          NAME L15),
-         LABEL L15,
+          NAME L14),
+         LABEL L14,
 ),
         TEMP t131)),
       JUMP(
@@ -1088,10 +1101,10 @@ EXP(
      CONST 0)),
 ),
   CALL(
-   NAME L12,
+   NAME L11,
     CONST 0,
     CONST 10)))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1126,7 +1139,7 @@ EXP(
           BINOP(PLUS,
            TEMP t129,
            CONST 0)),
-         NAME L13),
+         NAME L12),
         MOVE(
          MEM(
           BINOP(PLUS,
@@ -1140,9 +1153,9 @@ EXP(
   ESEQ(
    MOVE(
     CONST 0,
-    NAME L15),
+    NAME L14),
    CONST 0)))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1176,7 +1189,7 @@ EXP(
           BINOP(PLUS,
            TEMP t129,
            CONST 0)),
-         NAME L13),
+         NAME L12),
         MOVE(
          MEM(
           BINOP(PLUS,
@@ -1195,14 +1208,11 @@ EXP(
       BINOP(MUL,
        CONST 1,
        CONST 4))),
-    NAME L15),
+    NAME L14),
    CONST 0)))
-emit L11
+emit L10
+val it = () : unit
 
-uncaught exception Subscript [subscript out of bounds]
-  raised at: Basis/Implementation/list.sml:67.35-67.44
-             main.sml:28.46
-- 
 "
 `;
 
@@ -1222,7 +1232,7 @@ EXP(
      CONST 0)),
 ),
   CONST 0))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1244,7 +1254,7 @@ EXP(
      CONST 0)),
 ),
   CONST 0))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1257,8 +1267,8 @@ test/testcases/test26.tig:3.3:Not int type
 EXP(
  BINOP(PLUS,
   CONST 3,
-  NAME L13))
-emit L11
+  NAME L12))
+emit L10
 val it = () : unit
 
 "
@@ -1279,7 +1289,7 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L12,
+      LABEL L11,
       MOVE(
        TEMP t101,
        TEMP t131),
@@ -1289,10 +1299,10 @@ EXP(
      CONST 0)),
 ),
   CALL(
-   NAME L12,
+   NAME L11,
     CONST 0,
     CONST 2)))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1327,7 +1337,7 @@ EXP(
           BINOP(PLUS,
            TEMP t129,
            CONST 0)),
-         NAME L13),
+         NAME L12),
         MOVE(
          MEM(
           BINOP(PLUS,
@@ -1339,7 +1349,7 @@ EXP(
      CONST 0)),
 ),
   CONST 0))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1367,7 +1377,7 @@ EXP(
      CONST 0)),
 ),
   CONST 0))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1397,7 +1407,7 @@ EXP(
     BINOP(MUL,
      CONST 2,
      CONST 4)))))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1416,11 +1426,11 @@ EXP(
     ESEQ(
      MOVE(
       TEMP t129,
-      NAME L12),
+      NAME L11),
      CONST 0)),
 ),
   CONST 0))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1442,11 +1452,11 @@ EXP(
       CALL(
        NAME initArray,
         CONST 10,
-        NAME L13)),
+        NAME L12)),
      CONST 0)),
 ),
   CONST 0))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1469,7 +1479,7 @@ EXP(
      CONST 0)),
 ),
   CONST 0))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1485,7 +1495,7 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L12,
+      LABEL L11,
       MOVE(
        TEMP t101,
        TEMP t132),
@@ -1495,11 +1505,11 @@ EXP(
      CONST 0)),
 ),
   CALL(
-   NAME L12,
+   NAME L11,
     CONST 0,
-    NAME L15,
-    NAME L16)))
-emit L11
+    NAME L14,
+    NAME L15)))
+emit L10
 val it = () : unit
 
 "
@@ -1515,7 +1525,7 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L12,
+      LABEL L11,
       MOVE(
        TEMP t101,
        TEMP t132),
@@ -1525,10 +1535,10 @@ EXP(
      CONST 0)),
 ),
   CALL(
-   NAME L12,
+   NAME L11,
     CONST 0,
-    NAME L14)))
-emit L11
+    NAME L13)))
+emit L10
 val it = () : unit
 
 "
@@ -1544,7 +1554,7 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L12,
+      LABEL L11,
       MOVE(
        TEMP t101,
        TEMP t132),
@@ -1554,12 +1564,12 @@ EXP(
      CONST 0)),
 ),
   CALL(
-   NAME L12,
+   NAME L11,
     CONST 0,
     CONST 3,
-    NAME L14,
+    NAME L13,
     CONST 5)))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1581,11 +1591,11 @@ EXP(
     ESEQ(
      MOVE(
       TEMP t130,
-      NAME L12),
+      NAME L11),
      CONST 0)),
 ),
   CONST 0))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1602,7 +1612,7 @@ EXP(
     CONST 0),
 ),
   CONST 0))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1618,17 +1628,17 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L12,
+      LABEL L11,
       MOVE(
        TEMP t101,
-       TEMP t130),
+       TEMP t132),
       JUMP(
        TEMP t128),
 ),
      CONST 0)),
 ),
   CONST 0))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1644,7 +1654,7 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L12,
+      LABEL L11,
       MOVE(
        TEMP t101,
        TEMP t130),
@@ -1654,10 +1664,10 @@ EXP(
      CONST 0)),
 ),
   CALL(
-   NAME L12,
+   NAME L11,
     CONST 0,
     CONST 2)))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1678,7 +1688,7 @@ EXP(
      CONST 0),
 ),
    CONST 0)))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1722,13 +1732,13 @@ EXP(
             BINOP(PLUS,
              TEMP t131,
              CONST 0)),
-           NAME L18),
+           NAME L17),
           MOVE(
            MEM(
             BINOP(PLUS,
              TEMP t131,
              CONST 4)),
-           NAME L19),
+           NAME L18),
           MOVE(
            MEM(
             BINOP(PLUS,
@@ -1751,7 +1761,7 @@ EXP(
       CALL(
        NAME initArray,
         CONST 100,
-        NAME L21)),
+        NAME L20)),
      CONST 0)),
    EXP(
     ESEQ(
@@ -1771,13 +1781,13 @@ EXP(
           BINOP(PLUS,
            TEMP t134,
            CONST 0)),
-         NAME L24),
+         NAME L23),
         MOVE(
          MEM(
           BINOP(PLUS,
            TEMP t134,
            CONST 4)),
-         NAME L25),
+         NAME L24),
         MOVE(
          MEM(
           BINOP(PLUS,
@@ -1811,7 +1821,7 @@ EXP(
           BINOP(PLUS,
            TEMP t136,
            CONST 0)),
-         NAME L27),
+         NAME L26),
         MOVE(
          MEM(
           BINOP(PLUS,
@@ -1839,12 +1849,9 @@ EXP(
        CONST 4))),
     CONST 2323),
    CONST 0)))
-emit L11
+emit L10
+val it = () : unit
 
-uncaught exception Subscript [subscript out of bounds]
-  raised at: Basis/Implementation/list.sml:67.35-67.44
-             main.sml:28.46
-- 
 "
 `;
 
@@ -1865,7 +1872,7 @@ EXP(
   BINOP(PLUS,
    TEMP t129,
    CONST 3)))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1891,7 +1898,7 @@ EXP(
     TEMP t129,
     CONST 0),
    CONST 0)))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1914,7 +1921,7 @@ EXP(
      CONST 0)),
 ),
   TEMP t129))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1943,15 +1950,15 @@ EXP(
     CJUMP(NE,
      TEMP t129,
      CONST 0,
-     L12,L13),
-    LABEL L13,
+     L11,L12),
+    LABEL L12,
     MOVE(
      TEMP t130,
      CONST 0),
-    LABEL L12,
+    LABEL L11,
 ),
    TEMP t130)))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1975,7 +1982,7 @@ EXP(
     CONST 0),
 ),
   CONST 0))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -1990,7 +1997,7 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L12,
+      LABEL L11,
       MOVE(
        TEMP t101,
        TEMP t130),
@@ -2003,7 +2010,7 @@ EXP(
    EXP(
     ESEQ(
      SEQ(
-      LABEL L13,
+      LABEL L12,
       MOVE(
        TEMP t101,
        TEMP t132),
@@ -2013,7 +2020,7 @@ EXP(
      CONST 0)),
 ),
   CONST 0))
-emit L11
+emit L10
 val it = () : unit
 
 "
@@ -2044,7 +2051,7 @@ EXP(
      CONST 0)),
 ),
   TEMP t129))
-emit L11
+emit L10
 val it = () : unit
 
 "

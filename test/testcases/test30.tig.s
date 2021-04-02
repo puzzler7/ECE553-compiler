@@ -1,4 +1,4 @@
-L13:
+L12:
 addi t131, $0, 0
 move t103, t131
 jal initArray
@@ -9,5 +9,5 @@ mul t134, t135, t136
 add t133, t129, t134
 lw t132, 0(t133)
 add t132, $0, t132
-j L12
-L12:
+j L11
+L11:
