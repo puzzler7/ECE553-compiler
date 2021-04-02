@@ -45,7 +45,7 @@ fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
 	  | munchStm(T.MOVE(T.MEM(T.CONST i),e2)) =
 	    emit(A.OPER{assem="STORE M[r0+" ^ int i ^ "] <- `s0\n", src=[munchExp e2], dst=[],jump=NONE}) *)
 	  | munchStm(T.MOVE(T.MEM(e1),e2)) =
-	    emit(A.OPER{assem="sw `s2, 0(`s1)\n", src=[munchExp e1, munchExp e2], dst= [] ,jump=NONE})
+	    emit(A.OPER{assem="sw `s1, 0(`s0)\n", src=[munchExp e1, munchExp e2], dst= [] ,jump=NONE})
 	  | munchStm (T.MOVE(T.TEMP t, T.CALL(T.NAME l, args)))  =	    
             emit(A.OPER{assem="jal " ^ Symbol.name(l) ^ "\nmove `d0, `d1\n", src=munchArgs(0, args), dst=[t,Frame.RV]@calldefs, jump = NONE})	  
 	  | munchStm (T.MOVE(T.TEMP t, T.CALL(e, args)))  =
