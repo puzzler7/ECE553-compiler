@@ -1,9 +1,8 @@
-L13:
+L14:
+addi t129, $0, 0
 addi t131, $0, 0
-move t129, t131
-addi t132, $0, 0
-add t132, $0, t132
-addi t133, $0, 0
-move t130, t133
-j lab
-L12:
+add t131, $0, t131
+la t132, L12
+move t130, t132
+j L13
+L13:

@@ -37,17 +37,17 @@ fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
 	    
 	and munchStm(T.SEQ(a)) = ((map munchStm a); ())  
 	  | munchStm(T.MOVE(T.MEM(T.BINOP(T.PLUS,e1,T.CONST i)),e2)) =
-	    emit(A.OPER{assem="sw `s1, " ^ Int.toString(i) ^ "(`s0)\n`", src=[munchExp e1, munchExp e2], dst=[],jump=NONE})
+	    emit(A.OPER{assem="sw `s1, " ^ Int.toString(i) ^ "(`s0)\n", src=[munchExp e1, munchExp e2], dst=[],jump=NONE})
 	  | munchStm(T.MOVE(T.MEM(T.BINOP(T.PLUS,T.CONST i,e1)),e2)) =
 	    emit(A.OPER{assem="sw `s1, " ^ Int.toString(i) ^ "(`s0)\n", src=[munchExp e1, munchExp e2], dst=[],jump=NONE})
        (* Shouldn`t combine steps | munchStm(T.MOVE(T.MEM(e1),T.MEM(e2))) =
 	    emit(A.OPER{assem="move `s1", src=[munchExp e1, munchExp e2], dst=[j,jump=NONE]})
 	  | munchStm(T.MOVE(T.MEM(T.CONST i),e2)) =
-	    emit(A.OPER{assem="STORE M[r0+" ^ int i ^ "] <- `s0\n", src=[munchExp e2], dst=[],jump=NONE})
+	    emit(A.OPER{assem="STORE M[r0+" ^ int i ^ "] <- `s0\n", src=[munchExp e2], dst=[],jump=NONE}) *)
 	  | munchStm(T.MOVE(T.MEM(e1),e2)) =
-	    emit(A.OPER{assem="STORE M[`s0] <- `s1\n", src=[munchExp e1, munchExp e2], dst= [] ,jump=NONE})*)
+	    emit(A.OPER{assem="sw `s2, 0(`s1)\n", src=[munchExp e1, munchExp e2], dst= [] ,jump=NONE})
 	  | munchStm (T.MOVE(T.TEMP t, T.CALL(T.NAME l, args)))  =	    
-            emit(A.OPER{assem="jal " ^ Symbol.name(l) ^ "\nmove `d0, $v0\n", src=munchArgs(0, args), dst=t::calldefs, jump = NONE})	  
+            emit(A.OPER{assem="jal " ^ Symbol.name(l) ^ "\nmove `d0, `d1\n", src=munchArgs(0, args), dst=[t,Frame.RV]@calldefs, jump = NONE})	  
 	  | munchStm (T.MOVE(T.TEMP t, T.CALL(e, args)))  =
 	    emit(A.OPER{assem="jalr `s0\n move `d0, $v0\n", src=munchExp(e)::munchArgs(0, args), dst=t::calldefs, jump = NONE})
 	  | munchStm (T.MOVE(T.TEMP i, T.CONST c)) =
@@ -151,7 +151,7 @@ fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
 	  | munchExp (T.BINOP(T.ARSHIFT, e1, e2)) =
             result(fn r => emit(A.OPER{assem="srav `d0, `s0, `s1\n", src=[munchExp e1, munchExp e2], dst=[r], jump=NONE}))
 	  | munchExp (T.NAME lab) = 
-	    result(fn r => emit(A.LABEL{assem=Symbol.name(lab) ^ " shouldn't have gotten here:\n", lab = lab}))
+	    result(fn r => emit(A.OPER{assem="la `d0, " ^ Symbol.name(lab) ^ "\n", src = [], dst = [r], jump = NONE}))
 	  | munchExp(T.CALL(T.NAME l, args)) =
 	    result(fn r => emit(A.OPER{assem="jal " ^ Symbol.name(l) ^ "\nmove `d1 `d0\n", src= munchArgs(0, args), dst = [Frame.RV, r]@calldefs, jump = NONE}))
 	  | munchExp(T.CALL(e, args)) =	    
