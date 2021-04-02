@@ -2,10 +2,10 @@ L16:
 L14:
 addi t129, $0, 10
 addi t130, $0, 5
-bgt t129, t130, t 
- ble t129, t130, f 
+bgt t129, t130, L13
+ble t129, t130, L12
 L13:
-j lab
+j L14
 L12:
-j lab
+j L15
 L15:

@@ -192,7 +192,7 @@ struct
                    | NONE => (E.error pos ("Variable " ^ S.name(sym) ^ " does not exist!"); T.NIL))
           val exp = (case S.look((!venv), sym) of
                  SOME x => (case x of
-                        Env.VarEntry({access, ty}) => TR.simpleVar(access)
+                        Env.VarEntry({access, ty}) => TR.simpleVar(access, level)
                           | Env.FunEntry({level, label, formals, result}) => (E.error pos "Calling function as variable!"; TR.NIL))
                    | NONE => (E.error pos ("Variable " ^ S.name(sym) ^ " does not exist!"); TR.NIL))
         in
@@ -234,7 +234,7 @@ struct
 	                val {exp,ty} = transExp(venv,tenv,init, break, level) 
                   val acc = TR.allocLocal(level)(!escape)
 	            in  
-	                (if checkTypeEqual(T.NIL, ty) then E.error pos "assigning nil to non-record" else();{tenv=tenv,venv=(venv:=S.enter(!venv,name,Env.VarEntry{access=acc,ty=ty});venv), exp=TR.assignIR(TR.simpleVar(acc), exp)})
+	                (if checkTypeEqual(T.NIL, ty) then E.error pos "assigning nil to non-record" else();{tenv=tenv,venv=(venv:=S.enter(!venv,name,Env.VarEntry{access=acc,ty=ty});venv), exp=TR.assignIR(TR.simpleVar(acc, level), exp)})
 	            end
 	      | trdec (venv, tenv, A.VarDec({name, escape, typ=SOME(x), init, pos})) = 
 	            let 
@@ -242,8 +242,8 @@ struct
                   val acc = TR.allocLocal(level)(!escape)
 	            in  
 	                if checkTypeEqual(lookupType(!tenv, #1 x, #2 x), ty) then 
-	                	{tenv=tenv, venv = (venv := S.enter(!venv,name,Env.VarEntry{access=acc,ty=lookupType(!tenv, #1 x, #2 x)}); venv), exp=TR.assignIR(TR.simpleVar(acc), exp)}
-	                else (E.error pos "named type does not match expression";{tenv=tenv, venv=venv, exp=TR.assignIR(TR.simpleVar(acc), exp)})
+	                	{tenv=tenv, venv = (venv := S.enter(!venv,name,Env.VarEntry{access=acc,ty=lookupType(!tenv, #1 x, #2 x)}); venv), exp=TR.assignIR(TR.simpleVar(acc, level), exp)}
+	                else (E.error pos "named type does not match expression";{tenv=tenv, venv=venv, exp=TR.assignIR(TR.simpleVar(acc, level), exp)})
 	            end
 	      | trdec (venv,tenv,A.TypeDec[{name,ty,pos}]) = {venv=venv,tenv=(tenv:= S.enter(!tenv, name, T.NAME(name, ref NONE));
 						(case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else seenTypes:= name:: !seenTypes;tenv), exp=TR.NIL}
