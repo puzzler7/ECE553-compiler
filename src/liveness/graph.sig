@@ -7,10 +7,7 @@ sig
     val succ: node -> node list
     val pred: node -> node list
     val adj: node -> node list   (* succ+pred *)
-    val eq: node*node -> bool
-    val noode: node
-    val isNoode: node -> bool
-			     
+    val eq: node*node -> bool		     
 			     			     
 
     val newGraph: unit -> graph

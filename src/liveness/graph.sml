@@ -27,9 +27,7 @@ struct
   fun augment (g: graph) (n: node') : node = (g,n)
 
   fun newGraph() = A.array(0,bogusNode)
-
-  val noode = (newGraph(), ~1)
-  fun isNoode(n: node) = (#2(n) = ~1)  		  
+	  
   fun nodes g = let val b = A.bound g
                     fun f i = if isBogus( A.sub(g,i)) then nil
 			           else (g,i)::f(i+1)

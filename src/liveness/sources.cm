@@ -7,7 +7,7 @@ graph.sig
 graph.sml
 makegraph.sml
 liveness.sml
-flow.sml
+flowgraph.sml
 
 errormsg.sml
 table.sig
