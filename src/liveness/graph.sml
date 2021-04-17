@@ -1,7 +1,6 @@
 structure Graph :> GRAPH =
 struct
   type node' = int
-  type temp = Temp.temp
 
   datatype noderep = NODE of {succ: node' list, pred: node' list}
 
