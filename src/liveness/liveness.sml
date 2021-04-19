@@ -27,9 +27,7 @@ struct
     fun lookup (tab, x) = case T.look(tab, x) of SOME(y) => y
 												
     fun interferenceGraph (F.FGRAPH{control, def, use, ismove}) = let
-        fun igraphify() = IGRAPH({graph=G.newGraph(), tnode=(fn(x)=>G.newNode(G.newGraph())),
-                            gtemp=(fn(x)=>Temp.newtemp()), moves=[]})
-	fun tableEqual(t1, t2) = foldr (fn (x, y) => y andalso (ILS.equal(lookup(t1, x), lookup(t2, x)))) true (G.nodes(control))
+        fun tableEqual(t1, t2) = foldr (fn (x, y) => y andalso (ILS.equal(lookup(t1, x), lookup(t2, x)))) true (G.nodes(control))
 			    
         fun livify(fcontrol, fdef, fuse, fismove) = let
 	    
@@ -43,7 +41,7 @@ struct
 					  T.enter(y, node, (foldr (fn (suc, res) => ILS.union(lookup(intab, suc), res)) ILS.empty (G.succ(node)))))
 				       T.empty (G.nodes(fcontrol))
 	    in		            	    						
-                if tableEqual(intab, fintable) andalso tableEqual(outab, fouttable) then (fn (x) => ILS.listItems(lookup(outab, x)))  else iter(fintable, fouttable)
+                if tableEqual(intab, fintable) andalso tableEqual(outab, fouttable) then (fn (x) => ILS.listItems(lookup(outab, x)) : Temp.temp list)  else iter(fintable, fouttable)
             end
         in
 	    iter(intable, outtable)
@@ -81,7 +79,7 @@ struct
 
             fun node2Temp(node) = let
                 fun nhelp(node, [], cnt) = (ErrorMsg.error 0 "node not found, cry"; Temp.newtemp())
-                  | nhelp(node: G.node, a::b : G.node list, cnt) = if node = a then List.nth(!templist, cnt) 
+                  | nhelp(node: G.node, a::b : G.node list, cnt) = if G.eq(node,a) then List.nth(!templist, cnt) 
                                                 else nhelp(node, b, cnt+1)
             in
                 nhelp(node, !nodelist, 0)
@@ -108,7 +106,7 @@ struct
                   end
 
                 fun iterCtrlNodes(g, []) = g
-                  | iterCtrlNodes(g, a::b) = iterCtrlNodes(addEdges(g, liveFn(a), T.look(ismove, a)), b)
+                  | iterCtrlNodes(g, a::b) = iterCtrlNodes(addEdges(g, (map (fn x => temp2Node(x)) (liveFn a)), T.look(ismove, a)), b)
             in
                 (iterCtrlNodes(g, G.nodes(control)), !moveslist)
             end
