@@ -6,7 +6,7 @@ sig
                                 moves:  (Graph.node * Graph.node) list}
     val interferenceGraph :Flow.flowgraph ->igraph * (Graph.node  -> Temp.temp list)
 
-    (*val show  : outstream * igraph -> unit*)
+    val show  : TextIO.outstream * igraph -> unit
 end =
 struct
     structure A = Assem
@@ -23,6 +23,17 @@ struct
                                 tnode: Temp.temp  -> Graph.node,
                                 gtemp: Graph.node  -> Temp.temp,
                                 moves:  (Graph.node * Graph.node) list}
+
+    fun show (out, IGRAPH{graph=gr, tnode=tn, gtemp=gt, moves=mv}) = let
+      fun pr(s) = TextIO.output(out, s)
+      fun prNode(n) = pr(G.nodename n)
+      fun prNodeList([]) = pr("\n")
+        | prNodeList(a::b) = (prNode(a); pr(", "); prNodeList(b))
+      fun prGraphNodes([]) = ()
+        | prGraphNodes(a::b) = (prNode(a); pr(": "); prNodeList(G.adj(a)))
+    in
+      prGraphNodes(G.nodes(gr))
+    end
 
     fun lookup (tab, x) = case T.look(tab, x) of SOME(y) => y
 												
