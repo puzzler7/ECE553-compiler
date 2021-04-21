@@ -106,7 +106,7 @@ struct
                                                     SOME(true) => (moveslist:=(first, second)::(second, first)::(!moveslist);()) 
                                                       | _ => ());
                                                               G.mk_edge{from=first, to=second};
-                                                              G.mk_edge{from=second, to=first};
+                                                              (*G.mk_edge{from=second, to=first};*)
                                                               firstEdge(g, first, lst))
                   in
                       addEdges(firstEdge(g, a, b), b, ismove)
