@@ -78,7 +78,7 @@ struct
             simplifyWorklist := restOfSimplifyWorklist;
             selectStack := node::(!selectStack);
             map decrementDegree (getAdjacent(node));
-            simplify(restOfSimplifyWorklist)
+            simplify(!simplifyWorklist)
         )
         | simplify([]) = ()
 
