@@ -76,5 +76,9 @@ struct
 
   fun nodename(g,i:int) = "n" ^ Int.toString(i)
 
+  fun exposeNode'(g,i) = i
+
+  fun constructNode(g,i) = (g,i)
+  
 end
 

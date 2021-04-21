@@ -1,7 +1,11 @@
 signature GRAPH =
 sig
     type graph
+    type node' = int
     type node
+
+    val exposeNode': node -> node'
+    val constructNode: (graph * node') -> node
     
     val nodes: graph -> node list
     val succ: node -> node list
