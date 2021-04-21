@@ -69,6 +69,12 @@ struct
 
   val mk_edge = diddle_edge (op ::)
   val rm_edge = diddle_edge delete
+  fun rm_edge_safe(x) = let
+    val _ = 0
+  in
+    rm_edge(x)
+  end
+  handle GraphEdge => ()
 
   structure Table = IntMapTable(type key = node
 				fun getInt(g,n) = n)
