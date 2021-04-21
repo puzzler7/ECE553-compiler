@@ -7,8 +7,23 @@ structure Main = struct
    structure TigerP = Join(structure ParserData = TigerLrVals.ParserData
     structure Lex=Lex
     structure LrParser = LrParser)
+   structure R = RegAlloc
    
  fun getsome (SOME x) = x
+
+ fun magicTempMapper(alloc: R.allocation)(t: Temp.temp) = 
+        if t = F.ZERO then "$0" else
+        if t = F.V0 then "$v0" else
+        if t = F.V1 then "$v1" else
+        if t = F.GP then "$gp" else
+        if t = F.SP then "$sp" else
+        if t = F.FP then "$fp" else
+        if t = F.RA then "$ra" else
+        if t = F.A0 then "$a0" else
+        if t = F.A1 then "$a1" else
+        if t = F.A2 then "$a2" else
+        if t = F.A3 then "$a3" else
+        getsome(Temp.Table.look(alloc, t))
 
  fun emitproc out (F.PROC{body,frame}) =
      let val _ = print ("emit " ^ Symbol.name(F.name(frame)) ^ "\n")
@@ -17,9 +32,12 @@ structure Main = struct
 (*         val _ = app (fn s => Printtree.printtree(out,s)) stms; *)
          val stms' = Canon.traceSchedule(Canon.basicBlocks stms) 
 	     val instrs = List.concat(map (MIPSGen.codegen frame) stms') 
-         val format0 = Assem.format(Temp.makestring)
-         val igraph = #1(Liveness.interferenceGraph(#1(MakeGraph.instrs2graph(instrs))))
-         val alloc = RegAlloc.color({ interference=igraph, initial=MipsFrame.tempMap, spillCost=(fn(_)=>1), registers=MipsFrame.registerNames})
+       
+       val igraph = #1(Liveness.interferenceGraph(#1(MakeGraph.instrs2graph(instrs))))
+       val alloc = RegAlloc.color({ interference=igraph, initial=MipsFrame.tempMap, spillCost=(fn(_)=>1), registers=MipsFrame.registerNames})
+       
+
+       val format0 = Assem.format(magicTempMapper(alloc))
      in  (Liveness.show(TextIO.stdOut, igraph);
 	  (app (fn i => TextIO.output(out,format0 i)) instrs))	     
      end

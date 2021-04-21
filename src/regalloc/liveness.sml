@@ -26,11 +26,11 @@ struct
 
     fun show (out, IGRAPH{graph=gr, tnode=tn, gtemp=gt, moves=mv}) = let
       fun pr(s) = TextIO.output(out, s)
-      fun prNode(n) = pr(G.nodename n)
+      fun prNode(n) = pr(Temp.makestring(gt(n)))
       fun prNodeList([]) = pr("\n")
         | prNodeList(a::b) = (prNode(a); pr(", "); prNodeList(b))
       fun prGraphNodes([]) = ()
-        | prGraphNodes(a::b) = (prNode(a); pr(": "); prNodeList(G.adj(a)))
+        | prGraphNodes(a::b) = (prNode(a); pr(": "); prNodeList(G.adj(a)); prGraphNodes(b))
     in
       prGraphNodes(G.nodes(gr))
     end
@@ -69,15 +69,11 @@ struct
 
             fun addTemps(g, SOME([])) = g
               | addTemps(g, NONE) = g
-              | addTemps(g, SOME(a::b)) = let
-                  val newNode = G.newNode(g)
-              in
-                  if seen(a, !templist) then g 
-                  else (nodelist := newNode::(!nodelist); templist := a::(!templist); g)
-              end
-
+              | addTemps(g, SOME(a::b)) = if seen(a, !templist) then addTemps(g, SOME(b)) 
+                  else (nodelist := G.newNode(g)::(!nodelist); templist := a::(!templist); addTemps(g, SOME(b)))
+              
             fun addNodes (g, []) = g
-              | addNodes (g, a::b) = (addTemps(g, T.look(def, a)); addTemps(g, T.look(use, a)); g)
+              | addNodes (g, a::b) = (addTemps(g, T.look(def, a)); addTemps(g, T.look(use, a)); addNodes(g, b))
             val retgraph = addNodes(G.newGraph(), G.nodes(control))
 
             fun temp2Node(temp) = let

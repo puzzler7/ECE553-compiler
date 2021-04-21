@@ -16,7 +16,10 @@ sig type frame
     val A0: Temp.temp
     val A1: Temp.temp
     val A2: Temp.temp
-    val A3: Temp.temp		
+    val A3: Temp.temp
+    val ZERO: Temp.temp
+    val SP: Temp.temp
+    val GP: Temp.temp	
     val callersaves: Temp.temp list	
     val tempMap: register Temp.Table.table
     val registerNames: register list		       

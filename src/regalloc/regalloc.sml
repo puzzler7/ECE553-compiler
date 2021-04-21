@@ -18,7 +18,7 @@ struct
     structure TT = Temp.Table
     type allocation = MipsFrame.register Temp.Table.table
 
-    val regCount = 24 (* very hmm *)
+    val regCount = 18 (* very hmm *)
 
     fun color {
         interference = Liveness.IGRAPH ({
