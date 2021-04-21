@@ -17,7 +17,9 @@ sig type frame
     val A1: Temp.temp
     val A2: Temp.temp
     val A3: Temp.temp		
-    val callersaves: Temp.temp list			       
+    val callersaves: Temp.temp list	
+    val tempMap: register Temp.Table.table
+    val registerNames: register list		       
     val wordSize: int
     val exp: access  -> Tree.exp -> Tree.exp
 
