@@ -12,7 +12,7 @@ structure Main = struct
  fun getsome (SOME x) = x
 
  fun magicTempMapper(alloc: R.allocation)(t: Temp.temp) = 
-        if t = F.ZERO then "$0" else
+        (*if t = F.ZERO then "$0" else
         if t = F.V0 then "$v0" else
         if t = F.V1 then "$v1" else
         if t = F.GP then "$gp" else
@@ -22,7 +22,7 @@ structure Main = struct
         if t = F.A0 then "$a0" else
         if t = F.A1 then "$a1" else
         if t = F.A2 then "$a2" else
-        if t = F.A3 then "$a3" else
+        if t = F.A3 then "$a3" else*)
         getsome(Temp.Table.look(alloc, t))
 
  fun emitproc out (F.PROC{body,frame}) =
