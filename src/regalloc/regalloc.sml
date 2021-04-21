@@ -100,12 +100,17 @@ struct
             )(registers)
         in
         (
-            case okColors of
-            [] => ErrorMsg.error 0 "no colors available wtf"
-            | someColor::otherColors => (
-                coloring := TT.enter(!coloring,  gtemp(Graph.constructNode(graph, node)), someColor);
-                coloredNodes := node::(!coloredNodes)
-            );
+            (* ignore this node if already colored *)
+            (case TT.look((!coloring), gtemp(Graph.constructNode(graph, node))) of
+                SOME color => ()
+            |   NONE => (
+                case okColors of
+                [] => ErrorMsg.error 0 "no colors available wtf"
+                | someColor::otherColors => (
+                    coloring := TT.enter(!coloring,  gtemp(Graph.constructNode(graph, node)), someColor);
+                    coloredNodes := node::(!coloredNodes)
+                )
+            ));
             assignColors(restOfSelectStack)
         )
         end
