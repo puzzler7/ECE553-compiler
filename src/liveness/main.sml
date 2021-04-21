@@ -18,7 +18,8 @@ structure Main = struct
          val stms' = Canon.traceSchedule(Canon.basicBlocks stms) 
 	 val instrs = List.concat(map (MIPSGen.codegen frame) stms') 
          val format0 = Assem.format(Temp.makestring)
-     in  (Liveness.show(TextIO.stdOut, #1(Liveness.interferenceGraph(#1(MakeGraph.instrs2graph(instrs)))));
+     in  (MakeGraph.show(TextIO.stdOut, #1(MakeGraph.instrs2graph(instrs)))
+	 ; Liveness.show(TextIO.stdOut, #1(Liveness.interferenceGraph(#1(MakeGraph.instrs2graph(instrs)))));
 	  (app (fn i => TextIO.output(out,format0 i)) instrs))	     
      end
    | emitproc out (F.STRING(lab,s)) = TextIO.output(out,s)
