@@ -392,7 +392,7 @@ struct
         seenFns:= [];
         TR.resetFragList();
         TR.procEntryExit{body=e, level=lvl};
-        Printtree.printtree(TextIO.stdOut, TR.unNx(e));
+        (*Printtree.printtree(TextIO.stdOut, TR.unNx(e));*)
         TR.getResult())
     end
        

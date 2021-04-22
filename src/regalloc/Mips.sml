@@ -109,7 +109,7 @@ fun codegen (frame) (stm: Tree.stm) : Assem.instr list =
   	  | munchStm (T.EXP(T.CALL(e, args))) = (* somehow need to be able to list actual registers in calldefs *)
 	    emit(A.OPER{assem="jalr `s0\n", src=munchExp(e)::munchArgs(0,args), dst=calldefs, jump = NONE})
 	  | munchStm (T.EXP e1) =
-	    emit(A.OPER{assem="add `s0, $0, `s0\n", src=[munchExp e1], dst=[], jump=NONE})		
+	    emit(A.OPER{assem="", src=[munchExp e1], dst=[], jump=NONE})		
 	  | munchStm(T.LABEL lab) =
 	    emit(A.LABEL{assem=Symbol.name(lab) ^ ":\n", lab=lab})
       

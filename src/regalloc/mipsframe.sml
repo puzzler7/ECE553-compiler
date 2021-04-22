@@ -84,12 +84,6 @@ struct
     val calleesaves = [S0, S1, S2, S3, S4, S5, S6, S7]
 
     val registerNames: register list = [
-        "$v0",
-        "$v1",
-        "$a0",
-        "$a1",
-        "$a2",
-        "$a3",
         "$t0",
         "$t1",
         "$t2",
@@ -107,7 +101,13 @@ struct
         "$s6",
         "$s7",
         "$t8",
-        "$t9"
+        "$t9",
+        "$a0",
+        "$a1",
+        "$a2",
+        "$a3",
+        "$v0",
+        "$v1"
     ]
 
     fun makeRegList someList = foldl (
