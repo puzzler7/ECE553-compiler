@@ -171,6 +171,7 @@ struct
         in
             Tree.SEQ[
                 Tree.MOVE(Tree.TEMP(FP), Tree.BINOP(Tree.MINUS, Tree.TEMP(FP), Tree.CONST frameSize)),
+                Tree.MOVE(Tree.TEMP(SP), Tree.BINOP(Tree.MINUS, Tree.TEMP(SP), Tree.CONST frameSize)),
                 Tree.MOVE(exp1(s0a), Tree.TEMP(S0)),
                 Tree.MOVE(exp1(s1a), Tree.TEMP(S1)),
                 Tree.MOVE(exp1(s2a), Tree.TEMP(S2)),
@@ -190,7 +191,9 @@ struct
                 Tree.MOVE(Tree.TEMP(S6), exp1(s6a)),
                 Tree.MOVE(Tree.TEMP(S7), exp1(s7a)),
                 Tree.MOVE(Tree.TEMP(RA), exp1(raa)),
-                Tree.MOVE(Tree.TEMP(FP), Tree.BINOP(Tree.PLUS, Tree.TEMP(FP), Tree.CONST frameSize))
+                Tree.MOVE(Tree.TEMP(FP), Tree.BINOP(Tree.PLUS, Tree.TEMP(FP), Tree.CONST frameSize)),
+                Tree.MOVE(Tree.TEMP(SP), Tree.BINOP(Tree.PLUS, Tree.TEMP(SP), Tree.CONST frameSize)),
+                Tree.JUMP(Tree.TEMP(RA), [])
             ]
         end
     fun procEntryExit2(frame, body) = body @ [
