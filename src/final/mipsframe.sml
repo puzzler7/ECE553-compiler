@@ -84,14 +84,6 @@ struct
     val calleesaves = [S0, S1, S2, S3, S4, S5, S6, S7]
 
     val registerNames: register list = [
-        "$t0",
-        "$t1",
-        "$t2",
-        "$t3",
-        "$t4",
-        "$t5",
-        "$t6",
-        "$t7",
         "$s0",
         "$s1",
         "$s2",
@@ -100,6 +92,14 @@ struct
         "$s5",
         "$s6",
         "$s7",
+        "$t0",
+        "$t1",
+        "$t2",
+        "$t3",
+        "$t4",
+        "$t5",
+        "$t6",
+        "$t7",
         "$t8",
         "$t9",
         "$a0",
@@ -212,5 +212,5 @@ struct
         {prolog=pro, body=body, epilog=epi}
     end
 
-    fun string(lbl, s) = Symbol.name(lbl) ^ ": .ascii \""^s^"\"\n"
+    fun string(lbl, s) = ".data\n"^Symbol.name(lbl) ^ ": .ascii \""^s^"\"\n"
 end

@@ -29,7 +29,8 @@ sig
     val breakIR: Temp.label -> exp
     val assignIR: exp * exp -> exp
     val letIR: exp list * exp -> exp
-    val fundecIR: exp * Temp.label -> exp
+    val fundecIR: exp * Temp.label * level -> exp
+    val combineFns: exp * exp -> exp
     val callIR: Temp.label * exp list -> exp
     val seqIR: exp list -> exp
 
@@ -181,18 +182,74 @@ struct
     end
 
     fun seqIR([]) = NIL
-      | seqIR(x::explist) = Ex(TR.ESEQ(TR.SEQ[ TR.EXP(unEx(x)), TR.EXP(unEx(seqIR(explist)))],
+      | seqIR(x::[]) = x
+      | seqIR(x::explist) = let
+          fun help([]) = NIL
+            | help(y::[]) = NIL
+            | help(y::xlist) = Ex(TR.ESEQ(TR.SEQ[ TR.EXP(unEx(y)), TR.EXP(unEx(seqIR(xlist)))],
+                                         unEx(NIL)))
+      in 
+          Ex(TR.ESEQ(TR.SEQ[ TR.EXP(unEx(x)), TR.EXP(unEx(help(explist)))],
                                          unEx(List.last(x::explist))))
+      end
 
-    fun fundecIR(body, name) = let
+        
+
+    fun procEntryExit({body=body, level=LEVEL(lvl)}) = fraglist := F.PROC{body=F.procEntryExit1(#frame lvl, unNx(body)), frame= (#frame lvl)}::(!fraglist)
+      | procEntryExit({body=body, level=OUTERMOST}) = (E.error 0 "I don't think this should happen ever"; ())
+
+    fun stackify(frame,body) = let
+            val s0a = F.allocLocal(frame)(true)
+            val s1a = F.allocLocal(frame)(true)
+            val s2a = F.allocLocal(frame)(true)
+            val s3a = F.allocLocal(frame)(true)
+            val s4a = F.allocLocal(frame)(true)
+            val s5a = F.allocLocal(frame)(true)
+            val s6a = F.allocLocal(frame)(true)
+            val s7a = F.allocLocal(frame)(true)
+            val raa = F.allocLocal(frame)(true)
+        in
+            Tree.SEQ[
+                Tree.MOVE(Tree.TEMP(F.FP), Tree.BINOP(Tree.MINUS, Tree.TEMP(F.FP), Tree.CONST F.frameSize)),
+                Tree.MOVE(Tree.TEMP(F.SP), Tree.BINOP(Tree.MINUS, Tree.TEMP(F.SP), Tree.CONST F.frameSize)),
+                Tree.MOVE(F.exp1(s0a), Tree.TEMP(F.S0)),
+                Tree.MOVE(F.exp1(s1a), Tree.TEMP(F.S1)),
+                Tree.MOVE(F.exp1(s2a), Tree.TEMP(F.S2)),
+                Tree.MOVE(F.exp1(s3a), Tree.TEMP(F.S3)),
+                Tree.MOVE(F.exp1(s4a), Tree.TEMP(F.S4)),
+                Tree.MOVE(F.exp1(s5a), Tree.TEMP(F.S5)),
+                Tree.MOVE(F.exp1(s6a), Tree.TEMP(F.S6)),
+                Tree.MOVE(F.exp1(s7a), Tree.TEMP(F.S7)),
+                Tree.MOVE(F.exp1(raa), Tree.TEMP(F.RA)),
+                body,
+                Tree.MOVE(Tree.TEMP(F.S0), F.exp1(s0a)),
+                Tree.MOVE(Tree.TEMP(F.S1), F.exp1(s1a)),
+                Tree.MOVE(Tree.TEMP(F.S2), F.exp1(s2a)),
+                Tree.MOVE(Tree.TEMP(F.S3), F.exp1(s3a)),
+                Tree.MOVE(Tree.TEMP(F.S4), F.exp1(s4a)),
+                Tree.MOVE(Tree.TEMP(F.S5), F.exp1(s5a)),
+                Tree.MOVE(Tree.TEMP(F.S6), F.exp1(s6a)),
+                Tree.MOVE(Tree.TEMP(F.S7), F.exp1(s7a)),
+                Tree.MOVE(Tree.TEMP(F.RA), F.exp1(raa)),
+                Tree.MOVE(Tree.TEMP(F.FP), Tree.BINOP(Tree.PLUS, Tree.TEMP(F.FP), Tree.CONST F.frameSize)),
+                Tree.MOVE(Tree.TEMP(F.SP), Tree.BINOP(Tree.PLUS, Tree.TEMP(F.SP), Tree.CONST F.frameSize)),
+                Tree.JUMP(Tree.TEMP(F.RA), [])
+            ]
+        end
+
+    fun fundecIR(body, name, LEVEL(lvl)) = let
       val b = unEx(body)
-    in
-      Nx(TR.SEQ[
-        TR.LABEL(name),
+      val ret = TR.SEQ[
         TR.MOVE(TR.TEMP(F.RV), b),
         TR.JUMP(TR.TEMP(F.RA), [])
-      ])
+      ]
+    in
+      Nx(TR.SEQ[ TR.LABEL(name),stackify(#frame lvl, ret)])
     end
+
+    fun combineFns(f1, f2) = Nx(TR.SEQ[ unNx(f1), unNx(f2) ])
+
+
                                                         (*FIXME static link here*)
     fun callIR(name, explist) = Ex(TR.CALL(TR.NAME(name), (TR.CONST 0)::(map unEx explist)))
 
@@ -233,7 +290,7 @@ struct
             val cond = unCx(test)
             val bdy = unNx(body)
             val bodylabel = Temp.newlabel()
-            val tst = Temp.newlabel()
+            val tst = (print("calling while\n");Temp.newlabel())
         in
             Nx(TR.SEQ([TR.LABEL(tst), cond(bodylabel, done), TR.LABEL(bodylabel), bdy,
              TR.JUMP(TR.NAME(tst), [tst]), TR.LABEL(done)]))
@@ -247,6 +304,5 @@ struct
 
     fun resetFragList() = (fraglist := []; ())
 
-    fun procEntryExit({body=body, level=LEVEL(lvl)}) = fraglist := F.PROC{body=F.procEntryExit1(#frame lvl, unNx(body)), frame= (#frame lvl)}::(!fraglist)
-      | procEntryExit({body=body, level=OUTERMOST}) = (E.error 0 "I don't think this should happen ever"; ())
+    
 end

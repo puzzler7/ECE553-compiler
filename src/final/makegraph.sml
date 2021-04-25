@@ -52,6 +52,7 @@ struct
       (F.FGRAPH{control=control, def = T.enter(def, ret, [dst]), use = T.enter(use, ret, [src]), ismove = T.enter(ismove, ret, true)}, ret::nodelist)
     end
     fun lookup(x) = case S.look(!lTable, x) of SOME x => x (* case nonexhaustive should never occur *)
+                            | NONE => (print("Can't find"^S.name(x)^"\n"); G.newNode(G.newGraph()))
       
      fun edgify([node], [A.OPER{assem, dst, src, jump=SOME(j)}]) = (map (fn x => G.mk_edge{from=node, to=lookup(x)}) j; ())
        | edgify([node], [assem]) = ()					 

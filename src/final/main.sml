@@ -31,7 +31,7 @@ structure Main = struct
        
 
        val format0 = Assem.format(magicTempMapper(alloc))
-     in  (TextIO.output(out, #prolog entryexited);
+     in  (TextIO.output(out, ".text\n");TextIO.output(out, #prolog entryexited);
              app (fn i => TextIO.output(out,format0 i)) instrs;
               TextIO.output(out, #epilog entryexited))     
      end

@@ -251,15 +251,15 @@ struct
 									    (case S.look(!tenv, name) of SOME(T.NAME(n, r)) => (r := SOME(transTy(tenv, ty)); if existsCycle(T.NAME(n,r)) then (raise CycleInTypeDec) else ())); if checkIfSeen(name, !seenTypes) then E.error pos "repeated type name in typedec" else seenTypes:= name:: !seenTypes;{venv=venv,tenv=tenv, exp=TR.NIL})
 	      | trdec (venv,tenv, A.FunctionDec[{name,params,body,pos,result}]) = (let 
          val nextLevel = TR.newLevel({parent=level, name=name, formals=map(fn(field) => !(#escape field))(params)})
-         val nm = funcDecl(name, params, result, nextLevel, pos);
+         val nm = (funcDecl(name, params, result, nextLevel, pos));
          val rt = funcBody(name, params, result, pos, nextLevel);
-         val trbody = transExp(venv, tenv, body, break, nextLevel) in (if checkTypeEqual(rt, #ty(trbody)) then () else E.error pos "function body and return type differ"; scopeUp(); {venv = venv, tenv = tenv, exp=TR.fundecIR(#exp(trbody), nm)}) end)
+         val trbody = transExp(venv, tenv, body, break, nextLevel) in (if checkTypeEqual(rt, #ty(trbody)) then () else E.error pos "function body and return type differ"; scopeUp(); {venv = venv, tenv = tenv, exp=TR.fundecIR(#exp(trbody), nm, nextLevel)}) end)
 	      | trdec (venv, tenv, A.FunctionDec({name,params,body,pos,result}::fundeclist)) = (  let 
           val nextLevel = TR.newLevel({parent=level, name=name, formals=map(fn(field) => !(#escape field))(params)})
           val nm = funcDecl(name, params, result, nextLevel, pos);
-	  val _ = trdec(venv, tenv, A.FunctionDec(fundeclist));
+	         val dec_ret = (trdec(venv, tenv, A.FunctionDec(fundeclist)));
           val rt = funcBody(name, params, result, pos, nextLevel);          
-         val trbody = transExp(venv, tenv, body, break, nextLevel) in (if checkTypeEqual(rt, #ty(trbody)) then () else E.error pos "function body and return type differ"; scopeUp(); {venv = venv, tenv = tenv, exp=TR.fundecIR(#exp(trbody), nm)}) end)				
+         val trbody = transExp(venv, tenv, body, break, nextLevel) in (if checkTypeEqual(rt, #ty(trbody)) then () else E.error pos "function body and return type differ"; scopeUp(); {venv = venv, tenv = tenv, exp=TR.combineFns(TR.fundecIR(#exp(trbody), nm, nextLevel), #exp dec_ret)}) end)				
 	    in
 	    	(seenFns := []; seenTypes:= []; trdec(venv, tenv, dec))
 	    end				    
@@ -398,7 +398,7 @@ struct
       (seenTypes:= [];
         seenFns:= [];
         TR.procEntryExit{body=e, level=lvl};
-        (*Printtree.printtree(TextIO.stdOut, TR.unNx(e));*)
+        Printtree.printtree(TextIO.stdOut, TR.unNx(e));
         TR.getResult())
     end
        
