@@ -140,12 +140,12 @@ struct
 
     fun relopIR (rop, left, right, ty) = 
         case (rop, ty) of (*Need external calls for all of these*)
-            (A.EqOp, T.STRING) => Ex(F.externalCall("stringEqual", [unEx(left), unEx(right)]) )
-          | (A.NeqOp, T.STRING) => Ex(TR.BINOP(TR.MINUS, TR.CONST(1), (F.externalCall("stringEqual", [unEx(left), unEx(right)]))))
-          | (A.LeOp, T.STRING) => Ex(TR.BINOP(TR.MINUS, F.externalCall("stringLT", [unEx(left), unEx(right)]), (F.externalCall("stringEqual", [unEx(left), unEx(right)]))))
-          | (A.LtOp, T.STRING) => Ex(F.externalCall("stringLT", [unEx(left), unEx(right)]))
-          | (A.GeOp, T.STRING) => Ex(TR.BINOP(TR.MINUS, TR.CONST(1), (F.externalCall("stringLT", [unEx(left), unEx(right)]))))
-          | (A.GtOp, T.STRING) => Ex(TR.BINOP(TR.MINUS, TR.CONST(1), (TR.BINOP(TR.MINUS, F.externalCall("stringLT", [unEx(left), unEx(right)]), (F.externalCall("stringEqual", [unEx(left), unEx(right)]))))))
+            (A.EqOp, T.STRING) => Ex(F.externalCall("tig_stringEqual", [unEx(left), unEx(right)]) )
+          | (A.NeqOp, T.STRING) => Ex(TR.BINOP(TR.MINUS, TR.CONST(1), (F.externalCall("tig_stringEqual", [unEx(left), unEx(right)]))))
+          | (A.LeOp, T.STRING) => Ex(TR.BINOP(TR.MINUS, F.externalCall("tig_stringLT", [unEx(left), unEx(right)]), (F.externalCall("stringEqual", [unEx(left), unEx(right)]))))
+          | (A.LtOp, T.STRING) => Ex(F.externalCall("tig_stringLT", [unEx(left), unEx(right)]))
+          | (A.GeOp, T.STRING) => Ex(TR.BINOP(TR.MINUS, TR.CONST(1), (F.externalCall("tig_stringLT", [unEx(left), unEx(right)]))))
+          | (A.GtOp, T.STRING) => Ex(TR.BINOP(TR.MINUS, TR.CONST(1), (TR.BINOP(TR.MINUS, F.externalCall("tig_stringLT", [unEx(left), unEx(right)]), (F.externalCall("stringEqual", [unEx(left), unEx(right)]))))))
           | (r, x) => Cx(fn(t, f) => TR.CJUMP(aToTrelop(r), unEx(left), unEx(right), t, f))
 
     fun conditionalIR(test, then', else') = 
@@ -200,7 +200,7 @@ struct
 
     fun intIR (n) = Ex(TR.CONST n)
 
-    fun arrayVar (size, init) = Ex(F.externalCall("initArray", [unEx(size), unEx(init)])) 
+    fun arrayVar (size, init) = Ex(F.externalCall("tig_initArray", [unEx(size), unEx(init)])) 
 
     fun recordVar(explist) = let
       val ret = Temp.newtemp()
@@ -247,6 +247,6 @@ struct
 
     fun resetFragList() = (fraglist := []; ())
 
-    fun procEntryExit({body=body, level=LEVEL(lvl)}) = fraglist := F.PROC{body=unNx(body), frame= (#frame lvl)}::(!fraglist)
+    fun procEntryExit({body=body, level=LEVEL(lvl)}) = fraglist := F.PROC{body=F.procEntryExit1(#frame lvl, unNx(body)), frame= (#frame lvl)}::(!fraglist)
       | procEntryExit({body=body, level=OUTERMOST}) = (E.error 0 "I don't think this should happen ever"; ())
 end
